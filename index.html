@@ -404,8 +404,20 @@ body.mobile-app{
   border-radius:12px;
 }
 .mobile-app .team-foot{
-  flex-direction:row;
-  align-items:center;
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:start;
+  row-gap:8px;
+}
+.mobile-app .team-foot > span{
+  display:block;
+  width:100%;
+  white-space:nowrap;
+  line-height:1.35;
+}
+.mobile-app .team-actions{
+  width:100%;
+  justify-content:flex-end;
 }
 .mobile-app .trend-panel{
   background:#fff;
@@ -449,6 +461,276 @@ body.mobile-app{
   transform:scale(.985)!important;
   transition:transform .08s ease!important;
 }
+/* Mobile app rebuild layer */
+:root{
+  --app-bg:#f6f7f9;
+  --app-card:#ffffff;
+  --app-text:#17191f;
+  --app-sub:#757b86;
+  --app-line:#eceff3;
+  --app-blue:#2563eb;
+  --app-green:#16a36a;
+  --app-red:#e0524d;
+  --app-amber:#c68416;
+  --app-shadow:0 10px 28px rgba(23,25,31,.06);
+}
+body,body.mobile-app{
+  background:var(--app-bg);
+  color:var(--app-text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",Arial,sans-serif;
+}
+body.dark,body.dark.mobile-app{--app-bg:#0f131a;--app-card:#171c25;--app-text:#f4f6f8;--app-sub:#a1a8b3;--app-line:#28313d;background:var(--app-bg)}
+.app,.mobile-app .app{
+  width:min(430px,100%);
+  max-width:430px;
+  padding:0 18px 96px;
+}
+.topbar,.mobile-app .topbar{
+  position:sticky;
+  top:0;
+  z-index:60;
+  margin:0 -18px;
+  padding:14px 18px 12px;
+  background:rgba(246,247,249,.88);
+  border:0;
+  backdrop-filter:blur(18px);
+}
+.dark .topbar,.dark.mobile-app .topbar{background:rgba(15,19,26,.88)}
+.brand{gap:10px}
+.brand-mark,.mobile-app .brand-mark{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:11px;
+  background:var(--app-text);
+  box-shadow:none;
+}
+.brand-mark svg{color:var(--app-card);filter:none;width:19px;height:19px}
+.brand-title{font-size:15px;font-weight:750;color:var(--app-text)}
+.brand-sub{font-size:11px;font-weight:500;color:var(--app-sub);max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-actions{gap:6px}
+.icon-btn,.refresh-btn,.mobile-app .icon-btn,.mobile-app .refresh-btn{
+  width:36px;
+  height:36px;
+  padding:0;
+  border:0;
+  border-radius:12px;
+  background:var(--app-card);
+  box-shadow:none;
+}
+.refresh-text{display:none}
+.icon-btn svg,.refresh-btn svg{filter:none;color:var(--app-text);width:18px;height:18px}
+.hero,.mobile-app .hero{display:block;margin-top:8px}
+.hero-main,.mobile-app .hero-main{
+  min-height:0;
+  padding:8px 0 14px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:var(--app-text);
+}
+.hero-main:before,.hero-main:after{display:none}
+.eyebrow{font-size:13px;font-weight:650;color:var(--app-blue);letter-spacing:0}
+h1,.mobile-app h1{
+  margin:8px 0 8px;
+  color:var(--app-text);
+  font-size:30px;
+  line-height:1.18;
+  font-weight:820;
+  letter-spacing:-.02em;
+}
+.hero-main p,.mobile-app .hero-main p{
+  max-width:none;
+  color:var(--app-sub);
+  font-size:14px;
+  font-weight:500;
+  line-height:1.55;
+}
+.hero-meta{margin-top:14px;gap:6px}
+.pill,.mobile-app .pill{
+  border:0;
+  border-radius:999px;
+  background:#eef3ff;
+  color:#315fba;
+  padding:7px 9px;
+  font-size:11px;
+  font-weight:650;
+}
+.dark .pill{background:#18233a;color:#8fb2ff}
+.summary,.mobile-app .summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:8px;
+}
+.metric,.mobile-app .metric{
+  border:0;
+  border-radius:22px;
+  background:var(--app-card);
+  padding:16px;
+  min-height:100px;
+  box-shadow:var(--app-shadow);
+}
+.metric.primary{
+  grid-column:1/3;
+  min-height:126px;
+  background:var(--app-text);
+  color:var(--app-card);
+}
+.metric.primary:before{display:none}
+.metric.primary .metric-label,.metric.primary .metric-note,.metric.primary .metric-value small{color:rgba(255,255,255,.68)}
+.metric-label{font-size:12px;font-weight:650;color:var(--app-sub)}
+.metric-label svg{display:none}
+.metric-value,.mobile-app .metric-value{
+  margin-top:12px;
+  color:inherit;
+  font-size:32px;
+  font-weight:820;
+  letter-spacing:-.02em;
+}
+.metric:not(.primary) .metric-value{font-size:27px}
+.metric-value small{font-size:12px;color:var(--app-sub);font-weight:650}
+.metric-note{font-size:12px;font-weight:500;color:var(--app-sub)}
+.progress-line{height:7px;background:rgba(255,255,255,.22);border:0;margin-top:16px}
+.metric:not(.primary) .progress-line{background:var(--app-line)}
+.progress-line span{background:var(--app-green)}
+.toolbar,.mobile-app .toolbar{
+  position:sticky;
+  top:58px;
+  z-index:40;
+  margin:12px -18px 8px;
+  padding:10px 18px;
+  background:linear-gradient(180deg,rgba(246,247,249,.94) 80%,rgba(246,247,249,0));
+  border:0;
+  backdrop-filter:blur(12px);
+}
+.dark .toolbar{background:linear-gradient(180deg,rgba(15,19,26,.94) 80%,rgba(15,19,26,0))}
+.search-row{grid-template-columns:1fr}
+.search,.sort-select,.mobile-app .search,.mobile-app .sort-select{
+  height:46px;
+  border:0;
+  border-radius:16px;
+  background:var(--app-card);
+  box-shadow:none;
+}
+.search input{font-size:15px;font-weight:500}
+.search svg{filter:none;color:var(--app-sub)}
+.sort-select{padding-left:14px;color:var(--app-text);font-size:13px;font-weight:650}
+.chips{gap:7px;padding:9px 0 2px}
+.chip,.mobile-app .chip{
+  border:0;
+  border-radius:999px;
+  background:var(--app-card);
+  color:var(--app-sub);
+  padding:8px 12px;
+  font-size:13px;
+  font-weight:650;
+  box-shadow:none;
+}
+.chip:before{display:none}
+.chip.active,.mobile-app .chip.active{
+  background:var(--app-text);
+  color:var(--app-card);
+}
+.toolbar-meta{font-size:11px;font-weight:500;color:var(--app-sub)}
+.section-title{margin:22px 0 10px}
+.section-title h2{font-size:18px;font-weight:800;color:var(--app-text);letter-spacing:-.01em}
+.section-title span{font-size:12px;font-weight:500;color:var(--app-sub)}
+.leaderboard{
+  display:flex;
+  gap:10px;
+  margin:0 -18px;
+  padding:0 18px 4px;
+}
+.rank-card,.mobile-app .rank-card{
+  min-width:210px;
+  border:0;
+  border-radius:20px;
+  background:var(--app-card);
+  box-shadow:var(--app-shadow);
+  padding:16px;
+}
+.rank-card:first-child{background:var(--app-card);border:0}
+.rank-no{border:0;box-shadow:none;background:#f1f4f8;color:var(--app-text);border-radius:12px}
+.rank-card:first-child .rank-no{background:#fff4d6;color:#8a640f}
+.rank-rate{color:var(--app-blue);font-size:22px;font-weight:820}
+.rank-team{font-size:15px;font-weight:760;color:var(--app-text)}
+.rank-meta{font-size:12px;font-weight:500;color:var(--app-sub)}
+.trend-panel,.mobile-app .trend-panel{
+  border:0;
+  border-radius:22px;
+  background:var(--app-card);
+  box-shadow:var(--app-shadow);
+  overflow:hidden;
+}
+.trend-chart{background:var(--app-card)}
+.trend-item{grid-template-columns:76px minmax(0,1fr) 86px;gap:10px;padding:13px 16px;min-height:58px;border-color:var(--app-line)}
+.trend-label{font-size:12px;font-weight:700;color:var(--app-text)}
+.trend-bar-wrap{height:8px;background:var(--app-line)}
+.trend-bar{background:#a8bdd9}.trend-bar.is-latest{background:var(--app-green)}
+.trend-value{font-size:12px;font-weight:760;color:var(--app-text)}
+.trend-delta{grid-column:3;font-size:11px;font-weight:650}
+.team-list,.mobile-app .team-list{grid-template-columns:1fr;gap:10px}
+.team-card,.mobile-app .team-card{
+  border:0;
+  border-radius:22px;
+  background:var(--app-card);
+  box-shadow:var(--app-shadow);
+  padding:17px;
+  min-height:0;
+}
+.team-card:before{display:none}
+.team-title{font-size:16px;font-weight:760;color:var(--app-text);line-height:1.4}
+.leader{font-size:12px;font-weight:500;color:var(--app-sub)}
+.leader b{font-weight:700;color:var(--app-text)}
+.rank-badge{border:0;border-radius:999px;background:#f1f4f8;color:var(--app-blue);font-weight:760}
+.team-status{border:0;box-shadow:none;border-radius:999px;font-size:11px}
+.team-body,.mobile-app .team-body{grid-template-columns:68px 1fr;gap:13px;margin-top:14px}
+.ring{width:68px;height:68px}
+.ring-core{width:52px;height:52px;font-size:16px}
+.stat{border:0;border-radius:14px;background:#f6f7f9}
+.dark .stat{background:#202735}
+.stat span{font-size:11px;font-weight:600;color:var(--app-sub)}
+.stat b{font-size:15px;font-weight:760;color:var(--app-text)}
+.team-foot,.mobile-app .team-foot{
+  display:grid;
+  grid-template-columns:1fr;
+  row-gap:9px;
+  border-color:var(--app-line);
+  font-size:12px;
+  font-weight:600;
+  color:var(--app-sub);
+}
+.team-foot > span{white-space:nowrap}
+.team-actions{justify-content:flex-end}
+.link-btn{font-size:12px;font-weight:700;color:var(--app-blue)}
+.member{background:#f6f7f9;border-radius:12px;font-weight:600}
+.bottom-nav,.mobile-app .bottom-nav{
+  left:50%;
+  right:auto;
+  bottom:12px;
+  width:min(394px,calc(100% - 28px));
+  transform:translateX(-50%);
+  border:0;
+  border-radius:24px;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 18px 44px rgba(23,25,31,.18);
+  padding:7px;
+  backdrop-filter:blur(18px);
+}
+.dark .bottom-nav{background:rgba(23,28,37,.9)}
+.nav-inner{width:100%;gap:4px}
+.nav-inner button{height:44px;border-radius:17px;font-size:12px;font-weight:700}
+.nav-inner button.active{border:0;background:var(--app-text);color:var(--app-card)}
+.nav-inner button.active:after{display:none}
+@media (min-width:721px){
+  .app{max-width:1040px;width:min(1040px,100%);padding-left:24px;padding-right:24px}
+  .summary{grid-template-columns:1.1fr .95fr .95fr}.metric.primary{grid-column:auto}
+  .team-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .toolbar{margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px}
+  .bottom-nav{width:min(430px,calc(100% - 28px))}
+}
 </style>
 </head>
 <body>
@@ -456,7 +738,7 @@ body.mobile-app{
   <header class="topbar">
     <div class="brand">
       <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17 19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div><div class="brand-title">PSM Challenge</div><div class="brand-sub" id="basisText">데이터 준비 중</div></div>
+      <div><div class="brand-title">PSM 소통트립</div><div class="brand-sub" id="basisText">데이터 준비 중</div></div>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 모드 변경"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36-6.36-1.42 1.42M7.06 16.94l-1.42 1.42m12.72 0-1.42-1.42M7.06 7.06 5.64 5.64M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -467,9 +749,9 @@ body.mobile-app{
   <section class="hero" id="home">
     <article class="hero-main">
       <div>
-        <div class="eyebrow">7월 특화 마케팅 프로젝트</div>
-        <h1>PSM 소통트립<br>챌린지</h1>
-        <p>오전 9시와 오후 18시 기준으로 팀별 목표, 실적, 달성률 순위를 확인합니다.</p>
+        <div class="eyebrow">7월 챌린지 현황</div>
+        <h1>오늘의 실적을<br>한눈에 확인하세요</h1>
+        <p>오전 9시와 오후 18시 기준으로 팀별 실적과 달성률을 업데이트합니다.</p>
       </div>
       <div class="hero-meta">
         <span class="pill" id="syncState">저장된 기준값 표시</span>
@@ -755,7 +1037,7 @@ function teamCard(t, rank, highlight){
     <div class="team-head"><div><div class="team-title">${esc(t.team)}</div><div class="leader">팀장 <b>${esc(t.leader)}</b></div><span class="team-status ${status[0]}">${status[1]}</span></div><div class="rank-badge">#${rank}</div></div>
     <div class="team-body"><div class="ring" style="--p:${capped};--ring:${ringColor}"><div class="ring-core">${p.toFixed(1)}<small>%</small></div></div>
     <div><div class="stats"><div class="stat"><span>목표(천원)</span><b>${fmt(t.target)}</b></div><div class="stat"><span>실적(천원)</span><b>${fmt(t.result)}</b></div></div><div class="progress-line"><span data-width="${capped}"></span></div></div></div>
-    <div class="team-foot"><span>${left ? '목표까지 ' + fmt(left) + '천원' : '목표 달성 완료'}</span><div class="team-actions"><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div></div>
+    <div class="team-foot"><span>${left ? '잔여 ' + fmt(left) + '천원' : '목표 달성 완료'}</span><div class="team-actions"><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div></div>
     <div class="members">${members.map(m => '<span class="member">' + esc(m) + '</span>').join('')}</div>
   </article>`;
 }
