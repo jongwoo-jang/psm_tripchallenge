@@ -1130,7 +1130,7 @@ function teamCard(t, rank, highlight){
         <div><span>잔여</span><b>${left ? fmt(left) + '천원' : '완료'}</b></div>
       </div>
       <div class="team-actions"><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div>
-      <div class="members">${members.map(m => `<span class="member"><b>${esc(memberName(m))}</b>${memberBranch(m) ? `<small>${esc(memberBranch(m))}</small>` : ''}</span>`).join('')}</div>
+      <div class="members">${members.map(m => '<span class="member"><b>' + esc(memberName(m)) + '</b>' + (memberBranch(m) ? '<small>' + esc(memberBranch(m)) + '</small>' : '') + '</span>').join('')}</div>
     </div>
   </article>`;
 }
