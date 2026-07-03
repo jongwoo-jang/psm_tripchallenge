@@ -98,3 +98,1225 @@ body.dark{background:linear-gradient(180deg,#141b26 0%,var(--bg) 260px)}
   border-color:rgba(31,55,85,.13);
   box-shadow:var(--shadow-soft);
 }
+.dark .icon-btn,.dark .refresh-btn,.dark .search,.dark .sort-select,.dark .metric,.dark .rank-card,.dark .team-card,.dark .trend-panel{
+  background:linear-gradient(180deg,rgba(23,31,43,.98),rgba(20,27,38,.94));
+  border-color:rgba(169,196,232,.14);
+}
+.icon-btn:hover,.refresh-btn:hover,.rank-card:hover,.team-card:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.icon-btn,.refresh-btn,.rank-card,.team-card{transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.hero{gap:14px}.hero-main{
+  border-color:rgba(31,55,85,.14);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.88)),
+    linear-gradient(135deg,rgba(45,111,183,.10),rgba(20,120,90,.08));
+  box-shadow:var(--shadow);
+}
+.dark .hero-main{
+  background:
+    linear-gradient(180deg,rgba(23,31,43,.98),rgba(18,25,35,.94)),
+    linear-gradient(135deg,rgba(127,176,236,.12),rgba(20,120,90,.10));
+}
+.hero-main:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--brand-2),var(--accent));opacity:.9}
+.eyebrow{letter-spacing:.02em;text-transform:none;color:var(--brand-2)}
+h1{font-size:33px;letter-spacing:-.01em}
+.pill{background:rgba(31,55,85,.045);border-color:rgba(31,55,85,.12);color:#506176}
+.dark .pill{background:rgba(169,196,232,.08);border-color:rgba(169,196,232,.14);color:var(--muted)}
+.metric{position:relative;overflow:hidden}
+.metric.primary:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--brand-2),var(--accent))}
+.metric-label{letter-spacing:.01em}.metric-value{letter-spacing:-.01em;color:var(--text)}
+.progress-line{box-shadow:inset 0 0 0 1px rgba(31,55,85,.04)}.progress-line span{background:linear-gradient(90deg,#2d6fb7,#14785a)}
+.toolbar{top:0;padding-top:12px;background:linear-gradient(180deg,rgba(243,245,248,.96) 76%,rgba(243,245,248,0));border-bottom:1px solid rgba(217,224,232,.45)}
+.dark .toolbar{background:linear-gradient(180deg,rgba(16,21,29,.96) 76%,rgba(16,21,29,0));border-bottom-color:rgba(48,59,77,.45)}
+.search:focus-within,.sort-select:focus{border-color:rgba(45,111,183,.45);box-shadow:0 0 0 3px rgba(45,111,183,.10)}
+.chip{background:rgba(255,255,255,.68);border-color:rgba(31,55,85,.11)}
+.dark .chip{background:rgba(23,31,43,.72)}.chip.active{box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+.section-title{padding-top:2px}.section-title h2{letter-spacing:-.01em}.section-title span{letter-spacing:.01em}
+.rank-card:first-child{border-color:rgba(183,133,35,.42);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,250,239,.92))}
+.dark .rank-card:first-child{background:linear-gradient(180deg,rgba(23,31,43,.98),rgba(35,29,20,.92))}
+.rank-no{background:rgba(31,55,85,.07)}.rank-card:first-child .rank-no{background:#f2d58f;color:#5f420c}
+.team-card{border-radius:15px}.team-card:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(255,255,255,.7)}
+.dark .team-card:before{background:rgba(255,255,255,.06)}
+.rank-badge{background:rgba(45,111,183,.09);color:var(--brand-2)}
+.stat{border:1px solid rgba(31,55,85,.06)}.dark .stat{border-color:rgba(169,196,232,.06)}
+.ring{box-shadow:inset 0 0 0 1px rgba(31,55,85,.08)}.ring-core{box-shadow:0 0 0 1px rgba(31,55,85,.06)}
+.link-btn{border-bottom:1px solid transparent}.link-btn:hover{border-bottom-color:currentColor}
+.trend-panel{box-shadow:var(--shadow-soft)}
+.trend-chart{padding:4px 2px 0;background:linear-gradient(180deg,transparent 0,transparent 31%,rgba(31,55,85,.045) 32%,transparent 33%,transparent 65%,rgba(31,55,85,.045) 66%,transparent 67%)}
+.dark .trend-chart{background:linear-gradient(180deg,transparent 0,transparent 31%,rgba(169,196,232,.06) 32%,transparent 33%,transparent 65%,rgba(169,196,232,.06) 66%,transparent 67%)}
+.trend-bar{background:linear-gradient(180deg,#5b91d3,#2d6fb7);box-shadow:0 8px 16px rgba(45,111,183,.16)}
+.trend-bar.is-latest{background:linear-gradient(180deg,#32a27d,#14785a);box-shadow:0 8px 16px rgba(20,120,90,.18)}
+.bottom-nav{box-shadow:0 -10px 28px rgba(26,39,58,.07)}.nav-inner button.active{border-color:rgba(45,111,183,.18)}
+@media (max-width:640px){
+  body{font-size:14px}.app{padding-top:14px}.hero{gap:10px}.hero-main{border-radius:16px}.summary{gap:8px}
+  .top-actions{gap:6px}.icon-btn,.refresh-btn{height:36px}.section-title{margin-top:16px}
+}
+/* CSS and JS interaction layer */
+.metric,.rank-card,.team-card,.trend-panel,.hero-main{will-change:transform}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .42s ease,transform .42s ease}
+.reveal.is-visible{opacity:1;transform:none}
+.rank-card:active,.team-card:active,.chip:active,.refresh-btn:active,.icon-btn:active{transform:translateY(0) scale(.99)}
+.team-card.highlight{animation:focusPulse 1.4s ease both}
+@keyframes focusPulse{0%{box-shadow:0 0 0 0 rgba(45,111,183,.22)}55%{box-shadow:0 0 0 8px rgba(45,111,183,.04)}100%{box-shadow:var(--shadow-soft)}}
+.refresh-btn[disabled]{opacity:.58;cursor:wait}
+.refresh-btn[disabled] svg{animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.nav-inner button{position:relative;overflow:hidden}.nav-inner button.active:after{content:"";position:absolute;left:50%;bottom:5px;width:18px;height:2px;border-radius:999px;background:currentColor;transform:translateX(-50%);opacity:.55}
+.trend-bar{transition:height .55s cubic-bezier(.2,.8,.2,1),filter .2s ease}.trend-item:hover .trend-bar{filter:saturate(1.12) brightness(1.04)}
+/* Compact business icon style */
+.brand-mark,.icon-btn svg,.refresh-btn svg,.search svg,.metric-label svg,.nav-inner svg{overflow:visible}
+.brand-mark{background:#fff;border:1px solid rgba(45,111,183,.22);box-shadow:0 6px 14px rgba(45,111,183,.12)}
+.brand-mark svg{color:#3977e3;filter:drop-shadow(6px 5px 0 rgba(255,201,45,.65))}
+.icon-btn svg,.refresh-btn svg,.search svg,.nav-inner svg{stroke-width:2.2;filter:drop-shadow(4px 4px 0 rgba(255,201,45,.55))}
+.icon-btn:first-child svg{color:#344f6f}.refresh-btn svg{color:#3977e3}.search svg{color:#344f6f}
+.metric-label svg{width:22px;height:22px;padding:3px;border-radius:7px;color:#3977e3;background:rgba(57,119,227,.10);filter:drop-shadow(5px 5px 0 rgba(255,201,45,.48))}
+.metric:nth-child(2) .metric-label:after,.metric:nth-child(3) .metric-label:after{content:"";width:22px;height:22px;border-radius:7px;display:block;background:linear-gradient(135deg,#3977e3 0 50%,#ffc92d 50%);box-shadow:5px 5px 0 rgba(52,79,111,.12)}
+.chip:before{content:"";width:7px;height:7px;border-radius:50%;background:#3977e3;display:inline-block;margin-right:6px;vertical-align:1px}
+.chip[data-filter="watch"]:before{background:#e44b55}.chip[data-filter="over55"]:before,.chip[data-filter="over60"]:before,.chip[data-filter="over65"]:before{background:#d39516}.chip[data-filter="done"]:before{background:#1a9a72}.chip[data-filter="top10"]:before{background:#344f6f}
+.rank-no{position:relative;color:#344f6f;background:#fff;border:1px solid rgba(52,79,111,.16);box-shadow:5px 5px 0 rgba(255,201,45,.45)}
+.team-status{border:1px solid rgba(31,55,85,.08);box-shadow:4px 4px 0 rgba(255,201,45,.22)}
+.link-btn:before{content:"";display:inline-block;width:6px;height:6px;border-radius:2px;background:currentColor;margin-right:5px;vertical-align:1px;box-shadow:4px 3px 0 rgba(255,201,45,.55)}
+/* UX refinement layer */
+.search{position:relative}.clear-search{display:none;width:26px;height:26px;border:0;border-radius:8px;background:var(--surface-2);color:var(--muted);font-size:18px;line-height:1;align-items:center;justify-content:center;flex:none}
+.clear-search.is-visible{display:inline-flex}.clear-search:hover{background:var(--surface-3);color:var(--text)}
+.toolbar-meta{margin-top:8px;color:var(--muted);font-size:12px;font-weight:620;line-height:1.35;padding:0 2px}
+.chip{transition:background .16s ease,border-color .16s ease,color .16s ease,transform .16s ease}.chip:hover{transform:translateY(-1px);border-color:rgba(45,111,183,.28)}
+.team-card{display:flex;flex-direction:column;min-height:232px}.team-head{min-height:48px}.team-body{flex:1}
+.team-title{padding-right:2px}.team-status{display:inline-flex;align-items:center;height:24px;border-radius:999px;padding:0 8px;margin-top:8px;background:var(--surface-2);color:var(--muted);font-size:11px;font-weight:720}
+.team-status.done{background:rgba(20,120,90,.10);color:var(--accent)}.team-status.watch{background:rgba(185,75,69,.10);color:var(--danger)}.team-status.near{background:rgba(45,111,183,.10);color:var(--brand-2)}
+.team-foot span{min-width:0}.team-actions{flex:none}.rank-badge{align-self:flex-start}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;margin-top:8px}
+@media (max-width:640px){
+  .toolbar-meta{font-size:11px}.team-card{min-height:auto}.team-head{min-height:auto}.team-foot{align-items:flex-start;flex-direction:column}.team-actions{width:100%;justify-content:flex-end}
+}
+/* Executive clean design override */
+:root{
+  --bg:#f5f6f8;--surface:#ffffff;--surface-2:#f7f8fa;--surface-3:#e9edf2;
+  --text:#1f2933;--muted:#6c7582;--line:#dfe4ea;--brand:#243447;--brand-2:#315f9b;
+  --accent:#16745c;--warn:#9b6a15;--danger:#b4534b;
+  --shadow:0 10px 26px rgba(31,41,51,.07);--shadow-soft:0 3px 12px rgba(31,41,51,.05);
+}
+body{background:#f5f6f8;color:var(--text)}
+body.dark{background:#10151d}
+.app{max-width:1060px}
+.brand-mark{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.brand-mark svg,.icon-btn svg,.refresh-btn svg,.search svg,.nav-inner svg,.metric-label svg{filter:none;color:var(--brand-2);stroke-width:2}
+.brand-title{font-size:14px;font-weight:760}.brand-sub{font-size:12px;color:var(--muted)}
+.hero-main,.metric,.rank-card,.team-card,.trend-panel,.search,.sort-select,.icon-btn,.refresh-btn{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.dark .hero-main,.dark .metric,.dark .rank-card,.dark .team-card,.dark .trend-panel,.dark .search,.dark .sort-select,.dark .icon-btn,.dark .refresh-btn{background:#171f2b;border-color:#303a48}
+.hero-main{padding:24px;border-radius:18px;box-shadow:var(--shadow)}
+.hero-main:before{width:3px;background:var(--brand-2);opacity:.8}
+.eyebrow{color:var(--muted);font-weight:700}
+h1{font-size:32px;font-weight:780;color:var(--text)}
+.hero-main p{font-size:14px;line-height:1.65;color:var(--muted)}
+.pill{background:#f6f8fb;border:1px solid var(--line);color:#536170;border-radius:999px;font-weight:650}
+.metric{border-radius:16px}.metric.primary:before{height:2px;background:var(--brand-2)}
+.metric-label svg{background:#f3f6fb;border:1px solid #e3e9f2;border-radius:8px;padding:3px}
+.metric:nth-child(2) .metric-label:after,.metric:nth-child(3) .metric-label:after{display:none}
+.metric-value{font-weight:760;color:#18212b}.metric-note{color:var(--muted)}
+.toolbar{background:linear-gradient(180deg,rgba(245,246,248,.96) 78%,rgba(245,246,248,0));border-bottom:0}
+.search:focus-within,.sort-select:focus{border-color:#9db6d8;box-shadow:0 0 0 3px rgba(49,95,155,.10)}
+.chip{background:#fff;border-color:var(--line);border-radius:999px;color:#5f6b78;font-weight:680;box-shadow:none}
+.chip:before{display:none}.chip:hover{transform:none;border-color:#b9c5d3}.chip.active{background:#243447;border-color:#243447;color:#fff}
+.section-title h2{font-size:17px;font-weight:760}.section-title span,.toolbar-meta{font-weight:560;color:var(--muted)}
+.rank-card{border-radius:15px}.rank-card:hover,.team-card:hover,.icon-btn:hover,.refresh-btn:hover{transform:none;box-shadow:var(--shadow)}
+.rank-card:first-child{background:#fff;border-color:#d8c28a}
+.rank-no{box-shadow:none;background:#f5f7fa;border:1px solid var(--line);color:var(--brand)}
+.rank-card:first-child .rank-no{background:#f7efd8;color:#6b520f}
+.rank-rate{color:var(--brand-2);font-weight:760}.rank-team,.team-title{font-weight:730}
+.team-card{border-radius:16px}.team-card:before{display:none}
+.rank-badge{background:#f3f6fb;color:var(--brand-2);border:1px solid #e3e9f2;border-radius:999px}
+.team-status{box-shadow:none;border:1px solid var(--line);background:#f7f8fa;color:#647281}
+.team-status.done{background:#eef8f4;border-color:#cfe9de;color:#16745c}
+.team-status.watch{background:#fff3f2;border-color:#f1d6d3;color:#b4534b}
+.team-status.near{background:#f2f6fb;border-color:#d7e2f0;color:#315f9b}
+.ring{box-shadow:none}.ring-core{box-shadow:none}
+.stat{background:#f7f8fa;border:1px solid #edf0f4;border-radius:12px}
+.link-btn:before{display:none}.link-btn{font-weight:700}
+.trend-chart{background:none}.trend-bar{background:#315f9b;box-shadow:none;border-radius:6px 6px 0 0}.trend-bar.is-latest{background:#16745c;box-shadow:none}
+.bottom-nav{box-shadow:0 -8px 22px rgba(31,41,51,.06);background:rgba(245,246,248,.92)}
+.nav-inner button.active{background:#fff;color:var(--brand-2);border-color:var(--line)}
+@media (max-width:640px){
+  .hero-main{padding:20px;border-radius:16px}h1{font-size:28px}.metric,.team-card,.trend-panel{border-radius:14px}
+}
+/* Readable trend table */
+.trend-panel{padding:0;overflow:hidden}
+.trend-chart{display:grid;grid-template-columns:1fr;gap:0;min-height:auto;padding:0;background:#fff}
+.trend-item{display:grid;grid-template-columns:92px minmax(0,1fr) 104px 82px;align-items:center;gap:12px;min-height:52px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.trend-item:last-child{border-bottom:0}
+.trend-bar-wrap{height:10px;border:0;background:var(--surface-3);border-radius:999px;overflow:hidden}
+.trend-bar{height:100%!important;min-height:0;border-radius:999px;background:#8aa8cf}
+.trend-bar.is-latest{background:var(--accent)}
+.trend-value{position:static;transform:none;font-size:13px;font-weight:720;color:var(--text);text-align:right;white-space:nowrap}
+.trend-value:after{content:"천원";margin-left:2px;color:var(--muted);font-size:11px;font-weight:620}
+.trend-label{text-align:left;color:var(--text);font-size:12px;font-weight:680;white-space:nowrap}
+.trend-delta{display:block;margin:0;text-align:right;font-size:12px;font-weight:680;color:var(--muted);white-space:nowrap}
+.trend-delta:after{content:"천원";margin-left:2px;color:var(--muted);font-size:10px;font-weight:560}
+.trend-delta.flat:after,.trend-delta.start:after{content:""}
+@media (max-width:640px){
+  .trend-item{grid-template-columns:72px minmax(72px,1fr) 82px;gap:8px;padding:10px 12px}
+  .trend-delta{grid-column:3}.trend-value{font-size:12px}.trend-label{font-size:11px}
+}
+/* Mobile app experience layer */
+body.mobile-app{
+  background:#eef2f6;
+  overscroll-behavior-y:contain;
+  -webkit-tap-highlight-color:transparent;
+}
+.mobile-app .app{
+  width:min(440px,100%);
+  padding:0 12px 96px;
+}
+.mobile-app .topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  margin:0 -12px 10px;
+  padding:12px 12px 10px;
+  background:rgba(238,242,246,.92);
+  border-bottom:1px solid rgba(31,41,51,.08);
+  backdrop-filter:blur(18px);
+}
+.mobile-app.dark .topbar{background:rgba(16,21,29,.9)}
+.mobile-app .brand-mark{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+}
+.mobile-app .brand-title{font-size:14px}
+.mobile-app .brand-sub{font-size:11px;max-width:210px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mobile-app .top-actions{gap:6px}
+.mobile-app .icon-btn,.mobile-app .refresh-btn{
+  width:38px;
+  height:38px;
+  padding:0;
+  border-radius:12px;
+}
+.mobile-app .refresh-text{display:none}
+.mobile-app .hero{
+  display:block;
+}
+.mobile-app .hero-main{
+  min-height:180px;
+  padding:20px 18px;
+  border-radius:22px;
+  border:0;
+  background:linear-gradient(145deg,#17263a,#27486f 62%,#176b58);
+  color:#fff;
+  box-shadow:0 18px 36px rgba(23,38,58,.18);
+}
+.mobile-app .hero-main:before{display:none}
+.mobile-app .eyebrow,.mobile-app .hero-main p{color:rgba(255,255,255,.72)}
+.mobile-app h1{
+  color:#fff;
+  font-size:29px;
+  line-height:1.15;
+  margin-top:8px;
+}
+.mobile-app .hero-meta{gap:6px}
+.mobile-app .pill{
+  color:rgba(255,255,255,.86);
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.18);
+}
+.mobile-app .summary{
+  margin-top:10px;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.mobile-app .metric{
+  border:0;
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 10px 24px rgba(31,41,51,.08);
+}
+.mobile-app .metric.primary{border-radius:20px}
+.mobile-app .metric-value{font-size:25px}
+.mobile-app .metric-label{font-size:11px}
+.mobile-app .metric-note{font-size:11px}
+.mobile-app .toolbar{
+  position:sticky;
+  top:60px;
+  z-index:40;
+  margin:10px -12px 8px;
+  padding:10px 12px 9px;
+  background:linear-gradient(180deg,rgba(238,242,246,.96) 82%,rgba(238,242,246,0));
+  border:0;
+}
+.mobile-app.dark .toolbar{background:linear-gradient(180deg,rgba(16,21,29,.95) 82%,rgba(16,21,29,0))}
+.mobile-app .search-row{
+  grid-template-columns:1fr;
+}
+.mobile-app .search,.mobile-app .sort-select{
+  height:44px;
+  border:0;
+  border-radius:14px;
+  box-shadow:0 8px 20px rgba(31,41,51,.07);
+}
+.mobile-app .chips{
+  padding:9px 0 2px;
+  gap:7px;
+}
+.mobile-app .chip{
+  padding:8px 11px;
+  border:0;
+  border-radius:999px;
+  background:#fff;
+  box-shadow:0 4px 12px rgba(31,41,51,.055);
+}
+.mobile-app .chip.active{
+  background:#17263a;
+  color:#fff;
+}
+.mobile-app .section-title{
+  margin:18px 2px 10px;
+}
+.mobile-app .section-title h2{font-size:16px}
+.mobile-app .leaderboard{
+  margin-left:-12px;
+  margin-right:-12px;
+  padding-left:12px;
+  padding-right:12px;
+}
+.mobile-app .rank-card,.mobile-app .team-card,.mobile-app .trend-panel{
+  border:0;
+  border-radius:20px;
+  box-shadow:0 10px 24px rgba(31,41,51,.075);
+}
+.mobile-app .team-list{
+  grid-template-columns:1fr;
+  gap:10px;
+}
+.mobile-app .team-card{
+  padding:15px;
+}
+.mobile-app .team-title{
+  font-size:16px;
+  line-height:1.38;
+}
+.mobile-app .team-body{
+  grid-template-columns:70px 1fr;
+  margin-top:14px;
+}
+.mobile-app .ring{width:70px;height:70px}
+.mobile-app .ring-core{width:52px;height:52px}
+.mobile-app .stat{
+  border:0;
+  border-radius:12px;
+}
+.mobile-app .team-foot{
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:start;
+  row-gap:8px;
+}
+.mobile-app .team-foot > span{
+  display:block;
+  width:100%;
+  white-space:nowrap;
+  line-height:1.35;
+}
+.mobile-app .team-actions{
+  width:100%;
+  justify-content:flex-end;
+}
+.mobile-app .trend-panel{
+  background:#fff;
+}
+.mobile-app .trend-item{
+  grid-template-columns:74px minmax(70px,1fr) 86px;
+  padding:11px 13px;
+}
+.mobile-app .trend-delta{
+  grid-column:3;
+  font-size:11px;
+}
+.mobile-app .bottom-nav{
+  left:50%;
+  right:auto;
+  bottom:10px;
+  width:min(416px,calc(100% - 24px));
+  transform:translateX(-50%);
+  border:1px solid rgba(31,41,51,.08);
+  border-radius:22px;
+  padding:7px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 16px 36px rgba(31,41,51,.16);
+}
+.mobile-app.dark .bottom-nav{background:rgba(23,31,43,.88)}
+.mobile-app .nav-inner{
+  width:100%;
+  gap:4px;
+}
+.mobile-app .nav-inner button{
+  height:44px;
+  border-radius:16px;
+}
+.mobile-app .nav-inner button.active{
+  border:0;
+  background:#17263a;
+  color:#fff;
+}
+.mobile-app .nav-inner button.active:after{display:none}
+.touch-down{
+  transform:scale(.985)!important;
+  transition:transform .08s ease!important;
+}
+/* Mobile app rebuild layer */
+:root{
+  --app-bg:#f6f7f9;
+  --app-card:#ffffff;
+  --app-text:#17191f;
+  --app-sub:#757b86;
+  --app-line:#eceff3;
+  --app-blue:#2563eb;
+  --app-green:#16a36a;
+  --app-red:#e0524d;
+  --app-amber:#c68416;
+  --app-shadow:0 10px 28px rgba(23,25,31,.06);
+}
+body,body.mobile-app{
+  background:var(--app-bg);
+  color:var(--app-text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",Arial,sans-serif;
+}
+body.dark,body.dark.mobile-app{--app-bg:#0f131a;--app-card:#171c25;--app-text:#f4f6f8;--app-sub:#a1a8b3;--app-line:#28313d;background:var(--app-bg)}
+.app,.mobile-app .app{
+  width:min(430px,100%);
+  max-width:430px;
+  padding:0 18px 96px;
+}
+.topbar,.mobile-app .topbar{
+  position:sticky;
+  top:0;
+  z-index:60;
+  margin:0 -18px;
+  padding:14px 18px 12px;
+  background:rgba(246,247,249,.88);
+  border:0;
+  backdrop-filter:blur(18px);
+}
+.dark .topbar,.dark.mobile-app .topbar{background:rgba(15,19,26,.88)}
+.brand{gap:10px}
+.brand-mark,.mobile-app .brand-mark{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:11px;
+  background:var(--app-text);
+  box-shadow:none;
+}
+.brand-mark svg{color:var(--app-card);filter:none;width:19px;height:19px}
+.brand-title{font-size:15px;font-weight:750;color:var(--app-text)}
+.brand-sub{font-size:11px;font-weight:500;color:var(--app-sub);max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-actions{gap:6px}
+.icon-btn,.refresh-btn,.mobile-app .icon-btn,.mobile-app .refresh-btn{
+  width:36px;
+  height:36px;
+  padding:0;
+  border:0;
+  border-radius:12px;
+  background:var(--app-card);
+  box-shadow:none;
+}
+.refresh-text{display:none}
+.icon-btn svg,.refresh-btn svg{filter:none;color:var(--app-text);width:18px;height:18px}
+.hero,.mobile-app .hero{display:block;margin-top:8px}
+.hero-main,.mobile-app .hero-main{
+  min-height:0;
+  padding:8px 0 14px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:var(--app-text);
+}
+.hero-main:before,.hero-main:after{display:none}
+.eyebrow{font-size:13px;font-weight:650;color:var(--app-blue);letter-spacing:0}
+h1,.mobile-app h1{
+  margin:8px 0 8px;
+  color:var(--app-text);
+  font-size:30px;
+  line-height:1.18;
+  font-weight:820;
+  letter-spacing:-.02em;
+}
+.hero-main p,.mobile-app .hero-main p{
+  max-width:none;
+  color:var(--app-sub);
+  font-size:14px;
+  font-weight:500;
+  line-height:1.55;
+}
+.hero-meta{margin-top:14px;gap:6px}
+.pill,.mobile-app .pill{
+  border:0;
+  border-radius:999px;
+  background:#eef3ff;
+  color:#315fba;
+  padding:7px 9px;
+  font-size:11px;
+  font-weight:650;
+}
+.dark .pill{background:#18233a;color:#8fb2ff}
+.summary,.mobile-app .summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:8px;
+}
+.metric,.mobile-app .metric{
+  border:0;
+  border-radius:22px;
+  background:var(--app-card);
+  padding:16px;
+  min-height:100px;
+  box-shadow:var(--app-shadow);
+}
+.metric.primary{
+  grid-column:1/3;
+  min-height:126px;
+  background:var(--app-text);
+  color:var(--app-card);
+}
+.metric.primary:before{display:none}
+.metric.primary .metric-label,.metric.primary .metric-note,.metric.primary .metric-value small{color:rgba(255,255,255,.68)}
+.metric-label{font-size:12px;font-weight:650;color:var(--app-sub)}
+.metric-label svg{display:none}
+.metric-value,.mobile-app .metric-value{
+  margin-top:12px;
+  color:inherit;
+  font-size:32px;
+  font-weight:820;
+  letter-spacing:-.02em;
+}
+.metric:not(.primary) .metric-value{font-size:27px}
+.metric-value small{font-size:12px;color:var(--app-sub);font-weight:650}
+.metric-note{font-size:12px;font-weight:500;color:var(--app-sub)}
+.progress-line{height:7px;background:rgba(255,255,255,.22);border:0;margin-top:16px}
+.metric:not(.primary) .progress-line{background:var(--app-line)}
+.progress-line span{background:var(--app-green)}
+.toolbar,.mobile-app .toolbar{
+  position:sticky;
+  top:58px;
+  z-index:40;
+  margin:12px -18px 8px;
+  padding:10px 18px;
+  background:linear-gradient(180deg,rgba(246,247,249,.94) 80%,rgba(246,247,249,0));
+  border:0;
+  backdrop-filter:blur(12px);
+}
+.dark .toolbar{background:linear-gradient(180deg,rgba(15,19,26,.94) 80%,rgba(15,19,26,0))}
+.search-row{grid-template-columns:1fr}
+.search,.sort-select,.mobile-app .search,.mobile-app .sort-select{
+  height:46px;
+  border:0;
+  border-radius:16px;
+  background:var(--app-card);
+  box-shadow:none;
+}
+.search input{font-size:15px;font-weight:500}
+.search svg{filter:none;color:var(--app-sub)}
+.sort-select{padding-left:14px;color:var(--app-text);font-size:13px;font-weight:650}
+.chips{gap:7px;padding:9px 0 2px}
+.chip,.mobile-app .chip{
+  border:0;
+  border-radius:999px;
+  background:var(--app-card);
+  color:var(--app-sub);
+  padding:8px 12px;
+  font-size:13px;
+  font-weight:650;
+  box-shadow:none;
+}
+.chip:before{display:none}
+.chip.active,.mobile-app .chip.active{
+  background:var(--app-text);
+  color:var(--app-card);
+}
+.toolbar-meta{font-size:11px;font-weight:500;color:var(--app-sub)}
+.section-title{margin:22px 0 10px}
+.section-title h2{font-size:18px;font-weight:800;color:var(--app-text);letter-spacing:-.01em}
+.section-title span{font-size:12px;font-weight:500;color:var(--app-sub)}
+.leaderboard{
+  display:flex;
+  gap:10px;
+  margin:0 -18px;
+  padding:0 18px 4px;
+}
+.rank-card,.mobile-app .rank-card{
+  min-width:210px;
+  border:0;
+  border-radius:20px;
+  background:var(--app-card);
+  box-shadow:var(--app-shadow);
+  padding:16px;
+}
+.rank-card:first-child{background:var(--app-card);border:0}
+.rank-no{border:0;box-shadow:none;background:#f1f4f8;color:var(--app-text);border-radius:12px}
+.rank-card:first-child .rank-no{background:#fff4d6;color:#8a640f}
+.rank-rate{color:var(--app-blue);font-size:22px;font-weight:820}
+.rank-team{font-size:15px;font-weight:760;color:var(--app-text)}
+.rank-meta{font-size:12px;font-weight:500;color:var(--app-sub)}
+.trend-panel,.mobile-app .trend-panel{
+  border:0;
+  border-radius:22px;
+  background:var(--app-card);
+  box-shadow:var(--app-shadow);
+  overflow:hidden;
+}
+.trend-chart{background:var(--app-card)}
+.trend-item{grid-template-columns:76px minmax(0,1fr) 86px;gap:10px;padding:13px 16px;min-height:58px;border-color:var(--app-line)}
+.trend-label{font-size:12px;font-weight:700;color:var(--app-text)}
+.trend-bar-wrap{height:8px;background:var(--app-line)}
+.trend-bar{background:#a8bdd9}.trend-bar.is-latest{background:var(--app-green)}
+.trend-value{font-size:12px;font-weight:760;color:var(--app-text)}
+.trend-delta{grid-column:3;font-size:11px;font-weight:650}
+.team-list,.mobile-app .team-list{grid-template-columns:1fr;gap:10px}
+.team-card,.mobile-app .team-card{
+  border:0;
+  border-radius:22px;
+  background:var(--app-card);
+  box-shadow:var(--app-shadow);
+  padding:17px;
+  min-height:0;
+}
+.team-card:before{display:none}
+.team-title{font-size:16px;font-weight:760;color:var(--app-text);line-height:1.4}
+.leader{font-size:12px;font-weight:500;color:var(--app-sub)}
+.leader b{font-weight:700;color:var(--app-text)}
+.rank-badge{border:0;border-radius:999px;background:#f1f4f8;color:var(--app-blue);font-weight:760}
+.team-status{border:0;box-shadow:none;border-radius:999px;font-size:11px}
+.team-body,.mobile-app .team-body{grid-template-columns:68px 1fr;gap:13px;margin-top:14px}
+.ring{width:68px;height:68px}
+.ring-core{width:52px;height:52px;font-size:16px}
+.stat{border:0;border-radius:14px;background:#f6f7f9}
+.dark .stat{background:#202735}
+.stat span{font-size:11px;font-weight:600;color:var(--app-sub)}
+.stat b{font-size:15px;font-weight:760;color:var(--app-text)}
+.team-foot,.mobile-app .team-foot{
+  display:grid;
+  grid-template-columns:1fr;
+  row-gap:9px;
+  border-color:var(--app-line);
+  font-size:12px;
+  font-weight:600;
+  color:var(--app-sub);
+}
+.team-foot > span{white-space:nowrap}
+.team-actions{justify-content:flex-end}
+.link-btn{font-size:12px;font-weight:700;color:var(--app-blue)}
+.member{background:#f6f7f9;border-radius:12px;font-weight:600}
+.member{display:grid;gap:2px;white-space:normal}
+.member b{font-size:12px;font-weight:720;color:var(--app-text)}
+.member small{font-size:10px;font-weight:560;color:var(--app-sub)}
+.bottom-nav,.mobile-app .bottom-nav{
+  left:50%;
+  right:auto;
+  bottom:12px;
+  width:min(394px,calc(100% - 28px));
+  transform:translateX(-50%);
+  border:0;
+  border-radius:24px;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 18px 44px rgba(23,25,31,.18);
+  padding:7px;
+  backdrop-filter:blur(18px);
+}
+.dark .bottom-nav{background:rgba(23,28,37,.9)}
+.nav-inner{width:100%;gap:4px}
+.nav-inner button{height:44px;border-radius:17px;font-size:12px;font-weight:700}
+.nav-inner button.active{border:0;background:var(--app-text);color:var(--app-card)}
+.nav-inner button.active:after{display:none}
+@media (min-width:721px){
+  .app{max-width:1040px;width:min(1040px,100%);padding-left:24px;padding-right:24px}
+  .summary{grid-template-columns:1.1fr .95fr .95fr}.metric.primary{grid-column:auto}
+  .team-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .toolbar{margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px}
+  .bottom-nav{width:min(430px,calc(100% - 28px))}
+}
+/* Product redesign final layer */
+.team-card{padding:0;overflow:hidden}
+.team-summary{
+  width:100%;
+  border:0;
+  background:transparent;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:14px;
+  align-items:center;
+  padding:18px 18px 12px;
+  text-align:left;
+  color:inherit;
+}
+.team-main{min-width:0;display:grid;gap:7px}
+.team-side{display:grid;justify-items:end;gap:8px;color:var(--app-text)}
+.team-side b{font-size:20px;font-weight:820;letter-spacing:-.02em}
+.team-progress{height:7px;margin:0 18px 16px;border-radius:999px;background:var(--app-line);overflow:hidden}
+.team-progress span{display:block;height:100%;border-radius:999px}
+.team-detail{display:none;padding:0 18px 18px}
+.team-card.open .team-detail{display:block}
+.detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  padding-top:2px;
+}
+.detail-grid div{
+  background:#f6f7f9;
+  border-radius:14px;
+  padding:11px 12px;
+}
+.dark .detail-grid div{background:#202735}
+.detail-grid span{display:block;color:var(--app-sub);font-size:11px;font-weight:600}
+.detail-grid b{display:block;margin-top:4px;color:var(--app-text);font-size:14px;font-weight:760}
+.team-detail .team-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:12px}
+.team-detail .members{margin-top:12px}
+.team-body,.team-foot,.ring{display:none}
+.toolbar{order:4}
+#trend{margin-top:8px}
+.trend-toggle{background:var(--app-card);border-radius:22px;box-shadow:var(--app-shadow);overflow:hidden}
+.trend-toggle summary{list-style:none;cursor:pointer;padding:16px 18px;font-size:14px;font-weight:720;color:var(--app-text)}
+.trend-toggle summary::-webkit-details-marker{display:none}
+.trend-toggle summary:after{content:"열기";float:right;color:var(--app-sub);font-size:12px;font-weight:600}
+.trend-toggle[open] summary:after{content:"닫기"}
+.trend-toggle .trend-panel{box-shadow:none;border-radius:0}
+.trend-toggle:not([open]) .trend-panel{display:none}
+.search{height:50px}
+.search input{font-size:16px}
+.rank-card:first-child{min-width:240px;transform:none;background:var(--app-text);color:var(--app-card)}
+.rank-card:first-child .rank-team,.rank-card:first-child .rank-meta{color:inherit}
+.rank-card:first-child .rank-meta{opacity:.68}
+.rank-card:first-child .rank-rate{color:#8ee0b7}
+.rank-card:first-child .rank-no{background:rgba(255,255,255,.14);color:#fff}
+.hero-meta .pill:nth-child(3){display:none}
+@media (max-width:720px){
+  .summary{grid-template-columns:1fr 1fr}
+  .metric.primary{grid-column:1/3}
+  .team-summary{padding:17px 16px 11px}
+  .team-progress{margin:0 16px 15px}
+  .team-detail{padding:0 16px 16px}
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17 19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="brand-title">PSM 소통트립</div><div class="brand-sub" id="basisText">데이터 준비 중</div></div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 모드 변경"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36-6.36-1.42 1.42M7.06 16.94l-1.42 1.42m12.72 0-1.42-1.42M7.06 7.06 5.64 5.64M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <button class="refresh-btn" id="refreshBtn" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 0 1-14.2 5M4 12A8 8 0 0 1 18.2 7M18 3v4h-4M6 21v-4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="refresh-text">새로고침</span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <article class="hero-main">
+      <div>
+        <div class="eyebrow">7월 챌린지 현황</div>
+        <h1>오늘의 실적을<br>한눈에 확인하세요</h1>
+        <p>오전 8시와 오후 18시 기준으로 팀별 실적과 달성률을 업데이트합니다.</p>
+      </div>
+      <div class="hero-meta">
+        <span class="pill" id="syncState">저장된 기준값 표시</span>
+        <span class="pill">업데이트 08:00 / 18:00</span>
+        <span class="pill" id="topTeamPill">TOP 팀 집계 중</span>
+      </div>
+    </article>
+
+    <section class="summary" aria-label="전체 요약">
+      <article class="metric primary">
+        <div class="metric-label"><span>전체 달성률</span><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M8 15l3-3 3 2 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="metric-value"><span id="overallRate">0.0</span><small>%</small></div>
+        <div class="progress-line"><span id="overallBar"></span></div>
+        <div class="metric-note" id="overallNote">전체 목표 대비 실적</div>
+      </article>
+      <article class="metric"><div class="metric-label"><span>전체 실적</span></div><div class="metric-value"><span id="totalResult">0</span><small>천원</small></div><div class="metric-note" id="totalTarget">목표 0천원</div></article>
+      <article class="metric"><div class="metric-label"><span>참여 현황</span></div><div class="metric-value"><span id="teamCount">0</span><small>팀</small></div><div class="metric-note"><span id="memberCount">0</span>명 참여</div></article>
+    </section>
+  </section>
+
+  <section class="toolbar" id="search" aria-label="검색과 필터">
+    <div class="search-row">
+      <label class="search" for="q"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="팀명 또는 이름 검색" autocomplete="off"><button class="clear-search" id="clearSearch" type="button" aria-label="검색어 지우기">×</button></label>
+      <label class="sr-only" for="sort">정렬</label><select class="sort-select" id="sort"><option value="rate">달성률순</option><option value="result">실적순</option><option value="remain">잔여 적은순</option><option value="team">팀명순</option></select>
+    </div>
+    <nav class="chips" aria-label="필터">
+      <button class="chip active" data-filter="all" type="button">전체</button>
+      <button class="chip" data-filter="top10" type="button">상위 10</button>
+      <button class="chip" data-filter="watch" type="button">관심 필요</button>
+      <button class="chip" data-filter="over55" type="button">55% 이상</button>
+      <button class="chip" data-filter="over60" type="button">60% 이상</button>
+      <button class="chip" data-filter="over65" type="button">65% 이상</button>
+      <button class="chip" data-filter="done" type="button">목표 달성</button>
+    </nav>
+    <div class="toolbar-meta" id="activeHint">전체 팀을 표시합니다.</div>
+  </section>
+
+  <div class="notice" id="notice" role="status"></div>
+
+  <section id="top">
+    <div class="section-title"><h2>현재 TOP 5</h2><span>달성률 기준</span></div>
+    <div class="leaderboard" id="topList"></div>
+  </section>
+
+  <section id="trend">
+    <div class="section-title"><h2>시간대별 추이</h2><span id="trendSummary">데이터 집계 중</span></div>
+    <details class="trend-toggle">
+      <summary>추이 자세히 보기</summary>
+      <div class="trend-panel">
+      <div class="trend-chart" id="trendChart" aria-label="시간대별 전체 실적 추이"></div>
+      </div>
+    </details>
+  </section>
+
+  <section id="teams">
+    <div class="section-title"><h2>참여 팀</h2><span id="listCount">0팀</span></div>
+    <div class="team-list" id="grid"></div>
+    <div class="empty" id="empty">검색 조건에 맞는 팀이 없습니다.</div>
+  </section>
+</main>
+
+<nav class="bottom-nav" aria-label="하단 메뉴">
+  <div class="nav-inner">
+    <button class="active" data-go="top" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>랭킹</button>
+    <button data-go="teams" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 1 1-8 0m8 0h3a3 3 0 0 1 3 3v4h-5m-9-7H5a3 3 0 0 0-3 3v4h5m1-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>팀</button>
+    <button data-go="search" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>검색</button>
+  </div>
+</nav>
+
+<script>
+const BASE_TEAMS = [{"team":"나 오늘 밥 안해","leader":"신유경","members":["신유경","김미라","백형금","박정윤","김해정","김유랑","김민숙"],"target":12080,"result":896},{"team":"마음은 하나~","leader":"한예서","members":["한예서","김애정","임선희","최옥남","석미정"],"target":12220,"result":1152},{"team":"앗!싸리","leader":"정경화","members":["정경화","유영순","최은희","박순희"],"target":7680,"result":348},{"team":"대충~이겼슈~","leader":"주인애","members":["주인애","김경숙","오선미","복경연","김영란","권희나"],"target":11320,"result":1201},{"team":"행복찾기","leader":"예윤정","members":["예윤정","홍은주","권나영","김수현"],"target":9890,"result":596},{"team":"타코","leader":"서명옥","members":["서명옥","선호복","이미령","윤미해"],"target":7460,"result":922},{"team":"출근금지 구역으로 출발","leader":"이경희","members":["이경희","김현숙","조영주","송하연"],"target":7770,"result":1138},{"team":"오(5)지게 달리는 언니들~","leader":"김수현","members":["김수현","김주희","박미순","노희정","최영순"],"target":12800,"result":706},{"team":"美親여자들","leader":"박정희","members":["박정희","이숙희","문춘옥","박영숙"],"target":9050,"result":638},{"team":"여행가자~!","leader":"조현숙","members":["조현숙","김윤희","안명주","이미라","정은주","이금희"],"target":14390,"result":945},{"team":"도토리 오형제","leader":"허혜경","members":["허혜경","김영경","윤정하","천소미","양문희"],"target":9040,"result":259},{"team":"오(5)마이갓동-","leader":"남궁희","members":["남궁희","김미경","서애경","배유정"],"target":11450,"result":1058},{"team":"4륜구동","leader":"김희묘","members":["김희묘","김정숙","김순희","유현숙"],"target":7300,"result":984},{"team":"모기보다 센 빨대","leader":"이지영","members":["이지영","최남순","최진아","국은희","변섭희"],"target":8660,"result":930},{"team":"매출원정대","leader":"김진선","members":["김진선","김소현","최나리","김보선"],"target":7620,"result":1062},{"team":"광주교차","leader":"송경하","members":["송경하","박순덕","구현숙","심경숙","임효정"],"target":8050,"result":301},{"team":"즐겁게 삽시다.","leader":"김종미","members":["김종미","이은숙","조예진","안옥자"],"target":10370,"result":527},{"team":"광(미칠광)열 하게 놀아볼까","leader":"김정화","members":["김정화","이지영","한아름","이설호","송해영","김정우"],"target":14220,"result":615},{"team":"소통은 내돈내삼, 트립은 니돈내삼","leader":"김은주","members":["김은주","엄미영","고다현","이의주"],"target":6770,"result":847},{"team":"중부걸스 체결 어벤저스~","leader":"현용은","members":["현용은","임서인","임경미","김수연","최한미"],"target":9990,"result":702},{"team":"의.일아(의정부+일산)걱정마♡","leader":"최봉애","members":["최봉애","김다연","이채원","권경미","김영란","박수정"],"target":11910,"result":936},{"team":"일당백5공주","leader":"조선영","members":["조선영","이수진","허은경","송현아","김혜란"],"target":13280,"result":1233},{"team":"우리가 간다 하와이!!","leader":"한은희","members":["한은희","허진우","김명진","전병원"],"target":9810,"result":879},{"team":"떠나자ㆍ남동!!!","leader":"김영미","members":["김영미","장혜정","권채령","김양현"],"target":6650,"result":411},{"team":"가즈아~ 제주로","leader":"황세비","members":["황세비","성안제","박미림","윤승연"],"target":8480,"result":638},{"team":"대권주자","leader":"박서윤","members":["박서윤","김은숙","남정아","한지선","김민선","강미경"],"target":12680,"result":671},{"team":"우리가유~","leader":"전성미","members":["전성미","박수미","박연희","변경희","권은주"],"target":11300,"result":878},{"team":"구상용의 아이들 외 1인","leader":"기유리","members":["기유리","김시내","정건희","문지현","서마로","박정해","김은정"],"target":12840,"result":955},{"team":"나 오늘 집에 안갈래","leader":"이혜영","members":["이혜영","김윤정","김경옥","김영미","김수정","안지숙"],"target":11210,"result":1058},{"team":"놀러가려고 일한 조","leader":"김미록","members":["김미록","최옥희","이미화","김경애"],"target":10690,"result":1308},{"team":"욱이라면어디든","leader":"김형욱","members":["김형욱","차정숙","김영경","최성해","장혜은","권옥주","강단영"],"target":16280,"result":1533},{"team":"기유리 돌아와","leader":"박지영","members":["박지영","김민정","박선영","장은영"],"target":11940,"result":1427},{"team":"신촌 드림투어","leader":"김혜원","members":["김혜원","조혜진","박미정","김미희","김주현"],"target":8560,"result":961},{"team":"원++식스","leader":"유정화","members":["유정화","김선화","김현","배주연","이금선","박정숙","복영숙"],"target":15580,"result":1035},{"team":"시너지크루","leader":"이정희","members":["이정희","이선희","김정아","허용미"],"target":7600,"result":861},{"team":"왈(曰),왈(曰),왈(曰)","leader":"방은경","members":["방은경","양덕순","김승희","노은경"],"target":7130,"result":874},{"team":"독수리 오남매","leader":"박성희","members":["박성희","최서온","이선아","이상영","이금숙"],"target":10140,"result":903},{"team":"우리의 7월은 제대로 대박7거야","leader":"조유이","members":["조유이","구복희","김양미","김연희","신은선","홍동호"],"target":11450,"result":1105},{"team":"성경(성남경기)드림","leader":"최명호","members":["최명호","박영숙","임나경","정선형","이경민","김한숙"],"target":14080,"result":1491}];
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
+const MEMBER_CSV_URL = 'https://docs.google.com/spreadsheets/d/1pwoa_QvPUiAzhcu0ZsYQfV3Zb7rxiLdbP4v7JZ6yVV4/gviz/tq?tqx=out:csv&gid=1874206095';
+const $ = id => document.getElementById(id);
+const state = { teams: structuredClone(BASE_TEAMS), history: [], filter: 'all', sort: 'rate', loading: false };
+const fmt = n => Number(n || 0).toLocaleString('ko-KR');
+const norm = s => (s || '').toString().normalize('NFKC').replace(/\s/g, '').toLowerCase();
+const memberName = m => typeof m === 'string' ? m : (m?.name || '');
+const memberBranch = m => typeof m === 'string' ? '' : (m?.branch || '');
+const rate = t => t.target ? (t.result / t.target) * 100 : 0;
+const remain = t => Math.max((t.target || 0) - (t.result || 0), 0);
+const esc = s => (s || '').toString().replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+const parseNumber = v => Number((v || '0').toString().replace(/[^0-9.-]/g, '')) || 0;
+const parseSheetTime = v => {
+  const raw = (v || '').toString().replace(/\D/g, '');
+  if(raw.length < 12) return '';
+  const y = raw.slice(0, 4), m = raw.slice(4, 6), d = raw.slice(6, 8);
+  const h = raw.slice(8, 10) === '10' ? '08' : raw.slice(8, 10);
+  const min = raw.slice(10, 12);
+  return `${y}.${m}.${d} ${h}:${min} 기준`;
+};
+const shortSheetTime = raw => {
+  const s = (raw || '').toString().replace(/\D/g, '');
+  if(s.length < 12) return '';
+  const h = s.slice(8,10) === '10' ? '08' : s.slice(8,10);
+  return `${s.slice(4,6)}.${s.slice(6,8)} ${h}:${s.slice(10,12)}`;
+};
+const prefersReducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function setTheme(mode){
+  const dark = mode === 'dark' || (!mode && matchMedia('(prefers-color-scheme: dark)').matches);
+  document.body.classList.toggle('dark', dark);
+  localStorage.setItem('psm-theme', dark ? 'dark' : 'light');
+}
+
+function setBasis(sourceText){
+  const d = new Date().toLocaleDateString('ko-KR', { month:'2-digit', day:'2-digit' }).replace(/\.\s?/g,'.').replace(/\.$/,'');
+  $('basisText').textContent = sourceText || d + ' 업데이트 08:00 / 18:00 기준';
+}
+
+function totals(list = state.teams){
+  return list.reduce((acc, t) => {
+    acc.target += Number(t.target || 0);
+    acc.result += Number(t.result || 0);
+    acc.members += Array.isArray(t.members) ? t.members.length : 0;
+    return acc;
+  }, { target:0, result:0, members:0 });
+}
+
+function setNumber(id, value, options = {}){
+  const el = $(id);
+  if(!el) return;
+  const decimals = options.decimals || 0;
+  const format = n => decimals ? Number(n).toFixed(decimals) : fmt(Math.round(n));
+  if(prefersReducedMotion()){
+    el.textContent = format(value);
+    el.dataset.value = value;
+    return;
+  }
+  const from = Number(el.dataset.value || el.textContent.replace(/[^0-9.-]/g, '') || 0);
+  const to = Number(value || 0);
+  el.dataset.value = to;
+  const start = performance.now();
+  const duration = options.duration || 520;
+  function tick(now){
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = format(from + (to - from) * eased);
+    if(p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function setupReveal(){
+  const items = document.querySelectorAll('.hero-main,.metric,.rank-card,.trend-panel,.team-card');
+  items.forEach(el => el.classList.add('reveal'));
+  if(prefersReducedMotion() || !('IntersectionObserver' in window)){
+    items.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold:.12 });
+  items.forEach(el => observer.observe(el));
+}
+
+function setupSectionSpy(){
+  if(!('IntersectionObserver' in window)) return;
+  const buttons = new Map([...document.querySelectorAll('[data-go]')].map(btn => [btn.dataset.go, btn]));
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if(!visible) return;
+    document.querySelectorAll('[data-go]').forEach(btn => btn.classList.remove('active'));
+    const btn = buttons.get(visible.target.id);
+    if(btn) btn.classList.add('active');
+  }, { rootMargin:'-35% 0px -50% 0px', threshold:[.1,.25,.5] });
+  ['top','teams','search'].forEach(id => { const el = $(id); if(el) observer.observe(el); });
+}
+
+function arrangeProductFlow(){
+  const toolbar = $('search');
+  const top = $('top');
+  if(toolbar && top && top.nextElementSibling !== toolbar) top.insertAdjacentElement('afterend', toolbar);
+}
+
+function setupMobileAppMode(){
+  const apply = () => document.body.classList.toggle('mobile-app', innerWidth <= 720);
+  apply();
+  addEventListener('resize', apply, { passive:true });
+  document.addEventListener('pointerdown', e => {
+    const target = e.target.closest('button,.team-card,.rank-card');
+    if(target) target.classList.add('touch-down');
+  }, { passive:true });
+  document.addEventListener('pointerup', () => {
+    document.querySelectorAll('.touch-down').forEach(el => el.classList.remove('touch-down'));
+  }, { passive:true });
+  document.addEventListener('pointercancel', () => {
+    document.querySelectorAll('.touch-down').forEach(el => el.classList.remove('touch-down'));
+  }, { passive:true });
+}
+
+function sortedTeams(){
+  const list = state.teams.map(t => ({ ...t, rate: rate(t), remain: remain(t) }));
+  return list.sort((a,b) => {
+    if(state.sort === 'result') return b.result - a.result || b.rate - a.rate;
+    if(state.sort === 'remain') return a.remain - b.remain || b.rate - a.rate;
+    if(state.sort === 'team') return a.team.localeCompare(b.team, 'ko');
+    return b.rate - a.rate || b.result - a.result || a.team.localeCompare(b.team, 'ko');
+  });
+}
+
+function filteredTeams(rankMap){
+  const q = norm($('q').value);
+  let list = sortedTeams().filter(t => !q || norm(t.team).includes(q) || norm(t.leader).includes(q) || t.members.some(m => norm(memberName(m)).includes(q) || norm(memberBranch(m)).includes(q)));
+  if(state.filter === 'top10') list = list.filter(t => rankMap.get(t.team) <= 10);
+  if(state.filter === 'watch') list = list.filter(t => t.rate < 10);
+  if(state.filter === 'over55') list = list.filter(t => t.rate >= 55);
+  if(state.filter === 'over60') list = list.filter(t => t.rate >= 60);
+  if(state.filter === 'over65') list = list.filter(t => t.rate >= 65);
+  if(state.filter === 'done') list = list.filter(t => t.rate >= 100);
+  return list;
+}
+
+function render(){
+  const ranked = [...state.teams].map(t => ({ ...t, rate: rate(t), remain: remain(t) })).sort((a,b) => b.rate - a.rate || b.result - a.result || a.team.localeCompare(b.team, 'ko'));
+  const rankMap = new Map(ranked.map((t,i) => [t.team, i + 1]));
+  const total = totals();
+  const overall = total.target ? total.result / total.target * 100 : 0;
+  setNumber('overallRate', overall, { decimals:1 });
+  $('overallBar').style.width = Math.min(overall, 100) + '%';
+  $('overallNote').textContent = fmt(total.result) + ' / ' + fmt(total.target) + '천원';
+  setNumber('totalResult', total.result);
+  $('totalTarget').textContent = '목표 ' + fmt(total.target) + '천원';
+  setNumber('teamCount', state.teams.length);
+  setNumber('memberCount', total.members);
+  $('topTeamPill').textContent = ranked[0] ? '1위 ' + ranked[0].team + ' ' + ranked[0].rate.toFixed(1) + '%' : 'TOP 팀 없음';
+  $('topList').innerHTML = ranked.slice(0,5).map((t,i) => rankCard(t, i)).join('');
+  const teamParam = new URLSearchParams(location.search).get('team');
+  const list = filteredTeams(rankMap);
+  $('grid').innerHTML = list.map(t => teamCard(t, rankMap.get(t.team), teamParam && norm(teamParam) === norm(t.team))).join('');
+  $('listCount').textContent = fmt(list.length) + '팀';
+  updateActiveHint(list.length, state.teams.length);
+  $('empty').style.display = list.length ? 'none' : 'block';
+  renderTrend();
+  setupReveal();
+  requestAnimationFrame(() => document.querySelectorAll('[data-width]').forEach(el => { el.style.width = el.dataset.width + '%'; }));
+}
+
+function updateActiveHint(visible, total){
+  const q = $('q').value.trim();
+  const filterLabel = document.querySelector('.chip.active')?.textContent || '전체';
+  const sortLabel = $('sort').selectedOptions[0]?.textContent || '달성률순';
+  const searchText = q ? ` · 검색 "${q}"` : '';
+  $('activeHint').textContent = `${filterLabel} ${fmt(visible)}팀 / 전체 ${fmt(total)}팀 · ${sortLabel}${searchText}`;
+  $('clearSearch').classList.toggle('is-visible', Boolean(q));
+}
+
+function renderTrend(){
+  const chart = $('trendChart');
+  if(!chart) return;
+  const source = state.history.length ? state.history : state.teams.map(t => ({ ...t, timeRaw: '' }));
+  const grouped = new Map();
+  source.forEach(t => {
+    const key = t.timeRaw || 'baseline';
+    if(!grouped.has(key)) grouped.set(key, { timeRaw:key, target:0, result:0 });
+    const item = grouped.get(key);
+    item.target += Number(t.target || 0);
+    item.result += Number(t.result || 0);
+  });
+  const points = [...grouped.values()].sort((a,b) => a.timeRaw.localeCompare(b.timeRaw)).slice(-8);
+  const max = Math.max(...points.map(p => p.result), 1);
+  const latest = points[points.length - 1];
+  const prev = points[points.length - 2];
+  const delta = latest && prev ? latest.result - prev.result : 0;
+  $('trendSummary').textContent = points.length > 1
+    ? `최근 ${points.length}개 시점 · ${delta >= 0 ? '+' : ''}${fmt(delta)}천원`
+    : '최근 업데이트 기준';
+  if(chart.style.setProperty) chart.style.setProperty('--trend-count', points.length || 1);
+  else chart.style['--trend-count'] = points.length || 1;
+  chart.innerHTML = points.map((p, i) => {
+    const h = Math.max((p.result / max) * 100, 4);
+    const diff = i ? p.result - points[i - 1].result : 0;
+    const diffClass = i ? (diff > 0 ? 'up' : diff < 0 ? 'down' : 'flat') : 'start';
+    const label = p.timeRaw === 'baseline' ? '기준값' : shortSheetTime(p.timeRaw);
+    return `<div class="trend-item">
+      <div class="trend-label">${label}</div>
+      <div class="trend-bar-wrap"><div class="trend-bar ${i === points.length - 1 ? 'is-latest' : ''}" style="width:${h}%"></div></div>
+      <div class="trend-value">${fmt(p.result)}</div>
+      <div class="trend-delta ${diffClass}">${i ? (diff >= 0 ? '+' : '') + fmt(diff) : '-'}</div>
+    </div>`;
+  }).join('');
+}
+
+function rankCard(t, i){
+  return `<button class="rank-card" type="button" onclick="focusTeam('${encodeURIComponent(t.team)}')">
+    <div class="rank-top"><div class="rank-no">${i + 1}</div><div class="rank-rate">${t.rate.toFixed(1)}%</div></div>
+    <div class="rank-team">${esc(t.team)}</div><div class="rank-meta">팀장 ${esc(t.leader)} · 실적 ${fmt(t.result)}천원</div>
+  </button>`;
+}
+
+function teamCard(t, rank, highlight){
+  const p = rate(t), capped = Math.min(p, 100), left = remain(t), members = t.members.filter(m => norm(memberName(m)) !== norm(t.leader));
+  const ringColor = p >= 100 ? 'var(--accent)' : p < 10 ? 'var(--warn)' : 'var(--brand-2)';
+  const status = p >= 100 ? ['done','달성 완료'] : p >= 80 ? ['near','목표 근접'] : p < 10 ? ['watch','관심 필요'] : ['','순항 중'];
+  return `<article class="team-card ${highlight ? 'highlight' : ''}" id="team-${encodeURIComponent(t.team)}">
+    <button class="team-summary" type="button" onclick="toggleTeam(this)" aria-expanded="false">
+      <span class="team-main"><span class="team-title">${esc(t.team)}</span><span class="team-status ${status[0]}">${status[1]}</span></span>
+      <span class="team-side"><span class="rank-badge">#${rank}</span><b>${p.toFixed(1)}%</b></span>
+    </button>
+    <div class="team-progress"><span style="width:${capped}%;background:${ringColor}"></span></div>
+    <div class="team-detail">
+      <div class="detail-grid">
+        <div><span>팀장</span><b>${esc(t.leader)}</b></div>
+        <div><span>목표</span><b>${fmt(t.target)}천원</b></div>
+        <div><span>실적</span><b>${fmt(t.result)}천원</b></div>
+        <div><span>잔여</span><b>${left ? fmt(left) + '천원' : '완료'}</b></div>
+      </div>
+      <div class="team-actions"><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div>
+      <div class="members">${members.map(m => `<span class="member"><b>${esc(memberName(m))}</b>${memberBranch(m) ? `<small>${esc(memberBranch(m))}</small>` : ''}</span>`).join('')}</div>
+    </div>
+  </article>`;
+}
+
+function toggleMembers(btn){
+  const box = btn.closest('.team-card').querySelector('.members');
+  const open = box.classList.toggle('open');
+  btn.textContent = open ? '접기' : '팀원 ' + box.children.length + '명';
+}
+
+function toggleTeam(btn){
+  const card = btn.closest('.team-card');
+  const open = card.classList.toggle('open');
+  btn.setAttribute('aria-expanded', String(open));
+}
+
+function focusTeam(name){
+  const el = $('team-' + name);
+  if(el){ el.scrollIntoView({ behavior:'smooth', block:'center' }); el.classList.add('highlight'); setTimeout(() => el.classList.remove('highlight'), 1800); }
+}
+
+async function shareTeam(name){
+  const teamName = decodeURIComponent(name);
+  const url = new URL(location.href);
+  url.searchParams.set('team', teamName);
+  try{
+    await navigator.clipboard.writeText(url.toString());
+    showNotice('팀 공유 링크를 복사했습니다.', 'ok');
+  }catch(e){
+    location.href = url.toString();
+  }
+}
+
+function parseCSV(text){
+  const rows = [];
+  let row = [], cur = '', quote = false;
+  for(let i = 0; i < text.length; i++){
+    const c = text[i], n = text[i + 1];
+    if(c === '"'){
+      if(quote && n === '"'){ cur += '"'; i++; }
+      else quote = !quote;
+    }else if(c === ',' && !quote){
+      row.push(cur.trim());
+      cur = '';
+    }else if((c === '\n' || c === '\r') && !quote){
+      if(c === '\r' && n === '\n') i++;
+      row.push(cur.trim());
+      cur = '';
+      if(row.some(v => v !== '')) rows.push(row);
+      row = [];
+    }else{
+      cur += c;
+    }
+  }
+  row.push(cur.trim());
+  if(row.some(v => v !== '')) rows.push(row);
+  return rows;
+}
+
+function findColumn(headers, names){
+  const normalized = headers.map(norm);
+  return names.map(norm).reduce((found, name) => found >= 0 ? found : normalized.findIndex(h => h === name || h.includes(name)), -1);
+}
+
+function applyRows(rows){
+  if(!rows || rows.length < 2) throw new Error('empty');
+  const headers = rows[0].map(v => (v || '').trim());
+  const teamIndex = findColumn(headers, ['팀명','팀','team']);
+  const targetIndex = findColumn(headers, ['목표','target']);
+  const resultIndex = findColumn(headers, ['실적','result']);
+  const timeIndex = findColumn(headers, ['시간','업데이트','기준','time','updated']);
+  if(teamIndex < 0 || targetIndex < 0 || resultIndex < 0) throw new Error('columns');
+  const latestByTeam = new Map();
+  const history = [];
+  let sheetTimeRaw = '';
+  rows.slice(1).forEach(r => {
+    const name = (r[teamIndex] || '').trim();
+    const timeRaw = (r[timeIndex >= 0 ? timeIndex : 3] || '').toString().replace(/\D/g, '');
+    if(!name) return;
+    const item = { team:name, target: parseNumber(r[targetIndex]), result: parseNumber(r[resultIndex]), timeRaw };
+    history.push(item);
+    const key = norm(name);
+    const current = latestByTeam.get(key);
+    if(!current || (timeRaw && timeRaw >= (current.timeRaw || ''))) latestByTeam.set(key, item);
+    if(timeRaw && timeRaw > sheetTimeRaw) sheetTimeRaw = timeRaw;
+  });
+  if(!latestByTeam.size) throw new Error('no rows');
+  state.history = history;
+  state.teams = BASE_TEAMS.map(t => latestByTeam.has(norm(t.team)) ? { ...t, ...latestByTeam.get(norm(t.team)) } : { ...t });
+  showNotice('', 'hide');
+  setBasis(parseSheetTime(sheetTimeRaw));
+  $('syncState').textContent = '구글 시트 최신 데이터 반영';
+  render();
+}
+
+function applyMemberRows(rows){
+  if(!rows || rows.length < 2) throw new Error('member empty');
+  const headers = rows[0].map(v => (v || '').trim());
+  const teamIndex = findColumn(headers, ['팀명','팀','team']);
+  const nameIndex = findColumn(headers, ['이름','팀원','name','member']);
+  const branchIndex = findColumn(headers, ['지점','소속지점','소속','branch','office']);
+  const leaderIndex = findColumn(headers, ['팀장','leader']);
+  if(teamIndex < 0 || nameIndex < 0) throw new Error('member columns');
+  const map = new Map();
+  rows.slice(1).forEach(r => {
+    const team = (r[teamIndex] || '').trim();
+    const name = (r[nameIndex] || '').trim();
+    const branch = branchIndex >= 0 ? (r[branchIndex] || '').trim() : '';
+    if(!team || !name) return;
+    const key = norm(team);
+    if(!map.has(key)) map.set(key, { members: [], leader: '' });
+    const item = map.get(key);
+    if(!item.members.some(m => norm(memberName(m)) === norm(name))) item.members.push({ name, branch });
+    if(leaderIndex >= 0 && r[leaderIndex]) item.leader = r[leaderIndex].trim();
+  });
+  if(!map.size) throw new Error('member no rows');
+  state.teams = state.teams.map(t => {
+    const item = map.get(norm(t.team));
+    if(!item) return t;
+    return { ...t, members: item.members, leader: item.leader || t.leader || item.members[0] };
+  });
+}
+
+function showNotice(text, mode){
+  const n = $('notice');
+  if(mode === 'hide' || !text){ n.style.display = 'none'; n.textContent = ''; return; }
+  n.style.display = 'block'; n.textContent = text;
+}
+
+async function loadSheet(){
+  if(state.loading) return;
+  state.loading = true;
+  $('refreshBtn').disabled = true;
+  try{
+    const res = await fetch(CSV_URL + '&cacheBust=' + Date.now());
+    if(!res.ok) throw new Error('network');
+    applyRows(parseCSV(await res.text()));
+    try{
+      const memberRes = await fetch(MEMBER_CSV_URL + '&cacheBust=' + Date.now());
+      if(!memberRes.ok) throw new Error('member network');
+      applyMemberRows(parseCSV(await memberRes.text()));
+      render();
+    }catch(memberError){
+      console.warn('Member CSV load failed:', memberError);
+    }
+  }catch(e){
+    console.warn('CSV load failed:', e);
+    state.teams = structuredClone(BASE_TEAMS);
+    state.history = [];
+    setBasis();
+    $('syncState').textContent = '기본 데이터 표시';
+    showNotice('구글 시트 연결이 지연되어 기본 데이터를 표시하고 있습니다. 새로고침을 누르면 다시 확인합니다.', 'warn');
+    render();
+  }finally{
+    state.loading = false;
+    $('refreshBtn').disabled = false;
+  }
+}
+
+document.querySelectorAll('.chip').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+  btn.classList.add('active'); state.filter = btn.dataset.filter; render();
+}));
+document.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => {
+  $(btn.dataset.go).scrollIntoView({ behavior:'smooth', block:'start' });
+  document.querySelectorAll('[data-go]').forEach(x => x.classList.remove('active'));
+  btn.classList.add('active');
+}));
+$('q').addEventListener('input', render);
+$('clearSearch').addEventListener('click', () => {
+  $('q').value = '';
+  $('q').focus();
+  render();
+});
+$('q').addEventListener('keydown', e => {
+  if(e.key === 'Escape' && $('q').value){
+    $('q').value = '';
+    render();
+  }
+});
+$('sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+$('refreshBtn').addEventListener('click', loadSheet);
+$('themeBtn').addEventListener('click', () => setTheme(document.body.classList.contains('dark') ? 'light' : 'dark'));
+setTheme(localStorage.getItem('psm-theme'));
+setBasis(); setupMobileAppMode(); arrangeProductFlow(); render(); setupSectionSpy(); loadSheet();
+setTimeout(() => { const p = new URLSearchParams(location.search).get('team'); if(p) focusTeam(encodeURIComponent(p)); }, 700);
+</script>
+</body>
+</html>
