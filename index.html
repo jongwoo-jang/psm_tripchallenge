@@ -1,243 +1,171 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7월 특화마케팅팀 핵심프로젝트 · 팀 보드</title>
-  <style>
-    :root {
-      --bg:#07111f;
-      --surface:rgba(255,255,255,.10);
-      --surface2:rgba(255,255,255,.16);
-      --line:rgba(255,255,255,.18);
-      --text:#f8fafc;
-      --muted:#bfd0e6;
-      --navy:#0f172a;
-      --primary:#7c3aed;
-      --cyan:#22d3ee;
-      --pink:#f472b6;
-      --amber:#fbbf24;
-      --white:#ffffff;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:Pretendard,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 12% 12%, rgba(34,211,238,.34), transparent 28%),
-        radial-gradient(circle at 86% 4%, rgba(244,114,182,.35), transparent 26%),
-        radial-gradient(circle at 76% 82%, rgba(124,58,237,.35), transparent 30%),
-        linear-gradient(135deg,#020617 0%,#111827 48%,#172554 100%);
-      overflow-x:hidden;
-    }
-    body:before{
-      content:"";
-      position:fixed;inset:0;pointer-events:none;opacity:.55;
-      background-image:
-        linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
-      background-size:44px 44px;
-      mask-image:linear-gradient(to bottom,#000,transparent 78%);
-    }
-    .orb{position:fixed;border-radius:50%;filter:blur(22px);opacity:.65;pointer-events:none;animation:float 8s ease-in-out infinite alternate}
-    .orb.one{width:260px;height:260px;background:#22d3ee;left:-70px;top:120px}
-    .orb.two{width:330px;height:330px;background:#7c3aed;right:-110px;top:290px;animation-delay:-2s}
-    @keyframes float{to{transform:translateY(26px) translateX(18px) scale(1.05)}}
-    .container{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:48px 22px 80px}
-    .hero{
-      display:grid;grid-template-columns:minmax(0,1.25fr) 360px;gap:28px;align-items:stretch;margin-bottom:22px;
-    }
-    .heroCard,.sideCard,.panel,.card{
-      border:1px solid var(--line);
-      background:linear-gradient(145deg,rgba(255,255,255,.15),rgba(255,255,255,.07));
-      box-shadow:0 24px 90px rgba(0,0,0,.28);
-      backdrop-filter:blur(18px);
-    }
-    .heroCard{border-radius:36px;padding:38px;position:relative;overflow:hidden}
-    .heroCard:after{content:"";position:absolute;right:-80px;top:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 68%)}
-    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid var(--line);font-weight:900;color:#e0f2fe}
-    h1{margin:24px 0 12px;font-size:clamp(44px,7vw,86px);line-height:.98;letter-spacing:-.075em}
-    .highlight{background:linear-gradient(90deg,#67e8f9,#c4b5fd,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .subtitle{font-size:18px;line-height:1.75;color:var(--muted);max-width:820px;margin:0}
-    .sideCard{border-radius:36px;padding:26px;display:flex;flex-direction:column;gap:14px;justify-content:center}
-    .metric{border-radius:26px;padding:22px;background:rgba(2,6,23,.28);border:1px solid rgba(255,255,255,.14)}
-    .metric strong{display:block;font-size:46px;letter-spacing:-.06em}
-    .metric span{color:var(--muted);font-weight:800}
-    .panel{border-radius:30px;padding:18px;margin-bottom:24px}
-    .toolbar{display:grid;grid-template-columns:1fr 170px 150px;gap:12px;align-items:center}
-    .searchBox{height:56px;display:flex;align-items:center;gap:10px;border-radius:20px;padding:0 16px;background:rgba(15,23,42,.48);border:1px solid rgba(255,255,255,.18)}
-    .searchBox input{width:100%;height:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:16px;font-weight:800}
-    .searchBox input::placeholder{color:#94a3b8}
-    button{height:56px;border:0;border-radius:20px;padding:0 18px;cursor:pointer;color:#07111f;font-weight:950;font-size:15px;background:linear-gradient(135deg,#67e8f9,#c4b5fd);box-shadow:0 14px 30px rgba(34,211,238,.18)}
-    button.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.18);box-shadow:none}
-    .result{margin-top:12px;color:var(--muted);font-weight:800}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
-    .card{position:relative;overflow:hidden;border-radius:28px;padding:22px;cursor:pointer;transition:transform .22s ease, border-color .22s ease, background .22s ease}
-    .card:hover{transform:translateY(-7px);border-color:rgba(103,232,249,.55);background:linear-gradient(145deg,rgba(255,255,255,.20),rgba(255,255,255,.09))}
-    .card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--cyan),var(--primary),var(--pink))}
-    .cardTop{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-    .team{font-size:21px;font-weight:1000;letter-spacing:-.05em;line-height:1.25}
-    .num{min-width:50px;height:50px;border-radius:18px;display:grid;place-items:center;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.16);font-weight:1000;color:#dbeafe}
-    .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-    .chip{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14);font-size:12px;font-weight:900;color:#e2e8f0}
-    .leaderChip{background:linear-gradient(135deg,rgba(251,191,36,.26),rgba(244,114,182,.20));border-color:rgba(251,191,36,.36);color:#fff7ed}
-    .people{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
-    .badge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.14);font-size:13px;color:#f8fafc;font-weight:800}
-    .avatar{width:20px;height:20px;border-radius:999px;display:inline-grid;place-items:center;background:linear-gradient(135deg,#67e8f9,#c4b5fd);color:#07111f;font-size:10px;font-weight:1000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
-    .leaderHero{display:flex;align-items:center;gap:12px;margin-top:18px;padding:14px 16px;border-radius:22px;background:linear-gradient(135deg,rgba(251,191,36,.24),rgba(244,114,182,.14));border:1px solid rgba(251,191,36,.30);color:#fff7ed;font-weight:1000}
-    .leaderHero .crown{width:42px;height:42px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#fde68a,#f59e0b);color:#713f12;box-shadow:0 10px 24px rgba(245,158,11,.22)}
-    .leaderHero small{display:block;color:#fde68a;font-size:11px;letter-spacing:.08em;margin-bottom:2px}
-    .empty{display:none;text-align:center;padding:60px 20px;color:#cbd5e1;border:1px dashed var(--line);border-radius:28px;background:rgba(255,255,255,.06)}
-    .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(2,6,23,.76);backdrop-filter:blur(10px)}
-    .box{position:relative;max-width:820px;width:100%;max-height:88vh;overflow:auto;border-radius:34px;background:#fff;color:#0f172a;padding:34px;box-shadow:0 40px 120px rgba(0,0,0,.48)}
-    .box:before{content:"";position:absolute;inset:0 0 auto;height:10px;background:linear-gradient(90deg,var(--cyan),var(--primary),var(--pink),var(--amber))}
-    .close{position:absolute;right:20px;top:18px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#f1f5f9;font-size:28px;cursor:pointer;color:#334155}
-    .modalTitle{margin:16px 54px 8px 0;font-size:38px;letter-spacing:-.06em;line-height:1.15}
-    .modalSub{color:#64748b;font-weight:900;margin-bottom:12px}
-    .leaderBox{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;margin:18px 0;border-radius:22px;background:linear-gradient(135deg,#fff7ed,#fef3c7);border:1px solid #fde68a;color:#78350f;font-weight:1000}
-    .leaderBox small{display:block;font-size:12px;color:#92400e;margin-bottom:2px}
-    .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:12px}
-    .member{display:flex;align-items:center;justify-content:center;gap:8px;position:relative;padding:15px 12px;text-align:center;border-radius:18px;background:linear-gradient(135deg,#eef2ff,#ecfeff);font-weight:950;color:#1e293b;border:1px solid #e2e8f0}
-    .sectionTitle{margin:20px 0 12px;color:#334155;font-size:15px;font-weight:1000;letter-spacing:-.03em}
-    .navBtns{display:flex;gap:10px;margin-top:24px}
-    .navBtns button{flex:1;color:#07111f}
-    .navBtns .ghost{color:#111827;background:#f1f5f9;border:1px solid #e2e8f0}
-    @media(max-width:860px){.hero{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr}.sideCard{display:grid;grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:560px){.container{padding:28px 14px 60px}.heroCard{padding:26px 20px;border-radius:28px}.sideCard{grid-template-columns:1fr}.metric strong{font-size:38px}.modalTitle{font-size:30px}.box{padding:28px 18px}}
-  </style>
-</head>
-<body>
-  <div class="orb one"></div><div class="orb two"></div>
-  <main class="container">
-    <section class="hero">
-      <div class="heroCard">
-        <div class="eyebrow">✨ PSM · Special Marketing Team</div>
-        <h1>7월 특화마케팅팀<br><span class="highlight">핵심프로젝트</span></h1>
-        <p class="subtitle">38개 팀의 구성과 팀장을 한눈에 확인하는 인터랙티브 팀 보드입니다. 팀명, 지점, 팀원 이름으로 검색하고 카드 클릭으로 상세 명단을 확인하세요.</p>
-      </div>
-      <aside class="sideCard">
-        <div class="metric"><strong id="teamTotal">38</strong><span>참여 팀</span></div>
-        <div class="metric"><strong id="memberTotal">189</strong><span>참여 인원</span></div>
-      </aside>
-    </section>
-
-    <section class="panel">
-      <div class="toolbar">
-        <label class="searchBox"><span>🔎</span><input id="search" placeholder="팀명 · 지점 · 팀원 이름으로 검색" autocomplete="off"></label>
-        <button onclick="randomTeam()">랜덤 팀 보기</button>
-        <button class="ghost" onclick="resetSearch()">전체 보기</button>
-      </div>
-      <div class="result" id="resultText"></div>
-    </section>
-
-    <section class="grid" id="grid"></section>
-    <section class="empty" id="empty">검색 결과가 없습니다. 다른 팀명, 지점 또는 이름으로 찾아보세요.</section>
-  </main>
-
-  <div class="modal" id="modal" role="dialog" aria-modal="true">
-    <div class="box">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 class="modalTitle" id="mt"></h2>
-      <div class="modalSub" id="ms"></div>
-      <div id="mc"></div>
-      <div class="navBtns"><button class="ghost" onclick="moveTeam(-1)">이전 팀</button><button onclick="moveTeam(1)">다음 팀</button></div>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>PSM 소통트립 챌린지</title>
+<style>
+:root {
+  --bg:#f6f8ff; --card:#ffffff; --text:#111827; --muted:#6b7280; --line:#e9edf7;
+  --blue:#2563eb; --blue2:#7c3aed; --gold:#f59e0b; --green:#10b981; --orange:#f97316;
+  --shadow:0 14px 40px rgba(20,34,80,.10); --radius:22px;
+}
+@media (prefers-color-scheme: dark) {:root {--bg:#08111f; --card:#111c2e; --text:#f9fafb; --muted:#9ca3af; --line:#24324a; --shadow:0 18px 50px rgba(0,0,0,.38);}}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(37,99,235,.20),transparent 34%),radial-gradient(circle at 85% 8%,rgba(124,58,237,.18),transparent 30%),var(--bg);color:var(--text);padding-bottom:84px;}
+.app{max-width:760px;margin:0 auto;padding:18px 16px 28px}
+.hero{position:sticky;top:0;z-index:10;margin:0 -16px 12px;padding:16px 16px 12px;background:linear-gradient(to bottom,var(--bg) 78%,transparent);backdrop-filter:blur(16px)}
+.eyebrow{display:inline-flex;gap:7px;align-items:center;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.35);font-size:12px;color:var(--muted);font-weight:700}
+h1{font-size:28px;line-height:1.08;margin:13px 0 6px;letter-spacing:-.8px} .subtitle{margin:0;color:var(--muted);font-weight:650}
+.summary{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:10px;margin:18px 0 12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 12px;box-shadow:var(--shadow)}
+.kpi b{display:block;font-size:22px;letter-spacing:-.5px} .kpi span{font-size:12px;color:var(--muted);font-weight:750}
+.myteam{display:none;margin:10px 0 14px;padding:14px;border-radius:20px;background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(37,99,235,.10));border:1px solid rgba(245,158,11,.35)}
+.topbox,.syncbox{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin:12px 0}
+.section-title{width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px;border:0;background:transparent;color:var(--text);font:inherit;font-weight:900;font-size:16px;text-align:left}
+.chev{transition:.2s} .collapsed .chev{transform:rotate(-90deg)}
+.toplist{padding:0 14px 14px;display:grid;gap:9px}
+.rank{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:10px;padding:12px;border-radius:16px;background:rgba(127,127,127,.06);border:1px solid var(--line)}
+.medal{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(245,158,11,.15)} .rank strong{font-size:15px} .rank small{display:block;color:var(--muted);margin-top:2px}
+.pct{font-weight:950;color:var(--blue)}
+.sync-content{padding:0 16px 16px;color:var(--muted);font-size:13px;line-height:1.5}.sync-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px}
+.searchbar{position:sticky;top:112px;z-index:9;margin:14px 0;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;padding:12px 14px;display:flex;gap:9px;align-items:center}
+.searchbar input{border:0;outline:0;background:transparent;color:var(--text);font-size:16px;width:100%}
+.filters{display:flex;gap:8px;overflow:auto;padding:2px 0 12px;scrollbar-width:none} .filters::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:9px 13px;font-weight:800;box-shadow:0 6px 16px rgba(0,0,0,.04)} .chip.active{color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue2));border-color:transparent}
+.grid{display:grid;grid-template-columns:1fr;gap:13px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow);overflow:hidden;animation:rise .35s ease both}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--blue),var(--blue2));opacity:.9}
+.card.highlight{outline:3px solid rgba(245,158,11,.55)}
+.cardhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start} .team{font-size:19px;font-weight:950;letter-spacing:-.5px;line-height:1.22}
+.badge{font-size:12px;font-weight:950;padding:7px 10px;border-radius:999px;background:rgba(37,99,235,.10);color:var(--blue);white-space:nowrap}
+.leader{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:8px 10px;border-radius:999px;background:rgba(245,158,11,.14);color:var(--text);font-weight:900;font-size:13px}
+.metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0 12px} .metric{padding:10px;border-radius:14px;background:rgba(127,127,127,.06)} .metric span{display:block;color:var(--muted);font-size:11px;font-weight:850} .metric b{font-size:14px}
+.gauge{display:grid;grid-template-columns:76px 1fr;gap:13px;align-items:center;margin-top:6px}
+.circle{--p:0; width:76px;height:76px;border-radius:50%;background:conic-gradient(var(--blue) calc(var(--p)*1%), rgba(127,127,127,.14) 0);display:grid;place-items:center}
+.circle i{width:58px;height:58px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-style:normal;font-weight:950;font-size:17px}
+.barwrap{height:10px;border-radius:999px;background:rgba(127,127,127,.13);overflow:hidden;margin:8px 0} .bar{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.remain{font-size:13px;color:var(--muted);font-weight:750}
+.toggle{margin-top:13px;width:100%;border:0;border-radius:14px;padding:12px;background:rgba(37,99,235,.08);color:var(--blue);font-weight:950;font-size:14px}
+.members{display:none;padding-top:12px;gap:8px;flex-wrap:wrap} .members.open{display:flex}
+.person{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:7px 10px;background:rgba(127,127,127,.04);font-weight:750;font-size:13px}
+.avatar{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-size:12px;font-weight:950}
+.empty{text-align:center;color:var(--muted);padding:36px 10px}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:9px 16px calc(9px + env(safe-area-inset-bottom));background:rgba(246,248,255,.82);backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+@media (prefers-color-scheme: dark){.bottom{background:rgba(8,17,31,.82)}}
+.nav{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px} .nav button{border:0;background:transparent;color:var(--muted);font-weight:850;font-size:12px;padding:8px 4px;border-radius:13px} .nav button.active{background:var(--card);color:var(--blue);box-shadow:0 8px 18px rgba(0,0,0,.08)}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(min-width:680px){.grid{grid-template-columns:1fr 1fr} h1{font-size:36px} .searchbar{top:125px}}
+</style>
+</head><body>
+<div class="app">
+  <header class="hero" id="home">
+    <span class="eyebrow">🌿 7월 특화마케팅팀 핵심프로젝트</span>
+    <h1>PSM 소통트립 챌린지</h1>
+    <p class="subtitle">모바일에서 빠르게 확인하는 팀별 현황</p>
+  </header>
+  <section class="summary">
+    <div class="kpi"><b id="teamCount">-</b><span>참가팀</span></div>
+    <div class="kpi"><b id="memberCount">-</b><span>참가PSM</span></div>
+    <div class="kpi"><b id="totalResult">-</b><span>전체실적</span></div>
+  </section>
+  <div class="myteam" id="myTeamBox"></div>
+  <section class="topbox" id="top5">
+    <button class="section-title" onclick="toggleBox(this)">🏆 현재 TOP5 <span class="chev">⌄</span></button>
+    <div class="toplist" id="topList"></div>
+  </section>
+  <section class="syncbox" id="sync">
+    <button class="section-title" onclick="toggleBox(this)">🔄 구글시트 연동 상태 <span class="chev">⌄</span></button>
+    <div class="sync-content" id="syncContent">
+      <span class="sync-dot"></span><span id="syncMsg">구글시트에서 최신 실적을 불러오는 중입니다.</span>
     </div>
+  </section>
+  <label class="searchbar" id="search"><span>🔍</span><input id="q" placeholder="팀명 또는 이름으로 검색" autocomplete="off" /></label>
+  <div class="filters">
+    <button class="chip active" data-filter="all">전체 팀</button><button class="chip" data-filter="top10">상위 10</button><button class="chip" data-filter="risk">분발 필요</button><button class="chip" data-filter="done">100% 이상</button>
   </div>
+  <main class="grid" id="grid"></main>
+  <div class="empty" id="empty" style="display:none">검색 결과가 없습니다.</div>
+</div>
+<nav class="bottom"><div class="nav" style="grid-template-columns:repeat(3,1fr)"><button class="active" onclick="go('home',this)">홈</button><button onclick="go('top5',this)">TOP5</button><button onclick="go('search',this)">검색</button></div></nav>
+<script>
+const BASE_TEAMS = [{"team": "나 오늘 밥 안해", "leader": "신유경", "members": ["신유경", "김미라", "백형금", "박정윤", "김해정", "김유랑", "김민숙"], "target": 12080, "result": 896}, {"team": "마음은 하나~", "leader": "한예서", "members": ["한예서", "김애정", "임선희", "최옥남", "석미정"], "target": 12220, "result": 1152}, {"team": "앗!싸리", "leader": "정경화", "members": ["정경화", "유영순", "최은희", "박순희"], "target": 7680, "result": 348}, {"team": "대충~이겼슈~", "leader": "주인애", "members": ["주인애", "김경숙", "오선미", "복경연", "김영란", "권희나"], "target": 11320, "result": 1201}, {"team": "행복찾기", "leader": "예윤정", "members": ["예윤정", "홍은주", "권나영", "김수현"], "target": 9890, "result": 596}, {"team": "타코", "leader": "서명옥", "members": ["서명옥", "선호복", "이미령", "윤미해"], "target": 7460, "result": 922}, {"team": "출근금지 구역으로 출발", "leader": "이경희", "members": ["이경희", "김현숙", "조영주", "송하연"], "target": 7770, "result": 1138}, {"team": "오(5)지게 달리는 언니들~", "leader": "김수현", "members": ["김수현", "김주희", "박미순", "노희정", "최영순"], "target": 12800, "result": 706}, {"team": "美親여자들", "leader": "박정희", "members": ["박정희", "이숙희", "문춘옥", "박영숙"], "target": 9050, "result": 638}, {"team": "여행가자~!", "leader": "조현숙", "members": ["조현숙", "김윤희", "안명주", "이미라", "정은주", "이금희"], "target": 14390, "result": 945}, {"team": "도토리 오형제", "leader": "허혜경", "members": ["허혜경", "김영경", "윤정하", "천소미", "양문희"], "target": 9040, "result": 259}, {"team": "오(5)마이갓동-", "leader": "남궁희", "members": ["남궁희", "김미경", "서애경", "배유정"], "target": 11450, "result": 1058}, {"team": "4륜구동", "leader": "김희묘", "members": ["김희묘", "김정숙", "김순희", "유현숙"], "target": 7300, "result": 984}, {"team": "모기보다 센 빨대", "leader": "이지영", "members": ["이지영", "최남순", "최진아", "국은희", "변섭희"], "target": 8660, "result": 930}, {"team": "매출원정대", "leader": "김진선", "members": ["김진선", "김소현", "최나리", "김보선"], "target": 7620, "result": 1062}, {"team": "광주교차", "leader": "송경하", "members": ["송경하", "박순덕", "구현숙", "심경숙", "임효정"], "target": 8050, "result": 301}, {"team": "즐겁게 삽시다.", "leader": "김종미", "members": ["김종미", "이은숙", "조예진", "안옥자"], "target": 10370, "result": 527}, {"team": "광(미칠광)열 하게 놀아볼까", "leader": "김정화", "members": ["김정화", "이지영", "한아름", "이설호", "송해영", "김정우"], "target": 14220, "result": 615}, {"team": "소통은 내돈내삼, 트립은 니돈내삼", "leader": "김은주", "members": ["김은주", "엄미영", "고다현", "이의주"], "target": 6770, "result": 847}, {"team": "중부걸스 체결 어벤저스~", "leader": "현용은", "members": ["현용은", "임서인", "임경미", "김수연", "최한미"], "target": 9990, "result": 702}, {"team": "의.일아(의정부+일산)걱정마♡", "leader": "최봉애", "members": ["최봉애", "김다연", "이채원", "권경미", "김영란", "박수정"], "target": 11910, "result": 936}, {"team": "일당백5공주", "leader": "조선영", "members": ["조선영", "이수진", "허은경", "송현아", "김혜란"], "target": 13280, "result": 1233}, {"team": "우리가 간다 하와이!!", "leader": "한은희", "members": ["한은희", "허진우", "김명진", "전병원"], "target": 9810, "result": 879}, {"team": "떠나자ㆍ남동!!!", "leader": "김영미", "members": ["김영미", "장혜정", "권채령", "김양현"], "target": 6650, "result": 411}, {"team": "가즈아~ 제주로", "leader": "황세비", "members": ["황세비", "성안제", "박미림", "윤승연"], "target": 8480, "result": 638}, {"team": "대권주자", "leader": "박서윤", "members": ["박서윤", "김은숙", "남정아", "한지선", "김민선", "강미경"], "target": 12680, "result": 671}, {"team": "우리가유~", "leader": "전성미", "members": ["전성미", "박수미", "박연희", "변경희", "권은주"], "target": 11300, "result": 878}, {"team": "구상용의 아이들 외 1인", "leader": "기유리", "members": ["기유리", "김시내", "정건희", "문지현", "서마로", "박정해", "김은정"], "target": 12840, "result": 955}, {"team": "나 오늘 집에 안갈래", "leader": "이혜영", "members": ["이혜영", "김윤정", "김경옥", "김영미", "김수정", "안지숙"], "target": 11210, "result": 1058}, {"team": "놀러가려고 일한 조", "leader": "김미록", "members": ["김미록", "최옥희", "이미화", "김경애"], "target": 10690, "result": 1308}, {"team": "욱이라면어디든", "leader": "김형욱", "members": ["김형욱", "차정숙", "김영경", "최성해", "장혜은", "권옥주", "강단영"], "target": 16280, "result": 1533}, {"team": "기유리 돌아와", "leader": "박지영", "members": ["박지영", "김민정", "박선영", "장은영"], "target": 11940, "result": 1427}, {"team": "신촌 드림투어", "leader": "김혜원", "members": ["김혜원", "조혜진", "박미정", "김미희", "김주현"], "target": 8560, "result": 961}, {"team": "원++식스", "leader": "유정화", "members": ["유정화", "김선화", "김현", "배주연", "이금선", "박정숙", "복영숙"], "target": 15580, "result": 1035}, {"team": "시너지크루", "leader": "이정희", "members": ["이정희", "이선희", "김정아", "허용미"], "target": 7600, "result": 861}, {"team": "왈(曰),왈(曰),왈(曰)", "leader": "방은경", "members": ["방은경", "양덕순", "김승희", "노은경"], "target": 7130, "result": 874}, {"team": "독수리 오남매", "leader": "박성희", "members": ["박성희", "최서온", "이선아", "이상영", "이금숙"], "target": 10140, "result": 903}, {"team": "우리의 7월은 제대로 대박7거야", "leader": "조유이", "members": ["조유이", "구복희", "김양미", "김연희", "신은선", "홍동호"], "target": 11450, "result": 1105}, {"team": "성경(성남경기)드림", "leader": "최명호", "members": ["최명호", "박영숙", "임나경", "정선형", "이경민", "김한숙"], "target": 14080, "result": 1491}];
+let teams = JSON.parse(JSON.stringify(BASE_TEAMS));
+const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1pwoa_QvPUiAzhcu0ZsYQfV3Zb7rxiLdbP4v7JZ6yVV4/gviz/tq?tqx=out:csv';
+let filter = 'all';
+const fmt = n => Number(n||0).toLocaleString('ko-KR');
+const pct = t => t.target ? (t.result / t.target * 100) : 0;
+const initials = name => (name||'?').trim().slice(0,1);
+function normalize(s){return (s||'').toString().replace(/\s/g,'').toLowerCase()}
+function ranked(){return [...teams].map(t=>({...t, rate:pct(t)})).sort((a,b)=>b.rate-a.rate || b.result-a.result)}
+function render(){
+  const r = ranked();
+  const rankMap = new Map(r.map((t,i)=>[t.team,i+1]));
+  document.getElementById('teamCount').textContent = fmt(teams.length);
+  document.getElementById('memberCount').textContent = fmt(teams.reduce((a,t)=>a+t.members.length,0));
+  document.getElementById('totalResult').textContent = fmt(teams.reduce((a,t)=>a+t.result,0));
+  document.getElementById('topList').innerHTML = r.slice(0,5).map((t,i)=>`<div class="rank" onclick="focusTeam('${encodeURIComponent(t.team)}')"><div class="medal">${['🥇','🥈','🥉','4','5'][i]}</div><div><strong>${t.team}</strong><small>👑 ${t.leader} · 실적 ${fmt(t.result)}</small></div><div class="pct">${t.rate.toFixed(1)}%</div></div>`).join('');
+  const query = normalize(document.getElementById('q').value);
+  let list = r.filter(t => !query || normalize(t.team).includes(query) || t.members.some(m=>normalize(m).includes(query)));
+  if(filter==='top10') list = list.slice(0,10);
+  if(filter==='risk') list = list.filter(t=>t.rate<10);
+  if(filter==='done') list = list.filter(t=>t.rate>=100);
+  const params = new URLSearchParams(location.search); const teamParam = params.get('team');
+  const grid = document.getElementById('grid');
+  grid.innerHTML = list.map(t=>card(t, rankMap.get(t.team), teamParam && normalize(teamParam)===normalize(t.team))).join('');
+  document.querySelectorAll('.bar').forEach(el=>requestAnimationFrame(()=>el.style.width=el.dataset.w+'%'));
+  document.getElementById('empty').style.display = list.length?'none':'block';
+  if(teamParam) showMyTeam(teamParam, r.find(t=>normalize(t.team)===normalize(teamParam)));
+}
+function card(t, rank, hi){
+  const rate = pct(t), capped = Math.min(rate,100), remain = Math.max(t.target-t.result,0);
+  const members = t.members.filter(n=>n!==t.leader);
+  return `<article class="card ${hi?'highlight':''}" id="team-${encodeURIComponent(t.team)}"><div class="cardhead"><div><div class="team">${t.team}</div><div class="leader">👑 팀장 ${t.leader}</div></div><div class="badge">#${rank}</div></div><div class="metrics"><div class="metric"><span>목표</span><b>${fmt(t.target)}</b></div><div class="metric"><span>실적</span><b>${fmt(t.result)}</b></div><div class="metric"><span>참가PSM</span><b>${fmt(t.members.length)}명</b></div></div><div class="gauge"><div class="circle" style="--p:${capped}"><i>${rate.toFixed(1)}%</i></div><div><b>달성률</b><div class="barwrap"><div class="bar" data-w="${capped}"></div></div><div class="remain">${remain?`목표까지 ${fmt(remain)} 남음`:'목표 달성 완료 🎉'}</div></div></div><button class="toggle" onclick="toggleMembers(this)">팀원 보기 ${members.length}명</button><div class="members">${members.map(m=>`<span class="person"><span class="avatar">${initials(m)}</span>${m}</span>`).join('')}</div></article>`
+}
+function toggleMembers(btn){ const m=btn.nextElementSibling; m.classList.toggle('open'); btn.textContent = m.classList.contains('open') ? '팀원 접기' : '팀원 보기 '+m.children.length+'명'; }
+function toggleBox(btn){ const box=btn.parentElement; const content=btn.nextElementSibling; box.classList.toggle('collapsed'); btn.classList.toggle('collapsed'); content.style.display = content.style.display==='none' ? (content.className.includes('toplist')?'grid':'block') : 'none'; }
+function go(id,btn){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'}); document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); btn.classList.add('active')}
+function focusTeam(name){ const id='team-'+name; const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); }
+function showMyTeam(param,t){ const box=document.getElementById('myTeamBox'); if(!t) return; box.style.display='block'; box.innerHTML=`<b>내 팀 바로가기</b><br>${t.team} · 현재 #${ranked().findIndex(x=>x.team===t.team)+1} · 달성률 ${pct(t).toFixed(1)}%`; }
+document.getElementById('q').addEventListener('input', render);
+document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active')); b.classList.add('active'); filter=b.dataset.filter; render();});
+function parseCSV(text){
+  const rows=[]; let row=[], cur='', q=false;
+  for(let i=0;i<text.length;i++){const c=text[i], n=text[i+1]; if(c==='"'){ if(q&&n==='"'){cur+='"';i++} else q=!q } else if(c===','&&!q){row.push(cur);cur=''} else if((c==='
+'||c==='
+')&&!q){ if(cur||row.length){row.push(cur);rows.push(row);row=[];cur=''} if(c==='
+'&&n==='
+')i++; } else cur+=c; } if(cur||row.length){row.push(cur);rows.push(row)} return rows;
+}
 
-  <script>
-    const teams = [{"team": "나 오늘 밥 안해", "branch": "전남교차", "leader": "신유경", "members": ["신유경", "김미라", "백형금", "박정윤", "김해정", "김유랑", "김민숙"]}, {"team": "마음은 하나~", "branch": "대전교차 · 청주교차 · 충주교차", "leader": "한예서", "members": ["한예서", "김애정", "임선희", "최옥남", "석미정"]}, {"team": "앗!싸리", "branch": "대구교차", "leader": "정경화", "members": ["정경화", "유영순", "최은희", "박순희"]}, {"team": "대충~이겼슈~", "branch": "충남교차 · 충청교차", "leader": "주인애", "members": ["주인애", "김경숙", "오선미", "복경연", "김영란", "권희나"]}, {"team": "행복찾기", "branch": "부산교차1 · 울산포항교차", "leader": "예윤정", "members": ["예윤정", "홍은주", "권나영", "김수현"]}, {"team": "타코", "branch": "삼성교차", "leader": "서명옥", "members": ["서명옥", "선호복", "이미령", "윤미해"]}, {"team": "출근금지 구역으로 출발", "branch": "제주교차", "leader": "이경희", "members": ["이경희", "김현숙", "조영주", "송하연"]}, {"team": "오(5)지게 달리는 언니들~", "branch": "부산교차2 · 통영진주교차", "leader": "김수현", "members": ["김수현", "김주희", "박미순", "노희정", "최영순"]}, {"team": "美親여자들", "branch": "안산교차", "leader": "박정희", "members": ["박정희", "이숙희", "문춘옥", "박영숙"]}, {"team": "여행가자~!", "branch": "부산교차3", "leader": "조현숙", "members": ["조현숙", "김윤희", "안명주", "이미라", "정은주", "이금희"]}, {"team": "도토리 오형제", "branch": "대구교차", "leader": "허혜경", "members": ["허혜경", "김영경", "윤정하", "천소미", "양문희"]}, {"team": "오(5)마이갓동-", "branch": "관동교차 · 원주춘천교차", "leader": "남궁희", "members": ["남궁희", "김미경", "서애경", "성은아", "배유정"]}, {"team": "4륜구동", "branch": "부천교차", "leader": "김희묘", "members": ["김희묘", "김정숙", "김순희", "유현숙"]}, {"team": "모기보다 센 빨대", "branch": "전북교차 · 전주교차", "leader": "이지영", "members": ["이지영", "최남순", "최진아", "국은희", "변섭희"]}, {"team": "매출원정대", "branch": "대전교차", "leader": "김진선", "members": ["김진선", "김소현", "최나리", "김보선"]}, {"team": "광주교차", "branch": "광주교차", "leader": "송경하", "members": ["송경하", "박순덕", "구현숙", "심경숙", "임효정"]}, {"team": "즐겁게 삽시다.", "branch": "대전교차 · 청주교차 · 충주교차 · 충청교차", "leader": "김종미", "members": ["김종미", "이은숙", "조예진", "안옥자"]}, {"team": "광(미칠광)열 하게 놀아볼까", "branch": "경북북부교차 · 구미교차", "leader": "김정화", "members": ["김정화", "이지영", "한아름", "이설호", "송해영", "김정우"]}, {"team": "소통은 내돈내삼, 트립은 니돈내삼", "branch": "강남교차 · 관동교차", "leader": "김은주", "members": ["김은주", "엄미영", "고다현", "이의주"]}, {"team": "중부걸스 체결 어벤저스~", "branch": "대전중부교차", "leader": "현용은", "members": ["현용은", "임서인", "임경미", "김수연", "최한미"]}, {"team": "의.일아(의정부+일산)걱정마♡", "branch": "의정부일산교차", "leader": "최봉애", "members": ["최봉애", "김다연", "이채원", "권경미", "김영란", "박수정"]}, {"team": "일당백5공주", "branch": "성남분당교차 · 수원교차 · 울산포항교차", "leader": "조선영", "members": ["조선영", "이수진", "허은경", "송현아", "김혜란"]}, {"team": "우리가 간다 하와이!!", "branch": "경남교차", "leader": "한은희", "members": ["한은희", "허진우", "김명진", "전병원"]}, {"team": "떠나자ㆍ남동!!!", "branch": "인천교차", "leader": "김영미", "members": ["김영미", "장혜정", "권채령", "김양현"]}, {"team": "가즈아~ 제주로", "branch": "평택교차", "leader": "황세비", "members": ["황세비", "성안제", "박미림", "윤승연"]}, {"team": "대권주자", "branch": "강남교차 · 방배서초교차 · 서부교차", "leader": "박서윤", "members": ["박서윤", "김은숙", "남정아", "한지선", "김민선", "강미경"]}, {"team": "우리가유~", "branch": "강동송파교차 · 강북교차", "leader": "전성미", "members": ["전성미", "박수미", "박연희", "변경희", "권은주"]}, {"team": "구상용의 아이들 외 1인", "branch": "강남교차 · 강북교차 · 구리동서울교차", "leader": "기유리", "members": ["기유리", "김시내", "정건희", "문지현", "서마로", "박정해", "김은정"]}, {"team": "나 오늘 집에 안갈래", "branch": "부평교차", "leader": "이혜영", "members": ["이혜영", "김윤정", "김경옥", "김영미", "김수정", "안지숙"]}, {"team": "놀러가려고 일한 조", "branch": "광진교차 · 구리동서울교차 · 성남분당교차", "leader": "김미록", "members": ["김미록", "최옥희", "이미화", "김경애"]}, {"team": "욱이라면어디든", "branch": "서울교차", "leader": "김형욱", "members": ["김형욱", "차정숙", "김영경", "최성해", "장혜은", "권옥주", "강단영"]}, {"team": "기유리 돌아와", "branch": "경기교차 · 경남교차 · 광주교차 · 통영진주교차", "leader": "박지영", "members": ["박지영", "김민정", "박선영", "장은영"]}, {"team": "신촌 드림투어", "branch": "신촌교차", "leader": "김혜원", "members": ["김혜원", "조혜진", "박미정", "김미희", "김주현"]}, {"team": "원++식스", "branch": "부산교차1 · 부산교차2", "leader": "유정화", "members": ["유정화", "김선화", "김현", "배주연", "이금선", "박정숙", "복영숙"]}, {"team": "시너지크루", "branch": "울산포항교차", "leader": "이정희", "members": ["이정희", "이선희", "김정아", "허용미"]}, {"team": "왈(曰),왈(曰),왈(曰)", "branch": "전주교차 · 충청교차", "leader": "방은경", "members": ["방은경", "양덕순", "김승희", "노은경"]}, {"team": "독수리 오남매", "branch": "안양교차", "leader": "박성희", "members": ["박성희", "최서온", "이선아", "이상영", "이금숙"]}, {"team": "우리의 7월은 제대로 대박7거야", "branch": "광진교차 · 구리동서울교차", "leader": "김양미", "members": ["김양미", "구복희", "조유이", "김연희", "신은선", "홍동호"]}];
-    let currentIndex=0;
-    const grid=document.getElementById('grid');
-    const modal=document.getElementById('modal');
-    const search=document.getElementById('search');
-    const teamTotal=document.getElementById('teamTotal');
-    const memberTotal=document.getElementById('memberTotal');
-    const resultText=document.getElementById('resultText');
-    const empty=document.getElementById('empty');
-    const mt=document.getElementById('mt');
-    const ms=document.getElementById('ms');
-    const mc=document.getElementById('mc');
-
-    teamTotal.textContent=teams.length;
-    memberTotal.textContent=teams.reduce((s,t)=>s+t.members.length,0);
-
-    function escapeHtml(str){
-      return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-    }
-
-    function render(arr=teams){
-      grid.innerHTML='';
-      empty.style.display=arr.length?'none':'block';
-      resultText.textContent=`현재 ${arr.length}개 팀 / ${arr.reduce((s,t)=>s+t.members.length,0)}명 표시 중`;
-      arr.forEach((t)=>{
-        const i=teams.indexOf(t);
-        const c=document.createElement('article');
-        c.className='card';
-        const memberOnly=t.members.filter((m,idx)=>idx!==0 || m!==t.leader);
-        const preview=memberOnly.slice(0,6).map((m,idx)=>`<span class="badge"><span class="avatar">${escapeHtml(m.charAt(0))}</span>${escapeHtml(m)}</span>`).join('');
-        c.innerHTML=`
-          <div class="cardTop">
-            <div>
-              <div class="team">${escapeHtml(t.team)}</div>
-              <div class="meta">
-                <span class="chip">📍 ${escapeHtml(t.branch||'지점 미지정')}</span>
-                <span class="chip">👥 ${t.members.length}명</span>
-              </div>
-            </div>
-            <div class="num">${String(i+1).padStart(2,'0')}</div>
-          </div>
-          <div class="leaderHero"><span class="crown">👑</span><div><small>TEAM LEADER</small>${escapeHtml(t.leader)}</div></div>
-          <div class="people">${preview}${memberOnly.length>6?'<span class="badge">외 '+(memberOnly.length-6)+'명</span>':''}</div>`;
-        c.onclick=()=>show(i);
-        grid.appendChild(c);
-      });
-    }
-
-    function show(i){
-      currentIndex=(i+teams.length)%teams.length;
-      const t=teams[currentIndex];
-      mt.textContent=t.team;
-      ms.textContent=`${String(currentIndex+1).padStart(2,'0')}번째 팀 · ${t.branch||'지점 미지정'} · 팀원 ${t.members.length}명`;
-      const memberOnly=t.members.filter((m,idx)=>idx!==0 || m!==t.leader);
-      mc.innerHTML=`
-        <div class="leaderBox">
-          <div><small>TEAM LEADER</small><div>👑 ${escapeHtml(t.leader)}</div></div>
-          <div>${escapeHtml(t.team)}</div>
-        </div>
-        <div class="sectionTitle">👥 팀원 명단</div>
-        <div class="list">
-          ${memberOnly.map((m)=>`<div class="member"><span class="avatar">${escapeHtml(m.charAt(0))}</span>${escapeHtml(m)}</div>`).join('') || '<div class="member">팀원 없음</div>'}
-        </div>`;
-      modal.style.display='flex';
-    }
-
-    function closeModal(){modal.style.display='none'}
-    function moveTeam(dir){show(currentIndex+dir)}
-    function randomTeam(){show(Math.floor(Math.random()*teams.length))}
-    function resetSearch(){search.value='';render(teams);search.focus()}
-
-    search.addEventListener('input',e=>{
-      const q=e.target.value.trim().toLowerCase();
-      const filtered=teams.filter(t=>
-        t.team.toLowerCase().includes(q) ||
-        (t.branch||'').toLowerCase().includes(q) ||
-        t.members.some(m=>m.toLowerCase().includes(q))
-      );
-      render(filtered);
+function parseNumber(v){ return Number((v||'0').toString().replace(/[^0-9.-]/g,'')) || 0; }
+async function loadSheetData(){
+  const msg = document.getElementById('syncMsg');
+  try{
+    const res = await fetch(GOOGLE_SHEET_CSV_URL + '&cacheBust=' + Date.now(), {cache:'no-store'});
+    if(!res.ok) throw new Error('시트 응답 오류');
+    const text = await res.text();
+    const rows = parseCSV(text).filter(r => r.some(c => (c||'').trim()));
+    const head = rows.shift().map(h => h.trim());
+    const ti = head.findIndex(h => h === '팀명');
+    const ta = head.findIndex(h => h.includes('목표'));
+    const ri = head.findIndex(h => h.includes('실적'));
+    if(ti < 0 || ta < 0 || ri < 0) throw new Error('팀명, 목표, 실적 컬럼을 찾지 못했습니다.');
+    const map = new Map();
+    rows.forEach(r => {
+      const teamName = (r[ti] || '').trim();
+      if(!teamName) return;
+      map.set(normalize(teamName), { target: parseNumber(r[ta]), result: parseNumber(r[ri]) });
     });
-
-    modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
-    window.addEventListener('keydown',e=>{
-      if(modal.style.display==='flex'){
-        if(e.key==='Escape')closeModal();
-        if(e.key==='ArrowLeft')moveTeam(-1);
-        if(e.key==='ArrowRight')moveTeam(1);
-      }
-    });
+    teams = BASE_TEAMS.map(t => map.has(normalize(t.team)) ? {...t, ...map.get(normalize(t.team))} : {...t});
     render();
-  </script>
-</body>
-</html>
+    msg.textContent = `구글시트 연동 완료 · ${new Date().toLocaleString('ko-KR', {month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'})} 기준`;
+  }catch(err){
+    console.error(err);
+    render();
+    msg.textContent = '구글시트를 불러오지 못했습니다. 공유 권한이 “링크가 있는 모든 사용자 - 뷰어”인지 확인해주세요.';
+  }
+}
+loadSheetData();
+setInterval(loadSheetData, 5 * 60 * 1000);
+setTimeout(()=>{const p=new URLSearchParams(location.search).get('team'); if(p) focusTeam(encodeURIComponent(p));},500);
+</script></body></html>
