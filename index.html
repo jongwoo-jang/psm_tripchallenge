@@ -1,269 +1,576 @@
+
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0f172a" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10233f">
+<meta name="description" content="PSM 소통트립 챌린지 팀별 목표와 실적 현황판">
+<meta property="og:title" content="PSM 소통트립 챌린지">
+<meta property="og:description" content="팀별 실적, 달성률, 순위를 한눈에 확인하세요.">
+<meta property="og:type" content="website">
 <title>PSM 소통트립 챌린지</title>
 <style>
 :root{
-  --bg:#f7f8fb;--card:#ffffff;--card-soft:#f2f5f9;--text:#172033;--sub:#697386;--line:#e7ebf0;
-  --navy:#14213d;--blue:#2563eb;--blue-soft:#eaf1ff;--green:#16a34a;--amber:#d99a18;--red:#dc5f4a;
-  --shadow:0 12px 34px rgba(22,31,49,.08);--shadow2:0 6px 18px rgba(22,31,49,.06);
-  --radius:26px;
+  color-scheme:light;
+  --bg:#f6f7f9;--surface:#ffffff;--surface-2:#eef2f6;--surface-3:#e7edf4;
+  --text:#162033;--muted:#667287;--line:#dfe5ec;--brand:#12355b;--brand-2:#1877f2;
+  --accent:#0f9f6e;--warn:#d8841b;--danger:#d84f45;--gold:#c58a1b;
+  --shadow:0 16px 44px rgba(23,35,55,.10);--shadow-soft:0 8px 22px rgba(23,35,55,.07);
+  --radius:18px;--bottom:82px;
 }
-@media (prefers-color-scheme: dark){
-  :root{--bg:#0c111d;--card:#141b2a;--card-soft:#111827;--text:#f5f7fb;--sub:#a7b0c0;--line:#263044;--blue-soft:rgba(37,99,235,.14);--shadow:0 18px 45px rgba(0,0,0,.32);--shadow2:0 8px 24px rgba(0,0,0,.22)}
+body.dark{
+  color-scheme:dark;--bg:#0d121c;--surface:#151d2a;--surface-2:#101722;--surface-3:#202b3c;
+  --text:#f2f5f9;--muted:#a9b3c4;--line:#293548;--brand:#8db9ff;--brand-2:#58a6ff;
+  --shadow:0 16px 44px rgba(0,0,0,.32);--shadow-soft:0 8px 22px rgba(0,0,0,.24);
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Pretendard,"Noto Sans KR",Arial,sans-serif;letter-spacing:-.02em;padding-bottom:92px}
-button,input{font:inherit} button{cursor:pointer}
-.app{max-width:720px;margin:0 auto;padding:18px 16px 34px}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:2px 2px 12px}
-.mark{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;color:var(--sub)}
-.mark i{width:32px;height:32px;border-radius:11px;background:var(--navy);display:block;position:relative;box-shadow:var(--shadow2)}
-.mark i:after{content:"";position:absolute;inset:9px;border-radius:5px;background:#fff;opacity:.9}
-.date-pill{padding:8px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.65);color:var(--sub);font-size:12px;font-weight:700;backdrop-filter:blur(10px)}
-@media (prefers-color-scheme: dark){.date-pill{background:rgba(20,27,42,.7)}}
-.hero{padding:16px 0 12px}
-.hero h1{margin:0;font-size:34px;line-height:1.06;letter-spacing:-1.05px;font-weight:900}
-.hero p{margin:10px 0 0;color:var(--sub);font-size:15px;font-weight:650}
-.summary{display:grid;grid-template-columns:1.05fr .95fr;gap:12px;margin:18px 0 14px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;overflow:hidden}
-.main-result{grid-column:1/3;background:linear-gradient(145deg,#111c36 0%,#1d4ed8 100%);color:white;position:relative}
-.main-result:before{content:"";position:absolute;right:-42px;top:-44px;width:132px;height:132px;border-radius:50%;background:rgba(255,255,255,.12)}
-.label{font-size:12px;font-weight:750;color:var(--sub)}
-.main-result .label{color:rgba(255,255,255,.72)}
-.big{position:relative;margin-top:6px;font-size:37px;line-height:1;font-weight:900;letter-spacing:-1px}
-.big small{font-size:15px;font-weight:700;opacity:.75;margin-left:4px}
-.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;grid-column:1/3}
-.metric{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:15px;box-shadow:var(--shadow2)}
-.metric strong{display:block;margin-top:6px;font-size:23px;line-height:1;font-weight:900}
-.search-wrap{position:sticky;top:0;z-index:20;margin:0 -16px 10px;padding:10px 16px;background:linear-gradient(180deg,var(--bg) 72%,rgba(247,248,251,0));backdrop-filter:blur(14px)}
-@media (prefers-color-scheme: dark){.search-wrap{background:linear-gradient(180deg,var(--bg) 72%,rgba(12,17,29,0))}}
-.search{display:flex;align-items:center;gap:10px;height:52px;padding:0 15px;border-radius:18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow2)}
-.search svg{width:19px;height:19px;color:var(--sub);flex:none}
-.search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:16px;font-weight:650}
-.search input::placeholder{color:#97a0af}
-.chips{display:flex;gap:8px;overflow:auto;padding:2px 0 12px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--sub);border-radius:999px;padding:10px 13px;font-size:13px;font-weight:800;box-shadow:var(--shadow2)}
-.chip.active{background:var(--navy);border-color:var(--navy);color:#fff}
-.section-title{display:flex;align-items:flex-end;justify-content:space-between;margin:20px 2px 11px}
-.section-title h2{margin:0;font-size:18px;letter-spacing:-.4px}
-.section-title span{color:var(--sub);font-size:12px;font-weight:750}
-.leaderboard{display:flex;gap:10px;overflow:auto;margin:0 -16px 18px;padding:0 16px 4px;scroll-snap-type:x mandatory;scrollbar-width:none}
-.leaderboard::-webkit-scrollbar{display:none}
-.rank-card{min-width:78%;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:25px;padding:17px;box-shadow:var(--shadow2);display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:center}
-.rank-card:first-child{border-color:rgba(217,154,24,.35);background:linear-gradient(145deg,rgba(217,154,24,.13),var(--card) 56%)}
-.rank-no{width:42px;height:42px;border-radius:15px;background:var(--card-soft);display:grid;place-items:center;font-weight:900;color:var(--navy)}
-.rank-card:first-child .rank-no{background:#f8df9a;color:#5b3a00}
-.rank-team{font-size:16px;font-weight:900;line-height:1.25}
-.rank-meta{margin-top:4px;color:var(--sub);font-size:12px;font-weight:700}
-.rank-rate{font-size:22px;font-weight:900;color:var(--blue);text-align:right}
-.rank-rate small{font-size:12px;color:var(--sub);font-weight:750;margin-left:1px}
-.team-list{display:grid;grid-template-columns:1fr;gap:12px}
-.team-card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:17px;box-shadow:var(--shadow2);position:relative;overflow:hidden}
-.team-card.highlight{outline:3px solid rgba(217,154,24,.28)}
-.team-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
-.team-title{font-size:19px;font-weight:900;line-height:1.25;letter-spacing:-.5px}
-.rank-badge{flex:none;min-width:46px;text-align:center;border-radius:999px;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:900;padding:8px 10px}
-.leader{display:flex;align-items:center;gap:8px;margin-top:10px;color:var(--sub);font-size:13px;font-weight:750}
-.leader b{color:var(--text);font-weight:900}
-.leader-dot{width:22px;height:22px;border-radius:50%;background:#f7d67b;color:#573600;display:grid;place-items:center;font-size:11px;font-weight:900}
-.card-body{display:grid;grid-template-columns:82px 1fr;gap:15px;align-items:center;margin-top:17px}
-.ring{--p:0;--color:var(--blue);width:82px;height:82px;border-radius:50%;background:conic-gradient(var(--color) calc(var(--p)*1%), rgba(145,158,171,.18) 0);display:grid;place-items:center}
-.ring-inner{width:62px;height:62px;border-radius:50%;background:var(--card);display:grid;place-items:center;text-align:center;font-size:18px;font-weight:900;line-height:1}
-.ring-inner small{display:block;margin-top:3px;color:var(--sub);font-size:10px;font-weight:800}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.stat{background:var(--card-soft);border-radius:17px;padding:11px 12px}
-.stat span{display:block;color:var(--sub);font-size:11px;font-weight:800}
-.stat b{display:block;margin-top:4px;font-size:16px;font-weight:900}
-.bar-track{height:8px;border-radius:999px;background:rgba(145,158,171,.18);overflow:hidden;margin-top:12px}
-.bar{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,var(--blue),#22c55e);transition:width .8s cubic-bezier(.2,.8,.2,1)}
-.card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;color:var(--sub);font-size:13px;font-weight:750}
-.member-btn{border:0;background:transparent;color:var(--blue);font-size:13px;font-weight:900;padding:7px 0}
-.members{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.members.open{display:grid}
-.member{border-radius:14px;background:var(--card-soft);padding:10px 11px;color:var(--text);font-size:13px;font-weight:750}
-.empty{display:none;text-align:center;color:var(--sub);font-weight:750;padding:42px 10px}
-.notice{display:none;margin:12px 0;padding:13px 14px;border-radius:18px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:13px;font-weight:700;line-height:1.45}
-@media (prefers-color-scheme: dark){.notice{background:rgba(154,52,18,.16);border-color:rgba(251,146,60,.28);color:#fdba74}}
-.nav{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:9px 15px calc(9px + env(safe-area-inset-bottom));background:rgba(247,248,251,.82);border-top:1px solid var(--line);backdrop-filter:blur(18px)}
-@media (prefers-color-scheme: dark){.nav{background:rgba(12,17,29,.82)}}
-.nav-inner{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.nav button{border:0;background:transparent;color:var(--sub);border-radius:16px;padding:10px 6px;font-size:12px;font-weight:850}
-.nav button.active{background:var(--card);color:var(--blue);box-shadow:var(--shadow2)}
-@media (min-width:720px){.team-list{grid-template-columns:1fr 1fr}.rank-card{min-width:260px}.hero h1{font-size:42px}}
-@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.team-card,.rank-card,.panel,.metric{animation:rise .35s ease both}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",Arial,sans-serif;padding:0 0 calc(var(--bottom) + env(safe-area-inset-bottom));letter-spacing:0}button,input,select{font:inherit}button{cursor:pointer}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.app{width:min(1120px,100%);margin:0 auto;padding:18px 16px 28px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:11px;min-width:0}.brand-mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#10233f,#1877f2);display:grid;place-items:center;box-shadow:var(--shadow-soft);flex:none}.brand-mark svg{width:22px;height:22px;color:#fff}.brand-title{font-weight:900;font-size:15px;line-height:1.2}.brand-sub{color:var(--muted);font-size:12px;font-weight:700;margin-top:2px}.top-actions{display:flex;align-items:center;gap:8px}.icon-btn,.refresh-btn{border:1px solid var(--line);background:rgba(255,255,255,.74);color:var(--text);height:40px;border-radius:13px;box-shadow:var(--shadow-soft);display:inline-flex;align-items:center;justify-content:center;gap:7px}.dark .icon-btn,.dark .refresh-btn{background:rgba(21,29,42,.82)}.icon-btn{width:40px}.refresh-btn{padding:0 12px;font-weight:850;font-size:13px}.icon-btn svg,.refresh-btn svg{width:18px;height:18px;flex:none}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;align-items:stretch}.hero-main{background:linear-gradient(135deg,#10233f 0%,#1357aa 55%,#0f9f6e 130%);color:#fff;border-radius:24px;padding:24px;box-shadow:var(--shadow);min-height:224px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}.hero-main:after{content:"";position:absolute;right:-56px;top:-54px;width:180px;height:180px;border:1px solid rgba(255,255,255,.26);border-radius:50%}.eyebrow{font-size:12px;font-weight:900;color:rgba(255,255,255,.72)}h1{position:relative;margin:8px 0 10px;font-size:36px;line-height:1.08;letter-spacing:0;font-weight:950}.hero-main p{position:relative;margin:0;color:rgba(255,255,255,.80);font-size:15px;font-weight:700;line-height:1.55}.hero-meta{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.pill{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.12);border-radius:999px;padding:8px 10px;color:#fff;font-size:12px;font-weight:850}.summary{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow-soft);min-height:106px}.metric.primary{grid-column:1/3;background:var(--surface);min-height:116px}.metric-label{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;font-weight:850}.metric-label svg{width:18px;height:18px;color:var(--brand-2)}.metric-value{margin-top:10px;font-size:31px;line-height:1;font-weight:950}.metric-value small{font-size:13px;color:var(--muted);font-weight:850;margin-left:3px}.metric-note{margin-top:10px;color:var(--muted);font-size:12px;font-weight:750}.progress-line{height:10px;border-radius:999px;background:var(--surface-3);overflow:hidden;margin-top:14px}.progress-line span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--brand-2),var(--accent));border-radius:999px;transition:width .7s cubic-bezier(.2,.8,.2,1)}.toolbar{position:sticky;top:0;z-index:10;margin:16px -16px 12px;padding:10px 16px;background:linear-gradient(180deg,var(--bg) 80%,rgba(246,247,249,0));backdrop-filter:blur(16px)}.dark .toolbar{background:linear-gradient(180deg,var(--bg) 80%,rgba(13,18,28,0))}.search-row{display:grid;grid-template-columns:1fr auto;gap:8px}.search{height:50px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow-soft);display:flex;align-items:center;gap:10px;padding:0 14px}.search svg{width:19px;height:19px;color:var(--muted);flex:none}.search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-weight:750;font-size:15px}.sort-select{height:50px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--text);box-shadow:var(--shadow-soft);padding:0 34px 0 12px;font-weight:850;font-size:13px}.chips{display:flex;gap:8px;overflow:auto;padding:10px 0 2px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);padding:10px 13px;font-size:13px;font-weight:900}.chip.active{background:var(--brand);border-color:var(--brand);color:#fff}.section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:20px 2px 11px}.section-title h2{margin:0;font-size:18px;font-weight:950}.section-title span{color:var(--muted);font-size:12px;font-weight:850}.leaderboard{display:grid;grid-template-columns:repeat(5,minmax(190px,1fr));gap:10px;overflow:auto;margin:0 -16px 6px;padding:0 16px 8px;scroll-snap-type:x proximity}.rank-card{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:15px;box-shadow:var(--shadow-soft);scroll-snap-align:start;min-width:190px;text-align:left}.rank-card:first-child{border-color:rgba(197,138,27,.45);background:linear-gradient(145deg,rgba(197,138,27,.16),var(--surface) 58%)}.rank-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.rank-no{width:38px;height:38px;border-radius:13px;background:var(--surface-2);display:grid;place-items:center;font-weight:950;color:var(--brand)}.rank-rate{font-size:24px;font-weight:950;color:var(--brand-2)}.rank-team{margin-top:12px;font-size:15px;font-weight:950;line-height:1.3;word-break:keep-all}.rank-meta{margin-top:6px;color:var(--muted);font-size:12px;font-weight:750;line-height:1.45}.notice{display:none;margin:12px 0;border:1px solid #f2c385;background:#fff7e8;color:#8b4c00;border-radius:16px;padding:12px 13px;font-size:13px;font-weight:750;line-height:1.5}.dark .notice{background:rgba(216,132,27,.15);border-color:rgba(216,132,27,.34);color:#ffd08c}.team-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.team-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-soft);padding:16px;overflow:hidden;position:relative}.team-card.highlight{outline:3px solid rgba(24,119,242,.28);border-color:rgba(24,119,242,.55)}.team-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.team-title{font-size:17px;font-weight:950;line-height:1.3;word-break:keep-all}.rank-badge{flex:none;border-radius:999px;background:rgba(24,119,242,.12);color:var(--brand-2);padding:7px 9px;min-width:44px;text-align:center;font-size:12px;font-weight:950}.leader{margin-top:8px;color:var(--muted);font-size:12px;font-weight:800}.leader b{color:var(--text);font-weight:950}.team-body{display:grid;grid-template-columns:78px 1fr;gap:13px;align-items:center;margin-top:16px}.ring{--p:0;--ring:var(--brand-2);width:78px;height:78px;border-radius:50%;background:conic-gradient(var(--ring) calc(var(--p)*1%), var(--surface-3) 0);display:grid;place-items:center}.ring-core{width:58px;height:58px;border-radius:50%;background:var(--surface);display:grid;place-items:center;text-align:center;font-size:17px;font-weight:950;line-height:1}.ring-core small{display:block;color:var(--muted);font-size:10px;font-weight:850;margin-top:2px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.stat{background:var(--surface-2);border-radius:14px;padding:10px}.stat span{display:block;color:var(--muted);font-size:11px;font-weight:850}.stat b{display:block;margin-top:4px;font-size:15px;font-weight:950}.team-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);margin-top:14px;padding-top:12px;color:var(--muted);font-size:12px;font-weight:800}.team-actions{display:flex;align-items:center;gap:8px}.link-btn{border:0;background:transparent;color:var(--brand-2);font-size:12px;font-weight:950;padding:6px 0}.members{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.members.open{display:grid}.member{background:var(--surface-2);border-radius:12px;padding:9px 10px;font-size:12px;font-weight:800;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.empty{display:none;text-align:center;color:var(--muted);font-weight:850;padding:44px 10px}.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:30;border-top:1px solid var(--line);background:rgba(246,247,249,.86);backdrop-filter:blur(18px);padding:9px 14px calc(9px + env(safe-area-inset-bottom))}.dark .bottom-nav{background:rgba(13,18,28,.86)}.nav-inner{width:min(720px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.nav-inner button{height:46px;border:0;border-radius:15px;background:transparent;color:var(--muted);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:6px}.nav-inner button.active{background:var(--surface);color:var(--brand-2);box-shadow:var(--shadow-soft)}.nav-inner svg{width:17px;height:17px}@media (max-width:920px){.hero{grid-template-columns:1fr}.team-list{grid-template-columns:repeat(2,minmax(0,1fr))}.leaderboard{grid-template-columns:repeat(5,210px)}}@media (max-width:640px){.app{padding:14px 14px 24px}.hero-main{padding:22px 18px;min-height:218px;border-radius:22px}h1{font-size:32px}.summary{grid-template-columns:1fr 1fr}.metric{padding:15px}.metric.primary{grid-column:1/3}.metric-value{font-size:28px}.search-row{grid-template-columns:1fr}.sort-select{width:100%}.team-list{grid-template-columns:1fr}.team-card{border-radius:18px}.members{grid-template-columns:1fr 1fr}.top-actions .refresh-text{display:none}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* Readability tuning */
+body{font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.brand-title{font-weight:780}.brand-sub{font-weight:620}
+.refresh-btn,.sort-select,.chip,.metric-label,.section-title span,.pill{font-weight:720}
+.eyebrow{font-weight:760}
+h1{font-weight:820;line-height:1.12}
+.hero-main p{font-weight:560;line-height:1.62}
+.metric-value,.rank-rate{font-weight:820}
+.metric-note,.rank-meta,.notice,.leader,.team-foot,.member{font-weight:620;line-height:1.5}
+.section-title h2{font-weight:820}
+.rank-no,.rank-team,.team-title,.rank-badge,.leader b,.ring-core,.stat b,.link-btn,.nav-inner button{font-weight:760}
+.search input{font-weight:560}.stat span,.ring-core small{font-weight:650}
+@media (max-width:640px){h1{font-size:31px;line-height:1.14}.team-title{font-size:16px;line-height:1.42}.rank-team{line-height:1.42}.metric-value{font-size:27px}}
+/* Operational UI polish */
+:root{
+  --bg:#f4f6f8;--surface:#ffffff;--surface-2:#f7f8fa;--surface-3:#e8edf3;
+  --text:#202734;--muted:#697386;--line:#d8dee7;--brand:#243b5a;--brand-2:#2f6fbd;
+  --accent:#16845b;--warn:#b97318;--shadow:0 8px 24px rgba(31,42,58,.07);--shadow-soft:0 3px 12px rgba(31,42,58,.055);
+}
+body.dark{
+  --bg:#10151d;--surface:#171f2b;--surface-2:#121923;--surface-3:#263242;
+  --text:#edf1f6;--muted:#aab3c0;--line:#303b4d;--brand:#a9c4e8;--brand-2:#7fb0ec;
+}
+.app{max-width:1040px}
+.topbar{margin-bottom:10px}.brand-mark{border-radius:10px;background:#243b5a;box-shadow:none}.brand-title{font-size:14px}.brand-sub{font-size:12px}
+.icon-btn,.refresh-btn,.search,.sort-select,.metric,.rank-card,.team-card{box-shadow:none}
+.icon-btn,.refresh-btn{height:38px;border-radius:10px;background:var(--surface)}
+.hero{gap:12px}.hero-main{min-height:auto;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--text);padding:22px;box-shadow:none}
+.hero-main:after{display:none}.eyebrow{color:var(--muted);font-size:12px}.hero-main p{color:var(--muted);max-width:34rem}
+h1{font-size:32px;margin:7px 0 9px;color:var(--text)}
+.hero-meta{margin-top:16px}.pill{background:var(--surface-2);border-color:var(--line);color:var(--muted);border-radius:8px;padding:7px 9px}
+.summary{gap:10px}.metric{border-radius:14px;padding:16px;min-height:98px}.metric.primary{min-height:108px}
+.metric-value{font-size:29px}.progress-line{height:8px;background:var(--surface-3)}.progress-line span{background:var(--brand-2)}
+.toolbar{margin-top:12px}.search{height:46px;border-radius:12px}.sort-select{height:46px;border-radius:12px}.chip{border-radius:10px;padding:9px 12px;background:var(--surface-2);box-shadow:none}.chip.active{background:var(--brand);border-color:var(--brand)}
+.section-title{margin-top:18px}.section-title h2{font-size:17px}
+.leaderboard{gap:8px}.rank-card{border-radius:14px;padding:14px;min-width:184px}.rank-card:first-child{background:var(--surface);border-color:#d7b56b}.rank-no{border-radius:10px;background:var(--surface-2)}.rank-rate{font-size:22px}.rank-team{margin-top:10px}
+.team-list{gap:10px}.team-card{border-radius:14px;padding:15px}.team-card.highlight{outline:2px solid rgba(47,111,189,.22)}.team-title{font-size:16px}.rank-badge{border-radius:8px;background:var(--surface-2);padding:6px 8px}
+.team-body{grid-template-columns:72px 1fr;gap:12px}.ring{width:72px;height:72px}.ring-core{width:54px;height:54px;font-size:16px}.stat{border-radius:10px;background:var(--surface-2);padding:9px 10px}
+.team-foot{margin-top:12px;padding-top:11px}.link-btn{text-decoration:none}.member{border-radius:9px;background:var(--surface-2)}
+.bottom-nav{background:rgba(244,246,248,.92)}.dark .bottom-nav{background:rgba(16,21,29,.92)}.nav-inner button{height:42px;border-radius:10px}.nav-inner button.active{box-shadow:none;border:1px solid var(--line)}
+.trend-panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:auto}
+.trend-chart{min-height:176px;display:grid;grid-template-columns:repeat(var(--trend-count,1),minmax(64px,1fr));gap:10px;align-items:end}
+.trend-item{display:grid;grid-template-rows:1fr auto;gap:8px;min-height:148px}
+.trend-bar-wrap{height:112px;display:flex;align-items:end;border-bottom:1px solid var(--line)}
+.trend-bar{width:100%;min-height:4px;border-radius:8px 8px 0 0;background:var(--brand-2);opacity:.82;position:relative}
+.trend-bar.is-latest{background:var(--accent);opacity:.95}
+.trend-value{position:absolute;left:50%;bottom:100%;transform:translate(-50%,-6px);font-size:11px;font-weight:700;color:var(--text);white-space:nowrap}
+.trend-label{text-align:center;color:var(--muted);font-size:11px;font-weight:620;line-height:1.25;white-space:nowrap}
+.trend-delta{display:block;margin-top:2px;font-size:11px;color:var(--muted)}
+.trend-delta.up{color:var(--accent)}.trend-delta.down{color:var(--danger)}
+@media (max-width:640px){
+  .app{padding:12px 12px 22px}.topbar{align-items:flex-start}.brand-mark{width:34px;height:34px}.hero-main{padding:18px;border-radius:14px}
+  h1{font-size:28px;line-height:1.16}.hero-main p{font-size:14px}.metric{border-radius:12px;padding:14px}.metric-value{font-size:25px}
+  .toolbar{padding-left:12px;padding-right:12px;margin-left:-12px;margin-right:-12px}.team-card{border-radius:12px}.team-body{grid-template-columns:68px 1fr}.ring{width:68px;height:68px}.ring-core{width:50px;height:50px}
+  .trend-panel{padding:12px}.trend-chart{grid-template-columns:repeat(var(--trend-count,1),minmax(58px,1fr));gap:8px}.trend-value{font-size:10px}.trend-label{font-size:10px}
+}
+/* Premium operations layer */
+:root{
+  --bg:#f3f5f8;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#e6ebf1;
+  --text:#1d2530;--muted:#687487;--line:#d9e0e8;--brand:#1f3755;--brand-2:#2d6fb7;
+  --accent:#14785a;--danger:#b94b45;--shadow:0 14px 34px rgba(26,39,58,.075);--shadow-soft:0 5px 18px rgba(26,39,58,.055);
+}
+body{background:linear-gradient(180deg,#f8fafc 0%,var(--bg) 260px);font-size:15px}
+body.dark{background:linear-gradient(180deg,#141b26 0%,var(--bg) 260px)}
+.app{padding-top:22px}
+.topbar{padding:0 2px 8px;border-bottom:1px solid transparent}
+.brand-title{letter-spacing:.01em}.brand-sub{margin-top:3px}
+.brand-mark{background:linear-gradient(135deg,#1f3755,#2d6fb7);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 18px rgba(31,55,85,.16)}
+.icon-btn,.refresh-btn,.search,.sort-select,.metric,.rank-card,.team-card,.trend-panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,255,255,.92));
+  border-color:rgba(31,55,85,.13);
+  box-shadow:var(--shadow-soft);
+}
+.dark .icon-btn,.dark .refresh-btn,.dark .search,.dark .sort-select,.dark .metric,.dark .rank-card,.dark .team-card,.dark .trend-panel{
+  background:linear-gradient(180deg,rgba(23,31,43,.98),rgba(20,27,38,.94));
+  border-color:rgba(169,196,232,.14);
+}
+.icon-btn:hover,.refresh-btn:hover,.rank-card:hover,.team-card:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.icon-btn,.refresh-btn,.rank-card,.team-card{transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.hero{gap:14px}.hero-main{
+  border-color:rgba(31,55,85,.14);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.88)),
+    linear-gradient(135deg,rgba(45,111,183,.10),rgba(20,120,90,.08));
+  box-shadow:var(--shadow);
+}
+.dark .hero-main{
+  background:
+    linear-gradient(180deg,rgba(23,31,43,.98),rgba(18,25,35,.94)),
+    linear-gradient(135deg,rgba(127,176,236,.12),rgba(20,120,90,.10));
+}
+.hero-main:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--brand-2),var(--accent));opacity:.9}
+.eyebrow{letter-spacing:.02em;text-transform:none;color:var(--brand-2)}
+h1{font-size:33px;letter-spacing:-.01em}
+.pill{background:rgba(31,55,85,.045);border-color:rgba(31,55,85,.12);color:#506176}
+.dark .pill{background:rgba(169,196,232,.08);border-color:rgba(169,196,232,.14);color:var(--muted)}
+.metric{position:relative;overflow:hidden}
+.metric.primary:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--brand-2),var(--accent))}
+.metric-label{letter-spacing:.01em}.metric-value{letter-spacing:-.01em;color:var(--text)}
+.progress-line{box-shadow:inset 0 0 0 1px rgba(31,55,85,.04)}.progress-line span{background:linear-gradient(90deg,#2d6fb7,#14785a)}
+.toolbar{top:0;padding-top:12px;background:linear-gradient(180deg,rgba(243,245,248,.96) 76%,rgba(243,245,248,0));border-bottom:1px solid rgba(217,224,232,.45)}
+.dark .toolbar{background:linear-gradient(180deg,rgba(16,21,29,.96) 76%,rgba(16,21,29,0));border-bottom-color:rgba(48,59,77,.45)}
+.search:focus-within,.sort-select:focus{border-color:rgba(45,111,183,.45);box-shadow:0 0 0 3px rgba(45,111,183,.10)}
+.chip{background:rgba(255,255,255,.68);border-color:rgba(31,55,85,.11)}
+.dark .chip{background:rgba(23,31,43,.72)}.chip.active{box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+.section-title{padding-top:2px}.section-title h2{letter-spacing:-.01em}.section-title span{letter-spacing:.01em}
+.rank-card:first-child{border-color:rgba(183,133,35,.42);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,250,239,.92))}
+.dark .rank-card:first-child{background:linear-gradient(180deg,rgba(23,31,43,.98),rgba(35,29,20,.92))}
+.rank-no{background:rgba(31,55,85,.07)}.rank-card:first-child .rank-no{background:#f2d58f;color:#5f420c}
+.team-card{border-radius:15px}.team-card:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(255,255,255,.7)}
+.dark .team-card:before{background:rgba(255,255,255,.06)}
+.rank-badge{background:rgba(45,111,183,.09);color:var(--brand-2)}
+.stat{border:1px solid rgba(31,55,85,.06)}.dark .stat{border-color:rgba(169,196,232,.06)}
+.ring{box-shadow:inset 0 0 0 1px rgba(31,55,85,.08)}.ring-core{box-shadow:0 0 0 1px rgba(31,55,85,.06)}
+.link-btn{border-bottom:1px solid transparent}.link-btn:hover{border-bottom-color:currentColor}
+.trend-panel{box-shadow:var(--shadow-soft)}
+.trend-chart{padding:4px 2px 0;background:linear-gradient(180deg,transparent 0,transparent 31%,rgba(31,55,85,.045) 32%,transparent 33%,transparent 65%,rgba(31,55,85,.045) 66%,transparent 67%)}
+.dark .trend-chart{background:linear-gradient(180deg,transparent 0,transparent 31%,rgba(169,196,232,.06) 32%,transparent 33%,transparent 65%,rgba(169,196,232,.06) 66%,transparent 67%)}
+.trend-bar{background:linear-gradient(180deg,#5b91d3,#2d6fb7);box-shadow:0 8px 16px rgba(45,111,183,.16)}
+.trend-bar.is-latest{background:linear-gradient(180deg,#32a27d,#14785a);box-shadow:0 8px 16px rgba(20,120,90,.18)}
+.bottom-nav{box-shadow:0 -10px 28px rgba(26,39,58,.07)}.nav-inner button.active{border-color:rgba(45,111,183,.18)}
+@media (max-width:640px){
+  body{font-size:14px}.app{padding-top:14px}.hero{gap:10px}.hero-main{border-radius:16px}.summary{gap:8px}
+  .top-actions{gap:6px}.icon-btn,.refresh-btn{height:36px}.section-title{margin-top:16px}
+}
+/* CSS and JS interaction layer */
+.metric,.rank-card,.team-card,.trend-panel,.hero-main{will-change:transform}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .42s ease,transform .42s ease}
+.reveal.is-visible{opacity:1;transform:none}
+.rank-card:active,.team-card:active,.chip:active,.refresh-btn:active,.icon-btn:active{transform:translateY(0) scale(.99)}
+.team-card.highlight{animation:focusPulse 1.4s ease both}
+@keyframes focusPulse{0%{box-shadow:0 0 0 0 rgba(45,111,183,.22)}55%{box-shadow:0 0 0 8px rgba(45,111,183,.04)}100%{box-shadow:var(--shadow-soft)}}
+.refresh-btn[disabled]{opacity:.58;cursor:wait}
+.refresh-btn[disabled] svg{animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.nav-inner button{position:relative;overflow:hidden}.nav-inner button.active:after{content:"";position:absolute;left:50%;bottom:5px;width:18px;height:2px;border-radius:999px;background:currentColor;transform:translateX(-50%);opacity:.55}
+.trend-bar{transition:height .55s cubic-bezier(.2,.8,.2,1),filter .2s ease}.trend-item:hover .trend-bar{filter:saturate(1.12) brightness(1.04)}
 </style>
 </head>
 <body>
 <main class="app">
   <header class="topbar">
-    <div class="mark"><i></i><span>PSM Challenge</span></div>
-    <div class="date-pill" id="basisText">오전 10:00 기준</div>
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17 19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="brand-title">PSM Challenge</div><div class="brand-sub" id="basisText">데이터 준비 중</div></div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 모드 변경"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.36-6.36-1.42 1.42M7.06 16.94l-1.42 1.42m12.72 0-1.42-1.42M7.06 7.06 5.64 5.64M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <button class="refresh-btn" id="refreshBtn" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 0 1-14.2 5M4 12A8 8 0 0 1 18.2 7M18 3v4h-4M6 21v-4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="refresh-text">새로고침</span></button>
+    </div>
   </header>
 
   <section class="hero" id="home">
-    <h1>PSM 소통트립<br>챌린지</h1>
-    <p>7월 특화마케팅팀 핵심프로젝트</p>
-  </section>
-
-  <section class="summary" aria-label="요약">
-    <article class="panel main-result">
-      <div class="label">전체실적</div>
-      <div class="big"><span id="totalResult">0</span><small>건</small></div>
+    <article class="hero-main">
+      <div>
+        <div class="eyebrow">7월 특화 마케팅 프로젝트</div>
+        <h1>PSM 소통트립<br>챌린지</h1>
+        <p>오전 9시와 오후 18시 기준으로 팀별 목표, 실적, 달성률 순위를 확인합니다.</p>
+      </div>
+      <div class="hero-meta">
+        <span class="pill" id="syncState">저장된 기준값 표시</span>
+        <span class="pill">업데이트 09:00 / 18:00</span>
+        <span class="pill" id="topTeamPill">TOP 팀 집계 중</span>
+      </div>
     </article>
-    <div class="mini-grid">
-      <article class="metric"><div class="label">참가팀</div><strong id="teamCount">0</strong></article>
-      <article class="metric"><div class="label">참가 PSM</div><strong id="memberCount">0</strong></article>
+
+    <section class="summary" aria-label="전체 요약">
+      <article class="metric primary">
+        <div class="metric-label"><span>전체 달성률</span><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M8 15l3-3 3 2 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="metric-value"><span id="overallRate">0.0</span><small>%</small></div>
+        <div class="progress-line"><span id="overallBar"></span></div>
+        <div class="metric-note" id="overallNote">전체 목표 대비 실적</div>
+      </article>
+      <article class="metric"><div class="metric-label"><span>전체 실적</span></div><div class="metric-value"><span id="totalResult">0</span><small>건</small></div><div class="metric-note" id="totalTarget">목표 0건</div></article>
+      <article class="metric"><div class="metric-label"><span>참여 현황</span></div><div class="metric-value"><span id="teamCount">0</span><small>팀</small></div><div class="metric-note"><span id="memberCount">0</span>명 참여</div></article>
+    </section>
+  </section>
+
+  <section class="toolbar" aria-label="검색과 필터">
+    <div class="search-row">
+      <label class="search" for="q"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="팀명 또는 이름 검색" autocomplete="off"></label>
+      <label class="sr-only" for="sort">정렬</label><select class="sort-select" id="sort"><option value="rate">달성률순</option><option value="result">실적순</option><option value="remain">잔여 적은순</option><option value="team">팀명순</option></select>
     </div>
+    <nav class="chips" aria-label="필터">
+      <button class="chip active" data-filter="all" type="button">전체</button>
+      <button class="chip" data-filter="top10" type="button">상위 10</button>
+      <button class="chip" data-filter="watch" type="button">관심 필요</button>
+      <button class="chip" data-filter="near" type="button">80% 이상</button>
+      <button class="chip" data-filter="done" type="button">목표 달성</button>
+    </nav>
   </section>
 
-  <section class="search-wrap">
-    <label class="search" for="q">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <input id="q" type="search" placeholder="팀명 또는 이름 검색" autocomplete="off" />
-    </label>
-  </section>
-
-  <nav class="chips" aria-label="필터">
-    <button class="chip active" data-filter="all">전체</button>
-    <button class="chip" data-filter="top10">상위 10</button>
-    <button class="chip" data-filter="watch">관심 필요</button>
-    <button class="chip" data-filter="done">목표 달성</button>
-  </nav>
-
-  <div class="notice" id="notice"></div>
+  <div class="notice" id="notice" role="status"></div>
 
   <section id="top">
     <div class="section-title"><h2>현재 TOP 5</h2><span>달성률 기준</span></div>
     <div class="leaderboard" id="topList"></div>
   </section>
 
+  <section id="trend">
+    <div class="section-title"><h2>시간대별 추이</h2><span id="trendSummary">데이터 집계 중</span></div>
+    <div class="trend-panel">
+      <div class="trend-chart" id="trendChart" aria-label="시간대별 전체 실적 추이"></div>
+    </div>
+  </section>
+
   <section id="teams">
-    <div class="section-title"><h2>참가팀</h2><span id="listCount">0개 팀</span></div>
+    <div class="section-title"><h2>참여 팀</h2><span id="listCount">0팀</span></div>
     <div class="team-list" id="grid"></div>
-    <div class="empty" id="empty">검색 결과가 없습니다.</div>
+    <div class="empty" id="empty">검색 조건에 맞는 팀이 없습니다.</div>
   </section>
 </main>
 
-<nav class="nav" aria-label="하단 메뉴">
+<nav class="bottom-nav" aria-label="하단 메뉴">
   <div class="nav-inner">
-    <button class="active" onclick="go('home',this)">홈</button>
-    <button onclick="go('top',this)">TOP 5</button>
-    <button onclick="go('teams',this)">참가팀</button>
+    <button class="active" data-go="home" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5 12 4l8 6.5V20H6v-7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>홈</button>
+    <button data-go="top" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>TOP 5</button>
+    <button data-go="teams" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 1 1-8 0m8 0h3a3 3 0 0 1 3 3v4h-5m-9-7H5a3 3 0 0 0-3 3v4h5m1-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>팀 보기</button>
   </div>
 </nav>
 
 <script>
-const BASE_TEAMS = [{"team": "나 오늘 밥 안해", "leader": "신유경", "members": ["신유경", "김미라", "백형금", "박정윤", "김해정", "김유랑", "김민숙"], "target": 12080, "result": 896}, {"team": "마음은 하나~", "leader": "한예서", "members": ["한예서", "김애정", "임선희", "최옥남", "석미정"], "target": 12220, "result": 1152}, {"team": "앗!싸리", "leader": "정경화", "members": ["정경화", "유영순", "최은희", "박순희"], "target": 7680, "result": 348}, {"team": "대충~이겼슈~", "leader": "주인애", "members": ["주인애", "김경숙", "오선미", "복경연", "김영란", "권희나"], "target": 11320, "result": 1201}, {"team": "행복찾기", "leader": "예윤정", "members": ["예윤정", "홍은주", "권나영", "김수현"], "target": 9890, "result": 596}, {"team": "타코", "leader": "서명옥", "members": ["서명옥", "선호복", "이미령", "윤미해"], "target": 7460, "result": 922}, {"team": "출근금지 구역으로 출발", "leader": "이경희", "members": ["이경희", "김현숙", "조영주", "송하연"], "target": 7770, "result": 1138}, {"team": "오(5)지게 달리는 언니들~", "leader": "김수현", "members": ["김수현", "김주희", "박미순", "노희정", "최영순"], "target": 12800, "result": 706}, {"team": "美親여자들", "leader": "박정희", "members": ["박정희", "이숙희", "문춘옥", "박영숙"], "target": 9050, "result": 638}, {"team": "여행가자~!", "leader": "조현숙", "members": ["조현숙", "김윤희", "안명주", "이미라", "정은주", "이금희"], "target": 14390, "result": 945}, {"team": "도토리 오형제", "leader": "허혜경", "members": ["허혜경", "김영경", "윤정하", "천소미", "양문희"], "target": 9040, "result": 259}, {"team": "오(5)마이갓동-", "leader": "남궁희", "members": ["남궁희", "김미경", "서애경", "배유정"], "target": 11450, "result": 1058}, {"team": "4륜구동", "leader": "김희묘", "members": ["김희묘", "김정숙", "김순희", "유현숙"], "target": 7300, "result": 984}, {"team": "모기보다 센 빨대", "leader": "이지영", "members": ["이지영", "최남순", "최진아", "국은희", "변섭희"], "target": 8660, "result": 930}, {"team": "매출원정대", "leader": "김진선", "members": ["김진선", "김소현", "최나리", "김보선"], "target": 7620, "result": 1062}, {"team": "광주교차", "leader": "송경하", "members": ["송경하", "박순덕", "구현숙", "심경숙", "임효정"], "target": 8050, "result": 301}, {"team": "즐겁게 삽시다.", "leader": "김종미", "members": ["김종미", "이은숙", "조예진", "안옥자"], "target": 10370, "result": 527}, {"team": "광(미칠광)열 하게 놀아볼까", "leader": "김정화", "members": ["김정화", "이지영", "한아름", "이설호", "송해영", "김정우"], "target": 14220, "result": 615}, {"team": "소통은 내돈내삼, 트립은 니돈내삼", "leader": "김은주", "members": ["김은주", "엄미영", "고다현", "이의주"], "target": 6770, "result": 847}, {"team": "중부걸스 체결 어벤저스~", "leader": "현용은", "members": ["현용은", "임서인", "임경미", "김수연", "최한미"], "target": 9990, "result": 702}, {"team": "의.일아(의정부+일산)걱정마♡", "leader": "최봉애", "members": ["최봉애", "김다연", "이채원", "권경미", "김영란", "박수정"], "target": 11910, "result": 936}, {"team": "일당백5공주", "leader": "조선영", "members": ["조선영", "이수진", "허은경", "송현아", "김혜란"], "target": 13280, "result": 1233}, {"team": "우리가 간다 하와이!!", "leader": "한은희", "members": ["한은희", "허진우", "김명진", "전병원"], "target": 9810, "result": 879}, {"team": "떠나자ㆍ남동!!!", "leader": "김영미", "members": ["김영미", "장혜정", "권채령", "김양현"], "target": 6650, "result": 411}, {"team": "가즈아~ 제주로", "leader": "황세비", "members": ["황세비", "성안제", "박미림", "윤승연"], "target": 8480, "result": 638}, {"team": "대권주자", "leader": "박서윤", "members": ["박서윤", "김은숙", "남정아", "한지선", "김민선", "강미경"], "target": 12680, "result": 671}, {"team": "우리가유~", "leader": "전성미", "members": ["전성미", "박수미", "박연희", "변경희", "권은주"], "target": 11300, "result": 878}, {"team": "구상용의 아이들 외 1인", "leader": "기유리", "members": ["기유리", "김시내", "정건희", "문지현", "서마로", "박정해", "김은정"], "target": 12840, "result": 955}, {"team": "나 오늘 집에 안갈래", "leader": "이혜영", "members": ["이혜영", "김윤정", "김경옥", "김영미", "김수정", "안지숙"], "target": 11210, "result": 1058}, {"team": "놀러가려고 일한 조", "leader": "김미록", "members": ["김미록", "최옥희", "이미화", "김경애"], "target": 10690, "result": 1308}, {"team": "욱이라면어디든", "leader": "김형욱", "members": ["김형욱", "차정숙", "김영경", "최성해", "장혜은", "권옥주", "강단영"], "target": 16280, "result": 1533}, {"team": "기유리 돌아와", "leader": "박지영", "members": ["박지영", "김민정", "박선영", "장은영"], "target": 11940, "result": 1427}, {"team": "신촌 드림투어", "leader": "김혜원", "members": ["김혜원", "조혜진", "박미정", "김미희", "김주현"], "target": 8560, "result": 961}, {"team": "원++식스", "leader": "유정화", "members": ["유정화", "김선화", "김현", "배주연", "이금선", "박정숙", "복영숙"], "target": 15580, "result": 1035}, {"team": "시너지크루", "leader": "이정희", "members": ["이정희", "이선희", "김정아", "허용미"], "target": 7600, "result": 861}, {"team": "왈(曰),왈(曰),왈(曰)", "leader": "방은경", "members": ["방은경", "양덕순", "김승희", "노은경"], "target": 7130, "result": 874}, {"team": "독수리 오남매", "leader": "박성희", "members": ["박성희", "최서온", "이선아", "이상영", "이금숙"], "target": 10140, "result": 903}, {"team": "우리의 7월은 제대로 대박7거야", "leader": "조유이", "members": ["조유이", "구복희", "김양미", "김연희", "신은선", "홍동호"], "target": 11450, "result": 1105}, {"team": "성경(성남경기)드림", "leader": "최명호", "members": ["최명호", "박영숙", "임나경", "정선형", "이경민", "김한숙"], "target": 14080, "result": 1491}];
-const CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
-let teams=JSON.parse(JSON.stringify(BASE_TEAMS));
-let filter='all';
-const $=id=>document.getElementById(id);
-const fmt=n=>Number(n||0).toLocaleString('ko-KR');
-const norm=s=>(s||'').toString().replace(/\s/g,'').toLowerCase();
-const rate=t=>t.target? t.result/t.target*100:0;
-function esc(s){return (s||'').toString().replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));}
-function setBasis(){const d=new Date().toLocaleDateString('ko-KR',{month:'2-digit',day:'2-digit'}).replace(/\.\s?/g,'.').replace(/\.$/,'');$('basisText').textContent=`${d} 오전 10:00 기준`;}
-function ranked(){return [...teams].map(t=>({...t,rate:rate(t)})).sort((a,b)=>b.rate-a.rate||b.result-a.result||a.team.localeCompare(b.team,'ko'));}
+const BASE_TEAMS = [{"team":"나 오늘 밥 안해","leader":"신유경","members":["신유경","김미라","백형금","박정윤","김해정","김유랑","김민숙"],"target":12080,"result":896},{"team":"마음은 하나~","leader":"한예서","members":["한예서","김애정","임선희","최옥남","석미정"],"target":12220,"result":1152},{"team":"앗!싸리","leader":"정경화","members":["정경화","유영순","최은희","박순희"],"target":7680,"result":348},{"team":"대충~이겼슈~","leader":"주인애","members":["주인애","김경숙","오선미","복경연","김영란","권희나"],"target":11320,"result":1201},{"team":"행복찾기","leader":"예윤정","members":["예윤정","홍은주","권나영","김수현"],"target":9890,"result":596},{"team":"타코","leader":"서명옥","members":["서명옥","선호복","이미령","윤미해"],"target":7460,"result":922},{"team":"출근금지 구역으로 출발","leader":"이경희","members":["이경희","김현숙","조영주","송하연"],"target":7770,"result":1138},{"team":"오(5)지게 달리는 언니들~","leader":"김수현","members":["김수현","김주희","박미순","노희정","최영순"],"target":12800,"result":706},{"team":"美親여자들","leader":"박정희","members":["박정희","이숙희","문춘옥","박영숙"],"target":9050,"result":638},{"team":"여행가자~!","leader":"조현숙","members":["조현숙","김윤희","안명주","이미라","정은주","이금희"],"target":14390,"result":945},{"team":"도토리 오형제","leader":"허혜경","members":["허혜경","김영경","윤정하","천소미","양문희"],"target":9040,"result":259},{"team":"오(5)마이갓동-","leader":"남궁희","members":["남궁희","김미경","서애경","배유정"],"target":11450,"result":1058},{"team":"4륜구동","leader":"김희묘","members":["김희묘","김정숙","김순희","유현숙"],"target":7300,"result":984},{"team":"모기보다 센 빨대","leader":"이지영","members":["이지영","최남순","최진아","국은희","변섭희"],"target":8660,"result":930},{"team":"매출원정대","leader":"김진선","members":["김진선","김소현","최나리","김보선"],"target":7620,"result":1062},{"team":"광주교차","leader":"송경하","members":["송경하","박순덕","구현숙","심경숙","임효정"],"target":8050,"result":301},{"team":"즐겁게 삽시다.","leader":"김종미","members":["김종미","이은숙","조예진","안옥자"],"target":10370,"result":527},{"team":"광(미칠광)열 하게 놀아볼까","leader":"김정화","members":["김정화","이지영","한아름","이설호","송해영","김정우"],"target":14220,"result":615},{"team":"소통은 내돈내삼, 트립은 니돈내삼","leader":"김은주","members":["김은주","엄미영","고다현","이의주"],"target":6770,"result":847},{"team":"중부걸스 체결 어벤저스~","leader":"현용은","members":["현용은","임서인","임경미","김수연","최한미"],"target":9990,"result":702},{"team":"의.일아(의정부+일산)걱정마♡","leader":"최봉애","members":["최봉애","김다연","이채원","권경미","김영란","박수정"],"target":11910,"result":936},{"team":"일당백5공주","leader":"조선영","members":["조선영","이수진","허은경","송현아","김혜란"],"target":13280,"result":1233},{"team":"우리가 간다 하와이!!","leader":"한은희","members":["한은희","허진우","김명진","전병원"],"target":9810,"result":879},{"team":"떠나자ㆍ남동!!!","leader":"김영미","members":["김영미","장혜정","권채령","김양현"],"target":6650,"result":411},{"team":"가즈아~ 제주로","leader":"황세비","members":["황세비","성안제","박미림","윤승연"],"target":8480,"result":638},{"team":"대권주자","leader":"박서윤","members":["박서윤","김은숙","남정아","한지선","김민선","강미경"],"target":12680,"result":671},{"team":"우리가유~","leader":"전성미","members":["전성미","박수미","박연희","변경희","권은주"],"target":11300,"result":878},{"team":"구상용의 아이들 외 1인","leader":"기유리","members":["기유리","김시내","정건희","문지현","서마로","박정해","김은정"],"target":12840,"result":955},{"team":"나 오늘 집에 안갈래","leader":"이혜영","members":["이혜영","김윤정","김경옥","김영미","김수정","안지숙"],"target":11210,"result":1058},{"team":"놀러가려고 일한 조","leader":"김미록","members":["김미록","최옥희","이미화","김경애"],"target":10690,"result":1308},{"team":"욱이라면어디든","leader":"김형욱","members":["김형욱","차정숙","김영경","최성해","장혜은","권옥주","강단영"],"target":16280,"result":1533},{"team":"기유리 돌아와","leader":"박지영","members":["박지영","김민정","박선영","장은영"],"target":11940,"result":1427},{"team":"신촌 드림투어","leader":"김혜원","members":["김혜원","조혜진","박미정","김미희","김주현"],"target":8560,"result":961},{"team":"원++식스","leader":"유정화","members":["유정화","김선화","김현","배주연","이금선","박정숙","복영숙"],"target":15580,"result":1035},{"team":"시너지크루","leader":"이정희","members":["이정희","이선희","김정아","허용미"],"target":7600,"result":861},{"team":"왈(曰),왈(曰),왈(曰)","leader":"방은경","members":["방은경","양덕순","김승희","노은경"],"target":7130,"result":874},{"team":"독수리 오남매","leader":"박성희","members":["박성희","최서온","이선아","이상영","이금숙"],"target":10140,"result":903},{"team":"우리의 7월은 제대로 대박7거야","leader":"조유이","members":["조유이","구복희","김양미","김연희","신은선","홍동호"],"target":11450,"result":1105},{"team":"성경(성남경기)드림","leader":"최명호","members":["최명호","박영숙","임나경","정선형","이경민","김한숙"],"target":14080,"result":1491}];
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
+const $ = id => document.getElementById(id);
+const state = { teams: structuredClone(BASE_TEAMS), history: [], filter: 'all', sort: 'rate', loading: false };
+const fmt = n => Number(n || 0).toLocaleString('ko-KR');
+const norm = s => (s || '').toString().normalize('NFKC').replace(/\s/g, '').toLowerCase();
+const rate = t => t.target ? (t.result / t.target) * 100 : 0;
+const remain = t => Math.max((t.target || 0) - (t.result || 0), 0);
+const esc = s => (s || '').toString().replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+const parseNumber = v => Number((v || '0').toString().replace(/[^0-9.-]/g, '')) || 0;
+const parseSheetTime = v => {
+  const raw = (v || '').toString().replace(/\D/g, '');
+  if(raw.length < 12) return '';
+  const y = raw.slice(0, 4), m = raw.slice(4, 6), d = raw.slice(6, 8), h = raw.slice(8, 10), min = raw.slice(10, 12);
+  return `${y}.${m}.${d} ${h}:${min} 기준`;
+};
+const shortSheetTime = raw => {
+  const s = (raw || '').toString().replace(/\D/g, '');
+  if(s.length < 12) return '';
+  return `${s.slice(4,6)}.${s.slice(6,8)} ${s.slice(8,10)}:${s.slice(10,12)}`;
+};
+const prefersReducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function setTheme(mode){
+  const dark = mode === 'dark' || (!mode && matchMedia('(prefers-color-scheme: dark)').matches);
+  document.body.classList.toggle('dark', dark);
+  localStorage.setItem('psm-theme', dark ? 'dark' : 'light');
+}
+
+function setBasis(sourceText){
+  const d = new Date().toLocaleDateString('ko-KR', { month:'2-digit', day:'2-digit' }).replace(/\.\s?/g,'.').replace(/\.$/,'');
+  $('basisText').textContent = sourceText || d + ' 업데이트 09:00 / 18:00 기준';
+}
+
+function totals(list = state.teams){
+  return list.reduce((acc, t) => {
+    acc.target += Number(t.target || 0);
+    acc.result += Number(t.result || 0);
+    acc.members += Array.isArray(t.members) ? t.members.length : 0;
+    return acc;
+  }, { target:0, result:0, members:0 });
+}
+
+function setNumber(id, value, options = {}){
+  const el = $(id);
+  if(!el) return;
+  const decimals = options.decimals || 0;
+  const format = n => decimals ? Number(n).toFixed(decimals) : fmt(Math.round(n));
+  if(prefersReducedMotion()){
+    el.textContent = format(value);
+    el.dataset.value = value;
+    return;
+  }
+  const from = Number(el.dataset.value || el.textContent.replace(/[^0-9.-]/g, '') || 0);
+  const to = Number(value || 0);
+  el.dataset.value = to;
+  const start = performance.now();
+  const duration = options.duration || 520;
+  function tick(now){
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = format(from + (to - from) * eased);
+    if(p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function setupReveal(){
+  const items = document.querySelectorAll('.hero-main,.metric,.rank-card,.trend-panel,.team-card');
+  items.forEach(el => el.classList.add('reveal'));
+  if(prefersReducedMotion() || !('IntersectionObserver' in window)){
+    items.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold:.12 });
+  items.forEach(el => observer.observe(el));
+}
+
+function setupSectionSpy(){
+  if(!('IntersectionObserver' in window)) return;
+  const buttons = new Map([...document.querySelectorAll('[data-go]')].map(btn => [btn.dataset.go, btn]));
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if(!visible) return;
+    document.querySelectorAll('[data-go]').forEach(btn => btn.classList.remove('active'));
+    const btn = buttons.get(visible.target.id);
+    if(btn) btn.classList.add('active');
+  }, { rootMargin:'-35% 0px -50% 0px', threshold:[.1,.25,.5] });
+  ['home','top','teams'].forEach(id => { const el = $(id); if(el) observer.observe(el); });
+}
+
+function sortedTeams(){
+  const list = state.teams.map(t => ({ ...t, rate: rate(t), remain: remain(t) }));
+  return list.sort((a,b) => {
+    if(state.sort === 'result') return b.result - a.result || b.rate - a.rate;
+    if(state.sort === 'remain') return a.remain - b.remain || b.rate - a.rate;
+    if(state.sort === 'team') return a.team.localeCompare(b.team, 'ko');
+    return b.rate - a.rate || b.result - a.result || a.team.localeCompare(b.team, 'ko');
+  });
+}
+
+function filteredTeams(rankMap){
+  const q = norm($('q').value);
+  let list = sortedTeams().filter(t => !q || norm(t.team).includes(q) || norm(t.leader).includes(q) || t.members.some(m => norm(m).includes(q)));
+  if(state.filter === 'top10') list = list.filter(t => rankMap.get(t.team) <= 10);
+  if(state.filter === 'watch') list = list.filter(t => t.rate < 10);
+  if(state.filter === 'near') list = list.filter(t => t.rate >= 80 && t.rate < 100);
+  if(state.filter === 'done') list = list.filter(t => t.rate >= 100);
+  return list;
+}
+
 function render(){
-  const r=ranked(), rankMap=new Map(r.map((t,i)=>[t.team,i+1]));
-  $('teamCount').textContent=fmt(teams.length);
-  $('memberCount').textContent=fmt(teams.reduce((a,t)=>a+t.members.length,0));
-  $('totalResult').textContent=fmt(teams.reduce((a,t)=>a+t.result,0));
-  $('topList').innerHTML=r.slice(0,5).map((t,i)=>rankCard(t,i)).join('');
-  const q=norm($('q').value);
-  let list=r.filter(t=>!q||norm(t.team).includes(q)||t.members.some(m=>norm(m).includes(q)));
-  if(filter==='top10') list=list.slice(0,10);
-  if(filter==='watch') list=list.filter(t=>t.rate<10);
-  if(filter==='done') list=list.filter(t=>t.rate>=100);
-  const teamParam=new URLSearchParams(location.search).get('team');
-  $('grid').innerHTML=list.map(t=>teamCard(t,rankMap.get(t.team),teamParam&&norm(teamParam)===norm(t.team))).join('');
-  $('listCount').textContent=`${list.length}개 팀`;
-  $('empty').style.display=list.length?'none':'block';
-  requestAnimationFrame(()=>document.querySelectorAll('.bar').forEach(el=>el.style.width=el.dataset.w+'%'));
+  const ranked = [...state.teams].map(t => ({ ...t, rate: rate(t), remain: remain(t) })).sort((a,b) => b.rate - a.rate || b.result - a.result || a.team.localeCompare(b.team, 'ko'));
+  const rankMap = new Map(ranked.map((t,i) => [t.team, i + 1]));
+  const total = totals();
+  const overall = total.target ? total.result / total.target * 100 : 0;
+  setNumber('overallRate', overall, { decimals:1 });
+  $('overallBar').style.width = Math.min(overall, 100) + '%';
+  $('overallNote').textContent = fmt(total.result) + ' / ' + fmt(total.target) + '건';
+  setNumber('totalResult', total.result);
+  $('totalTarget').textContent = '목표 ' + fmt(total.target) + '건';
+  setNumber('teamCount', state.teams.length);
+  setNumber('memberCount', total.members);
+  $('topTeamPill').textContent = ranked[0] ? '1위 ' + ranked[0].team + ' ' + ranked[0].rate.toFixed(1) + '%' : 'TOP 팀 없음';
+  $('topList').innerHTML = ranked.slice(0,5).map((t,i) => rankCard(t, i)).join('');
+  const teamParam = new URLSearchParams(location.search).get('team');
+  const list = filteredTeams(rankMap);
+  $('grid').innerHTML = list.map(t => teamCard(t, rankMap.get(t.team), teamParam && norm(teamParam) === norm(t.team))).join('');
+  $('listCount').textContent = fmt(list.length) + '팀';
+  $('empty').style.display = list.length ? 'none' : 'block';
+  renderTrend();
+  setupReveal();
+  requestAnimationFrame(() => document.querySelectorAll('[data-width]').forEach(el => { el.style.width = el.dataset.width + '%'; }));
 }
-function rankCard(t,i){
-  return `<article class="rank-card" onclick="focusTeam('${encodeURIComponent(t.team)}')">
-    <div class="rank-no">${i+1}</div>
-    <div><div class="rank-team">${esc(t.team)}</div><div class="rank-meta">팀장 ${esc(t.leader)} · 실적 ${fmt(t.result)}</div></div>
-    <div class="rank-rate">${t.rate.toFixed(1)}<small>%</small></div>
+
+function renderTrend(){
+  const chart = $('trendChart');
+  if(!chart) return;
+  const source = state.history.length ? state.history : state.teams.map(t => ({ ...t, timeRaw: '' }));
+  const grouped = new Map();
+  source.forEach(t => {
+    const key = t.timeRaw || 'baseline';
+    if(!grouped.has(key)) grouped.set(key, { timeRaw:key, target:0, result:0 });
+    const item = grouped.get(key);
+    item.target += Number(t.target || 0);
+    item.result += Number(t.result || 0);
+  });
+  const points = [...grouped.values()].sort((a,b) => a.timeRaw.localeCompare(b.timeRaw)).slice(-8);
+  const max = Math.max(...points.map(p => p.result), 1);
+  const latest = points[points.length - 1];
+  const prev = points[points.length - 2];
+  const delta = latest && prev ? latest.result - prev.result : 0;
+  $('trendSummary').textContent = points.length > 1
+    ? `최근 ${points.length}개 시점 · ${delta >= 0 ? '+' : ''}${fmt(delta)}건`
+    : '시간 데이터 1개 시점';
+  if(chart.style.setProperty) chart.style.setProperty('--trend-count', points.length || 1);
+  else chart.style['--trend-count'] = points.length || 1;
+  chart.innerHTML = points.map((p, i) => {
+    const h = Math.max((p.result / max) * 100, 4);
+    const diff = i ? p.result - points[i - 1].result : 0;
+    const diffClass = diff > 0 ? 'up' : diff < 0 ? 'down' : '';
+    const label = p.timeRaw === 'baseline' ? '기준값' : shortSheetTime(p.timeRaw);
+    return `<div class="trend-item">
+      <div class="trend-bar-wrap"><div class="trend-bar ${i === points.length - 1 ? 'is-latest' : ''}" style="height:${h}%"><span class="trend-value">${fmt(p.result)}</span></div></div>
+      <div class="trend-label">${label}<span class="trend-delta ${diffClass}">${i ? (diff >= 0 ? '+' : '') + fmt(diff) : '-'}</span></div>
+    </div>`;
+  }).join('');
+}
+
+function rankCard(t, i){
+  return `<button class="rank-card" type="button" onclick="focusTeam('${encodeURIComponent(t.team)}')">
+    <div class="rank-top"><div class="rank-no">${i + 1}</div><div class="rank-rate">${t.rate.toFixed(1)}%</div></div>
+    <div class="rank-team">${esc(t.team)}</div><div class="rank-meta">팀장 ${esc(t.leader)} · 실적 ${fmt(t.result)}건</div>
+  </button>`;
+}
+
+function teamCard(t, rank, highlight){
+  const p = rate(t), capped = Math.min(p, 100), left = remain(t), members = t.members.filter(m => m !== t.leader);
+  const ringColor = p >= 100 ? 'var(--accent)' : p < 10 ? 'var(--warn)' : 'var(--brand-2)';
+  return `<article class="team-card ${highlight ? 'highlight' : ''}" id="team-${encodeURIComponent(t.team)}">
+    <div class="team-head"><div><div class="team-title">${esc(t.team)}</div><div class="leader">팀장 <b>${esc(t.leader)}</b></div></div><div class="rank-badge">#${rank}</div></div>
+    <div class="team-body"><div class="ring" style="--p:${capped};--ring:${ringColor}"><div class="ring-core">${p.toFixed(1)}<small>%</small></div></div>
+    <div><div class="stats"><div class="stat"><span>목표</span><b>${fmt(t.target)}</b></div><div class="stat"><span>실적</span><b>${fmt(t.result)}</b></div></div><div class="progress-line"><span data-width="${capped}"></span></div></div></div>
+    <div class="team-foot"><span>${left ? '목표까지 ' + fmt(left) + '건' : '목표 달성 완료'}</span><div class="team-actions"><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div></div>
+    <div class="members">${members.map(m => '<span class="member">' + esc(m) + '</span>').join('')}</div>
   </article>`;
 }
-function teamCard(t,rank,highlight){
-  const p=rate(t), capped=Math.min(p,100), remain=Math.max(t.target-t.result,0), members=t.members.filter(m=>m!==t.leader);
-  const color=p>=100?'var(--green)':p<10?'var(--amber)':'var(--blue)';
-  return `<article class="team-card ${highlight?'highlight':''}" id="team-${encodeURIComponent(t.team)}">
-    <div class="team-head"><div><div class="team-title">${esc(t.team)}</div><div class="leader"><span class="leader-dot">장</span><span>팀장 <b>${esc(t.leader)}</b></span></div></div><div class="rank-badge">#${rank}</div></div>
-    <div class="card-body">
-      <div class="ring" style="--p:${capped};--color:${color}"><div class="ring-inner">${p.toFixed(1)}<small>%</small></div></div>
-      <div><div class="stats"><div class="stat"><span>목표</span><b>${fmt(t.target)}</b></div><div class="stat"><span>실적</span><b>${fmt(t.result)}</b></div></div><div class="bar-track"><div class="bar" data-w="${capped}"></div></div></div>
-    </div>
-    <div class="card-foot"><span>${remain?`목표까지 ${fmt(remain)} 남음`:'목표 달성 완료'}</span><button class="member-btn" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div>
-    <div class="members">${members.map(m=>`<span class="member">${esc(m)}</span>`).join('')}</div>
-  </article>`;
+
+function toggleMembers(btn){
+  const box = btn.closest('.team-card').querySelector('.members');
+  const open = box.classList.toggle('open');
+  btn.textContent = open ? '접기' : '팀원 ' + box.children.length + '명';
 }
-function toggleMembers(btn){const box=btn.parentElement.nextElementSibling; const open=box.classList.toggle('open'); btn.textContent=open?'접기':`팀원 ${box.children.length}명`;}
-function go(id,btn){$(id).scrollIntoView({behavior:'smooth',block:'start'}); document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');}
-function focusTeam(name){const el=$('team-'+name); if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
-function parseNumber(v){return Number((v||'0').toString().replace(/[^0-9.-]/g,''))||0;}
+
+function focusTeam(name){
+  const el = $('team-' + name);
+  if(el){ el.scrollIntoView({ behavior:'smooth', block:'center' }); el.classList.add('highlight'); setTimeout(() => el.classList.remove('highlight'), 1800); }
+}
+
+async function shareTeam(name){
+  const teamName = decodeURIComponent(name);
+  const url = new URL(location.href);
+  url.searchParams.set('team', teamName);
+  try{
+    await navigator.clipboard.writeText(url.toString());
+    showNotice('팀 공유 링크를 복사했습니다.', 'ok');
+  }catch(e){
+    location.href = url.toString();
+  }
+}
+
 function parseCSV(text){
-  const rows=[]; let row=[], cur='', q=false;
-  for(let i=0;i<text.length;i++){
-    const c=text[i], n=text[i+1];
-    if(c==='"'){
-      if(q && n==='"'){cur+='"'; i++;}
-      else q=!q;
-    }else if(c===',' && !q){row.push(cur.trim()); cur='';}
-    else if((c==='\n'||c==='\r') && !q){
-      if(c==='\r'&&n==='\n') i++;
-      row.push(cur.trim()); cur='';
-      if(row.some(v=>v!=='')) rows.push(row);
-      row=[];
-    }else cur+=c;
+  const rows = [];
+  let row = [], cur = '', quote = false;
+  for(let i = 0; i < text.length; i++){
+    const c = text[i], n = text[i + 1];
+    if(c === '"'){
+      if(quote && n === '"'){ cur += '"'; i++; }
+      else quote = !quote;
+    }else if(c === ',' && !quote){
+      row.push(cur.trim());
+      cur = '';
+    }else if((c === '\n' || c === '\r') && !quote){
+      if(c === '\r' && n === '\n') i++;
+      row.push(cur.trim());
+      cur = '';
+      if(row.some(v => v !== '')) rows.push(row);
+      row = [];
+    }else{
+      cur += c;
+    }
   }
   row.push(cur.trim());
-  if(row.some(v=>v!=='')) rows.push(row);
+  if(row.some(v => v !== '')) rows.push(row);
   return rows;
 }
+
+function findColumn(headers, names){
+  const normalized = headers.map(norm);
+  return names.map(norm).reduce((found, name) => found >= 0 ? found : normalized.findIndex(h => h === name || h.includes(name)), -1);
+}
+
 function applyRows(rows){
-  if(!rows||rows.length<2) throw new Error('empty');
-  const h=rows[0].map(v=>(v||'').toString().trim());
-  const ti=h.findIndex(x=>x==='팀명');
-  const ta=h.findIndex(x=>x==='목표');
-  const ri=h.findIndex(x=>x==='실적');
-  if(ti<0||ta<0||ri<0) throw new Error('columns');
-  const map=new Map();
-  rows.slice(1).forEach(r=>{
-    const nm=(r[ti]||'').toString().trim();
-    if(nm) map.set(norm(nm),{target:parseNumber(r[ta]),result:parseNumber(r[ri])});
+  if(!rows || rows.length < 2) throw new Error('empty');
+  const headers = rows[0].map(v => (v || '').trim());
+  const teamIndex = findColumn(headers, ['팀명','팀','team']);
+  const targetIndex = findColumn(headers, ['목표','target']);
+  const resultIndex = findColumn(headers, ['실적','result']);
+  const timeIndex = findColumn(headers, ['시간','업데이트','기준','time','updated']);
+  if(teamIndex < 0 || targetIndex < 0 || resultIndex < 0) throw new Error('columns');
+  const latestByTeam = new Map();
+  const history = [];
+  let sheetTimeRaw = '';
+  rows.slice(1).forEach(r => {
+    const name = (r[teamIndex] || '').trim();
+    const timeRaw = (r[timeIndex >= 0 ? timeIndex : 3] || '').toString().replace(/\D/g, '');
+    if(!name) return;
+    const item = { team:name, target: parseNumber(r[targetIndex]), result: parseNumber(r[resultIndex]), timeRaw };
+    history.push(item);
+    const key = norm(name);
+    const current = latestByTeam.get(key);
+    if(!current || (timeRaw && timeRaw >= (current.timeRaw || ''))) latestByTeam.set(key, item);
+    if(timeRaw && timeRaw > sheetTimeRaw) sheetTimeRaw = timeRaw;
   });
-  if(!map.size) throw new Error('no rows');
-  teams=BASE_TEAMS.map(t=>map.has(norm(t.team))?{...t,...map.get(norm(t.team))}:{...t});
-  $('notice').style.display='none';
+  if(!latestByTeam.size) throw new Error('no rows');
+  state.history = history;
+  state.teams = BASE_TEAMS.map(t => latestByTeam.has(norm(t.team)) ? { ...t, ...latestByTeam.get(norm(t.team)) } : { ...t });
+  showNotice('', 'hide');
+  setBasis(parseSheetTime(sheetTimeRaw));
+  $('syncState').textContent = '구글 시트 최신 데이터 반영';
   render();
 }
+
+function showNotice(text, mode){
+  const n = $('notice');
+  if(mode === 'hide' || !text){ n.style.display = 'none'; n.textContent = ''; return; }
+  n.style.display = 'block'; n.textContent = text;
+}
+
 async function loadSheet(){
+  if(state.loading) return;
+  state.loading = true;
+  $('refreshBtn').disabled = true;
   try{
-    const res=await fetch(`${CSV_URL}&cacheBust=${Date.now()}`,{cache:'no-store'});
+    const res = await fetch(CSV_URL + '&cacheBust=' + Date.now(), { cache:'no-store' });
     if(!res.ok) throw new Error('network');
-    const text=await res.text();
-    applyRows(parseCSV(text));
+    applyRows(parseCSV(await res.text()));
   }catch(e){
+    state.teams = structuredClone(BASE_TEAMS);
+    state.history = [];
+    setBasis();
+    $('syncState').textContent = '저장된 기준값 표시';
+    showNotice('최신 데이터를 불러오지 못해 저장된 기준값을 표시하고 있습니다.', 'warn');
     render();
-    const n=$('notice');
-    n.style.display='block';
-    n.textContent='일시적으로 최신 데이터를 불러오지 못해 저장된 기준값을 표시하고 있습니다.';
+  }finally{
+    state.loading = false;
+    $('refreshBtn').disabled = false;
   }
 }
-$('q').addEventListener('input',render);
-document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active')); b.classList.add('active'); filter=b.dataset.filter; render();});
-setBasis(); render(); loadSheet(); setTimeout(()=>{const p=new URLSearchParams(location.search).get('team'); if(p)focusTeam(encodeURIComponent(p));},700);
+
+document.querySelectorAll('.chip').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+  btn.classList.add('active'); state.filter = btn.dataset.filter; render();
+}));
+document.querySelectorAll('[data-go]').forEach(btn => btn.addEventListener('click', () => {
+  $(btn.dataset.go).scrollIntoView({ behavior:'smooth', block:'start' });
+  document.querySelectorAll('[data-go]').forEach(x => x.classList.remove('active'));
+  btn.classList.add('active');
+}));
+$('q').addEventListener('input', render);
+$('sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+$('refreshBtn').addEventListener('click', loadSheet);
+$('themeBtn').addEventListener('click', () => setTheme(document.body.classList.contains('dark') ? 'light' : 'dark'));
+setTheme(localStorage.getItem('psm-theme'));
+setBasis(); render(); setupSectionSpy(); loadSheet();
+setTimeout(() => { const p = new URLSearchParams(location.search).get('team'); if(p) focusTeam(encodeURIComponent(p)); }, 700);
 </script>
 </body>
 </html>
