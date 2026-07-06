@@ -828,6 +828,54 @@ h1,.mobile-app h1{
   .team-progress{margin:0 16px 15px}
   .team-detail{padding:0 16px 16px}
 }
+/* Commercial dashboard final layer */
+:root{
+  --dash-bg:#f5f7fa;--dash-card:#fff;--dash-text:#17202c;--dash-sub:#657287;--dash-line:#dce3eb;
+  --dash-blue:#2f6fbd;--dash-green:#16845b;--dash-amber:#b7791f;--dash-red:#c4514b;
+  --dash-shadow:0 10px 28px rgba(20,31,47,.075);--dash-radius:18px;
+}
+body.dark{--dash-bg:#10141b;--dash-card:#171d27;--dash-text:#f3f6fa;--dash-sub:#a7b0bf;--dash-line:#2c3544;--dash-shadow:0 14px 30px rgba(0,0,0,.28)}
+body,body.mobile-app{background:var(--dash-bg);color:var(--dash-text);font-size:14px;line-height:1.45}
+.app,.mobile-app .app{width:min(1120px,100%);max-width:1120px;padding:18px 18px 28px}
+.topbar,.mobile-app .topbar{position:sticky;top:0;z-index:40;margin:0 -18px 14px;padding:12px 18px;background:rgba(245,247,250,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(220,227,235,.72)}
+.dark .topbar,.dark.mobile-app .topbar{background:rgba(16,20,27,.88);border-bottom-color:rgba(44,53,68,.72)}
+.brand-title{font-size:15px;font-weight:780}.brand-sub{font-size:12px;font-weight:560;color:var(--dash-sub)}
+.brand-mark{border-radius:12px;background:#17202c;box-shadow:none}.icon-btn,.refresh-btn{border-radius:12px;border:1px solid var(--dash-line);background:var(--dash-card);box-shadow:none}
+.hero,.mobile-app .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(360px,.75fr);gap:14px;margin-top:0}
+.hero-main,.mobile-app .hero-main{min-height:218px;border:1px solid var(--dash-line);border-radius:var(--dash-radius);background:var(--dash-card);box-shadow:var(--dash-shadow);padding:24px;color:var(--dash-text)}
+.hero-main:before{display:block;width:5px;background:linear-gradient(180deg,var(--dash-blue),var(--dash-green))}
+.eyebrow{color:var(--dash-blue);font-size:12px;font-weight:760}.hero-main p,.mobile-app .hero-main p{color:var(--dash-sub);font-size:14px;line-height:1.6}
+h1,.mobile-app h1{font-size:32px;line-height:1.14;font-weight:800;color:var(--dash-text);letter-spacing:0;margin:8px 0 10px}
+.hero-meta{gap:7px}.pill,.mobile-app .pill{border-radius:999px;border:1px solid var(--dash-line);background:#f8fafc;color:var(--dash-sub);font-size:12px;font-weight:650;padding:7px 10px}
+.dark .pill{background:#1d2531}
+.summary,.mobile-app .summary{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:12px}
+.metric,.mobile-app .metric{border:1px solid var(--dash-line);border-radius:var(--dash-radius);background:var(--dash-card);box-shadow:var(--dash-shadow);padding:18px;min-height:116px}
+.metric.primary{grid-column:auto}.metric-label{font-size:12px;font-weight:680;color:var(--dash-sub)}.metric-value{font-size:32px;font-weight:820;letter-spacing:0}.metric-note{font-size:12px;color:var(--dash-sub);font-weight:560}
+.progress-line{height:9px;background:#e9eef4}.dark .progress-line{background:#293342}.progress-line span{background:linear-gradient(90deg,var(--dash-blue),var(--dash-green))}
+.time-dashboard{margin:8px 0 12px}.time-tabs{gap:8px}.time-tab{height:40px;border-radius:999px;border:1px solid var(--dash-line);background:var(--dash-card);color:var(--dash-sub);font-weight:700;box-shadow:0 2px 8px rgba(20,31,47,.04)}.time-tab.active{background:var(--dash-text);border-color:var(--dash-text);color:var(--dash-card)}
+.section-title{margin:24px 0 10px}.section-title h2{font-size:18px;font-weight:800;color:var(--dash-text)}.section-title span{font-size:12px;font-weight:560;color:var(--dash-sub)}
+.rising-list{grid-template-columns:repeat(5,minmax(176px,1fr));gap:12px;margin:0;padding:0 0 4px}.rising-card,.rank-card,.team-card,.trend-toggle{border:1px solid var(--dash-line);border-radius:var(--dash-radius);background:var(--dash-card);box-shadow:var(--dash-shadow)}
+.rising-card{padding:16px}.rising-rank{background:#eef4fb;color:var(--dash-blue)}.dark .rising-rank{background:#202b3a}.rising-team{font-size:14px;font-weight:780}.rising-delta{color:var(--dash-green);font-size:18px}.rising-meta{color:var(--dash-sub)}
+.trend-toggle{overflow:hidden}.trend-toggle summary{padding:17px 18px;border-bottom:1px solid var(--dash-line);font-weight:760}.trend-toggle[open] summary{border-bottom-color:transparent}
+.trend-panel,.mobile-app .trend-panel{border:0;border-radius:0;box-shadow:none;background:var(--dash-card)}
+.trend-controls{padding:14px 16px;border-color:var(--dash-line)}.trend-scope,.trend-team-picker{height:40px;border-color:var(--dash-line);border-radius:999px}.trend-scope{background:var(--dash-text)}
+.line-graph{padding:18px 18px 8px}.line-graph svg{height:190px}.line-path{stroke:var(--dash-blue);stroke-width:3.2}.line-fill{fill:var(--dash-blue);opacity:.08}.line-dot{stroke:var(--dash-blue)}.line-dot.is-latest{fill:var(--dash-blue)}
+.trend-item{grid-template-columns:82px minmax(0,1fr) 96px 78px;gap:12px;padding:12px 16px;min-height:54px}.trend-label,.trend-value,.trend-delta{font-size:12px}.trend-value{text-align:right;font-weight:760}
+.leaderboard{gap:12px;margin:0;padding:0 0 6px}.rank-card{min-width:198px;padding:16px}.rank-card:first-child{background:var(--dash-text);border-color:var(--dash-text);color:var(--dash-card)}.rank-card:first-child .rank-meta,.rank-card:first-child .rank-team{color:inherit}.rank-card:first-child .rank-rate{color:#91e0ba}
+.rank-no{border-radius:12px;background:#eef4fb;color:var(--dash-blue)}.rank-rate{font-size:24px;color:var(--dash-blue)}.rank-team{font-size:15px;font-weight:780}.rank-meta{font-size:12px;color:var(--dash-sub);font-weight:560}
+.toolbar,.mobile-app .toolbar{position:sticky;top:64px;z-index:20;margin:16px -18px 10px;padding:12px 18px;background:rgba(245,247,250,.9);border-bottom:1px solid rgba(220,227,235,.7);backdrop-filter:blur(16px)}
+.dark .toolbar{background:rgba(16,20,27,.9);border-bottom-color:rgba(44,53,68,.7)}
+.search-row{grid-template-columns:minmax(0,1fr) 160px}.search,.sort-select{height:46px;border-radius:14px;border-color:var(--dash-line);background:var(--dash-card);box-shadow:none}.search input{font-size:15px;font-weight:560}
+.chips{gap:8px;padding-top:10px}.chip,.mobile-app .chip{height:38px;border-radius:999px;border:1px solid var(--dash-line);background:var(--dash-card);color:var(--dash-sub);font-size:13px;font-weight:700;padding:0 12px}.chip.active{background:var(--dash-text);border-color:var(--dash-text);color:var(--dash-card)}.chip.is-empty{opacity:.54}.chip-count{background:#eef2f7;color:inherit}
+.team-list,.mobile-app .team-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.team-card{padding:0;overflow:hidden}.team-summary{padding:18px 18px 12px}.team-title{font-size:15px;font-weight:780}.team-status{font-size:11px}.team-side b{font-size:19px}.team-progress{margin:0 18px 14px;height:8px;background:#e9eef4}.team-detail{padding:0 18px 18px}.detail-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.detail-grid div{border:1px solid var(--dash-line);border-radius:12px;background:#f8fafc;padding:10px}.dark .detail-grid div{background:#1d2531}.detail-grid span{color:var(--dash-sub);font-size:11px}.detail-grid b{font-size:13px}.member{border-radius:12px;background:#f8fafc;border:1px solid var(--dash-line)}
+.bottom-nav{left:50%;right:auto;transform:translateX(-50%);bottom:12px;width:min(440px,calc(100% - 24px));border:1px solid var(--dash-line);border-radius:22px;background:rgba(255,255,255,.9);box-shadow:0 12px 30px rgba(20,31,47,.14);padding:8px}.dark .bottom-nav{background:rgba(23,29,39,.9)}.nav-inner{grid-template-columns:repeat(4,1fr);gap:4px}.nav-inner button{height:42px;border-radius:15px;font-weight:700}.nav-inner button.active{background:#eef4fb;color:var(--dash-blue);border:0;box-shadow:none}
+@media (max-width:860px){
+  .app,.mobile-app .app{padding:14px 14px 24px}.topbar,.mobile-app .topbar{margin:0 -14px 12px;padding:10px 14px}
+  .hero,.mobile-app .hero{display:block}.hero-main,.mobile-app .hero-main{min-height:auto;padding:20px}.summary,.mobile-app .summary{grid-template-columns:1fr 1fr;margin-top:12px}.metric.primary{grid-column:1/3}
+  h1,.mobile-app h1{font-size:29px}.toolbar,.mobile-app .toolbar{top:56px;margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}.search-row{grid-template-columns:1fr}.sort-select{width:100%}
+  .rising-list{display:flex;overflow:auto;margin:0 -14px;padding:0 14px 4px}.rising-card{min-width:180px}.leaderboard{overflow:auto;margin:0 -14px;padding:0 14px 6px}.rank-card{min-width:210px}
+  .team-list,.mobile-app .team-list{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr 1fr}.trend-item{grid-template-columns:72px minmax(0,1fr) 84px;gap:8px}.trend-delta{grid-column:3}.line-graph svg{height:168px}
+}
 </style>
 </head>
 <body>
@@ -906,7 +954,7 @@ h1,.mobile-app h1{
 
   <section id="trend">
     <div class="section-title"><h2>시간대별 추이</h2><span id="trendSummary">데이터 집계 중</span></div>
-    <details class="trend-toggle">
+    <details class="trend-toggle" open>
       <summary>추이 자세히 보기</summary>
       <div class="trend-panel">
         <div class="trend-controls">
