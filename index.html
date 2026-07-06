@@ -781,6 +781,12 @@ h1,.mobile-app h1{
 .trend-toggle[open] summary:after{content:"닫기"}
 .trend-toggle .trend-panel{box-shadow:none;border-radius:0}
 .trend-toggle:not([open]) .trend-panel{display:none}
+.trend-controls{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--app-line);background:var(--app-card)}
+.trend-scope{height:38px;border:1px solid var(--app-line);border-radius:999px;background:var(--app-text);color:var(--app-card);padding:0 15px;font-size:13px;font-weight:760}
+.trend-scope:not(.active){background:var(--app-soft);color:var(--app-sub)}
+.trend-team-picker{min-width:0;flex:1;height:38px;border:1px solid var(--app-line);border-radius:999px;background:var(--app-soft);display:flex;align-items:center;gap:8px;padding:0 12px}
+.trend-team-picker span{flex:none;color:var(--app-sub);font-size:12px;font-weight:700}
+.trend-team-picker select{min-width:0;width:100%;border:0;outline:0;background:transparent;color:var(--app-text);font-size:13px;font-weight:720}
 .search{height:50px}
 .search input{font-size:16px}
 .rank-card:first-child{min-width:240px;transform:none;background:var(--app-text);color:var(--app-card)}
@@ -816,6 +822,7 @@ h1,.mobile-app h1{
       <div>
         <div class="eyebrow">7월 챌린지 현황</div>
         <h1>오늘의 실적을<br>한눈에 확인하세요</h1>
+        <p>오전 9시, 오후 1시, 오후 3시, 오후 6시 기준으로 팀별 실적과 달성률을 업데이트합니다.</p>
       </div>
       <div class="hero-meta">
         <span class="pill" id="syncState">저장된 기준값 표시</span>
@@ -865,7 +872,11 @@ h1,.mobile-app h1{
     <details class="trend-toggle">
       <summary>추이 자세히 보기</summary>
       <div class="trend-panel">
-      <div class="trend-chart" id="trendChart" aria-label="시간대별 전체 실적 추이"></div>
+        <div class="trend-controls">
+          <button class="trend-scope active" id="trendAllBtn" type="button">전체</button>
+          <label class="trend-team-picker" for="trendTeamSelect"><span>팀별</span><select id="trendTeamSelect"><option value="">팀 선택</option></select></label>
+        </div>
+      <div class="trend-chart" id="trendChart" aria-label="시간대별 실적 추이"></div>
       </div>
     </details>
   </section>
@@ -890,7 +901,7 @@ const BASE_TEAMS = [{"team":"나 오늘 밥 안해","leader":"신유경","member
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
 const MEMBER_CSV_URL = 'https://docs.google.com/spreadsheets/d/1pwoa_QvPUiAzhcu0ZsYQfV3Zb7rxiLdbP4v7JZ6yVV4/gviz/tq?tqx=out:csv&gid=1874206095';
 const $ = id => document.getElementById(id);
-const state = { teams: structuredClone(BASE_TEAMS), history: [], filter: 'all', sort: 'rate', loading: false };
+const state = { teams: structuredClone(BASE_TEAMS), history: [], filter: 'all', sort: 'rate', trendTeam: '', loading: false };
 const fmt = n => Number(n || 0).toLocaleString('ko-KR');
 const norm = s => (s || '').toString().normalize('NFKC').replace(/\s/g, '').toLowerCase();
 const memberName = m => typeof m === 'string' ? m : (m?.name || '');
@@ -1055,6 +1066,7 @@ function render(){
   $('listCount').textContent = fmt(list.length) + '팀';
   updateActiveHint(list.length, state.teams.length);
   $('empty').style.display = list.length ? 'none' : 'block';
+  populateTrendTeamSelect();
   renderTrend();
   setupReveal();
   requestAnimationFrame(() => document.querySelectorAll('[data-width]').forEach(el => { el.style.width = el.dataset.width + '%'; }));
@@ -1069,26 +1081,66 @@ function updateActiveHint(visible, total){
   $('clearSearch').classList.toggle('is-visible', Boolean(q));
 }
 
+function populateTrendTeamSelect(){
+  const select = $('trendTeamSelect');
+  if(!select) return;
+  const current = state.trendTeam;
+  const options = state.teams
+    .slice()
+    .sort((a,b) => a.team.localeCompare(b.team, 'ko'))
+    .map(t => `<option value="${esc(t.team)}">${esc(t.team)}</option>`)
+    .join('');
+  select.innerHTML = '<option value="">팀 선택</option>' + options;
+  select.value = state.teams.some(t => t.team === current) ? current : '';
+  if(current && !select.value) state.trendTeam = '';
+}
+
+function setTrendTeam(team){
+  state.trendTeam = team || '';
+  const select = $('trendTeamSelect');
+  const allBtn = $('trendAllBtn');
+  if(select) select.value = state.trendTeam;
+  if(allBtn) allBtn.classList.toggle('active', !state.trendTeam);
+  renderTrend();
+}
+
+function showTeamTrend(team){
+  const decoded = decodeURIComponent(team || '');
+  const details = document.querySelector('#trend details');
+  if(details) details.open = true;
+  setTrendTeam(decoded);
+  $('trend').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
 function renderTrend(){
   const chart = $('trendChart');
   if(!chart) return;
+  const selectedTeam = state.trendTeam;
   const source = state.history.length ? state.history : state.teams.map(t => ({ ...t, timeRaw: '' }));
+  const scoped = selectedTeam ? source.filter(t => norm(t.team) === norm(selectedTeam)) : source;
   const grouped = new Map();
-  source.forEach(t => {
+  scoped.forEach(t => {
     const key = t.timeRaw || 'baseline';
     if(!grouped.has(key)) grouped.set(key, { timeRaw:key, target:0, result:0 });
     const item = grouped.get(key);
     item.target += Number(t.target || 0);
     item.result += Number(t.result || 0);
   });
+  if(selectedTeam && !grouped.size){
+    const fallback = state.teams.find(t => norm(t.team) === norm(selectedTeam));
+    if(fallback) grouped.set('baseline', { timeRaw:'baseline', target:fallback.target, result:fallback.result });
+  }
   const points = [...grouped.values()].sort((a,b) => a.timeRaw.localeCompare(b.timeRaw)).slice(-8);
   const max = Math.max(...points.map(p => p.result), 1);
   const latest = points[points.length - 1];
   const prev = points[points.length - 2];
   const delta = latest && prev ? latest.result - prev.result : 0;
+  const labelPrefix = selectedTeam ? selectedTeam + ' · ' : '';
   $('trendSummary').textContent = points.length > 1
-    ? `최근 ${points.length}개 시점 · ${delta >= 0 ? '+' : ''}${fmt(delta)}천원`
-    : '최근 업데이트 기준';
+    ? `${labelPrefix}최근 ${points.length}개 시점 · ${delta >= 0 ? '+' : ''}${fmt(delta)}천원`
+    : `${labelPrefix}최근 업데이트 기준`;
+  const allBtn = $('trendAllBtn');
+  if(allBtn) allBtn.classList.toggle('active', !selectedTeam);
   if(chart.style.setProperty) chart.style.setProperty('--trend-count', points.length || 1);
   else chart.style['--trend-count'] = points.length || 1;
   chart.innerHTML = points.map((p, i) => {
@@ -1129,7 +1181,7 @@ function teamCard(t, rank, highlight){
         <div><span>실적</span><b>${fmt(t.result)}천원</b></div>
         <div><span>잔여</span><b>${left ? fmt(left) + '천원' : '완료'}</b></div>
       </div>
-      <div class="team-actions"><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div>
+      <div class="team-actions"><button class="link-btn" type="button" onclick="showTeamTrend('${encodeURIComponent(t.team)}')">추이</button><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div>
       <div class="members">${members.map(m => '<span class="member"><b>' + esc(memberName(m)) + '</b>' + (memberBranch(m) ? '<small>' + esc(memberBranch(m)) + '</small>' : '') + '</span>').join('')}</div>
     </div>
   </article>`;
@@ -1312,6 +1364,8 @@ $('q').addEventListener('keydown', e => {
   }
 });
 $('sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+$('trendAllBtn').addEventListener('click', () => setTrendTeam(''));
+$('trendTeamSelect').addEventListener('change', e => setTrendTeam(e.target.value));
 $('refreshBtn').addEventListener('click', loadSheet);
 $('themeBtn').addEventListener('click', () => setTheme(document.body.classList.contains('dark') ? 'light' : 'dark'));
 setTheme(localStorage.getItem('psm-theme'));
