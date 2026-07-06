@@ -1042,8 +1042,10 @@ h1,.mobile-app h1{color:#fff!important;font-weight:900!important;letter-spacing:
 .team-status{width:max-content!important;max-width:max-content!important;min-width:0!important;height:20px!important;padding:2px 7px!important;margin-top:5px!important;font-size:10px!important;line-height:1!important;font-weight:800!important;letter-spacing:0!important}.team-status.done{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.watch{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
 .team-status.cruise,.team-status.realtime-top{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.effort,.team-status.realtime-low{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
 .team-summary{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:start!important;gap:12px!important}
-.team-rank-left{display:flex;align-items:center;gap:5px}
-.rank-shift{display:inline-flex;align-items:center;justify-content:center;height:19px;min-width:20px;padding:0 5px;border-radius:999px;font-size:10px;font-weight:900;line-height:1;background:rgba(148,163,184,.12);color:var(--muted)}
+.team-rank-left{display:flex;align-items:flex-start;min-width:52px}
+.team-rank-left .rank-badge{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:50px;min-height:42px;padding:7px 8px!important;border-radius:14px!important;line-height:1!important}
+.team-rank-left .rank-badge strong{display:block;font-size:16px;font-weight:950;letter-spacing:0;color:inherit;line-height:1}
+.rank-shift{display:inline-flex;align-items:center;justify-content:center;height:14px;min-width:18px;padding:0 4px;border-radius:999px;font-size:9px;font-weight:900;line-height:1;background:rgba(148,163,184,.12);color:var(--muted)}
 .rank-shift.up{background:rgba(0,168,107,.12);color:var(--fin-green)}
 .rank-shift.down{background:rgba(239,68,68,.10);color:var(--fin-red)}
 .rank-shift.flat{background:rgba(148,163,184,.12);color:var(--dash-sub)}
@@ -1080,8 +1082,8 @@ h1,.mobile-app h1{color:#fff!important;font-weight:900!important;letter-spacing:
 .target-step{position:relative;background:rgba(255,255,255,.78)!important;border:1px solid rgba(226,232,240,.88)!important;border-radius:15px!important;padding:13px 10px 11px!important;overflow:hidden}
 .dark .target-step,.dark .detail-info-row{background:rgba(255,255,255,.055)!important;border-color:var(--dash-line)!important}
 .target-step span{color:var(--dash-sub)!important;font-weight:800!important}
-.target-step b{display:block;margin-top:7px!important;color:var(--dash-text)!important;font-size:16px!important;font-weight:920!important;line-height:1.2}
-@media (max-width:640px){.detail-grid.detail-readable{grid-template-columns:1fr!important}.target-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.target-step b{display:block;margin-top:7px!important;color:var(--dash-text)!important;font-size:clamp(13px,1.7vw,16px)!important;font-weight:920!important;line-height:1.2;white-space:nowrap;letter-spacing:0}
+@media (max-width:640px){.detail-grid.detail-readable{grid-template-columns:1fr!important}.target-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.target-step{padding-left:7px!important;padding-right:7px!important}.target-step b{font-size:13px!important}}
 .trend-toggle summary{font-weight:850!important}.line-path{stroke:var(--fin-blue)!important}.line-fill{fill:var(--fin-blue)!important}.line-dot{stroke:var(--fin-blue)!important}.line-dot.is-latest{fill:var(--fin-blue)!important}
 .bottom-nav{background:rgba(255,255,255,.82)!important;backdrop-filter:blur(22px) saturate(1.2)!important;border-radius:28px!important}.dark .bottom-nav{background:rgba(21,27,37,.82)!important}
 .nav-inner button.active{background:#111827!important;color:#fff!important}.dark .nav-inner button.active{background:#f8fafc!important;color:#111827!important}
@@ -1514,6 +1516,10 @@ function rankDeltaMarkup(delta = { rankDelta:0 }){
   return '';
 }
 
+function rankBadgeMarkup(rank, delta = { rankDelta:0 }){
+  return '<span class="rank-badge"><strong>' + rank + '등</strong>' + rankDeltaMarkup(delta) + '</span>';
+}
+
 function targetRemainText(t, targetRate){
   const need = Math.max(Math.ceil(Number(t.target || 0) * targetRate - Number(t.result || 0)), 0);
   return need ? fmt(need) + '천원' : '완료';
@@ -1775,7 +1781,7 @@ function teamCard(t, rank, highlight, delta = { resultDelta:0, rankDelta:0 }, st
   const statusMarkup = status ? `<span class="team-status ${status[0]}">${status[1]}</span>` : '';
   return `<article class="team-card ${highlight ? 'highlight' : ''}" id="team-${encodeURIComponent(t.team)}">
     <button class="team-summary" type="button" onclick="toggleTeam(this)" aria-expanded="false">
-      <span class="team-rank-left"><span class="rank-badge">#${rank}</span>${rankDeltaMarkup(delta)}</span>
+      <span class="team-rank-left">${rankBadgeMarkup(rank, delta)}</span>
       <span class="team-main"><span class="team-title">${esc(t.team)}</span>${statusMarkup}</span>
       <span class="team-side"><b>${p.toFixed(1)}%</b><span class="team-daily-inline">당일 ${deltaText(dailyDelta.resultDelta || 0)}</span></span>
     </button>
