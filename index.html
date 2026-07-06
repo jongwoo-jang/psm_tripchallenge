@@ -1531,6 +1531,7 @@ function statusMapFor(currentList, deltas){
     delta: Number(deltas.get(t.team)?.resultDelta || 0)
   }));
   if(!rows.length) return new Map();
+  if(!rows.some(t => t.delta > 0)) return new Map();
   const statusMap = new Map();
   const ranked = rows
     .slice()
