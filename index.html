@@ -890,6 +890,172 @@ h1,.mobile-app h1{font-size:32px;line-height:1.14;font-weight:800;color:var(--da
 .progress-line{display:block!important;position:relative!important;width:100%!important;height:10px!important;margin:10px 0 2px!important;border-radius:999px!important;background:#e8edf4!important}
 .dark .progress-line{background:#293342!important}
 .progress-line span{display:block!important;height:100%!important;min-width:3px;border-radius:999px!important;background:linear-gradient(90deg,var(--dash-blue),var(--dash-green))!important}
+/* Color and placement refresh */
+:root{
+  --dash-bg:#f4f7fb;--dash-blue:#2d6cdf;--dash-green:#15966f;--dash-amber:#d79b24;--dash-red:#d5524a;
+  --dash-cyan:#1f9fb8;--dash-violet:#6b64d8;
+}
+body,body.mobile-app{
+  background:
+    linear-gradient(180deg,#eef5ff 0,#f7fafc 220px,var(--dash-bg) 620px),
+    var(--dash-bg);
+}
+body.dark,body.dark.mobile-app{
+  background:
+    linear-gradient(180deg,#121d2b 0,#10141b 260px),
+    #10141b;
+}
+.hero-main,.mobile-app .hero-main{
+  background:
+    linear-gradient(135deg,rgba(45,108,223,.10),rgba(21,150,111,.08) 48%,rgba(215,155,36,.10)),
+    var(--dash-card);
+}
+.hero-main:before{background:linear-gradient(180deg,var(--dash-blue),var(--dash-green),var(--dash-amber))}
+.hero-time{margin:12px 0 12px!important}
+.hero-time .time-tabs{padding:0 0 2px}
+.hero-time .time-tab{
+  background:rgba(255,255,255,.72);
+  border-color:rgba(45,108,223,.20);
+  color:#38506d;
+}
+.dark .hero-time .time-tab{background:rgba(31,41,55,.72);color:var(--dash-sub)}
+.hero-time .time-tab.active{
+  background:linear-gradient(135deg,var(--dash-blue),var(--dash-green));
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 8px 18px rgba(45,108,223,.22);
+}
+.metric:nth-child(1){border-top:4px solid var(--dash-blue)}
+.metric:nth-child(2){border-top:4px solid var(--dash-green)}
+.metric:nth-child(3){border-top:4px solid var(--dash-amber)}
+.rising-card:nth-child(1){border-top:4px solid var(--dash-green)}
+.rising-card:nth-child(2){border-top:4px solid var(--dash-blue)}
+.rising-card:nth-child(3){border-top:4px solid var(--dash-amber)}
+.rising-card:nth-child(4){border-top:4px solid var(--dash-cyan)}
+.rising-card:nth-child(5){border-top:4px solid var(--dash-violet)}
+#rising .section-title h2:before,#trend .section-title h2:before,#top .section-title h2:before,#teams .section-title h2:before{
+  content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:2px;
+}
+#rising .section-title h2:before{background:var(--dash-green)}
+#trend .section-title h2:before{background:var(--dash-blue)}
+#top .section-title h2:before{background:var(--dash-amber)}
+#teams .section-title h2:before{background:var(--dash-violet)}
+.chip.active{
+  background:linear-gradient(135deg,#1d2938,#31455f);
+  color:#fff;
+}
+.chip[data-filter="watch"].active{background:linear-gradient(135deg,var(--dash-red),#a43d38)}
+.chip[data-filter="over55"].active,.chip[data-filter="over60"].active,.chip[data-filter="over65"].active{background:linear-gradient(135deg,var(--dash-amber),#b06d16)}
+.chip[data-filter="done"].active{background:linear-gradient(135deg,var(--dash-green),#0f7053)}
+.trend-toggle{border-top:4px solid var(--dash-blue)}
+.line-path{stroke:var(--dash-blue)}
+.line-fill{fill:var(--dash-blue);opacity:.10}
+.line-dot{stroke:var(--dash-blue)}
+.line-dot.is-latest{fill:var(--dash-blue)}
+.team-card:nth-child(3n+1){border-top:3px solid rgba(45,108,223,.55)}
+.team-card:nth-child(3n+2){border-top:3px solid rgba(21,150,111,.55)}
+.team-card:nth-child(3n){border-top:3px solid rgba(215,155,36,.60)}
+@media (max-width:860px){
+  .hero-time{margin:10px -2px 12px!important}
+  .hero-time .time-tabs{overflow:auto}
+}
+
+
+/* Toss / Robinhood inspired UX refresh */
+:root{
+  --fin-bg:#f7f8fb;
+  --fin-card:#ffffff;
+  --fin-text:#111827;
+  --fin-sub:#7b8494;
+  --fin-line:#edf0f4;
+  --fin-blue:#2563eb;
+  --fin-green:#00a86b;
+  --fin-red:#ef4444;
+  --fin-yellow:#f7b500;
+  --fin-shadow:0 12px 32px rgba(17,24,39,.07);
+  --fin-shadow-strong:0 20px 48px rgba(17,24,39,.12);
+}
+body.dark{
+  --fin-bg:#0b1018;
+  --fin-card:#151b25;
+  --fin-text:#f8fafc;
+  --fin-sub:#9aa4b2;
+  --fin-line:#283241;
+  --fin-shadow:0 16px 36px rgba(0,0,0,.28);
+  --fin-shadow-strong:0 24px 56px rgba(0,0,0,.36);
+}
+body,body.mobile-app{
+  background:
+    radial-gradient(circle at 18% -12%,rgba(37,99,235,.14),transparent 34%),
+    linear-gradient(180deg,#f4f8ff 0,var(--fin-bg) 330px);
+  color:var(--fin-text);
+}
+body.dark,body.dark.mobile-app{
+  background:
+    radial-gradient(circle at 18% -12%,rgba(37,99,235,.18),transparent 34%),
+    linear-gradient(180deg,#101827 0,var(--fin-bg) 330px);
+}
+.app,.mobile-app .app{padding-bottom:110px}
+.topbar,.mobile-app .topbar{
+  background:rgba(247,248,251,.76);
+  border-bottom:1px solid rgba(237,240,244,.72);
+  backdrop-filter:blur(22px) saturate(1.2);
+}
+.dark .topbar,.dark.mobile-app .topbar{background:rgba(11,16,24,.76);border-bottom-color:rgba(40,50,65,.72)}
+.brand-mark{background:linear-gradient(145deg,#111827,#2563eb)!important;border:0!important;color:#fff}
+.brand-title{font-weight:850;letter-spacing:-.02em}.brand-sub{font-weight:620}
+.icon-btn,.refresh-btn{border:0!important;background:var(--fin-card)!important;box-shadow:0 4px 16px rgba(17,24,39,.06)!important}
+.hero-main,.mobile-app .hero-main{
+  border:0!important;
+  border-radius:28px!important;
+  background:
+    linear-gradient(135deg,rgba(17,24,39,.98),rgba(37,99,235,.92) 58%,rgba(0,168,107,.88))!important;
+  color:#fff!important;
+  box-shadow:var(--fin-shadow-strong)!important;
+  overflow:hidden;
+}
+.hero-main:before{display:none!important}.hero-main:after{display:block!important;border-color:rgba(255,255,255,.16)!important}
+.eyebrow,.hero-main p,.mobile-app .hero-main p{color:rgba(255,255,255,.72)!important}
+h1,.mobile-app h1{color:#fff!important;font-weight:900!important;letter-spacing:-.04em!important}
+.pill,.mobile-app .pill{background:rgba(255,255,255,.14)!important;border:1px solid rgba(255,255,255,.18)!important;color:rgba(255,255,255,.88)!important}
+.metric,.rank-card,.rising-card,.team-card,.trend-toggle,.search,.sort-select,.bottom-nav{
+  border:0!important;
+  background:var(--fin-card)!important;
+  box-shadow:var(--fin-shadow)!important;
+}
+.metric{border-radius:24px!important}.metric.primary{background:var(--fin-card)!important;color:var(--fin-text)!important}
+.metric.primary .metric-label,.metric.primary .metric-note,.metric.primary .metric-value small{color:var(--fin-sub)!important}
+.metric-value,.metric-value span{color:var(--fin-text)!important;font-weight:900!important;letter-spacing:-.04em!important}
+.progress-line{background:var(--fin-line)!important}.progress-line span{background:linear-gradient(90deg,var(--fin-blue),var(--fin-green))!important}
+.hero-time .time-tab.active,.time-tab.active,.chip.active{
+  background:#111827!important;color:#fff!important;border-color:#111827!important;box-shadow:none!important
+}
+.dark .hero-time .time-tab.active,.dark .time-tab.active,.dark .chip.active{background:#f8fafc!important;color:#111827!important;border-color:#f8fafc!important}
+.search,.sort-select{height:52px!important;border-radius:18px!important}.search:focus-within{box-shadow:0 0 0 4px rgba(37,99,235,.12),var(--fin-shadow)!important}
+.chip,.time-tab{background:var(--fin-card)!important;border:1px solid var(--fin-line)!important;color:var(--fin-sub)!important}
+.section-title h2{font-size:19px!important;font-weight:900!important;letter-spacing:-.03em!important}.section-title span{color:var(--fin-sub)!important}
+.rank-card,.rising-card,.team-card,.trend-toggle{border-radius:24px!important}
+.rank-card:first-child{background:#111827!important;color:#fff!important}.rank-card:first-child .rank-rate{color:#86efac!important}.rank-card:first-child .rank-no{background:rgba(255,255,255,.12)!important;color:#fff!important}
+.rank-rate,.rising-delta,.link-btn{color:var(--fin-blue)!important;font-weight:900!important}.team-side b{font-size:22px!important;font-weight:900!important;letter-spacing:-.04em!important}
+.team-summary{padding:20px 20px 12px!important}.team-progress{margin:0 20px 16px!important;background:var(--fin-line)!important}.team-progress span{background:linear-gradient(90deg,var(--fin-blue),var(--fin-green))!important}
+.team-status{padding:4px 10px!important;font-weight:800!important}.team-status.done{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.watch{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
+.detail-grid div,.member{background:rgba(148,163,184,.10)!important;border:0!important}
+.trend-toggle summary{font-weight:850!important}.line-path{stroke:var(--fin-blue)!important}.line-fill{fill:var(--fin-blue)!important}.line-dot{stroke:var(--fin-blue)!important}.line-dot.is-latest{fill:var(--fin-blue)!important}
+.bottom-nav{background:rgba(255,255,255,.82)!important;backdrop-filter:blur(22px) saturate(1.2)!important;border-radius:28px!important}.dark .bottom-nav{background:rgba(21,27,37,.82)!important}
+.nav-inner button.active{background:#111827!important;color:#fff!important}.dark .nav-inner button.active{background:#f8fafc!important;color:#111827!important}
+button{touch-action:manipulation}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
+@media (max-width:860px){
+  .app,.mobile-app .app{padding-left:16px!important;padding-right:16px!important}
+  .topbar,.mobile-app .topbar,.toolbar,.mobile-app .toolbar{margin-left:-16px!important;margin-right:-16px!important;padding-left:16px!important;padding-right:16px!important}
+  .hero-main,.mobile-app .hero-main{padding:22px!important;min-height:210px!important}
+  h1,.mobile-app h1{font-size:32px!important}
+  .summary,.mobile-app .summary{gap:10px!important}
+  .metric{min-height:112px!important;padding:17px!important}
+  .metric.primary{min-height:136px!important}
+  .leaderboard,.rising-list{margin-left:-16px!important;margin-right:-16px!important;padding-left:16px!important;padding-right:16px!important}
+  .team-summary{padding:18px 18px 12px!important}.team-progress{margin:0 18px 15px!important}
+}
+
 </style>
 </head>
 <body>
@@ -910,6 +1076,11 @@ h1,.mobile-app h1{font-size:32px;line-height:1.14;font-weight:800;color:var(--da
       <div>
         <div class="eyebrow">7월 챌린지 현황</div>
         <h1>PSM<br>소통트립 챌린지</h1>
+        <section class="time-dashboard hero-time" aria-label="시점 선택">
+          <div class="time-tabs" id="timeTabs">
+            <button class="time-tab active" data-time="latest" type="button">최신</button>
+          </div>
+        </section>
         <p>오전 9시, 오후 1시, 오후 3시, 오후 6시 기준으로 팀별 실적과 달성률을 업데이트합니다.</p>
       </div>
       <div class="hero-meta">
@@ -949,12 +1120,6 @@ h1,.mobile-app h1{font-size:32px;line-height:1.14;font-weight:800;color:var(--da
   </section>
 
   <div class="notice" id="notice" role="status"></div>
-
-  <section class="time-dashboard" aria-label="시점 선택">
-    <div class="time-tabs" id="timeTabs">
-      <button class="time-tab active" data-time="latest" type="button">최신</button>
-    </div>
-  </section>
 
   <section id="top">
     <div class="section-title"><h2>현재 TOP 5</h2><span>달성률 기준</span></div>
@@ -1104,7 +1269,7 @@ function setupSectionSpy(){
 
 function arrangeProductFlow(){
   const toolbar = $('search');
-  const time = document.querySelector('.time-dashboard');
+  const time = $('home');
   const rising = $('rising');
   const trend = $('trend');
   const top = $('top');
@@ -1259,7 +1424,7 @@ function renderRising(currentList, deltas){
     .slice(0,5);
   const prevTime = previousTimeRaw();
   $('risingSummary').textContent = prevTime ? shortSheetTime(prevTime) + ' 대비' : '직전 업데이트 대비';
-  box.innerHTML = rows.map((t,i) => `<button class="rising-card" type="button" onclick="focusTeam('${encodeURIComponent(t.team)}')">
+  box.innerHTML = rows.map((t,i) => `<button class="rising-card" type="button" aria-label="상승 팀 상세 보기" onclick="focusTeam('${encodeURIComponent(t.team)}')">
     <div class="rising-rank">${i + 1}</div>
     <div class="rising-team">${esc(t.team)}</div>
     <div class="rising-delta">${t.delta.resultDelta > 0 ? '+' : ''}${fmt(t.delta.resultDelta)}천원</div>
@@ -1437,7 +1602,7 @@ function renderTrend(){
 }
 
 function rankCard(t, i, delta = { resultDelta:0, rankDelta:0 }){
-  return `<button class="rank-card" type="button" onclick="focusTeam('${encodeURIComponent(t.team)}')">
+  return `<button class="rank-card" type="button" aria-label="랭킹 팀 상세 보기" onclick="focusTeam('${encodeURIComponent(t.team)}')">
     <div class="rank-top"><div class="rank-no">${i + 1}</div><div class="rank-rate">${t.rate.toFixed(1)}%</div></div>
     <div class="rank-team">${esc(t.team)}</div>
     <div class="rank-meta">팀장 ${esc(t.leader)} · 실적 ${fmt(t.result)}천원</div>
@@ -1502,7 +1667,7 @@ async function shareTeam(name){
   url.searchParams.set('team', teamName);
   try{
     await navigator.clipboard.writeText(url.toString());
-    showNotice('팀 공유 링크를 복사했습니다.', 'ok');
+    showNotice('공유 링크가 복사됐습니다. 모바일 메신저에 바로 붙여넣을 수 있어요.', 'ok');
   }catch(e){
     location.href = url.toString();
   }
