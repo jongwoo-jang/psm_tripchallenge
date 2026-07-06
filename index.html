@@ -161,7 +161,7 @@ h1{font-size:33px;letter-spacing:-.01em}
 .refresh-btn[disabled] svg{animation:spin .9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .nav-inner button{position:relative;overflow:hidden}.nav-inner button.active:after{content:"";position:absolute;left:50%;bottom:5px;width:18px;height:2px;border-radius:999px;background:currentColor;transform:translateX(-50%);opacity:.55}
-.trend-bar{transition:height .55s cubic-bezier(.2,.8,.2,1),filter .2s ease}.trend-item:hover .trend-bar{filter:saturate(1.12) brightness(1.04)}
+.trend-bar{transition:width .55s cubic-bezier(.2,.8,.2,1),filter .2s ease}.trend-item:hover .trend-bar{filter:saturate(1.12) brightness(1.04)}
 /* Compact business icon style */
 .brand-mark,.icon-btn svg,.refresh-btn svg,.search svg,.metric-label svg,.nav-inner svg{overflow:visible}
 .brand-mark{background:#fff;border:1px solid rgba(45,111,183,.22);box-shadow:0 6px 14px rgba(45,111,183,.12)}
@@ -1131,7 +1131,9 @@ function renderTrend(){
     if(fallback) grouped.set('baseline', { timeRaw:'baseline', target:fallback.target, result:fallback.result });
   }
   const points = [...grouped.values()].sort((a,b) => a.timeRaw.localeCompare(b.timeRaw)).slice(-8);
-  const max = Math.max(...points.map(p => p.result), 1);
+  const currentTeam = selectedTeam ? state.teams.find(t => norm(t.team) === norm(selectedTeam)) : null;
+  const teamTarget = currentTeam ? Number(currentTeam.target || 0) : 0;
+  const max = selectedTeam && teamTarget ? teamTarget : Math.max(...points.map(p => p.result), 1);
   const latest = points[points.length - 1];
   const prev = points[points.length - 2];
   const delta = latest && prev ? latest.result - prev.result : 0;
@@ -1141,10 +1143,12 @@ function renderTrend(){
     : `${labelPrefix}최근 업데이트 기준`;
   const allBtn = $('trendAllBtn');
   if(allBtn) allBtn.classList.toggle('active', !selectedTeam);
+  chart.dataset.scope = selectedTeam ? 'team' : 'all';
+  chart.setAttribute('aria-label', selectedTeam ? selectedTeam + ' 시간대별 실적 추이' : '시간대별 전체 실적 추이');
   if(chart.style.setProperty) chart.style.setProperty('--trend-count', points.length || 1);
   else chart.style['--trend-count'] = points.length || 1;
   chart.innerHTML = points.map((p, i) => {
-    const h = Math.max((p.result / max) * 100, 4);
+    const h = Math.min(Math.max((p.result / max) * 100, 4), 100);
     const diff = i ? p.result - points[i - 1].result : 0;
     const diffClass = i ? (diff > 0 ? 'up' : diff < 0 ? 'down' : 'flat') : 'start';
     const label = p.timeRaw === 'baseline' ? '기준값' : shortSheetTime(p.timeRaw);
