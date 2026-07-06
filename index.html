@@ -1033,7 +1033,7 @@ h1,.mobile-app h1{color:#fff!important;font-weight:900!important;letter-spacing:
 .rank-rate,.rising-delta,.link-btn{color:var(--fin-blue)!important;font-weight:900!important}.team-side b{font-size:22px!important;font-weight:900!important;letter-spacing:-.04em!important}
 .team-summary{padding:20px 20px 12px!important}.team-progress{margin:0 20px 16px!important;background:var(--fin-line)!important}.team-progress span{background:linear-gradient(90deg,var(--fin-blue),var(--fin-green))!important}
 .team-status{width:max-content!important;max-width:max-content!important;min-width:0!important;height:20px!important;padding:2px 7px!important;margin-top:5px!important;font-size:10px!important;line-height:1!important;font-weight:800!important;letter-spacing:0!important}.team-status.done{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.watch{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
-.team-status.cruise{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.effort{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
+.team-status.cruise,.team-status.realtime-top{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.effort,.team-status.realtime-low{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
 .team-summary{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:start!important;gap:12px!important}
 .team-rank-left{display:flex;align-items:flex-start}
 .team-side{justify-items:end!important}
@@ -1498,20 +1498,15 @@ function statusMapFor(currentList, deltas){
     delta: Number(deltas.get(t.team)?.resultDelta || 0)
   }));
   if(!rows.length) return new Map();
-  const avg = rows.reduce((sum, t) => sum + t.delta, 0) / rows.length;
   const statusMap = new Map();
-  rows
+  const ranked = rows
     .slice()
-    .sort((a,b) => b.delta - a.delta || a.team.localeCompare(b.team, 'ko'))
-    .slice(0, 10)
-    .filter(t => t.delta >= avg)
-    .forEach(t => statusMap.set(t.team, ['cruise', '순항중']));
-  rows
-    .slice()
-    .sort((a,b) => a.delta - b.delta || a.team.localeCompare(b.team, 'ko'))
-    .slice(0, 10)
-    .filter(t => t.delta < avg)
-    .forEach(t => statusMap.set(t.team, ['effort', '노력필요']));
+    .sort((a,b) => b.delta - a.delta || a.team.localeCompare(b.team, 'ko'));
+  ranked.forEach((t, i) => {
+    const realRank = i + 1;
+    if(realRank <= 10) statusMap.set(t.team, ['realtime-top', '실시간 ' + realRank + '위']);
+    if(realRank > ranked.length - 10) statusMap.set(t.team, ['realtime-low', '실시간 ' + realRank + '위']);
+  });
   return statusMap;
 }
 
