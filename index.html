@@ -1394,6 +1394,17 @@ function findColumn(headers, names){
   return names.map(norm).reduce((found, name) => found >= 0 ? found : normalized.findIndex(h => h === name || h.includes(name)), -1);
 }
 
+function sheetTeam(row){
+  return {
+    team: row.team || '',
+    leader: row.leader || '',
+    members: Array.isArray(row.members) ? row.members : [],
+    target: Number(row.target || 0),
+    result: Number(row.result || 0),
+    timeRaw: row.timeRaw || ''
+  };
+}
+
 function applyRows(rows){
   if(!rows || rows.length < 2) throw new Error('empty');
   const headers = rows[0].map(v => (v || '').trim());
@@ -1420,7 +1431,12 @@ function applyRows(rows){
   state.history = history;
   state.latestTimeRaw = sheetTimeRaw;
   if(state.selectedTime !== 'latest' && !availableTimes().includes(state.selectedTime)) state.selectedTime = 'latest';
-  state.teams = BASE_TEAMS.map(t => latestByTeam.has(norm(t.team)) ? { ...t, ...latestByTeam.get(norm(t.team)) } : { ...t });
+  const baseKeys = new Set(BASE_TEAMS.map(t => norm(t.team)));
+  const merged = BASE_TEAMS.map(t => latestByTeam.has(norm(t.team)) ? { ...t, ...latestByTeam.get(norm(t.team)) } : { ...t });
+  latestByTeam.forEach((item, key) => {
+    if(!baseKeys.has(key)) merged.push(sheetTeam(item));
+  });
+  state.teams = merged;
   showNotice('', 'hide');
   setBasis(parseSheetTime(sheetTimeRaw));
   $('syncState').textContent = '구글 시트 최신 데이터 반영';
@@ -1442,7 +1458,7 @@ function applyMemberRows(rows){
     const branch = branchIndex >= 0 ? (r[branchIndex] || '').trim() : '';
     if(!team || !name) return;
     const key = norm(team);
-    if(!map.has(key)) map.set(key, { members: [], leader: '' });
+    if(!map.has(key)) map.set(key, { team, members: [], leader: '' });
     const item = map.get(key);
     if(!item.members.some(m => norm(memberName(m)) === norm(name))) item.members.push({ name, branch });
     if(leaderIndex >= 0 && r[leaderIndex]) item.leader = r[leaderIndex].trim();
@@ -1451,7 +1467,16 @@ function applyMemberRows(rows){
   state.teams = state.teams.map(t => {
     const item = map.get(norm(t.team));
     if(!item) return t;
-    return { ...t, members: item.members, leader: item.leader || t.leader || item.members[0] };
+    return { ...t, members: item.members, leader: item.leader || t.leader || memberName(item.members[0]) };
+  });
+  const existing = new Set(state.teams.map(t => norm(t.team)));
+  map.forEach((item, key) => {
+    if(existing.has(key)) return;
+    state.teams.push(sheetTeam({
+      team: item.team,
+      leader: item.leader || memberName(item.members[0]),
+      members: item.members
+    }));
   });
 }
 
