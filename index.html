@@ -797,7 +797,6 @@ h1,.mobile-app h1{
 .time-tab.active{background:var(--app-text);border-color:var(--app-text);color:var(--app-card)}
 .rising-list{display:grid;grid-template-columns:repeat(5,minmax(160px,1fr));gap:10px;overflow:auto;margin:0 -14px;padding:0 14px 6px;scroll-snap-type:x proximity}
 .rising-card{border:1px solid var(--app-line);border-radius:18px;background:var(--app-card);box-shadow:var(--app-shadow);padding:15px;text-align:left}
-.rising-rank{width:32px;height:32px;border-radius:11px;background:var(--app-soft);color:var(--app-text);display:grid;place-items:center;font-size:12px;font-weight:820}
 .rising-team{margin-top:12px;color:var(--app-text);font-size:14px;font-weight:800;line-height:1.35;word-break:keep-all}
 .rising-delta{margin-top:7px;color:var(--app-green);font-size:17px;font-weight:820}
 .rising-meta{margin-top:4px;color:var(--app-sub);font-size:11px;font-weight:620}
@@ -850,7 +849,7 @@ h1,.mobile-app h1{font-size:32px;line-height:1.14;font-weight:800;color:var(--da
 .time-dashboard{margin:8px 0 12px}.time-tabs{gap:8px}.time-tab{height:40px;border-radius:999px;border:1px solid var(--dash-line);background:var(--dash-card);color:var(--dash-sub);font-weight:700;box-shadow:0 2px 8px rgba(20,31,47,.04)}.time-tab.active{background:var(--dash-text);border-color:var(--dash-text);color:var(--dash-card)}
 .section-title{margin:24px 0 10px}.section-title h2{font-size:18px;font-weight:800;color:var(--dash-text)}.section-title span{font-size:12px;font-weight:560;color:var(--dash-sub)}
 .rising-list{grid-template-columns:repeat(5,minmax(176px,1fr));gap:12px;margin:0;padding:0 0 4px}.rising-card,.rank-card,.team-card,.trend-toggle{border:1px solid var(--dash-line);border-radius:var(--dash-radius);background:var(--dash-card);box-shadow:var(--dash-shadow)}
-.rising-card{padding:16px}.rising-rank{background:#eef4fb;color:var(--dash-blue)}.dark .rising-rank{background:#202b3a}.rising-team{font-size:14px;font-weight:780}.rising-delta{color:var(--dash-green);font-size:18px}.rising-meta{color:var(--dash-sub)}
+.rising-card{padding:16px}.rising-team{font-size:14px;font-weight:780}.rising-delta{color:var(--dash-green);font-size:18px}.rising-meta{color:var(--dash-sub)}
 .trend-toggle{overflow:hidden}.trend-toggle summary{padding:17px 18px;border-bottom:1px solid var(--dash-line);font-weight:760}.trend-toggle[open] summary{border-bottom-color:transparent}
 .trend-panel,.mobile-app .trend-panel{border:0;border-radius:0;box-shadow:none;background:var(--dash-card)}
 .trend-controls{padding:14px 16px;border-color:var(--dash-line)}.trend-scope,.trend-team-picker{height:40px;border-color:var(--dash-line);border-radius:999px}.trend-scope{background:var(--dash-text)}
@@ -1033,8 +1032,14 @@ h1,.mobile-app h1{color:#fff!important;font-weight:900!important;letter-spacing:
 .rank-card:first-child{background:#111827!important;color:#fff!important}.rank-card:first-child .rank-rate{color:#86efac!important}.rank-card:first-child .rank-no{background:rgba(255,255,255,.12)!important;color:#fff!important}
 .rank-rate,.rising-delta,.link-btn{color:var(--fin-blue)!important;font-weight:900!important}.team-side b{font-size:22px!important;font-weight:900!important;letter-spacing:-.04em!important}
 .team-summary{padding:20px 20px 12px!important}.team-progress{margin:0 20px 16px!important;background:var(--fin-line)!important}.team-progress span{background:linear-gradient(90deg,var(--fin-blue),var(--fin-green))!important}
-.team-status{padding:4px 10px!important;font-weight:800!important}.team-status.done{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.watch{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
+.team-status{width:max-content!important;max-width:max-content!important;min-width:0!important;height:20px!important;padding:2px 7px!important;margin-top:5px!important;font-size:10px!important;line-height:1!important;font-weight:800!important;letter-spacing:0!important}.team-status.done{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.watch{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
 .team-status.cruise{background:rgba(0,168,107,.12)!important;color:var(--fin-green)!important}.team-status.effort{background:rgba(239,68,68,.10)!important;color:var(--fin-red)!important}
+.team-summary{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:start!important;gap:12px!important}
+.team-rank-left{display:flex;align-items:flex-start}
+.team-side{justify-items:end!important}
+.team-daily-inline{color:var(--muted);font-size:11px;font-weight:800;line-height:1.2}
+.team-daily-inline .team-delta{font-size:11px}
+.trend-more{width:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);color:var(--text);padding:10px 12px;font-weight:800;font-size:12px}
 .detail-grid div,.member{background:rgba(148,163,184,.10)!important;border:0!important}
 .trend-toggle summary{font-weight:850!important}.line-path{stroke:var(--fin-blue)!important}.line-fill{fill:var(--fin-blue)!important}.line-dot{stroke:var(--fin-blue)!important}.line-dot.is-latest{fill:var(--fin-blue)!important}
 .bottom-nav{background:rgba(255,255,255,.82)!important;backdrop-filter:blur(22px) saturate(1.2)!important;border-radius:28px!important}.dark .bottom-nav{background:rgba(21,27,37,.82)!important}
@@ -1116,12 +1121,12 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
   <div class="notice" id="notice" role="status"></div>
 
   <section id="top">
-    <div class="section-title"><h2>현재 TOP 5</h2></div>
+    <div class="section-title"><h2>현재 TOP10</h2></div>
     <div class="leaderboard" id="topList"></div>
   </section>
 
   <section id="rising">
-    <div class="section-title"><h2>상승 TOP 5</h2><span id="risingSummary" class="sr-only"></span></div>
+    <div class="section-title"><h2>당일 실적 TOP5</h2><span id="risingSummary" class="sr-only"></span></div>
     <div class="rising-list" id="risingList"></div>
   </section>
 
@@ -1149,8 +1154,8 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
 <nav class="bottom-nav" aria-label="하단 메뉴">
   <div class="nav-inner">
     <button class="active" data-go="home" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5M5 10v10h14V10M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>홈</button>
-    <button data-go="top" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>랭킹</button>
     <button data-go="trend" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M7 15l3-3 3 2 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>추이</button>
+    <button data-go="top" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>랭킹</button>
     <button data-go="teams" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 1 1-8 0m8 0h3a3 3 0 0 1 3 3v4h-5m-9-7H5a3 3 0 0 0-3 3v4h5m1-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>팀</button>
   </div>
 </nav>
@@ -1160,7 +1165,7 @@ const BASE_TEAMS = [{"team":"나 오늘 밥 안해","leader":"신유경","member
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
 const MEMBER_CSV_URL = 'https://docs.google.com/spreadsheets/d/1pwoa_QvPUiAzhcu0ZsYQfV3Zb7rxiLdbP4v7JZ6yVV4/gviz/tq?tqx=out:csv&gid=1874206095';
 const $ = id => document.getElementById(id);
-const state = { teams: structuredClone(BASE_TEAMS), history: [], filter: 'all', sort: 'rate', trendTeam: '', selectedTime: 'latest', latestTimeRaw: '', loading: false };
+const state = { teams: structuredClone(BASE_TEAMS), history: [], filter: 'all', sort: 'rate', trendTeam: '', selectedTime: 'latest', latestTimeRaw: '', loading: false, trendExpanded: false };
 const fmt = n => Number(n || 0).toLocaleString('ko-KR');
 const norm = s => (s || '').toString().normalize('NFKC').replace(/\s/g, '').toLowerCase();
 const memberName = m => typeof m === 'string' ? m : (m?.name || '');
@@ -1308,9 +1313,11 @@ function sortedTeams(source = state.teams){
 }
 
 function watchTeamSet(source, deltas){
-  return new Set([...statusMapFor(source, deltas)]
-    .filter(([, status]) => status[0] === 'effort')
-    .map(([team]) => team));
+  return new Set(source
+    .slice()
+    .sort((a,b) => rate(a) - rate(b) || Number(a.result || 0) - Number(b.result || 0) || a.team.localeCompare(b.team, 'ko'))
+    .slice(0, 10)
+    .map(t => t.team));
 }
 
 function filteredTeams(rankMap, source = state.teams, deltas = new Map()){
@@ -1343,6 +1350,12 @@ function previousTimeRaw(timeRaw = activeTimeRaw()){
   return times[times.length - 1] || '';
 }
 
+function previousDayTimeRaw(timeRaw = activeTimeRaw()){
+  const day = (timeRaw || '').slice(0, 8);
+  const times = availableTimes().filter(t => t < timeRaw && t.slice(0, 8) < day);
+  return times[times.length - 1] || '';
+}
+
 function snapshotTeams(timeRaw = activeTimeRaw()){
   if(!state.history.length || !timeRaw) return state.teams.map(t => ({ ...t }));
   const byTeam = new Map();
@@ -1363,8 +1376,8 @@ function rankMapFor(list){
     .map((t,i) => [t.team, i + 1]));
 }
 
-function teamDeltaMap(currentList){
-  const prevTime = previousTimeRaw();
+function teamDeltaMap(currentList, timeRaw = activeTimeRaw()){
+  const prevTime = previousTimeRaw(timeRaw);
   const prevList = prevTime ? snapshotTeams(prevTime) : [];
   const prevByTeam = new Map(prevList.map(t => [norm(t.team), t]));
   const prevRank = rankMapFor(prevList);
@@ -1384,6 +1397,21 @@ function teamDeltaMap(currentList){
   return map;
 }
 
+function dailyDeltaMap(currentList, timeRaw = activeTimeRaw()){
+  const baseTime = previousDayTimeRaw(timeRaw);
+  const baseList = baseTime ? snapshotTeams(baseTime) : [];
+  const baseByTeam = new Map(baseList.map(t => [norm(t.team), t]));
+  const map = new Map();
+  currentList.forEach(t => {
+    const base = baseByTeam.get(norm(t.team));
+    map.set(t.team, {
+      resultDelta: Math.max(Number(t.result || 0) - Number(base?.result || 0), 0),
+      baseTime
+    });
+  });
+  return map;
+}
+
 function rankChangeText(delta){
   if(delta > 0) return `<span class="rank-change up">▲ ${delta}</span>`;
   if(delta < 0) return `<span class="rank-change down">▼ ${Math.abs(delta)}</span>`;
@@ -1396,8 +1424,12 @@ function deltaText(delta){
   return `<span class="team-delta ${cls}">${sign}${fmt(delta)}천원</span>`;
 }
 
+function targetRemainText(t, targetRate){
+  const need = Math.max(Math.ceil(Number(t.target || 0) * targetRate - Number(t.result || 0)), 0);
+  return need ? fmt(need) + '천원' : '완료';
+}
+
 function statusMapFor(currentList, deltas){
-  if(!previousTimeRaw()) return new Map();
   const rows = currentList.map(t => ({
     team: t.team,
     delta: Number(deltas.get(t.team)?.resultDelta || 0)
@@ -1411,17 +1443,27 @@ function statusMapFor(currentList, deltas){
     .slice(0, 10)
     .filter(t => t.delta >= avg)
     .forEach(t => statusMap.set(t.team, ['cruise', '순항중']));
-  currentList
+  rows
     .slice()
-    .sort((a,b) => rate(a) - rate(b) || Number(a.result || 0) - Number(b.result || 0) || a.team.localeCompare(b.team, 'ko'))
+    .sort((a,b) => a.delta - b.delta || a.team.localeCompare(b.team, 'ko'))
     .slice(0, 10)
-    .forEach(t => statusMap.set(t.team, ['effort', '하위10']));
+    .filter(t => t.delta < avg)
+    .forEach(t => statusMap.set(t.team, ['effort', '노력필요']));
   return statusMap;
 }
 
 function renderTimeTabs(){
   const tabs = $('timeTabs');
   if(!tabs) return;
+  if(!tabs.dataset.bound){
+    tabs.dataset.bound = 'true';
+    tabs.addEventListener('click', e => {
+      const btn = e.target.closest('.time-tab');
+      if(!btn || !tabs.contains(btn)) return;
+      state.selectedTime = btn.dataset.time;
+      render();
+    });
+  }
   const times = availableTimes();
   if(state.selectedTime !== 'latest' && !times.includes(state.selectedTime)) state.selectedTime = 'latest';
   const buttons = [{ label:'최신', value:'latest' }].concat(times.slice(-8).reverse().map(t => ({ label:shortSheetTime(t), value:t })));
@@ -1429,26 +1471,20 @@ function renderTimeTabs(){
   if(tabs.dataset.signature === signature) return;
   tabs.dataset.signature = signature;
   tabs.innerHTML = buttons.map(item => `<button class="time-tab ${state.selectedTime === item.value ? 'active' : ''}" data-time="${item.value}" type="button" aria-pressed="${state.selectedTime === item.value}">${item.label}</button>`).join('');
-  tabs.querySelectorAll('.time-tab').forEach(btn => btn.addEventListener('click', () => {
-    state.selectedTime = btn.dataset.time;
-    render();
-  }));
 }
 
-function renderRising(currentList, deltas){
+function renderRising(currentList, deltas, timeRaw = activeTimeRaw()){
   const box = $('risingList');
   if(!box) return;
   const rows = currentList
     .map(t => ({ ...t, delta:deltas.get(t.team) || { resultDelta:0, rankDelta:0 } }))
     .sort((a,b) => b.delta.resultDelta - a.delta.resultDelta || rate(b) - rate(a))
     .slice(0,5);
-  const prevTime = previousTimeRaw();
-  $('risingSummary').textContent = prevTime ? shortSheetTime(prevTime) + ' 대비' : '직전 업데이트 대비';
+  $('risingSummary').textContent = timeRaw ? shortSheetTime(timeRaw) + ' 당일 실적' : '당일 실적';
   box.innerHTML = rows.map((t,i) => `<button class="rising-card" type="button" aria-label="상승 팀 상세 보기" onclick="focusTeam('${encodeURIComponent(t.team)}')">
-    <div class="rising-rank">${i + 1}</div>
     <div class="rising-team">${esc(t.team)}</div>
     <div class="rising-delta">${t.delta.resultDelta > 0 ? '+' : ''}${fmt(t.delta.resultDelta)}천원</div>
-    <div class="rising-meta">현재 ${rate(t).toFixed(1)}% · 순위 ${rankChangeText(t.delta.rankDelta)}</div>
+    <div class="rising-meta">현재 ${rate(t).toFixed(1)}%</div>
   </button>`).join('');
 }
 
@@ -1481,11 +1517,16 @@ function updateFilterCounts(source, rankMap, deltas = new Map()){
 }
 
 function render(){
-  const displayTeams = snapshotTeams();
-  const deltas = teamDeltaMap(displayTeams);
+  const currentTime = state.latestTimeRaw || availableTimes().at(-1) || '';
+  const displayTeams = snapshotTeams(currentTime);
+  const deltas = teamDeltaMap(displayTeams, currentTime);
+  const selectedTime = activeTimeRaw();
+  const summaryTeams = snapshotTeams(selectedTime);
+  const risingTeams = snapshotTeams(currentTime);
+  const risingDeltas = dailyDeltaMap(risingTeams, currentTime);
   const ranked = [...displayTeams].map(t => ({ ...t, rate: rate(t), remain: remain(t), delta:deltas.get(t.team) })).sort((a,b) => b.rate - a.rate || b.result - a.result || a.team.localeCompare(b.team, 'ko'));
   const rankMap = new Map(ranked.map((t,i) => [t.team, i + 1]));
-  const total = totals(displayTeams);
+  const total = totals(summaryTeams);
   const overall = total.target ? total.result / total.target * 100 : 0;
   setNumber('overallRate', overall, { decimals:1 });
   $('overallBar').style.width = Math.min(overall, 100) + '%';
@@ -1495,14 +1536,15 @@ function render(){
   setNumber('teamCount', state.teams.length);
   setNumber('memberCount', total.members);
   renderTimeTabs();
-  renderRising(displayTeams, deltas);
+  renderRising(risingTeams, risingDeltas, currentTime);
   updateFilterCounts(displayTeams, rankMap, deltas);
   $('topTeamPill').textContent = ranked[0] ? '1위 ' + ranked[0].team + ' ' + ranked[0].rate.toFixed(1) + '%' : 'TOP 팀 없음';
-  $('topList').innerHTML = ranked.slice(0,5).map((t,i) => rankCard(t, i, t.delta)).join('');
+  const dailyDeltas = dailyDeltaMap(displayTeams, currentTime);
+  $('topList').innerHTML = ranked.slice(0,10).map((t,i) => rankCard(t, i, dailyDeltas.get(t.team))).join('');
   const teamParam = new URLSearchParams(location.search).get('team');
-  const statusMap = statusMapFor(displayTeams, deltas);
-  const list = filteredTeams(rankMap, displayTeams, deltas).map(t => ({ ...t, delta:deltas.get(t.team) }));
-  $('grid').innerHTML = list.map(t => teamCard(t, rankMap.get(t.team), teamParam && norm(teamParam) === norm(t.team), t.delta, statusMap.get(t.team))).join('');
+  const statusMap = statusMapFor(displayTeams, dailyDeltas);
+  const list = filteredTeams(rankMap, displayTeams, deltas).map(t => ({ ...t, delta:deltas.get(t.team), dailyDelta:dailyDeltas.get(t.team) }));
+  $('grid').innerHTML = list.map(t => teamCard(t, rankMap.get(t.team), teamParam && norm(teamParam) === norm(t.team), t.delta, statusMap.get(t.team), t.dailyDelta)).join('');
   $('listCount').textContent = fmt(list.length) + '팀';
   updateActiveHint(list.length, state.teams.length);
   $('empty').style.display = list.length ? 'none' : 'block';
@@ -1510,7 +1552,6 @@ function render(){
   populateTrendTeamSelect();
   renderTrend();
   setupReveal();
-  requestAnimationFrame(() => document.querySelectorAll('[data-width]').forEach(el => { el.style.width = el.dataset.width + '%'; }));
 }
 
 function updateActiveHint(visible, total){
@@ -1610,37 +1651,48 @@ function renderTrend(){
       ${coords.map((p,i) => `<circle class="line-dot ${i === coords.length - 1 ? 'is-latest' : ''}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5"></circle>`).join('')}
     </svg>
   </div>`;
-  const rows = points.map((p, i) => {
+  const allRows = points.map((p, i) => {
     const diff = i ? p.result - points[i - 1].result : 0;
     const diffClass = i ? (diff > 0 ? 'up' : diff < 0 ? 'down' : 'flat') : 'start';
     const label = p.timeRaw === 'baseline' ? '기준값' : shortSheetTime(p.timeRaw);
-    return `<div class="trend-item">
+    return { index:i, html:`<div class="trend-item">
       <div class="trend-label">${label}</div>
       <div class="trend-bar-wrap"><div class="trend-bar ${i === points.length - 1 ? 'is-latest' : ''}" style="width:${Math.min(Math.max((p.result / max) * 100, 4), 100)}%"></div></div>
       <div class="trend-value">${fmt(p.result)}</div>
       <div class="trend-delta ${diffClass}">${i ? (diff >= 0 ? '+' : '') + fmt(diff) : '-'}</div>
-    </div>`;
-  }).join('');
-  chart.innerHTML = graph + `<div class="trend-list">${rows}</div>`;
+    </div>` };
+  }).reverse();
+  const visibleRows = state.trendExpanded ? allRows : allRows.slice(0, 5);
+  const moreButton = allRows.length > 5
+    ? `<button class="trend-more" type="button" onclick="toggleTrendList()">${state.trendExpanded ? '접기' : '더보기'}</button>`
+    : '';
+  chart.innerHTML = graph + `<div class="trend-list">${visibleRows.map(row => row.html).join('')}</div>${moreButton}`;
 }
 
-function rankCard(t, i, delta = { resultDelta:0, rankDelta:0 }){
+function toggleTrendList(){
+  state.trendExpanded = !state.trendExpanded;
+  renderTrend();
+}
+window.toggleTrendList = toggleTrendList;
+
+function rankCard(t, i, delta = { resultDelta:0, rankDelta:0 }) {
   return `<button class="rank-card" type="button" aria-label="랭킹 팀 상세 보기" onclick="focusTeam('${encodeURIComponent(t.team)}')">
     <div class="rank-top"><div class="rank-no">${i + 1}</div><div class="rank-rate">${t.rate.toFixed(1)}%</div></div>
     <div class="rank-team">${esc(t.team)}</div>
     <div class="rank-meta">팀장 ${esc(t.leader)} · 실적 ${fmt(t.result)}천원</div>
-    <div class="rank-meta">직전 대비 ${deltaText(delta.resultDelta)} · 순위 ${rankChangeText(delta.rankDelta)}</div>
+    <div class="rank-meta">당일 실적 ${deltaText(delta.resultDelta)}</div>
   </button>`;
 }
 
-function teamCard(t, rank, highlight, delta = { resultDelta:0, rankDelta:0 }, status = null){
-  const p = rate(t), capped = Math.min(p, 100), left = remain(t), members = t.members.filter(m => norm(memberName(m)) !== norm(t.leader));
+function teamCard(t, rank, highlight, delta = { resultDelta:0, rankDelta:0 }, status = null, dailyDelta = { resultDelta:0 }){
+  const p = rate(t), capped = Math.min(p, 100), members = t.members.filter(m => norm(memberName(m)) !== norm(t.leader));
   const ringColor = p >= 100 ? 'var(--accent)' : p < 10 ? 'var(--warn)' : 'var(--brand-2)';
   const statusMarkup = status ? `<span class="team-status ${status[0]}">${status[1]}</span>` : '';
   return `<article class="team-card ${highlight ? 'highlight' : ''}" id="team-${encodeURIComponent(t.team)}">
     <button class="team-summary" type="button" onclick="toggleTeam(this)" aria-expanded="false">
+      <span class="team-rank-left"><span class="rank-badge">#${rank}</span></span>
       <span class="team-main"><span class="team-title">${esc(t.team)}</span>${statusMarkup}</span>
-      <span class="team-side"><span class="rank-badge">#${rank}</span><b>${p.toFixed(1)}%</b></span>
+      <span class="team-side"><b>${p.toFixed(1)}%</b><span class="team-daily-inline">당일 ${deltaText(dailyDelta.resultDelta || 0)}</span></span>
     </button>
     <div class="team-progress"><span style="width:${capped}%;background:${ringColor}"></span></div>
     <div class="team-detail">
@@ -1648,11 +1700,11 @@ function teamCard(t, rank, highlight, delta = { resultDelta:0, rankDelta:0 }, st
         <div><span>팀장</span><b>${esc(t.leader)}</b></div>
         <div><span>목표</span><b>${fmt(t.target)}천원</b></div>
         <div><span>실적</span><b>${fmt(t.result)}천원</b></div>
-        <div><span>잔여</span><b>${left ? fmt(left) + '천원' : '완료'}</b></div>
-        <div><span>직전 대비</span><b>${deltaText(delta.resultDelta)}</b></div>
-        <div><span>순위 변화</span><b>${rankChangeText(delta.rankDelta)}</b></div>
+        <div><span>55%까지</span><b>${targetRemainText(t, .55)}</b></div>
+        <div><span>60%까지</span><b>${targetRemainText(t, .60)}</b></div>
+        <div><span>65%까지</span><b>${targetRemainText(t, .65)}</b></div>
       </div>
-      <div class="team-actions"><button class="link-btn" type="button" onclick="showTeamTrend('${encodeURIComponent(t.team)}')">추이</button><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div>
+      <div class="team-actions"><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div>
       <div class="members">${members.map(m => '<span class="member"><b>' + esc(memberName(m)) + '</b>' + (memberBranch(m) ? '<small>' + esc(memberBranch(m)) + '</small>' : '') + '</span>').join('')}</div>
     </div>
   </article>`;
