@@ -1040,7 +1040,37 @@ h1,.mobile-app h1{color:#fff!important;font-weight:900!important;letter-spacing:
 .team-daily-inline{color:var(--muted);font-size:11px;font-weight:800;line-height:1.2}
 .team-daily-inline .team-delta{font-size:11px}
 .trend-more{width:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);color:var(--text);padding:10px 12px;font-weight:800;font-size:12px}
-.detail-grid div,.member{background:rgba(148,163,184,.10)!important;border:0!important}
+.member{background:rgba(148,163,184,.10)!important;border:0!important}
+.member-name-row{display:flex;align-items:center;gap:6px;min-width:0}
+.member-name-row b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.member small{display:block;margin-top:2px}
+.member-trait{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;flex:0 0 18px;border-radius:999px}
+.member-trait svg{display:block;width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.trait-leader{background:rgba(37,99,235,.12);color:var(--dash-blue)}
+.trait-first{background:rgba(245,158,11,.16);color:var(--dash-amber)}
+.trait-youngest{background:rgba(22,163,74,.13);color:var(--dash-green)}
+.dark .trait-leader{background:rgba(96,165,250,.18)}
+.dark .trait-first{background:rgba(251,191,36,.18)}
+.dark .trait-youngest{background:rgba(74,222,128,.16)}
+.detail-grid.detail-readable{display:grid!important;grid-template-columns:minmax(0,.88fr) minmax(0,1.2fr)!important;gap:11px!important}
+.detail-panel{border:1px solid rgba(226,232,240,.9)!important;border-radius:18px!important;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(248,250,252,.78))!important;padding:13px!important}
+.dark .detail-panel{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))!important;border-color:var(--dash-line)!important}
+.detail-panel-title{display:flex!important;align-items:center!important;gap:8px!important;margin:0 0 11px!important;color:var(--dash-text)!important;font-size:13px!important;font-weight:880!important;line-height:1.3!important}
+.detail-title-icon{display:inline-flex!important;align-items:center;justify-content:center;width:25px;height:25px;flex:0 0 25px;border-radius:11px;background:rgba(37,99,235,.1);color:var(--dash-blue)!important;box-shadow:inset 0 0 0 1px rgba(37,99,235,.12)}
+.detail-title-icon svg{display:block;width:15px;height:15px;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.target-panel .detail-title-icon{background:rgba(245,158,11,.13);color:var(--dash-amber)!important;box-shadow:inset 0 0 0 1px rgba(245,158,11,.16)}
+.dark .detail-title-icon{background:rgba(96,165,250,.16);box-shadow:inset 0 0 0 1px rgba(147,197,253,.12)}
+.dark .target-panel .detail-title-icon{background:rgba(251,191,36,.16);box-shadow:inset 0 0 0 1px rgba(251,191,36,.14)}
+.detail-info-list{display:grid;gap:8px}
+.detail-info-row{display:flex!important;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.78)!important;border:1px solid rgba(226,232,240,.88)!important;border-radius:14px!important;padding:10px 11px!important}
+.detail-info-row span,.target-step span{display:block;color:var(--dash-sub)!important;font-size:13px!important;font-weight:760!important}
+.detail-info-row b{margin:0!important;color:var(--dash-text)!important;font-size:16px!important;font-weight:900!important;text-align:right;line-height:1.25}
+.target-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.target-step{position:relative;background:rgba(255,255,255,.78)!important;border:1px solid rgba(226,232,240,.88)!important;border-radius:15px!important;padding:13px 10px 11px!important;overflow:hidden}
+.dark .target-step,.dark .detail-info-row{background:rgba(255,255,255,.055)!important;border-color:var(--dash-line)!important}
+.target-step span{color:var(--dash-sub)!important;font-weight:800!important}
+.target-step b{display:block;margin-top:7px!important;color:var(--dash-text)!important;font-size:16px!important;font-weight:920!important;line-height:1.2}
+@media (max-width:640px){.detail-grid.detail-readable{grid-template-columns:1fr!important}.target-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .trend-toggle summary{font-weight:850!important}.line-path{stroke:var(--fin-blue)!important}.line-fill{fill:var(--fin-blue)!important}.line-dot{stroke:var(--fin-blue)!important}.line-dot.is-latest{fill:var(--fin-blue)!important}
 .bottom-nav{background:rgba(255,255,255,.82)!important;backdrop-filter:blur(22px) saturate(1.2)!important;border-radius:28px!important}.dark .bottom-nav{background:rgba(21,27,37,.82)!important}
 .nav-inner button.active{background:#111827!important;color:#fff!important}.dark .nav-inner button.active{background:#f8fafc!important;color:#111827!important}
@@ -1084,7 +1114,7 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
         </section>
       </div>
       <div class="hero-meta">
-        <span class="pill" id="syncState">저장된 기준값 표시</span>
+        <span class="pill" id="syncState" hidden></span>
         <span class="pill" id="topTeamPill">TOP 팀 집계 중</span>
       </div>
     </article>
@@ -1170,6 +1200,39 @@ const fmt = n => Number(n || 0).toLocaleString('ko-KR');
 const norm = s => (s || '').toString().normalize('NFKC').replace(/\s/g, '').toLowerCase();
 const memberName = m => typeof m === 'string' ? m : (m?.name || '');
 const memberBranch = m => typeof m === 'string' ? '' : (m?.branch || '');
+const memberTrait = m => typeof m === 'string' ? '' : (m?.trait || '');
+const memberMeta = m => [memberBranch(m)].map(v => (v || '').trim()).filter(v => v && v !== '-').join(' · ');
+function teamMembers(t){
+  const leader = (t.leader || '').trim();
+  const list = (Array.isArray(t.members) ? t.members : []).map(m => {
+    if(typeof m === 'string') return norm(m) === norm(leader) ? { name: m, trait: '팀장' } : m;
+    if(leader && norm(memberName(m)) === norm(leader) && !norm(memberTrait(m)).includes('팀장')){
+      return { ...m, trait: [memberTrait(m), '팀장'].filter(v => v && v !== '-').join(' ') };
+    }
+    return m;
+  });
+  if(leader && !list.some(m => norm(memberName(m)) === norm(leader))) list.unshift({ name: leader, trait: '팀장' });
+  return list;
+}
+function memberTraitType(m, teamSize = 0){
+  const trait = norm(memberTrait(m));
+  if(!trait || trait === '-') return '';
+  if(trait.includes('팀장') && teamSize >= 6) return 'leader';
+  if(trait.includes('1위') || trait.includes('1등')) return 'first';
+  if(trait.includes('막내')) return 'youngest';
+  return '';
+}
+function memberTraitIcon(m, teamSize = 0){
+  const type = memberTraitType(m, teamSize);
+  if(!type) return '';
+  const label = type === 'leader' ? '팀장' : type === 'first' ? '1등' : '막내';
+  const icon = {
+    leader:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h16"/><path d="M5.5 18l1-9 4 3 1.5-5 1.5 5 4-3 1 9"/></svg>',
+    first:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M9 12.5 7.5 21 12 18.5 16.5 21 15 12.5"/></svg>',
+    youngest:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3"/><path d="M18.4 5.6 16.3 7.7"/><path d="M21 12h-3"/><path d="M5.6 5.6 7.7 7.7"/><path d="M3 12h3"/><circle cx="12" cy="13" r="5"/></svg>'
+  }[type];
+  return '<span class="member-trait trait-' + type + '" title="' + label + '" aria-label="' + label + '">' + icon + '</span>';
+}
 const rate = t => t.target ? (t.result / t.target) * 100 : 0;
 const remain = t => Math.max((t.target || 0) - (t.result || 0), 0);
 const esc = s => (s || '').toString().replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
@@ -1206,7 +1269,7 @@ function totals(list = state.teams){
   return list.reduce((acc, t) => {
     acc.target += Number(t.target || 0);
     acc.result += Number(t.result || 0);
-    acc.members += Array.isArray(t.members) ? t.members.length : 0;
+    acc.members += teamMembers(t).length;
     return acc;
   }, { target:0, result:0, members:0 });
 }
@@ -1322,7 +1385,7 @@ function watchTeamSet(source, deltas){
 
 function filteredTeams(rankMap, source = state.teams, deltas = new Map()){
   const q = norm($('q').value);
-  let list = sortedTeams(source).filter(t => !q || norm(t.team).includes(q) || norm(t.leader).includes(q) || t.members.some(m => norm(memberName(m)).includes(q) || norm(memberBranch(m)).includes(q)));
+  let list = sortedTeams(source).filter(t => !q || norm(t.team).includes(q) || norm(t.leader).includes(q) || teamMembers(t).some(m => norm(memberName(m)).includes(q) || norm(memberBranch(m)).includes(q) || norm(memberTrait(m)).includes(q)));
   if(state.filter === 'top10') list = list.filter(t => rankMap.get(t.team) <= 10);
   if(state.filter === 'watch'){
     const watch = watchTeamSet(source, deltas);
@@ -1466,7 +1529,7 @@ function renderTimeTabs(){
   }
   const times = availableTimes();
   if(state.selectedTime !== 'latest' && !times.includes(state.selectedTime)) state.selectedTime = 'latest';
-  const buttons = [{ label:'최신', value:'latest' }].concat(times.slice(-8).reverse().map(t => ({ label:shortSheetTime(t), value:t })));
+  const buttons = [{ label:'최신', value:'latest' }].concat(times.slice(-5).reverse().map(t => ({ label:shortSheetTime(t), value:t })));
   const signature = buttons.map(item => item.value).join('|') + '::' + state.selectedTime;
   if(tabs.dataset.signature === signature) return;
   tabs.dataset.signature = signature;
@@ -1538,7 +1601,7 @@ function render(){
   renderTimeTabs();
   renderRising(risingTeams, risingDeltas, currentTime);
   updateFilterCounts(displayTeams, rankMap, deltas);
-  $('topTeamPill').textContent = ranked[0] ? '1위 ' + ranked[0].team + ' ' + ranked[0].rate.toFixed(1) + '%' : 'TOP 팀 없음';
+  $('topTeamPill').innerHTML = '챌린지 실적 기준<br>5명이하 : 7월 목표 1등 팀원, 6월 힘들었던 팀원 목표 10%가산<br>6명이상 : 추가로 팀장 실적 10% 가산';
   const dailyDeltas = dailyDeltaMap(displayTeams, currentTime);
   $('topList').innerHTML = ranked.slice(0,10).map((t,i) => rankCard(t, i, dailyDeltas.get(t.team))).join('');
   const teamParam = new URLSearchParams(location.search).get('team');
@@ -1685,7 +1748,7 @@ function rankCard(t, i, delta = { resultDelta:0, rankDelta:0 }) {
 }
 
 function teamCard(t, rank, highlight, delta = { resultDelta:0, rankDelta:0 }, status = null, dailyDelta = { resultDelta:0 }){
-  const p = rate(t), capped = Math.min(p, 100), members = t.members.filter(m => norm(memberName(m)) !== norm(t.leader));
+  const p = rate(t), capped = Math.min(p, 100), members = teamMembers(t);
   const ringColor = p >= 100 ? 'var(--accent)' : p < 10 ? 'var(--warn)' : 'var(--brand-2)';
   const statusMarkup = status ? `<span class="team-status ${status[0]}">${status[1]}</span>` : '';
   return `<article class="team-card ${highlight ? 'highlight' : ''}" id="team-${encodeURIComponent(t.team)}">
@@ -1696,16 +1759,26 @@ function teamCard(t, rank, highlight, delta = { resultDelta:0, rankDelta:0 }, st
     </button>
     <div class="team-progress"><span style="width:${capped}%;background:${ringColor}"></span></div>
     <div class="team-detail">
-      <div class="detail-grid">
-        <div><span>팀장</span><b>${esc(t.leader)}</b></div>
-        <div><span>목표</span><b>${fmt(t.target)}천원</b></div>
-        <div><span>실적</span><b>${fmt(t.result)}천원</b></div>
-        <div><span>55%까지</span><b>${targetRemainText(t, .55)}</b></div>
-        <div><span>60%까지</span><b>${targetRemainText(t, .60)}</b></div>
-        <div><span>65%까지</span><b>${targetRemainText(t, .65)}</b></div>
+      <div class="detail-grid detail-readable">
+        <div class="detail-panel info-panel">
+          <span class="detail-panel-title"><span class="detail-title-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 7.5h8"/><path d="M8 12h8"/><path d="M8 16.5h5"/><rect x="5" y="4" width="14" height="16" rx="3"/></svg></span>기본 정보</span>
+          <div class="detail-info-list">
+            <div class="detail-info-row"><span>팀장</span><b>${esc(t.leader)}</b></div>
+            <div class="detail-info-row"><span>목표</span><b>${fmt(t.target)}천원</b></div>
+            <div class="detail-info-row"><span>실적</span><b>${fmt(t.result)}천원</b></div>
+          </div>
+        </div>
+        <div class="detail-panel target-panel">
+          <span class="detail-panel-title"><span class="detail-title-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3"/><path d="M21.5 12h-3"/><path d="M12 21.5v-3"/><path d="M5.5 12h-3"/></svg></span>목표 구간까지</span>
+          <div class="target-steps">
+            <div class="target-step"><span>55%</span><b>${targetRemainText(t, .55)}</b></div>
+            <div class="target-step"><span>60%</span><b>${targetRemainText(t, .60)}</b></div>
+            <div class="target-step"><span>65%</span><b>${targetRemainText(t, .65)}</b></div>
+          </div>
+        </div>
       </div>
       <div class="team-actions"><button class="link-btn" type="button" onclick="shareTeam('${encodeURIComponent(t.team)}')">공유</button><button class="link-btn" type="button" onclick="toggleMembers(this)">팀원 ${members.length}명</button></div>
-      <div class="members">${members.map(m => '<span class="member"><b>' + esc(memberName(m)) + '</b>' + (memberBranch(m) ? '<small>' + esc(memberBranch(m)) + '</small>' : '') + '</span>').join('')}</div>
+      <div class="members">${members.map(m => '<span class="member"><span class="member-name-row"><b>' + esc(memberName(m)) + '</b>' + memberTraitIcon(m, members.length) + '</span>' + (memberMeta(m) ? '<small>' + esc(memberMeta(m)) + '</small>' : '') + '</span>').join('')}</div>
     </div>
   </article>`;
 }
@@ -1824,7 +1897,7 @@ function applyRows(rows){
   state.teams = merged;
   showNotice('', 'hide');
   setBasis(parseSheetTime(sheetTimeRaw));
-  $('syncState').textContent = '구글 시트 최신 데이터 반영';
+  $('syncState').textContent = '';
   render();
 }
 
@@ -1834,6 +1907,7 @@ function applyMemberRows(rows){
   const teamIndex = findColumn(headers, ['팀명','팀','team']);
   const nameIndex = findColumn(headers, ['이름','팀원','name','member']);
   const branchIndex = findColumn(headers, ['지점','소속지점','소속','branch','office']);
+  const traitIndex = findColumn(headers, ['특성','팀원특성','구분','trait','role']);
   const leaderIndex = findColumn(headers, ['팀장','leader']);
   if(teamIndex < 0 || nameIndex < 0) throw new Error('member columns');
   const map = new Map();
@@ -1841,26 +1915,35 @@ function applyMemberRows(rows){
     const team = (r[teamIndex] || '').trim();
     const name = (r[nameIndex] || '').trim();
     const branch = branchIndex >= 0 ? (r[branchIndex] || '').trim() : '';
+    const trait = traitIndex >= 0 ? (r[traitIndex] || '').trim() : '';
     if(!team || !name) return;
     const key = norm(team);
     if(!map.has(key)) map.set(key, { team, members: [], leader: '' });
     const item = map.get(key);
-    if(!item.members.some(m => norm(memberName(m)) === norm(name))) item.members.push({ name, branch });
+    const existing = item.members.find(m => norm(memberName(m)) === norm(name));
+    if(existing){
+      existing.branch = existing.branch || branch;
+      existing.trait = existing.trait || trait;
+    }else{
+      item.members.push({ name, branch, trait });
+    }
     if(leaderIndex >= 0 && r[leaderIndex]) item.leader = r[leaderIndex].trim();
   });
   if(!map.size) throw new Error('member no rows');
   state.teams = state.teams.map(t => {
     const item = map.get(norm(t.team));
     if(!item) return t;
-    return { ...t, members: item.members, leader: item.leader || t.leader || memberName(item.members[0]) };
+    const leader = item.leader || t.leader || memberName(item.members[0]);
+    return { ...t, members: teamMembers({ ...t, leader, members: item.members }), leader };
   });
   const existing = new Set(state.teams.map(t => norm(t.team)));
   map.forEach((item, key) => {
     if(existing.has(key)) return;
+    const leader = item.leader || memberName(item.members[0]);
     state.teams.push(sheetTeam({
       team: item.team,
-      leader: item.leader || memberName(item.members[0]),
-      members: item.members
+      leader,
+      members: teamMembers({ leader, members: item.members })
     }));
   });
 }
