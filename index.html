@@ -1171,7 +1171,7 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
   </section>
 
   <section id="rising">
-    <div class="section-title"><h2>당일 실적 TOP5</h2><span id="risingSummary" class="sr-only"></span></div>
+    <div class="section-title"><h2>당일 달성률 TOP5</h2><span id="risingSummary" class="sr-only"></span></div>
     <div class="rising-list" id="risingList"></div>
   </section>
 
@@ -1578,14 +1578,18 @@ function renderRising(currentList, deltas, timeRaw = activeTimeRaw()){
   const box = $('risingList');
   if(!box) return;
   const rows = currentList
-    .map(t => ({ ...t, delta:deltas.get(t.team) || { resultDelta:0, rankDelta:0 } }))
-    .sort((a,b) => b.delta.resultDelta - a.delta.resultDelta || rate(b) - rate(a))
+    .map(t => {
+      const delta = deltas.get(t.team) || { resultDelta:0, rankDelta:0 };
+      const dailyRate = Number(t.target || 0) ? (Number(delta.resultDelta || 0) / Number(t.target || 0)) * 100 : 0;
+      return { ...t, delta, dailyRate };
+    })
+    .sort((a,b) => b.dailyRate - a.dailyRate || b.delta.resultDelta - a.delta.resultDelta || rate(b) - rate(a))
     .slice(0,5);
-  $('risingSummary').textContent = timeRaw ? shortSheetTime(timeRaw) + ' 당일 실적' : '당일 실적';
+  $('risingSummary').textContent = timeRaw ? shortSheetTime(timeRaw) + ' 당일 달성률' : '당일 달성률';
   box.innerHTML = rows.map((t,i) => `<button class="rising-card" type="button" aria-label="상승 팀 상세 보기" onclick="focusTeam('${encodeURIComponent(t.team)}')">
     <div class="rising-team">${esc(t.team)}</div>
-    <div class="rising-delta">${t.delta.resultDelta > 0 ? '+' : ''}${fmt(t.delta.resultDelta)}천원</div>
-    <div class="rising-meta">현재 ${rate(t).toFixed(1)}%</div>
+    <div class="rising-delta">${t.dailyRate > 0 ? '+' : ''}${t.dailyRate.toFixed(1)}%p</div>
+    <div class="rising-meta">당일 ${deltaText(t.delta.resultDelta || 0)}</div>
   </button>`).join('');
 }
 
