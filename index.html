@@ -1085,6 +1085,7 @@ h1,.mobile-app h1{color:#fff!important;font-weight:900!important;letter-spacing:
 .target-step b{display:block;margin-top:7px!important;color:var(--dash-text)!important;font-size:clamp(13px,1.7vw,16px)!important;font-weight:920!important;line-height:1.2;white-space:nowrap;letter-spacing:0}
 @media (max-width:640px){.detail-grid.detail-readable{grid-template-columns:1fr!important}.target-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.target-step{padding-left:7px!important;padding-right:7px!important}.target-step b{font-size:13px!important}}
 .trend-toggle summary{font-weight:850!important}.line-path{stroke:var(--fin-blue)!important}.line-fill{fill:var(--fin-blue)!important}.line-dot{stroke:var(--fin-blue)!important}.line-dot.is-latest{fill:var(--fin-blue)!important}
+.line-axis-label{fill:var(--dash-sub);font-size:9px;font-weight:800;opacity:.72}
 .trend-value.is-percent:after,.trend-delta.is-percent:after{content:""!important;margin:0!important}
 .bottom-nav{background:rgba(255,255,255,.82)!important;backdrop-filter:blur(22px) saturate(1.2)!important;border-radius:28px!important}.dark .bottom-nav{background:rgba(21,27,37,.82)!important}
 .nav-inner button.active{background:#111827!important;color:#fff!important}.dark .nav-inner button.active{background:#f8fafc!important;color:#111827!important}
@@ -1734,6 +1735,13 @@ function renderTrend(){
       graphMin = Math.max(0, center - 2.5);
       graphMax = Math.min(100, center + 2.5);
     }
+    graphMin = Math.max(0, Math.floor(graphMin / 5) * 5);
+    graphMax = Math.min(100, Math.ceil(graphMax / 5) * 5);
+    if(graphMax - graphMin < 5) graphMax = Math.min(100, graphMin + 5);
+    if((graphMax - graphMin) % 10 !== 0){
+      if(graphMax + 5 <= 100) graphMax += 5;
+      else graphMin = Math.max(0, graphMin - 5);
+    }
     if(graphMax <= graphMin) graphMax = graphMin + 1;
   }
   const latest = points[points.length - 1];
@@ -1759,11 +1767,17 @@ function renderTrend(){
   });
   const linePath = coords.map((p, i) => `${i ? 'L' : 'M'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
   const fillPath = coords.length ? `M ${coords[0].x.toFixed(1)} ${bottom} ${linePath} L ${coords[coords.length - 1].x.toFixed(1)} ${bottom} Z` : '';
+  const graphMid = (graphMax + graphMin) / 2;
+  const percentGuides = isTeamTrend ? `
+      <text class="line-axis-label" x="${right}" y="${top - 6}" text-anchor="end">${Math.round(graphMax)}%</text>
+      <text class="line-axis-label" x="${right}" y="${((top + bottom) / 2) - 6}" text-anchor="end">${Math.round(graphMid)}%</text>
+      <text class="line-axis-label" x="${right}" y="${bottom - 6}" text-anchor="end">${Math.round(graphMin)}%</text>` : '';
   const graph = `<div class="line-graph">
     <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${selectedTeam ? esc(selectedTeam) : '전체'} 실적 선그래프">
       <line class="line-grid" x1="${left}" y1="${top}" x2="${right}" y2="${top}"></line>
       <line class="line-grid" x1="${left}" y1="${(top + bottom) / 2}" x2="${right}" y2="${(top + bottom) / 2}"></line>
       <line class="line-grid" x1="${left}" y1="${bottom}" x2="${right}" y2="${bottom}"></line>
+      ${percentGuides}
       <path class="line-fill" d="${fillPath}"></path>
       <path class="line-path" d="${linePath}"></path>
       ${coords.map((p,i) => `<circle class="line-dot ${i === coords.length - 1 ? 'is-latest' : ''}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4.5"></circle>`).join('')}
