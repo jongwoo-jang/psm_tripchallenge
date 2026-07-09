@@ -1,105 +1,145 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#10233f">
-<meta name="description" content="PSM소통트립 친구데이 이벤트 팀별 진척 현황">
-<meta property="og:title" content="PSM 친구데이">
-<meta property="og:description" content="202607090900 기준 친구데이 이벤트 팀별 진척과 예상 지급액을 확인하세요.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="preview.png">
-<meta name="twitter:card" content="summary_large_image">
-<title>PSM 친구데이</title>
-<style>
-:root{color-scheme:light;--bg:#f5f7fa;--card:#fff;--text:#111827;--sub:#667085;--line:#e3e8ef;--blue:#2d6cdf;--green:#00a86b;--amber:#d79b24;--red:#ef4444;--shadow:0 14px 34px rgba(20,31,47,.08);--bottom:78px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",Arial,sans-serif;padding:0 0 calc(var(--bottom) + env(safe-area-inset-bottom));letter-spacing:0}button{font:inherit;cursor:pointer}
-.app{width:min(1120px,100%);margin:0 auto;padding:18px 16px 28px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:11px;min-width:0}.brand-mark{width:38px;height:38px;border-radius:13px;background:#111827;color:#fff;display:grid;place-items:center;box-shadow:var(--shadow)}.brand-mark svg{width:22px;height:22px}.brand-title{font-size:15px;font-weight:850}.brand-sub{margin-top:2px;color:var(--sub);font-size:12px;font-weight:700}.refresh-btn{height:40px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.86);padding:0 12px;font-weight:800;color:var(--text)}
-.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}.hero-main{min-height:228px;border-radius:26px;background:linear-gradient(135deg,#10233f 0%,#1f6ed4 58%,#13a474 128%);color:#fff;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}.hero-main:after{content:"";position:absolute;right:-56px;top:-54px;width:180px;height:180px;border:1px solid rgba(255,255,255,.24);border-radius:50%}.eyebrow{font-size:12px;font-weight:900;color:rgba(255,255,255,.72)}h1{position:relative;margin:8px 0 10px;font-size:38px;line-height:1.04;font-weight:950}.hero-copy{position:relative;margin:0;color:rgba(255,255,255,.84);font-size:14px;font-weight:700;line-height:1.6}.hero-pills{position:relative;display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.13);border-radius:999px;padding:8px 10px;color:#fff;font-size:12px;font-weight:850}
-.summary{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);min-height:106px}.metric.primary{grid-column:1/3;min-height:118px}.metric-label{color:var(--sub);font-size:12px;font-weight:850}.metric-value{margin-top:10px;font-size:31px;line-height:1;font-weight:950}.metric-value small{font-size:13px;color:var(--sub);font-weight:850;margin-left:3px}.metric-note{margin-top:10px;color:var(--sub);font-size:12px;font-weight:750}.progress-line{height:10px;border-radius:999px;background:#edf2f7;overflow:hidden;margin-top:14px}.progress-line span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green))}
-.section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:22px 2px 11px}.section-title h2{margin:0;font-size:18px;font-weight:900}.section-title span{font-size:12px;color:var(--sub);font-weight:800}.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.rule-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)}.rule-card b{display:block;font-size:22px;font-weight:950}.rule-card span{display:block;margin-top:5px;color:var(--sub);font-size:12px;font-weight:760}.rule-card:nth-child(1){border-top:4px solid var(--blue)}.rule-card:nth-child(2){border-top:4px solid var(--amber)}.rule-card:nth-child(3){border-top:4px solid var(--green)}
-.toolbar{position:sticky;top:0;z-index:20;margin:16px -16px 10px;padding:12px 16px;background:rgba(245,247,250,.92);border-bottom:1px solid rgba(220,227,235,.78);backdrop-filter:blur(16px)}.search-row{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:8px}.search,.sort-select{height:46px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:none;color:var(--text)}.search{display:flex;align-items:center;padding:0 13px}.search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:15px;font-weight:650}.sort-select{padding:0 12px;font-weight:800}
-.team-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.team-card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}.team-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:18px 18px 12px}.team-title{font-size:15px;font-weight:850;line-height:1.35;word-break:keep-all}.team-meta{margin-top:5px;color:var(--sub);font-size:12px;font-weight:720}.tier-badge{height:28px;border-radius:999px;padding:0 10px;display:inline-flex;align-items:center;background:#eef2f7;color:var(--sub);font-size:12px;font-weight:900}.tier-badge.tier12{background:rgba(45,108,223,.12);color:var(--blue)}.tier-badge.tier15{background:rgba(215,155,36,.16);color:var(--amber)}.tier-badge.tier18{background:rgba(0,168,107,.13);color:var(--green)}
-.team-body{padding:0 18px 16px}.team-score{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.team-score b{font-size:28px;line-height:1;font-weight:950}.team-score span{color:var(--sub);font-size:12px;font-weight:800}.team-progress{height:9px;border-radius:999px;background:#edf2f7;overflow:hidden;margin-top:12px}.team-progress span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green))}.team-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.stat{background:#f8fafc;border:1px solid #eef2f7;border-radius:14px;padding:10px}.stat span{display:block;color:var(--sub);font-size:11px;font-weight:760}.stat b{display:block;margin-top:4px;font-size:13px;font-weight:900;white-space:nowrap}.empty{display:none;text-align:center;color:var(--sub);font-weight:850;padding:42px 10px;background:var(--card);border:1px dashed var(--line);border-radius:20px}
-.bottom-nav{position:fixed;left:50%;right:auto;transform:translateX(-50%);bottom:12px;z-index:40;width:min(440px,calc(100% - 24px));border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.84);backdrop-filter:blur(22px) saturate(1.2);box-shadow:0 12px 30px rgba(20,31,47,.14);padding:8px}.nav-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.nav-inner button{height:42px;border:0;border-radius:15px;background:transparent;color:var(--sub);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:4px}.nav-inner button.active{background:#111827;color:#fff}.nav-inner svg{width:16px;height:16px;flex:none}
-@media (max-width:860px){.app{padding:14px 16px 24px}.hero{display:block}.summary{grid-template-columns:1fr 1fr;margin-top:12px}.metric.primary{grid-column:1/3}.rule-grid{grid-template-columns:1fr}.team-list{grid-template-columns:1fr}.search-row{grid-template-columns:1fr}.sort-select{width:100%}h1{font-size:31px}.hero-main{min-height:auto;padding:21px}.team-stats{grid-template-columns:repeat(2,1fr)}}
-/* friendday-rank-layout */
-.hero{grid-template-columns:.9fr 1.1fr}.hero-main{min-height:214px}.summary{grid-template-columns:1fr 1fr 1fr}.metric.primary{grid-column:1/4}.metric.rank-focus{background:#111827;color:#fff;border-color:#111827}.metric.rank-focus .metric-label,.metric.rank-focus .metric-note{color:rgba(255,255,255,.72)}.rank-podium{display:grid;grid-template-columns:1.08fr .96fr .96fr;gap:10px;margin-top:12px}.podium-card{position:relative;min-height:132px;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:16px;overflow:hidden}.podium-card:before{content:"";position:absolute;right:-32px;top:-36px;width:104px;height:104px;border-radius:50%;background:rgba(45,108,223,.1)}.podium-rank{min-width:58px;height:48px;padding:0 10px;border-radius:17px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:950}.podium-card.top1{background:linear-gradient(135deg,#111827,#1f6ed4);color:#fff;border-color:transparent}.podium-card.top1:before{background:rgba(255,255,255,.16)}.podium-card.top1 .podium-rank{background:#fff;color:#111827}.podium-team{position:relative;margin-top:13px;font-size:16px;font-weight:950;line-height:1.28;word-break:keep-all}.podium-rate{position:relative;margin-top:8px;font-size:28px;line-height:1;font-weight:950}.podium-meta{position:relative;margin-top:7px;color:var(--sub);font-size:12px;font-weight:800}.podium-card.top1 .podium-meta{color:rgba(255,255,255,.76)}.team-list{grid-template-columns:1fr}.team-card{display:grid;grid-template-columns:94px minmax(0,1fr);align-items:stretch}.rank-block{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#f8fafc;border-right:1px solid var(--line);padding:14px 10px}.rank-num{width:68px;height:58px;border-radius:20px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:950}.rank-label{color:var(--sub);font-size:11px;font-weight:900}.team-content{min-width:0}.team-head{grid-template-columns:minmax(0,1fr) auto;padding-bottom:8px}.team-body{padding-bottom:18px}.team-score b{font-size:34px}.team-score span{font-size:13px}.team-stats{grid-template-columns:1.2fr 1fr 1fr 1fr}.tier-badge{height:30px;border-radius:12px}.section-title.rank-title{align-items:center}.section-title.rank-title h2{font-size:20px}@media (max-width:860px){.summary{grid-template-columns:1fr 1fr}.metric.primary{grid-column:1/3}.rank-podium{grid-template-columns:1fr}.team-card{grid-template-columns:76px minmax(0,1fr)}.rank-num{width:50px;height:50px;border-radius:17px;font-size:18px}.team-stats{grid-template-columns:repeat(2,1fr)}.team-score{align-items:flex-start;flex-direction:column}.team-score b{font-size:31px}}
-.friend-hero-main{min-height:560px;background:linear-gradient(180deg,#fff 0%,#fff 72%,#082f63 72%,#04264f 100%);color:var(--text);border:1px solid #d7e5ff;border-radius:28px;display:block;text-align:center;padding:24px 24px 30px;overflow:hidden}.friend-hero-main:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 13% 18%,rgba(255,44,109,.14) 0 34px,transparent 35px),radial-gradient(circle at 86% 18%,rgba(45,108,223,.16) 0 38px,transparent 39px),linear-gradient(180deg,rgba(255,255,255,.4),transparent 48%);pointer-events:none}.friend-hero-main:after{display:none}.poster-ribbon{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:260px;height:48px;margin:0 auto 14px;border-radius:10px;background:linear-gradient(180deg,#ff2b25,#d80f14);color:#fff;font-size:23px;font-weight:950;box-shadow:0 10px 18px rgba(216,15,20,.22);text-shadow:0 2px 0 rgba(0,0,0,.18)}.poster-ribbon:before,.poster-ribbon:after{content:"";position:absolute;top:8px;border-top:20px solid #c50b12;border-bottom:20px solid #c50b12}.poster-ribbon:before{right:100%;border-left:22px solid transparent}.poster-ribbon:after{left:100%;border-right:22px solid transparent}.poster-title{position:relative;display:flex;align-items:baseline;justify-content:center;gap:16px;line-height:.95}.poster-title span{font-size:72px;font-weight:950;color:#1557d4;letter-spacing:0}.poster-title strong{font-size:66px;font-weight:950;color:#050505}.poster-script{position:relative;margin:14px 0 20px;color:#e91e63;font-size:48px;font-weight:950;line-height:1;font-family:\"Segoe Print\",\"Comic Sans MS\",Pretendard,sans-serif;transform:rotate(-2deg);text-decoration:underline;text-decoration-thickness:5px;text-underline-offset:12px}.poster-cards{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:930px;margin:0 auto}.poster-card{position:relative;min-height:250px;border-radius:25px;padding:44px 24px 22px;text-align:left;color:#fff;box-shadow:0 16px 34px rgba(7,33,73,.2),inset 0 0 0 3px rgba(255,255,255,.7)}.poster-blue{background:linear-gradient(180deg,#075cd6,#003b97)}.poster-pink{background:linear-gradient(180deg,#f42183,#bf0955)}.poster-card-no{position:absolute;left:50%;top:-28px;transform:translateX(-50%);width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:inherit;border:4px solid rgba(255,255,255,.88);font-size:34px;font-weight:950;box-shadow:0 8px 18px rgba(0,0,0,.18)}.poster-card h2{margin:0;font-size:29px;font-weight:950;text-shadow:0 2px 0 rgba(0,0,0,.18)}.poster-card h3{margin:8px 0 20px;color:#ffeb1a;font-size:36px;line-height:1;font-weight:950;text-shadow:0 3px 0 rgba(0,0,0,.18)}.poster-card ul{list-style:none;margin:0;padding:16px 18px;background:#fff;border-radius:20px;color:#111827}.poster-card li{display:flex;align-items:center;gap:12px;margin:10px 0;font-size:17px;font-weight:850}.poster-card li span{min-width:52px;border-radius:999px;background:#0749a8;color:#fff;text-align:center;padding:5px 9px;font-size:14px}.poster-pink li span{background:#d81b60}.reward-rows{display:grid;gap:10px;background:#fff;border-radius:20px;padding:16px}.reward-rows span{display:flex;align-items:center;justify-content:space-between;border:1px solid #dfe7f5;border-radius:14px;background:#fbfdff;padding:11px 14px}.reward-rows b{color:#0f4ab8;font-size:27px;font-weight:950}.reward-rows em{font-style:normal;background:#0f4ab8;color:#ffeb1a;border-radius:9px;padding:7px 10px;font-size:20px;font-weight:950}.poster-pink .reward-rows b{color:#d81b60}.poster-pink .reward-rows em{background:#d81b60}.balloon{position:absolute;top:42px;width:98px;height:108px;border-radius:52% 52% 48% 48%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;line-height:1.25;font-weight:950;z-index:1;box-shadow:inset 10px 13px 18px rgba(255,255,255,.34),0 10px 18px rgba(0,0,0,.1)}.balloon:after{content:"";position:absolute;left:50%;top:100%;width:1px;height:82px;background:rgba(100,116,139,.28)}.balloon-left{left:26px;background:#f06292;transform:rotate(-9deg)}.balloon-right{right:26px;background:#3b63df;transform:rotate(9deg)}.confetti i{position:absolute;z-index:1;width:8px;height:18px;border-radius:2px;background:#ffcc00;transform:rotate(24deg)}.confetti i:nth-child(1){left:18%;top:26px;background:#00a86b}.confetti i:nth-child(2){left:27%;top:72px;background:#1557d4;transform:rotate(-28deg)}.confetti i:nth-child(3){left:11%;top:150px;background:#ff4b91}.confetti i:nth-child(4){right:18%;top:38px;background:#1557d4}.confetti i:nth-child(5){right:10%;top:148px;background:#37b24d}.confetti i:nth-child(6){right:28%;top:124px;background:#ff8a00}.confetti i:nth-child(7){left:42%;top:170px;background:#ffcc00}.confetti i:nth-child(8){right:40%;top:68px;background:#ff4b91}.hero-pills{display:none}@media (max-width:860px){.friend-hero-main{min-height:auto;padding:20px 14px 24px;background:linear-gradient(180deg,#fff 0%,#fff 78%,#082f63 78%,#04264f 100%)}.poster-ribbon{min-width:210px;height:42px;font-size:19px}.poster-title{display:block}.poster-title span{display:block;font-size:54px}.poster-title strong{display:block;font-size:45px;margin-top:4px}.poster-script{font-size:35px;margin:12px 0 22px}.poster-cards{grid-template-columns:1fr;gap:34px}.poster-card{min-height:0;padding:38px 18px 18px}.poster-card h2{font-size:24px}.poster-card h3{font-size:30px}.poster-card li{font-size:15px}.reward-rows b{font-size:23px}.reward-rows em{font-size:17px}.balloon{display:none}.confetti i:nth-child(n+5){display:none}}
-</style>
-<style id="friendday-poster-fix">
-.hero{display:block}.hero>.summary{margin-top:14px}.poster-cards{max-width:930px}.friend-hero-main{width:100%}
-@media (min-width:861px){.summary{grid-template-columns:2fr 1fr 1fr}.metric.primary{grid-column:auto}.poster-card{min-height:238px}}
-</style>
-<style id="friendday-polish">
-.friend-hero-main{min-height:520px;padding:26px 32px 32px;background:linear-gradient(180deg,#fff 0%,#fff 69%,#073568 69%,#052a52 100%);border-color:#dbe7fb}.poster-ribbon{height:42px;min-width:236px;margin-bottom:12px;font-size:20px;border-radius:9px}.poster-title{gap:13px}.poster-title span{font-size:64px;letter-spacing:-.01em}.poster-title strong{font-size:58px;letter-spacing:-.01em}.poster-script{margin:10px 0 22px;font-size:43px;text-decoration-thickness:4px;text-underline-offset:10px}.poster-cards{grid-template-columns:1.04fr .96fr;gap:16px;max-width:880px}.poster-card{min-height:226px;border-radius:22px;padding:24px 22px 20px}.poster-card-no{display:none}.poster-card h2{font-size:24px}.poster-card h3{margin:7px 0 16px;font-size:31px}.poster-card ul{padding:14px 16px;border-radius:17px}.poster-card li{margin:8px 0;font-size:15px}.poster-card li span{min-width:48px;font-size:13px}.reward-rows{gap:8px;padding:14px;border-radius:17px}.reward-rows span{padding:9px 12px}.reward-rows b{font-size:24px}.reward-rows em{font-size:17px;padding:6px 9px}.balloon{width:84px;height:94px;font-size:12px}.balloon-left{left:22px}.balloon-right{right:22px}.top10-board{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.top10-row{display:grid;grid-template-columns:92px minmax(0,1fr) 86px 190px;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:var(--shadow)}.top10-row.top-medal{border-color:#d9e7ff;background:linear-gradient(90deg,#f8fbff,#fff)}.top10-rank{height:40px;border-radius:14px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:950;white-space:nowrap}.top-medal .top10-rank{background:#1557d4}.top10-team{min-width:0}.top10-team b{display:block;font-size:15px;font-weight:950;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top10-team span{display:block;margin-top:3px;color:var(--sub);font-size:12px;font-weight:800}.top10-rate{text-align:right;color:#1557d4;font-size:22px;font-weight:950}.top10-meta{text-align:right;color:var(--sub);font-size:12px;font-weight:850;white-space:nowrap}.rank-podium .podium-card{display:none}@media (max-width:860px){.friend-hero-main{padding:19px 13px 22px}.poster-ribbon{min-width:200px;height:38px;font-size:17px}.poster-title span{font-size:47px}.poster-title strong{font-size:40px}.poster-script{font-size:31px;margin:8px 0 20px}.poster-cards{gap:16px}.poster-card{border-radius:20px;padding:22px 16px 17px}.poster-card h2{font-size:21px}.poster-card h3{font-size:27px}.top10-row{grid-template-columns:72px minmax(0,1fr) 68px;gap:9px;padding:11px}.top10-meta{grid-column:2/4;text-align:left}.top10-rank{height:38px;font-size:13px;border-radius:13px}.top10-rate{font-size:19px}.top10-team b{font-size:14px}.top10-team span{font-size:11px}}
-.top10-empty{background:#fff;border:1px dashed var(--line);border-radius:18px;padding:24px;text-align:center;color:var(--sub);font-size:14px;font-weight:850;box-shadow:var(--shadow)}.rank-num.pending{background:#eef2f7;color:#667085;font-size:14px}
-
-.team-card{grid-template-columns:112px minmax(0,1fr)}.rank-block{gap:8px;padding:16px 12px}.rank-num{width:82px;height:56px;border-radius:18px;line-height:1.08;text-align:center;word-break:keep-all}.rank-num.pending{font-size:15px;letter-spacing:0}.rank-label{font-size:12px;line-height:1.2;white-space:nowrap}.team-title{font-size:16px}.team-meta{font-size:12px}@media (max-width:860px){.team-card{grid-template-columns:88px minmax(0,1fr)}.rank-block{padding:13px 8px}.rank-num{width:68px;height:48px;border-radius:16px;font-size:16px}.rank-num.pending{font-size:13px}.rank-label{font-size:10.5px}.team-title{font-size:14.5px}}
-</style>
-<style id="friendday-reference-style">
-.friend-hero-main{min-height:720px;background:linear-gradient(180deg,#fff 0%,#fff 70%,#e7f7ff 70%,#05316a 100%);padding:26px 32px 36px}.poster-ribbon{height:46px;min-width:260px;background:linear-gradient(180deg,#ff1919,#d70b13);font-size:22px}.poster-title span{font-size:72px;color:#1557d4;text-shadow:0 4px 0 rgba(0,0,0,.08)}.poster-title strong{font-size:66px;color:#050505;text-shadow:0 4px 0 rgba(0,0,0,.08)}.poster-script{font-size:50px;color:#e91e63;margin:12px 0 26px;text-decoration:none}.poster-script:after{content:"";display:block;width:min(430px,72%);height:5px;margin:8px auto 0;background:#e91e63;border-radius:999px;transform:rotate(-3deg)}.poster-board{position:relative;max-width:850px;margin:0 auto;border-radius:30px;background:linear-gradient(180deg,#075dcc,#003d99);padding:30px 24px 24px;color:#fff;box-shadow:0 18px 36px rgba(0,46,120,.28),inset 0 0 0 4px rgba(255,255,255,.72),inset 0 0 0 8px rgba(91,166,255,.55)}.poster-board:after{content:"✈";position:absolute;right:76px;top:34px;color:#fff;font-size:34px;transform:rotate(12deg);text-shadow:0 3px 0 rgba(0,0,0,.18)}.board-title{font-size:47px;line-height:1;font-weight:950;text-align:center;text-shadow:0 4px 0 rgba(0,0,0,.2)}.board-subtitle{margin:10px 0 22px;color:#ffed00;font-size:58px;line-height:1;font-weight:950;text-align:center;text-shadow:0 5px 0 rgba(0,0,0,.22)}.board-content{border-radius:24px;background:rgba(255,255,255,.96);padding:22px 24px 20px;color:#111827;box-shadow:inset 0 0 0 2px rgba(210,224,244,.9)}.board-info{display:grid;grid-template-columns:1fr 1fr;gap:11px 18px;margin-bottom:17px}.board-info p{display:flex;align-items:center;gap:12px;margin:0;font-size:20px;font-weight:900}.board-info span,.board-condition span{min-width:62px;border-radius:999px;background:#064ba8;color:#fff;text-align:center;padding:7px 10px;font-size:16px;font-weight:950}.board-info b{font-size:22px}.board-rewards{display:grid;gap:9px}.board-rewards div{display:grid;grid-template-columns:120px 1fr 170px;align-items:center;gap:10px;min-height:62px;border:2px solid #d9e4f4;border-radius:14px;background:#fbfdff;padding:8px 12px}.board-rewards strong{color:#123db7;font-size:40px;line-height:1;font-weight:950}.board-rewards em{font-style:normal;color:#123db7;font-size:22px;font-weight:950}.board-rewards b{justify-self:end;border-radius:10px;background:#064ba8;color:#ffed00;padding:9px 14px;font-size:26px;font-weight:950}.board-condition{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:11px;border:2px solid #d9e4f4;border-radius:14px;background:#fff;padding:11px 14px}.board-condition b{font-size:24px;font-weight:950}.board-condition b::after{content:" 55%";color:#ef1b1b}.poster-cards,.poster-card,.poster-card-no,.reward-rows{display:none!important}@media (max-width:860px){.friend-hero-main{min-height:auto;padding:20px 13px 24px;background:linear-gradient(180deg,#fff 0%,#fff 76%,#e7f7ff 76%,#05316a 100%)}.poster-ribbon{min-width:210px;height:40px;font-size:18px}.poster-title span{font-size:52px}.poster-title strong{font-size:44px}.poster-script{font-size:34px;margin:8px 0 22px}.poster-board{border-radius:24px;padding:22px 14px 16px}.poster-board:after{right:24px;top:24px;font-size:25px}.board-title{font-size:31px}.board-subtitle{font-size:40px;margin:8px 0 16px}.board-content{padding:16px 13px}.board-info{grid-template-columns:1fr;gap:8px}.board-info p{gap:10px;font-size:16px}.board-info span,.board-condition span{min-width:54px;font-size:14px;padding:6px 9px}.board-info b{font-size:17px}.board-rewards div{grid-template-columns:82px 48px 1fr;min-height:54px;padding:7px 8px}.board-rewards strong{font-size:30px}.board-rewards em{font-size:16px}.board-rewards b{font-size:18px;padding:8px 9px}.board-condition{gap:8px}.board-condition b{font-size:18px}}
-@media (min-width:861px){.friend-hero-main{min-height:650px}.poster-ribbon{height:42px;font-size:20px}.poster-title span{font-size:66px}.poster-title strong{font-size:60px}.poster-script{font-size:44px;margin:9px 0 20px}.poster-board{max-width:800px;padding:24px 22px 20px}.board-title{font-size:40px}.board-subtitle{font-size:50px;margin:8px 0 18px}.board-content{padding:18px 20px 17px}.board-info{gap:9px 16px;margin-bottom:13px}.board-info p{font-size:17px}.board-info b{font-size:19px}.board-rewards{gap:8px}.board-rewards div{min-height:54px;grid-template-columns:106px 1fr 154px}.board-rewards strong{font-size:34px}.board-rewards em{font-size:20px}.board-rewards b{font-size:22px}.board-condition{margin-top:9px;padding:9px 12px}.board-condition b{font-size:21px}}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
-<main class="app">
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5 12 16l3.5-3.5M12 21s-7-4.2-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.8-7 10-7 10Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div><div class="brand-title">PSM 친구데이</div><div class="brand-sub" id="basisText">데이터 준비 중</div></div>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <style>
+    @keyframes fd-spin { to { transform: rotate(360deg); } }
+    body { margin: 0; }
+  </style>
+</helmet>
+
+<div style="--accent:{{accent}}; background:#f4f6fb; min-height:100vh; color:#0f172a; font-family:'Pretendard','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<main data-screen-label="PSM 친구데이" style="width:min(1120px,100%); margin:0 auto; padding:20px 18px 110px; box-sizing:border-box;">
+
+  <header style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px;">
+    <div style="display:flex; align-items:center; gap:12px; min-width:0;">
+      <div style="width:40px; height:40px; border-radius:14px; background:#0f2547; color:#fff; display:grid; place-items:center; flex:none;">
+        <svg viewBox="0 0 24 24" fill="none" style="width:22px;height:22px;"><path d="M8.5 12.5 12 16l3.5-3.5M12 21s-7-4.2-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.8-7 10-7 10Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+      <div style="min-width:0;">
+        <div style="font-size:16px; font-weight:800;">PSM 친구데이</div>
+        <div style="margin-top:2px; color:#64748b; font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{basisText}}</div>
+      </div>
     </div>
-    <button class="refresh-btn" id="refreshBtn" type="button">새로고침</button>
+    <button type="button" onClick="{{onRefresh}}" disabled="{{refreshing}}" style="height:42px; padding:0 16px; border:1px solid #e2e8f0; border-radius:14px; background:#fff; font-weight:700; font-size:13px; color:#0f172a; display:flex; align-items:center; gap:8px; opacity:{{refreshOpacity}}; flex:none;">
+      <svg viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;animation:{{refreshSpin}};"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      {{refreshLabel}}
+    </button>
   </header>
 
-  <section class="hero" id="home">
-    <article class="hero-main friend-hero-main">
-      <div class="confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="balloon balloon-left">함께하면<br>더 즐거워요!</div>
-      <div class="balloon balloon-right">우리 함께<br>1등 가보자!</div>
-      <div class="poster-ribbon">7월 9일 - 7월 12일</div>
-      <div class="poster-title">
-        <span>PSM</span>
-        <strong>친구데이</strong>
-      </div>
-      <div class="poster-script">친구들 모여라!</div>
-      <section class="poster-board">
-        <div class="board-title">PSM 소통트립</div>
-        <div class="board-subtitle">친구들 모여라</div>
-        <div class="board-content">
-          <div class="board-info">
-            <p><span>대상</span><b>소통트립 그룹</b></p>
-            <p><span>기간</span><b>7.9(목) - 7.12(일)</b></p>
-            <p><span>내용</span><b>인보험 합산 달성률</b></p>
-            <p><span>시상</span><b>여행경비 추가 시상</b></p>
-          </div>
-          <div class="board-rewards">
-            <div><strong>12%</strong><em>달성</em><b>인당 +5만</b></div>
-            <div><strong>15%</strong><em>달성</em><b>인당 +7만</b></div>
-            <div><strong>18%</strong><em>달성</em><b>인당 +10만</b></div>
-          </div>
-          <div class="board-condition"><span>기본조건</span><b>1일 - 19일</b></div>
+  <section data-screen-label="히어로" style="position:relative; border-radius:28px; border:1px solid #dbe7fb; background:linear-gradient(180deg,#ffffff 0%,#ffffff 56%,#0b2f5e 56%,#071f42 100%); overflow:hidden; padding:clamp(24px,4vw,36px) clamp(18px,4vw,32px) clamp(28px,4vw,34px); text-align:center; margin-bottom:14px;">
+    <sc-if value="{{showConfetti}}" hint-placeholder-val="{{true}}">
+      <div aria-hidden="true" style="position:absolute; top:18px; left:14%; width:8px; height:18px; border-radius:2px; background:#16a34a; transform:rotate(20deg);"></div>
+      <div aria-hidden="true" style="position:absolute; top:44px; left:24%; width:8px; height:18px; border-radius:2px; background:#0d54c9; transform:rotate(-24deg);"></div>
+      <div aria-hidden="true" style="position:absolute; top:24px; right:14%; width:8px; height:18px; border-radius:2px; background:#dc2626; transform:rotate(-16deg);"></div>
+      <div aria-hidden="true" style="position:absolute; top:52px; right:24%; width:8px; height:18px; border-radius:2px; background:#d97706; transform:rotate(18deg);"></div>
+    </sc-if>
+
+    <div style="position:relative; display:inline-flex; align-items:center; justify-content:center; height:38px; padding:0 18px; border-radius:999px; background:#dc2626; color:#fff; font-weight:800; font-size:clamp(13px,1.8vw,15px); margin-bottom:14px; box-shadow:0 8px 16px rgba(220,38,38,.25);">7월 9일 – 7월 12일</div>
+
+    <div style="position:relative; display:flex; flex-wrap:wrap; align-items:baseline; justify-content:center; gap:12px; line-height:.95;">
+      <span style="font-size:clamp(38px,7vw,60px); font-weight:800; color:var(--accent);">PSM</span>
+      <strong style="font-size:clamp(34px,6.2vw,54px); font-weight:800; color:#0f172a;">친구데이</strong>
+    </div>
+    <p style="position:relative; margin:12px 0 22px; color:#dc2626; font-size:clamp(19px,3.2vw,27px); font-weight:800;">친구들 모여라!</p>
+
+    <div style="position:relative; max-width:820px; margin:0 auto; border-radius:26px; background:linear-gradient(180deg,#0d54c9,#08316e); padding:clamp(20px,3vw,26px) clamp(16px,3vw,24px) clamp(18px,3vw,22px); color:#fff; box-shadow:0 18px 34px rgba(4,26,63,.32), inset 0 0 0 3px rgba(255,255,255,.5);">
+      <div style="font-size:clamp(21px,3.4vw,27px); font-weight:800;">PSM 소통트립</div>
+      <div style="margin:8px 0 18px; color:#ffd400; font-size:clamp(26px,4.6vw,36px); font-weight:800;">친구들 모여라</div>
+
+      <div style="border-radius:20px; background:#fff; padding:clamp(16px,2.4vw,20px); color:#0f172a;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px 16px; margin-bottom:16px; text-align:left;">
+          <p style="display:flex; align-items:center; gap:10px; margin:0; font-size:clamp(14px,1.8vw,16px); font-weight:800;"><span style="min-width:52px; border-radius:999px; background:#0d54c9; color:#fff; text-align:center; padding:6px 8px; font-size:12px; font-weight:800;">대상</span>소통트립 그룹</p>
+          <p style="display:flex; align-items:center; gap:10px; margin:0; font-size:clamp(14px,1.8vw,16px); font-weight:800;"><span style="min-width:52px; border-radius:999px; background:#0d54c9; color:#fff; text-align:center; padding:6px 8px; font-size:12px; font-weight:800;">기간</span>7.9(목) - 7.12(일)</p>
+          <p style="display:flex; align-items:center; gap:10px; margin:0; font-size:clamp(14px,1.8vw,16px); font-weight:800;"><span style="min-width:52px; border-radius:999px; background:#0d54c9; color:#fff; text-align:center; padding:6px 8px; font-size:12px; font-weight:800;">내용</span>인보험 합산 달성률</p>
+          <p style="display:flex; align-items:center; gap:10px; margin:0; font-size:clamp(14px,1.8vw,16px); font-weight:800;"><span style="min-width:52px; border-radius:999px; background:#0d54c9; color:#fff; text-align:center; padding:6px 8px; font-size:12px; font-weight:800;">시상</span>여행경비 추가 시상</p>
         </div>
-      </section>
-    </article>
-    <section class="summary">
-      <article class="metric primary">
-        <div class="metric-label">전체 친구데이 진척</div>
-        <div class="metric-value"><span id="overallRate">0.0</span><small>%</small></div>
-        <div class="progress-line"><span id="overallBar"></span></div>
-        <div class="metric-note" id="overallNote">추가 실적 0천원 / 목표 0천원</div>
-      </article>
-      <article class="metric"><div class="metric-label">달성 팀</div><div class="metric-value"><span id="achievedTeams">0</span><small>팀</small></div><div class="metric-note">12% 이상 기준</div></article>
-      <article class="metric"><div class="metric-label">예상 지급액</div><div class="metric-value"><span id="totalReward">0</span><small>만원</small></div><div class="metric-note">현재 구간 기준</div></article>
-    </section>
+        <div style="display:grid; gap:8px;">
+          <div style="display:grid; grid-template-columns:76px 1fr auto; align-items:center; gap:10px; min-height:52px; border:2px solid #d9e4f4; border-radius:14px; background:#fbfdff; padding:8px 12px;">
+            <strong style="color:#0d54c9; font-size:clamp(24px,3.2vw,30px); font-weight:800; line-height:1;">12%</strong>
+            <em style="font-style:normal; color:#0d54c9; font-size:14px; font-weight:800;">달성</em>
+            <b style="border-radius:10px; background:#0d54c9; color:#ffd400; padding:8px 12px; font-size:clamp(14px,1.8vw,17px); font-weight:800; white-space:nowrap;">인당 +5만</b>
+          </div>
+          <div style="display:grid; grid-template-columns:76px 1fr auto; align-items:center; gap:10px; min-height:52px; border:2px solid #d9e4f4; border-radius:14px; background:#fbfdff; padding:8px 12px;">
+            <strong style="color:#0d54c9; font-size:clamp(24px,3.2vw,30px); font-weight:800; line-height:1;">15%</strong>
+            <em style="font-style:normal; color:#0d54c9; font-size:14px; font-weight:800;">달성</em>
+            <b style="border-radius:10px; background:#0d54c9; color:#ffd400; padding:8px 12px; font-size:clamp(14px,1.8vw,17px); font-weight:800; white-space:nowrap;">인당 +7만</b>
+          </div>
+          <div style="display:grid; grid-template-columns:76px 1fr auto; align-items:center; gap:10px; min-height:52px; border:2px solid #d9e4f4; border-radius:14px; background:#fbfdff; padding:8px 12px;">
+            <strong style="color:#0d54c9; font-size:clamp(24px,3.2vw,30px); font-weight:800; line-height:1;">18%</strong>
+            <em style="font-style:normal; color:#0d54c9; font-size:14px; font-weight:800;">달성</em>
+            <b style="border-radius:10px; background:#0d54c9; color:#ffd400; padding:8px 12px; font-size:clamp(14px,1.8vw,17px); font-weight:800; white-space:nowrap;">인당 +10만</b>
+          </div>
+        </div>
+        <div style="margin-top:10px; display:flex; align-items:center; justify-content:center; gap:10px; border:1px solid #dbe4f4; border-radius:14px; background:#f8fafc; padding:10px 14px;">
+          <span style="min-width:62px; border-radius:999px; background:#0d54c9; color:#fff; text-align:center; padding:6px 9px; font-size:13px; font-weight:800;">기본조건</span>
+          <b style="font-size:clamp(14px,1.8vw,16px); font-weight:800;">1일 - 19일</b>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="rankBoard"><div class="section-title rank-title"><h2>친구데이 현재 순위</h2><span>진척률 기준 TOP10</span></div><div class="rank-podium top10-board" id="rankPodium"></div></section>
+  <section style="display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin-bottom:8px;">
+    <article style="background:#0f2547; color:#fff; border-radius:22px; padding:18px; box-shadow:0 14px 30px rgba(15,37,71,.18);">
+      <div style="color:rgba(255,255,255,.72); font-size:12px; font-weight:800;">전체 친구데이 진척</div>
+      <div style="margin-top:10px; font-size:31px; font-weight:800; line-height:1;">{{overallRateStr}}<small style="font-size:13px; color:rgba(255,255,255,.72); font-weight:800; margin-left:3px;">%</small></div>
+      <div style="height:10px; border-radius:999px; background:rgba(255,255,255,.16); overflow:hidden; margin-top:14px;"><span style="display:block; height:100%; width:{{overallBarWidth}}%; border-radius:999px; background:linear-gradient(90deg,var(--accent),#16a34a);"></span></div>
+      <div style="margin-top:10px; color:rgba(255,255,255,.72); font-size:12px; font-weight:700;">{{overallNote}}</div>
+    </article>
+    <article style="background:#fff; border:1px solid #e2e8f0; border-radius:22px; padding:18px; box-shadow:0 10px 24px rgba(15,23,42,.06);">
+      <div style="color:#64748b; font-size:12px; font-weight:800;">달성 팀</div>
+      <div style="margin-top:10px; font-size:31px; font-weight:800; line-height:1;">{{achievedTeamsStr}}<small style="font-size:13px; color:#64748b; font-weight:800; margin-left:3px;">팀</small></div>
+      <div style="margin-top:10px; color:#64748b; font-size:12px; font-weight:700;">12% 이상 기준</div>
+    </article>
+    <article style="background:#fff; border:1px solid #e2e8f0; border-radius:22px; padding:18px; box-shadow:0 10px 24px rgba(15,23,42,.06);">
+      <div style="color:#64748b; font-size:12px; font-weight:800;">예상 지급액</div>
+      <div style="margin-top:10px; font-size:31px; font-weight:800; line-height:1;">{{totalRewardStr}}<small style="font-size:13px; color:#64748b; font-weight:800; margin-left:3px;">만원</small></div>
+      <div style="margin-top:10px; color:#64748b; font-size:12px; font-weight:700;">현재 구간 기준</div>
+    </article>
+  </section>
 
-  <section class="toolbar">
-    <div class="search-row">
-      <label class="search" for="q"><input id="q" type="search" placeholder="팀명 또는 팀장 검색" autocomplete="off"></label>
-      <select class="sort-select" id="sort" aria-label="정렬">
+  <section data-screen-label="랭킹" style="margin-top:26px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:11px;">
+      <h2 style="margin:0; font-size:18px; font-weight:800;">친구데이 현재 순위</h2>
+      <span style="font-size:12px; color:#64748b; font-weight:700;">진척률 기준 TOP10</span>
+    </div>
+    <sc-if value="{{hasRankRows}}" hint-placeholder-val="{{true}}">
+      <div style="display:grid; gap:8px;">
+        <sc-for list="{{topRows}}" as="row" hint-placeholder-count="5">
+          <article style="display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:14px; background:#fff; border:1px solid #e2e8f0; border-radius:18px; padding:13px 16px; box-shadow:0 10px 24px rgba(15,23,42,.06);">
+            <div style="min-width:68px; height:38px; padding:0 10px; border-radius:12px; background:{{row.rankBg}}; color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; white-space:nowrap;">{{row.rankLabel}}</div>
+            <div style="min-width:0;">
+              <div style="font-size:15px; font-weight:800; line-height:1.3; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{row.team}}</div>
+              <div style="margin-top:3px; color:#64748b; font-size:12px; font-weight:700;">{{row.meta}}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="color:var(--accent); font-size:19px; font-weight:800;">{{row.rateStr}}</div>
+              <div style="margin-top:2px; color:#64748b; font-size:11px; font-weight:700; white-space:nowrap;">{{row.metaRight}}</div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{hasNoRankRows}}" hint-placeholder-val="{{false}}">
+      <div style="background:#fff; border:1px dashed #e2e8f0; border-radius:18px; padding:24px; text-align:center; color:#64748b; font-size:13px; font-weight:700;">추가 실적 반영 후 순위가 표시됩니다.</div>
+    </sc-if>
+  </section>
+
+  <section style="position:sticky; top:0; z-index:20; margin:24px 0 12px; padding:12px 0; background:rgba(244,246,251,.92); backdrop-filter:blur(14px);">
+    <div style="display:flex; flex-wrap:wrap; gap:10px;">
+      <label style="flex:1 1 240px; display:flex; align-items:center; gap:8px; height:48px; border:1px solid #e2e8f0; border-radius:14px; background:#fff; padding:0 14px;">
+        <svg viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;flex:none;color:#94a3b8;"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M20 20l-3.2-3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+        <input type="search" placeholder="팀명 또는 팀장 검색" autoComplete="off" value="{{query}}" onChange="{{onQueryChange}}" style="flex:1; border:0; outline:0; background:transparent; font-size:15px; font-weight:600; color:#0f172a; min-width:0;"/>
+      </label>
+      <select value="{{sortValue}}" onChange="{{onSortChange}}" style="flex:0 0 auto; min-width:160px; height:48px; border:1px solid #e2e8f0; border-radius:14px; background:#fff; padding:0 14px; font-weight:700; color:#0f172a;">
         <option value="rate">순위순</option>
         <option value="reward">예상 지급액순</option>
         <option value="delta">추가 실적순</option>
@@ -108,212 +148,319 @@
     </div>
   </section>
 
-  <section id="teams">
-    <div class="section-title rank-title"><h2>전체 순위</h2><span id="listCount">0팀</span></div>
-    <div class="team-list" id="teamList"></div>
-    <div class="empty" id="empty">표시할 팀이 없습니다.</div>
+  <section data-screen-label="팀 리스트">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:11px;">
+      <h2 style="margin:0; font-size:18px; font-weight:800;">전체 순위</h2>
+      <span style="font-size:12px; color:#64748b; font-weight:700;">{{listCountStr}}</span>
+    </div>
+    <sc-if value="{{hasTeams}}" hint-placeholder-val="{{true}}">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px;">
+        <sc-for list="{{teamCards}}" as="t" hint-placeholder-count="4">
+          <article style="display:grid; grid-template-columns:96px minmax(0,1fr); background:#fff; border:1px solid #e2e8f0; border-radius:22px; box-shadow:0 10px 24px rgba(15,23,42,.06); overflow:hidden;">
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:#f8fafc; border-right:1px solid #e2e8f0; padding:14px 8px; text-align:center;">
+              <div style="min-width:64px; padding:8px 6px; border-radius:14px; background:{{t.rankBg}}; color:{{t.rankFg}}; font-size:14px; font-weight:800; line-height:1.15; word-break:keep-all;">{{t.rankLabel}}</div>
+              <div style="color:#64748b; font-size:11px; font-weight:800; white-space:nowrap;">{{t.rankStatus}}</div>
+            </div>
+            <div style="min-width:0; padding:16px 18px;">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:10px;">
+                <div style="min-width:0;">
+                  <div style="font-size:15px; font-weight:800; line-height:1.35; word-break:keep-all;">{{t.team}}</div>
+                  <div style="margin-top:4px; color:#64748b; font-size:12px; font-weight:700;">{{t.meta}}</div>
+                </div>
+                <span style="height:28px; border-radius:999px; padding:0 10px; display:inline-flex; align-items:center; justify-content:center; background:{{t.tierBg}}; color:{{t.tierFg}}; font-size:12px; font-weight:800; white-space:nowrap; flex:none;">{{t.tierLabel}}</span>
+              </div>
+              <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:10px;">
+                <b style="font-size:26px; font-weight:800; line-height:1;">{{t.rateStr}}</b>
+                <span style="color:#64748b; font-size:12px; font-weight:700; text-align:right;">{{t.scoreNote}}</span>
+              </div>
+              <div style="height:9px; border-radius:999px; background:#edf2f7; overflow:hidden; margin-top:12px;"><span style="display:block; height:100%; width:{{t.barWidth}}%; border-radius:999px; background:linear-gradient(90deg,var(--accent),#16a34a);"></span></div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(80px,1fr)); gap:8px; margin-top:12px;">
+                <div style="background:#f8fafc; border:1px solid #eef2f7; border-radius:14px; padding:9px 10px;"><span style="display:block; color:#64748b; font-size:11px; font-weight:700;">추가 실적</span><b style="display:block; margin-top:4px; font-size:13px; font-weight:800; white-space:nowrap;">{{t.stat1}}</b></div>
+                <div style="background:#f8fafc; border:1px solid #eef2f7; border-radius:14px; padding:9px 10px;"><span style="display:block; color:#64748b; font-size:11px; font-weight:700;">12%까지</span><b style="display:block; margin-top:4px; font-size:13px; font-weight:800; white-space:nowrap;">{{t.stat2}}</b></div>
+                <div style="background:#f8fafc; border:1px solid #eef2f7; border-radius:14px; padding:9px 10px;"><span style="display:block; color:#64748b; font-size:11px; font-weight:700;">15%까지</span><b style="display:block; margin-top:4px; font-size:13px; font-weight:800; white-space:nowrap;">{{t.stat3}}</b></div>
+                <div style="background:#f8fafc; border:1px solid #eef2f7; border-radius:14px; padding:9px 10px;"><span style="display:block; color:#64748b; font-size:11px; font-weight:700;">18%까지</span><b style="display:block; margin-top:4px; font-size:13px; font-weight:800; white-space:nowrap;">{{t.stat4}}</b></div>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{hasNoTeams}}" hint-placeholder-val="{{false}}">
+      <div style="text-align:center; color:#64748b; font-weight:700; padding:42px 10px; background:#fff; border:1px dashed #e2e8f0; border-radius:20px;">표시할 팀이 없습니다.</div>
+    </sc-if>
   </section>
+
 </main>
 
-<nav class="bottom-nav" aria-label="하단 메뉴">
-  <div class="nav-inner">
-    <button type="button" onclick="location.href='index.html'"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5M5 10v10h14V10M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>홈</button>
-    <button type="button" onclick="location.href='index.html#trend'"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M7 15l3-3 3 2 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>추이</button>
-    <button type="button" onclick="location.href='index.html#top'"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>랭킹</button>
-    <button type="button" onclick="location.href='index.html#teams'"><svg viewBox="0 0 24 24" fill="none"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 1 1-8 0m8 0h3a3 3 0 0 1 3 3v4h-5m-9-7H5a3 3 0 0 0-3 3v4h5m1-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>팀</button>
-    <button class="active" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5 12 16l3.5-3.5M12 21s-7-4.2-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.8-7 10-7 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>친구데이</button>
+<nav aria-label="하단 메뉴" style="position:fixed; left:50%; bottom:12px; transform:translateX(-50%); z-index:40; width:min(440px,calc(100% - 24px)); border:1px solid #e2e8f0; border-radius:28px; background:rgba(255,255,255,.86); backdrop-filter:blur(20px) saturate(1.2); box-shadow:0 12px 30px rgba(20,31,47,.14); padding:8px;">
+  <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:4px;">
+    <a href="index.html" style="height:42px; border-radius:15px; color:#64748b; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:4px; text-decoration:none;">
+      <svg viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;flex:none;"><path d="M3 11.5 12 4l9 7.5M5 10v10h14V10M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>홈
+    </a>
+    <a href="index.html#trend" style="height:42px; border-radius:15px; color:#64748b; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:4px; text-decoration:none;">
+      <svg viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;flex:none;"><path d="M4 19V5m0 14h16M7 15l3-3 3 2 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>추이
+    </a>
+    <a href="index.html#top" style="height:42px; border-radius:15px; color:#64748b; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:4px; text-decoration:none;">
+      <svg viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;flex:none;"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>랭킹
+    </a>
+    <a href="index.html#teams" style="height:42px; border-radius:15px; color:#64748b; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:4px; text-decoration:none;">
+      <svg viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;flex:none;"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 1 1-8 0m8 0h3a3 3 0 0 1 3 3v4h-5m-9-7H5a3 3 0 0 0-3 3v4h5m1-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>팀
+    </a>
+    <div style="height:42px; border-radius:15px; background:#0f172a; color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:4px;">
+      <svg viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;flex:none;"><path d="M8.5 12.5 12 16l3.5-3.5M12 21s-7-4.2-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.8-7 10-7 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>친구데이
+    </div>
   </div>
 </nav>
+</div>
 
-<script>
-const CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
-const MEMBER_CSV_URL='https://docs.google.com/spreadsheets/d/1pwoa_QvPUiAzhcu0ZsYQfV3Zb7rxiLdbP4v7JZ6yVV4/gviz/tq?tqx=out:csv&gid=1874206095';
-const START_TIME='202607090900';
-const END_TIME='202607130900';
-const $=id=>document.getElementById(id);
-const fmt=n=>Number(n||0).toLocaleString('ko-KR');
-const norm=s=>(s||'').toString().normalize('NFKC').replace(/\s/g,'').toLowerCase();
-const parseNumber=v=>Number((v||'0').toString().replace(/[^0-9.-]/g,''))||0;
-const esc=s=>(s||'').toString().replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
-const state={history:[],members:new Map(),teams:[],sort:'rate',query:''};
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#2563eb&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#2563eb&quot;, &quot;#7c3aed&quot;, &quot;#0f766e&quot;, &quot;#be123c&quot;], &quot;section&quot;: &quot;테마&quot;},
+  &quot;showConfetti&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;테마&quot;},
+  &quot;defaultSort&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;rate&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;rate&quot;, &quot;reward&quot;, &quot;delta&quot;, &quot;team&quot;], &quot;section&quot;: &quot;동작&quot;}
+}">
+class Component extends DCLogic {
+  state = {
+    loading: true,
+    error: null,
+    history: [],
+    members: {},
+    query: '',
+    sort: 'rate'
+  };
 
-function parseCSV(text){
-  const rows=[];let row=[],cur='',quote=false;
-  for(let i=0;i<text.length;i++){
-    const ch=text[i],next=text[i+1];
-    if(ch==='"'){ if(quote&&next==='"'){cur+='"';i++;} else quote=!quote; }
-    else if(ch===','&&!quote){ row.push(cur); cur=''; }
-    else if((ch==='\n'||ch==='\r')&&!quote){ if(ch==='\r'&&next==='\n') i++; row.push(cur); if(row.some(v=>v!=='')) rows.push(row); row=[]; cur=''; }
-    else cur+=ch;
+  componentDidMount() {
+    if (this.props.defaultSort) this.state.sort = this.props.defaultSort;
+    this.load();
   }
-  if(cur||row.length){ row.push(cur); if(row.some(v=>v!=='')) rows.push(row); }
-  return rows;
-}
-function findColumn(headers,names){return headers.findIndex(h=>names.some(n=>norm(h)===norm(n)||norm(h).includes(norm(n))));}
-function shortTime(raw){return raw&&raw.length>=12?raw.slice(4,6)+'.'+raw.slice(6,8)+' '+raw.slice(8,10)+':'+raw.slice(10,12):'기준값';}
-function memberName(m){return typeof m==='string'?m:(m?.name||'');}
-function memberBranch(m){return typeof m==='string'?'':(m?.branch||'');}
 
-function tierFor(rate){
-  if(rate>=18) return {key:'tier18', label:'18% 달성', perMember:10};
-  if(rate>=15) return {key:'tier15', label:'15% 달성', perMember:7};
-  if(rate>=12) return {key:'tier12', label:'12% 달성', perMember:5};
-  return {key:'', label:'진행중', perMember:0};
-}
-function snapshot(timeRaw){
-  const byTeam=new Map();
-  state.history.filter(r=>r.timeRaw&&r.timeRaw<=timeRaw).sort((a,b)=>a.timeRaw.localeCompare(b.timeRaw)).forEach(r=>byTeam.set(norm(r.team),r));
-  return byTeam;
-}
-function memberCount(team){
-  const item=state.members.get(norm(team.team));
-  if(item&&item.members.length) return item.members.length;
-  return 0;
-}
-function buildTeams(){
-  const latestTime=state.history.map(r=>r.timeRaw).filter(t=>t&&t<=END_TIME).sort().at(-1)||'';
-  const base=snapshot(START_TIME);
-  const current=snapshot(latestTime||END_TIME);
-  const keys=new Set([...base.keys(),...current.keys()]);
-  state.teams=[...keys].map(key=>{
-    const cur=current.get(key)||base.get(key);
-    const start=base.get(key)||cur;
-    const members=state.members.get(key);
-    const count=memberCount(cur);
-    const delta=Math.max(Number(cur?.result||0)-Number(start?.result||0),0);
-    const target=Number(cur?.target||start?.target||0);
-    const eventRate=target?delta/target*100:0;
-    const tier=tierFor(eventRate);
-    return {
-      team:cur?.team||start?.team||members?.team||'',
-      leader:members?.leader||'',
-      target,
-      baseResult:Number(start?.result||0),
-      result:Number(cur?.result||0),
-      delta,
-      eventRate,
-      memberCount:count,
-      tier,
-      reward:count*tier.perMember,
-      timeRaw:latestTime
+  norm(s) { return (s || '').toString().normalize('NFKC').replace(/\s/g, '').toLowerCase(); }
+  fmt(n) { return Number(n || 0).toLocaleString('ko-KR'); }
+  parseNumber(v) { return Number((v || '0').toString().replace(/[^0-9.-]/g, '')) || 0; }
+
+  shortTime(raw) {
+    return raw && raw.length >= 12 ? raw.slice(4, 6) + '.' + raw.slice(6, 8) + ' ' + raw.slice(8, 10) + ':' + raw.slice(10, 12) : '기준값';
+  }
+
+  parseCSV(text) {
+    const rows = []; let row = [], cur = '', quote = false;
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i], next = text[i + 1];
+      if (ch === '"') { if (quote && next === '"') { cur += '"'; i++; } else quote = !quote; }
+      else if (ch === ',' && !quote) { row.push(cur); cur = ''; }
+      else if ((ch === '\n' || ch === '\r') && !quote) { if (ch === '\r' && next === '\n') i++; row.push(cur); if (row.some(v => v !== '')) rows.push(row); row = []; cur = ''; }
+      else cur += ch;
+    }
+    if (cur || row.length) { row.push(cur); if (row.some(v => v !== '')) rows.push(row); }
+    return rows;
+  }
+
+  findColumn(headers, names) {
+    return headers.findIndex(h => names.some(n => this.norm(h) === this.norm(n) || this.norm(h).includes(this.norm(n))));
+  }
+
+  tierFor(rate) {
+    if (rate >= 18) return { key: 'tier18', label: '18% 달성', perMember: 10 };
+    if (rate >= 15) return { key: 'tier15', label: '15% 달성', perMember: 7 };
+    if (rate >= 12) return { key: 'tier12', label: '12% 달성', perMember: 5 };
+    return { key: '', label: '진행중', perMember: 0 };
+  }
+
+  applyRows(rows) {
+    if (!rows.length) return [];
+    const headers = rows[0].map(v => (v || '').trim());
+    const teamIndex = this.findColumn(headers, ['팀명', '팀', 'team']);
+    const targetIndex = this.findColumn(headers, ['목표', 'target']);
+    const resultIndex = this.findColumn(headers, ['실적', 'result']);
+    const timeIndex = this.findColumn(headers, ['시간', '업데이트', '기준', 'time']);
+    return rows.slice(1).map(r => ({
+      team: (r[teamIndex] || '').trim(),
+      target: this.parseNumber(r[targetIndex]),
+      result: this.parseNumber(r[resultIndex]),
+      timeRaw: (r[timeIndex >= 0 ? timeIndex : 3] || '').toString().replace(/\D/g, '')
+    })).filter(r => r.team);
+  }
+
+  applyMemberRows(rows) {
+    if (!rows.length) return {};
+    const headers = rows[0].map(v => (v || '').trim());
+    const teamIndex = this.findColumn(headers, ['팀명', '팀', 'team']);
+    const nameIndex = this.findColumn(headers, ['이름', '팀원', 'name', 'member']);
+    const branchIndex = this.findColumn(headers, ['지점', '소속', 'branch']);
+    const traitIndex = this.findColumn(headers, ['특성', '팀원특성', '구분', 'trait', 'role']);
+    const map = {};
+    rows.slice(1).forEach(r => {
+      const team = (r[teamIndex] || '').trim(), name = (r[nameIndex] || '').trim();
+      if (!team || !name) return;
+      const key = this.norm(team);
+      if (!map[key]) map[key] = { team, members: [], leader: '' };
+      const item = map[key];
+      const trait = traitIndex >= 0 ? (r[traitIndex] || '').trim() : '';
+      if (trait && this.norm(trait).includes('팀장')) item.leader = name;
+      if (!item.members.some(m => this.norm(m.name) === this.norm(name))) item.members.push({ name, branch: branchIndex >= 0 ? (r[branchIndex] || '').trim() : '' });
+    });
+    return map;
+  }
+
+  snapshot(timeRaw) {
+    const byTeam = {};
+    this.state.history.filter(r => r.timeRaw && r.timeRaw <= timeRaw)
+      .sort((a, b) => a.timeRaw.localeCompare(b.timeRaw))
+      .forEach(r => { byTeam[this.norm(r.team)] = r; });
+    return byTeam;
+  }
+
+  buildTeams() {
+    const START_TIME = '202607090900', END_TIME = '202607130900';
+    const times = this.state.history.map(r => r.timeRaw).filter(t => t && t <= END_TIME).sort();
+    const latestTime = times.length ? times[times.length - 1] : '';
+    const base = this.snapshot(START_TIME);
+    const current = this.snapshot(latestTime || END_TIME);
+    const keys = new Set([...Object.keys(base), ...Object.keys(current)]);
+    const teams = [...keys].map(key => {
+      const cur = current[key] || base[key];
+      const start = base[key] || cur;
+      const members = this.state.members[key];
+      const count = members && members.members.length ? members.members.length : 0;
+      const delta = Math.max(Number(cur?.result || 0) - Number(start?.result || 0), 0);
+      const target = Number(cur?.target || start?.target || 0);
+      const eventRate = target ? delta / target * 100 : 0;
+      const tier = this.tierFor(eventRate);
+      return {
+        team: cur?.team || start?.team || members?.team || '',
+        leader: members?.leader || '',
+        target, delta, eventRate,
+        memberCount: count,
+        tier,
+        reward: count * tier.perMember
+      };
+    }).filter(t => t.team);
+    return { teams, latestTime };
+  }
+
+  async load() {
+    this.setState({ loading: true, error: null });
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
+    const MEMBER_CSV_URL = 'https://docs.google.com/spreadsheets/d/1pwoa_QvPUiAzhcu0ZsYQfV3Zb7rxiLdbP4v7JZ6yVV4/gviz/tq?tqx=out:csv&gid=1874206095';
+    try {
+      const data = await fetch(CSV_URL + '&cacheBust=' + Date.now()).then(r => r.text());
+      const history = this.applyRows(this.parseCSV(data));
+      let members = {};
+      try {
+        const memberData = await fetch(MEMBER_CSV_URL + '&cacheBust=' + Date.now()).then(r => r.text());
+        members = this.applyMemberRows(this.parseCSV(memberData));
+      } catch (e) { console.warn('member load failed', e); }
+      this.setState({ history, members, loading: false });
+    } catch (e) {
+      console.error(e);
+      this.setState({ loading: false, error: '데이터 연결 실패' });
+    }
+  }
+
+  renderVals() {
+    const accent = this.props.accentColor || '#2563eb';
+    const showConfetti = this.props.showConfetti !== false;
+    const { teams, latestTime } = this.buildTeams();
+
+    const sorted = [...teams].sort((a, b) => b.eventRate - a.eventRate || b.delta - a.delta || a.team.localeCompare(b.team, 'ko'));
+    let prevRate = null, prevDelta = null, prevRank = 0;
+    let ranked = sorted.map((t, i) => {
+      const rankable = t.delta > 0;
+      const sameAsPrev = rankable && i > 0 && Math.abs(t.eventRate - prevRate) < 0.0001 && t.delta === prevDelta;
+      const rank = rankable ? (sameAsPrev ? prevRank : i + 1) : null;
+      prevRate = t.eventRate; prevDelta = t.delta; prevRank = rank;
+      return { ...t, rank, rankable };
+    });
+    const rankCounts = {};
+    ranked.forEach(t => { rankCounts[t.rank] = (rankCounts[t.rank] || 0) + 1; });
+    ranked = ranked.map(t => ({ ...t, tied: t.rankable && (rankCounts[t.rank] || 0) > 1 }));
+    const rankMap = {};
+    ranked.forEach(t => { rankMap[this.norm(t.team)] = t.rank; });
+
+    const q = this.norm(this.state.query);
+    let list = ranked.filter(t => !q || this.norm(t.team).includes(q) || this.norm(t.leader).includes(q));
+    const sort = this.state.sort;
+    if (sort === 'rate') list.sort((a, b) => (a.rank ?? 9999) - (b.rank ?? 9999) || a.team.localeCompare(b.team, 'ko'));
+    if (sort === 'reward') list.sort((a, b) => b.reward - a.reward || (a.rank ?? 9999) - (b.rank ?? 9999));
+    if (sort === 'delta') list.sort((a, b) => b.delta - a.delta || (a.rank ?? 9999) - (b.rank ?? 9999));
+    if (sort === 'team') list.sort((a, b) => a.team.localeCompare(b.team, 'ko'));
+    list = list.map(t => ({ ...t, rank: rankMap[this.norm(t.team)] ?? t.rank }));
+
+    const totals = teams.reduce((acc, t) => { acc.target += t.target; acc.delta += t.delta; acc.achieved += t.eventRate >= 12 ? 1 : 0; acc.reward += t.reward; return acc; }, { target: 0, delta: 0, achieved: 0, reward: 0 });
+    const overallRate = totals.target ? totals.delta / totals.target * 100 : 0;
+
+    const topRows = ranked.filter(t => t.rankable).slice(0, 10).map((t, i) => ({
+      key: this.norm(t.team) + '-' + i,
+      rankLabel: t.tied ? `공동 ${t.rank}등` : `${t.rank}등`,
+      rankBg: i < 3 ? '#2563eb' : '#0f172a',
+      team: t.team,
+      meta: (t.leader ? `팀장 ${t.leader} · ` : '') + `팀원 ${this.fmt(t.memberCount)}명`,
+      rateStr: t.eventRate.toFixed(1) + '%',
+      metaRight: `추가 ${this.fmt(t.delta)}천원 · 예상 ${this.fmt(t.reward)}만원`
+    }));
+
+    const tierColors = {
+      tier12: { bg: 'rgba(37,99,235,.12)', fg: '#2563eb' },
+      tier15: { bg: 'rgba(217,119,6,.15)', fg: '#b45309' },
+      tier18: { bg: 'rgba(22,163,74,.14)', fg: '#15803d' },
+      '': { bg: '#eef2f7', fg: '#64748b' }
     };
-  }).filter(t=>t.team);
-  $('basisText').textContent=(latestTime?shortTime(latestTime):'데이터 없음')+' 기준';
-}
-function render(){
-  buildTeams();
-  const sorted=[...state.teams].sort((a,b)=>b.eventRate-a.eventRate||b.delta-a.delta||a.team.localeCompare(b.team,'ko'));
-  let prevRate=null,prevDelta=null,prevRank=0;
-  let ranked=sorted.map((t,i)=>{
-    const rankable=t.delta>0;
-    const sameAsPrev=rankable&&i>0&&Math.abs(t.eventRate-prevRate)<0.0001&&t.delta===prevDelta;
-    const rank=rankable?(sameAsPrev?prevRank:i+1):null;
-    prevRate=t.eventRate; prevDelta=t.delta; prevRank=rank;
-    return {...t,rank,rankable};
-  });
-  const rankCounts=ranked.reduce((map,t)=>map.set(t.rank,(map.get(t.rank)||0)+1),new Map());
-  ranked=ranked.map(t=>({...t,tied:t.rankable&&(rankCounts.get(t.rank)||0)>1}));
-  const rankMap=new Map(ranked.map(t=>[norm(t.team),t.rank]));
-  const q=norm(state.query);
-  let list=ranked.filter(t=>!q||norm(t.team).includes(q)||norm(t.leader).includes(q));
-  if(state.sort==='rate') list.sort((a,b)=>(a.rank??9999)-(b.rank??9999)||a.team.localeCompare(b.team,'ko'));
-  if(state.sort==='reward') list.sort((a,b)=>b.reward-a.reward||(a.rank??9999)-(b.rank??9999));
-  if(state.sort==='delta') list.sort((a,b)=>b.delta-a.delta||(a.rank??9999)-(b.rank??9999));
-  if(state.sort==='team') list.sort((a,b)=>a.team.localeCompare(b.team,'ko'));
-  list=list.map(t=>({...t,rank:rankMap.get(norm(t.team))||t.rank}));
-  const totals=state.teams.reduce((acc,t)=>{acc.target+=t.target;acc.delta+=t.delta;acc.achieved+=t.eventRate>=12?1:0;acc.reward+=t.reward;return acc;},{target:0,delta:0,achieved:0,reward:0});
-  const overall=totals.target?totals.delta/totals.target*100:0;
-  $('overallRate').textContent=overall.toFixed(1);
-  $('overallBar').style.width=Math.min(overall,100)+'%';
-  $('overallNote').textContent='추가 실적 '+fmt(totals.delta)+'천원 / 목표 '+fmt(totals.target)+'천원';
-  $('achievedTeams').textContent=fmt(totals.achieved);
-  $('totalReward').textContent=fmt(totals.reward);
-  $('listCount').textContent=fmt(list.length)+'팀';
-  $('empty').style.display=list.length?'none':'block';
-  const podium=$('rankPodium');
-  if(podium){
-    const topRows=ranked.filter(t=>t.rankable).slice(0,10);
-    podium.innerHTML=topRows.length?topRows.map((t,i)=>`<article class="top10-row ${i<3?'top-medal':''}">
-      <div class="top10-rank">${t.tied?`공동 ${t.rank}등`:`${t.rank}등`}</div>
-      <div class="top10-team"><b>${esc(t.team)}</b><span>${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</span></div>
-      <div class="top10-rate">${t.eventRate.toFixed(1)}%</div>
-      <div class="top10-meta">추가 ${fmt(t.delta)}천원 · 예상 ${fmt(t.reward)}만원</div>
-    </article>`).join(''):`<article class="top10-empty">추가 실적 반영 후 순위가 표시됩니다.</article>`;
+
+    const teamCards = list.map((t, i) => {
+      const width = Math.min(t.eventRate / 18 * 100, 100);
+      const remain12 = Math.max(Math.ceil(t.target * .12 - t.delta), 0);
+      const remain15 = Math.max(Math.ceil(t.target * .15 - t.delta), 0);
+      const remain18 = Math.max(Math.ceil(t.target * .18 - t.delta), 0);
+      const tc = tierColors[t.tier.key] || tierColors[''];
+      return {
+        key: this.norm(t.team) + '-' + i,
+        rankLabel: t.rankable ? (t.tied ? `공동 ${t.rank}등` : `${t.rank}등`) : '집계 전',
+        rankStatus: t.rankable ? '현재 순위' : '순위 대기',
+        rankBg: t.rankable ? '#0f172a' : '#eef2f7',
+        rankFg: t.rankable ? '#fff' : '#64748b',
+        team: t.team,
+        meta: (t.leader ? `팀장 ${t.leader} · ` : '') + `팀원 ${this.fmt(t.memberCount)}명`,
+        tierLabel: t.tier.label,
+        tierBg: tc.bg, tierFg: tc.fg,
+        rateStr: t.eventRate.toFixed(1) + '%',
+        scoreNote: `추가 ${this.fmt(t.delta)}천원 · 예상 ${this.fmt(t.reward)}만원`,
+        barWidth: width,
+        stat1: this.fmt(t.delta) + '천원',
+        stat2: remain12 ? this.fmt(remain12) + '천원' : '달성',
+        stat3: remain15 ? this.fmt(remain15) + '천원' : '달성',
+        stat4: remain18 ? this.fmt(remain18) + '천원' : '달성'
+      };
+    });
+
+    return {
+      accent,
+      showConfetti,
+      basisText: this.state.error ? this.state.error : (this.state.loading ? '데이터 불러오는 중' : (latestTime ? this.shortTime(latestTime) : '데이터 없음') + ' 기준'),
+      refreshing: this.state.loading,
+      refreshOpacity: this.state.loading ? 0.6 : 1,
+      refreshSpin: this.state.loading ? 'fd-spin 0.9s linear infinite' : 'none',
+      refreshLabel: this.state.loading ? '불러오는 중' : '새로고침',
+      onRefresh: () => this.load(),
+      overallRateStr: overallRate.toFixed(1),
+      overallBarWidth: Math.min(overallRate, 100),
+      overallNote: `추가 실적 ${this.fmt(totals.delta)}천원 / 목표 ${this.fmt(totals.target)}천원`,
+      achievedTeamsStr: this.fmt(totals.achieved),
+      totalRewardStr: this.fmt(totals.reward),
+      hasRankRows: topRows.length > 0,
+      hasNoRankRows: topRows.length === 0,
+      topRows,
+      query: this.state.query,
+      onQueryChange: (e) => this.setState({ query: e.target.value }),
+      sortValue: sort,
+      onSortChange: (e) => this.setState({ sort: e.target.value }),
+      listCountStr: this.fmt(list.length) + '팀',
+      hasTeams: list.length > 0,
+      hasNoTeams: list.length === 0,
+      teamCards
+    };
   }
-  $('teamList').innerHTML=list.map(teamCard).join('');
 }
-function teamCard(t){
-  const width=Math.min(t.eventRate/18*100,100);
-  const remain12=Math.max(Math.ceil(t.target*.12-t.delta),0);
-  const remain15=Math.max(Math.ceil(t.target*.15-t.delta),0);
-  const remain18=Math.max(Math.ceil(t.target*.18-t.delta),0);
-  const rankText=t.rankable?(t.tied?`공동 ${t.rank}등`:`${t.rank}등`):'집계 전';
-  return `<article class="team-card">
-    <div class="rank-block"><div class="rank-num ${t.rankable?'':'pending'}">${rankText}</div><div class="rank-label">${t.rankable?'현재 순위':'순위 대기'}</div></div>
-    <div class="team-content">
-      <div class="team-head">
-        <div><div class="team-title">${esc(t.team)}</div><div class="team-meta">${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</div></div>
-        <span class="tier-badge ${t.tier.key}">${t.tier.label}</span>
-      </div>
-      <div class="team-body">
-        <div class="team-score"><b>${t.eventRate.toFixed(1)}%</b><span>추가 ${fmt(t.delta)}천원 · 예상 ${fmt(t.reward)}만원</span></div>
-        <div class="team-progress"><span style="width:${width}%"></span></div>
-        <div class="team-stats">
-          <div class="stat"><span>추가 실적</span><b>${fmt(t.delta)}천원</b></div>
-          <div class="stat"><span>12%까지</span><b>${remain12?fmt(remain12)+'천원':'달성'}</b></div>
-          <div class="stat"><span>15%까지</span><b>${remain15?fmt(remain15)+'천원':'달성'}</b></div>
-          <div class="stat"><span>18%까지</span><b>${remain18?fmt(remain18)+'천원':'달성'}</b></div>
-        </div>
-      </div>
-    </div>
-  </article>`;
-}
-function applyRows(rows){
-  const headers=rows[0].map(v=>(v||'').trim());
-  const teamIndex=findColumn(headers,['팀명','팀','team']);
-  const targetIndex=findColumn(headers,['목표','target']);
-  const resultIndex=findColumn(headers,['실적','result']);
-  const timeIndex=findColumn(headers,['시간','업데이트','기준','time']);
-  state.history=rows.slice(1).map(r=>({
-    team:(r[teamIndex]||'').trim(),
-    target:parseNumber(r[targetIndex]),
-    result:parseNumber(r[resultIndex]),
-    timeRaw:(r[timeIndex>=0?timeIndex:3]||'').toString().replace(/\D/g,'')
-  })).filter(r=>r.team);
-}
-function applyMemberRows(rows){
-  const headers=rows[0].map(v=>(v||'').trim());
-  const teamIndex=findColumn(headers,['팀명','팀','team']);
-  const nameIndex=findColumn(headers,['이름','팀원','name','member']);
-  const branchIndex=findColumn(headers,['지점','소속','branch']);
-  const traitIndex=findColumn(headers,['특성','팀원특성','구분','trait','role']);
-  const map=new Map();
-  rows.slice(1).forEach(r=>{
-    const team=(r[teamIndex]||'').trim(),name=(r[nameIndex]||'').trim();
-    if(!team||!name) return;
-    const key=norm(team);
-    if(!map.has(key)) map.set(key,{team,members:[],leader:''});
-    const item=map.get(key);
-    const trait=traitIndex>=0?(r[traitIndex]||'').trim():'';
-    if(trait&&norm(trait).includes('팀장')) item.leader=name;
-    if(!item.members.some(m=>norm(memberName(m))===norm(name))) item.members.push({name,branch:branchIndex>=0?(r[branchIndex]||'').trim():''});
-  });
-  state.members=map;
-}
-async function load(){
-  $('basisText').textContent='데이터 불러오는 중';
-  const data=await fetch(CSV_URL+'&cacheBust='+Date.now()).then(r=>r.text());
-  applyRows(parseCSV(data));
-  try{
-    const members=await fetch(MEMBER_CSV_URL+'&cacheBust='+Date.now()).then(r=>r.text());
-    applyMemberRows(parseCSV(members));
-  }catch(e){ console.warn('member load failed',e); }
-  render();
-}
-$('q').addEventListener('input',e=>{state.query=e.target.value;render();});
-$('sort').addEventListener('change',e=>{state.sort=e.target.value;render();});
-$('refreshBtn').addEventListener('click',load);
-load().catch(err=>{console.error(err);$('basisText').textContent='데이터 연결 실패';});
+
 </script>
 </body>
 </html>
