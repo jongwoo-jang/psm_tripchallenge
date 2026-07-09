@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10233f">
+<meta name="description" content="PSM소통트립 친구데이 이벤트 팀별 진척 현황">
+<meta property="og:title" content="PSM 친구데이">
+<meta property="og:description" content="202607090900 기준 친구데이 이벤트 팀별 진척과 예상 지급액을 확인하세요.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>PSM 친구데이</title>
+<style>
+:root{color-scheme:light;--bg:#f5f7fa;--card:#fff;--text:#111827;--sub:#667085;--line:#e3e8ef;--blue:#2d6cdf;--green:#00a86b;--amber:#d79b24;--red:#ef4444;--shadow:0 14px 34px rgba(20,31,47,.08);--bottom:78px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Noto Sans KR",Arial,sans-serif;padding:0 0 calc(var(--bottom) + env(safe-area-inset-bottom));letter-spacing:0}button{font:inherit;cursor:pointer}
+.app{width:min(1120px,100%);margin:0 auto;padding:18px 16px 28px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:11px;min-width:0}.brand-mark{width:38px;height:38px;border-radius:13px;background:#111827;color:#fff;display:grid;place-items:center;box-shadow:var(--shadow)}.brand-mark svg{width:22px;height:22px}.brand-title{font-size:15px;font-weight:850}.brand-sub{margin-top:2px;color:var(--sub);font-size:12px;font-weight:700}.refresh-btn{height:40px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.86);padding:0 12px;font-weight:800;color:var(--text)}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}.hero-main{min-height:228px;border-radius:26px;background:linear-gradient(135deg,#10233f 0%,#1f6ed4 58%,#13a474 128%);color:#fff;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}.hero-main:after{content:"";position:absolute;right:-56px;top:-54px;width:180px;height:180px;border:1px solid rgba(255,255,255,.24);border-radius:50%}.eyebrow{font-size:12px;font-weight:900;color:rgba(255,255,255,.72)}h1{position:relative;margin:8px 0 10px;font-size:38px;line-height:1.04;font-weight:950}.hero-copy{position:relative;margin:0;color:rgba(255,255,255,.84);font-size:14px;font-weight:700;line-height:1.6}.hero-pills{position:relative;display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.13);border-radius:999px;padding:8px 10px;color:#fff;font-size:12px;font-weight:850}
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow);min-height:106px}.metric.primary{grid-column:1/3;min-height:118px}.metric-label{color:var(--sub);font-size:12px;font-weight:850}.metric-value{margin-top:10px;font-size:31px;line-height:1;font-weight:950}.metric-value small{font-size:13px;color:var(--sub);font-weight:850;margin-left:3px}.metric-note{margin-top:10px;color:var(--sub);font-size:12px;font-weight:750}.progress-line{height:10px;border-radius:999px;background:#edf2f7;overflow:hidden;margin-top:14px}.progress-line span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green))}
+.section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:22px 2px 11px}.section-title h2{margin:0;font-size:18px;font-weight:900}.section-title span{font-size:12px;color:var(--sub);font-weight:800}.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.rule-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)}.rule-card b{display:block;font-size:22px;font-weight:950}.rule-card span{display:block;margin-top:5px;color:var(--sub);font-size:12px;font-weight:760}.rule-card:nth-child(1){border-top:4px solid var(--blue)}.rule-card:nth-child(2){border-top:4px solid var(--amber)}.rule-card:nth-child(3){border-top:4px solid var(--green)}
+.toolbar{position:sticky;top:0;z-index:20;margin:16px -16px 10px;padding:12px 16px;background:rgba(245,247,250,.92);border-bottom:1px solid rgba(220,227,235,.78);backdrop-filter:blur(16px)}.search-row{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:8px}.search,.sort-select{height:46px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:none;color:var(--text)}.search{display:flex;align-items:center;padding:0 13px}.search input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:15px;font-weight:650}.sort-select{padding:0 12px;font-weight:800}
+.team-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.team-card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}.team-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:18px 18px 12px}.team-title{font-size:15px;font-weight:850;line-height:1.35;word-break:keep-all}.team-meta{margin-top:5px;color:var(--sub);font-size:12px;font-weight:720}.tier-badge{height:28px;border-radius:999px;padding:0 10px;display:inline-flex;align-items:center;background:#eef2f7;color:var(--sub);font-size:12px;font-weight:900}.tier-badge.tier12{background:rgba(45,108,223,.12);color:var(--blue)}.tier-badge.tier15{background:rgba(215,155,36,.16);color:var(--amber)}.tier-badge.tier18{background:rgba(0,168,107,.13);color:var(--green)}
+.team-body{padding:0 18px 16px}.team-score{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.team-score b{font-size:28px;line-height:1;font-weight:950}.team-score span{color:var(--sub);font-size:12px;font-weight:800}.team-progress{height:9px;border-radius:999px;background:#edf2f7;overflow:hidden;margin-top:12px}.team-progress span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green))}.team-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.stat{background:#f8fafc;border:1px solid #eef2f7;border-radius:14px;padding:10px}.stat span{display:block;color:var(--sub);font-size:11px;font-weight:760}.stat b{display:block;margin-top:4px;font-size:13px;font-weight:900;white-space:nowrap}.empty{display:none;text-align:center;color:var(--sub);font-weight:850;padding:42px 10px;background:var(--card);border:1px dashed var(--line);border-radius:20px}
+.bottom-nav{position:fixed;left:50%;right:auto;transform:translateX(-50%);bottom:12px;z-index:40;width:min(440px,calc(100% - 24px));border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.84);backdrop-filter:blur(22px) saturate(1.2);box-shadow:0 12px 30px rgba(20,31,47,.14);padding:8px}.nav-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.nav-inner button{height:42px;border:0;border-radius:15px;background:transparent;color:var(--sub);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:4px}.nav-inner button.active{background:#111827;color:#fff}.nav-inner svg{width:16px;height:16px;flex:none}
+@media (max-width:860px){.app{padding:14px 16px 24px}.hero{display:block}.summary{grid-template-columns:1fr 1fr;margin-top:12px}.metric.primary{grid-column:1/3}.rule-grid{grid-template-columns:1fr}.team-list{grid-template-columns:1fr}.search-row{grid-template-columns:1fr}.sort-select{width:100%}h1{font-size:31px}.hero-main{min-height:auto;padding:21px}.team-stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5 12 16l3.5-3.5M12 21s-7-4.2-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.8-7 10-7 10Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="brand-title">PSM 친구데이</div><div class="brand-sub" id="basisText">데이터 준비 중</div></div>
+    </div>
+    <button class="refresh-btn" id="refreshBtn" type="button">새로고침</button>
+  </header>
+
+  <section class="hero" id="home">
+    <article class="hero-main">
+      <div>
+        <div class="eyebrow">친구데이 이벤트</div>
+        <h1>친구데이<br>진척 현황</h1>
+        <p class="hero-copy">202607090900 실적을 기준으로 202607130900까지 추가 달성률을 집계합니다.</p>
+      </div>
+      <div class="hero-pills">
+        <span class="pill">12% 팀원당 5만원</span>
+        <span class="pill">15% 팀원당 7만원</span>
+        <span class="pill">18% 팀원당 10만원</span>
+      </div>
+    </article>
+    <section class="summary">
+      <article class="metric primary">
+        <div class="metric-label">전체 친구데이 진척</div>
+        <div class="metric-value"><span id="overallRate">0.0</span><small>%</small></div>
+        <div class="progress-line"><span id="overallBar"></span></div>
+        <div class="metric-note" id="overallNote">추가 실적 0천원 / 목표 0천원</div>
+      </article>
+      <article class="metric"><div class="metric-label">달성 팀</div><div class="metric-value"><span id="achievedTeams">0</span><small>팀</small></div><div class="metric-note">12% 이상 기준</div></article>
+      <article class="metric"><div class="metric-label">예상 지급액</div><div class="metric-value"><span id="totalReward">0</span><small>만원</small></div><div class="metric-note">현재 구간 기준</div></article>
+    </section>
+  </section>
+
+  <section>
+    <div class="section-title"><h2>지급 구간</h2><span>팀원 수 기준 지급</span></div>
+    <div class="rule-grid">
+      <article class="rule-card"><b>12%</b><span>팀원당 5만원 지급</span></article>
+      <article class="rule-card"><b>15%</b><span>팀원당 7만원 지급</span></article>
+      <article class="rule-card"><b>18%</b><span>팀원당 10만원 지급</span></article>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="search-row">
+      <label class="search" for="q"><input id="q" type="search" placeholder="팀명 또는 팀장 검색" autocomplete="off"></label>
+      <select class="sort-select" id="sort" aria-label="정렬">
+        <option value="rate">진척률순</option>
+        <option value="reward">지급액순</option>
+        <option value="delta">추가실적순</option>
+        <option value="team">팀명순</option>
+      </select>
+    </div>
+  </section>
+
+  <section id="teams">
+    <div class="section-title"><h2>팀별 친구데이</h2><span id="listCount">0팀</span></div>
+    <div class="team-list" id="teamList"></div>
+    <div class="empty" id="empty">표시할 팀이 없습니다.</div>
+  </section>
+</main>
+
+<nav class="bottom-nav" aria-label="하단 메뉴">
+  <div class="nav-inner">
+    <button type="button" onclick="location.href='psm_dashboard_optimized.html'"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5M5 10v10h14V10M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>홈</button>
+    <button type="button" onclick="location.href='psm_dashboard_optimized.html#trend'"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M7 15l3-3 3 2 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>추이</button>
+    <button type="button" onclick="location.href='psm_dashboard_optimized.html#top'"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>랭킹</button>
+    <button type="button" onclick="location.href='psm_dashboard_optimized.html#teams'"><svg viewBox="0 0 24 24" fill="none"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 1 1-8 0m8 0h3a3 3 0 0 1 3 3v4h-5m-9-7H5a3 3 0 0 0-3 3v4h5m1-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>팀</button>
+    <button class="active" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5 12 16l3.5-3.5M12 21s-7-4.2-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.8-7 10-7 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>친구데이</button>
+  </div>
+</nav>
+
+<script>
+const CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
+const MEMBER_CSV_URL='https://docs.google.com/spreadsheets/d/1pwoa_QvPUiAzhcu0ZsYQfV3Zb7rxiLdbP4v7JZ6yVV4/gviz/tq?tqx=out:csv&gid=1874206095';
+const START_TIME='202607090900';
+const END_TIME='202607130900';
+const $=id=>document.getElementById(id);
+const fmt=n=>Number(n||0).toLocaleString('ko-KR');
+const norm=s=>(s||'').toString().normalize('NFKC').replace(/\s/g,'').toLowerCase();
+const parseNumber=v=>Number((v||'0').toString().replace(/[^0-9.-]/g,''))||0;
+const esc=s=>(s||'').toString().replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+const state={history:[],members:new Map(),teams:[],sort:'rate',query:''};
+
+function parseCSV(text){
+  const rows=[];let row=[],cur='',quote=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i],next=text[i+1];
+    if(ch==='"'){ if(quote&&next==='"'){cur+='"';i++;} else quote=!quote; }
+    else if(ch===','&&!quote){ row.push(cur); cur=''; }
+    else if((ch==='\n'||ch==='\r')&&!quote){ if(ch==='\r'&&next==='\n') i++; row.push(cur); if(row.some(v=>v!=='')) rows.push(row); row=[]; cur=''; }
+    else cur+=ch;
+  }
+  if(cur||row.length){ row.push(cur); if(row.some(v=>v!=='')) rows.push(row); }
+  return rows;
+}
+function findColumn(headers,names){return headers.findIndex(h=>names.some(n=>norm(h)===norm(n)||norm(h).includes(norm(n))));}
+function shortTime(raw){return raw&&raw.length>=12?raw.slice(4,6)+'.'+raw.slice(6,8)+' '+raw.slice(8,10)+':'+raw.slice(10,12):'기준값';}
+function memberName(m){return typeof m==='string'?m:(m?.name||'');}
+function memberBranch(m){return typeof m==='string'?'':(m?.branch||'');}
+
+function tierFor(rate){
+  if(rate>=18) return {key:'tier18', label:'18% 달성', perMember:10};
+  if(rate>=15) return {key:'tier15', label:'15% 달성', perMember:7};
+  if(rate>=12) return {key:'tier12', label:'12% 달성', perMember:5};
+  return {key:'', label:'진행중', perMember:0};
+}
+function snapshot(timeRaw){
+  const byTeam=new Map();
+  state.history.filter(r=>r.timeRaw&&r.timeRaw<=timeRaw).sort((a,b)=>a.timeRaw.localeCompare(b.timeRaw)).forEach(r=>byTeam.set(norm(r.team),r));
+  return byTeam;
+}
+function memberCount(team){
+  const item=state.members.get(norm(team.team));
+  if(item&&item.members.length) return item.members.length;
+  return 0;
+}
+function buildTeams(){
+  const latestTime=state.history.map(r=>r.timeRaw).filter(t=>t&&t<=END_TIME).sort().at(-1)||'';
+  const base=snapshot(START_TIME);
+  const current=snapshot(latestTime||END_TIME);
+  const keys=new Set([...base.keys(),...current.keys()]);
+  state.teams=[...keys].map(key=>{
+    const cur=current.get(key)||base.get(key);
+    const start=base.get(key)||cur;
+    const members=state.members.get(key);
+    const count=memberCount(cur);
+    const delta=Math.max(Number(cur?.result||0)-Number(start?.result||0),0);
+    const target=Number(cur?.target||start?.target||0);
+    const eventRate=target?delta/target*100:0;
+    const tier=tierFor(eventRate);
+    return {
+      team:cur?.team||start?.team||members?.team||'',
+      leader:members?.leader||'',
+      target,
+      baseResult:Number(start?.result||0),
+      result:Number(cur?.result||0),
+      delta,
+      eventRate,
+      memberCount:count,
+      tier,
+      reward:count*tier.perMember,
+      timeRaw:latestTime
+    };
+  }).filter(t=>t.team);
+  $('basisText').textContent=(latestTime?shortTime(latestTime):'데이터 없음')+' 기준';
+}
+function render(){
+  buildTeams();
+  const q=norm(state.query);
+  let list=state.teams.filter(t=>!q||norm(t.team).includes(q)||norm(t.leader).includes(q));
+  if(state.sort==='rate') list.sort((a,b)=>b.eventRate-a.eventRate||b.delta-a.delta||a.team.localeCompare(b.team,'ko'));
+  if(state.sort==='reward') list.sort((a,b)=>b.reward-a.reward||b.eventRate-a.eventRate||a.team.localeCompare(b.team,'ko'));
+  if(state.sort==='delta') list.sort((a,b)=>b.delta-a.delta||b.eventRate-a.eventRate||a.team.localeCompare(b.team,'ko'));
+  if(state.sort==='team') list.sort((a,b)=>a.team.localeCompare(b.team,'ko'));
+  const totals=state.teams.reduce((acc,t)=>{acc.target+=t.target;acc.delta+=t.delta;acc.achieved+=t.eventRate>=12?1:0;acc.reward+=t.reward;return acc;},{target:0,delta:0,achieved:0,reward:0});
+  const overall=totals.target?totals.delta/totals.target*100:0;
+  $('overallRate').textContent=overall.toFixed(1);
+  $('overallBar').style.width=Math.min(overall,100)+'%';
+  $('overallNote').textContent='추가 실적 '+fmt(totals.delta)+'천원 / 목표 '+fmt(totals.target)+'천원';
+  $('achievedTeams').textContent=fmt(totals.achieved);
+  $('totalReward').textContent=fmt(totals.reward);
+  $('listCount').textContent=fmt(list.length)+'팀';
+  $('empty').style.display=list.length?'none':'block';
+  $('teamList').innerHTML=list.map(teamCard).join('');
+}
+function teamCard(t){
+  const width=Math.min(t.eventRate/18*100,100);
+  const remain12=Math.max(Math.ceil(t.target*.12-t.delta),0);
+  const remain15=Math.max(Math.ceil(t.target*.15-t.delta),0);
+  const remain18=Math.max(Math.ceil(t.target*.18-t.delta),0);
+  return `<article class="team-card">
+    <div class="team-head">
+      <div><div class="team-title">${esc(t.team)}</div><div class="team-meta">${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</div></div>
+      <span class="tier-badge ${t.tier.key}">${t.tier.label}</span>
+    </div>
+    <div class="team-body">
+      <div class="team-score"><b>${t.eventRate.toFixed(1)}%</b><span>예상 ${fmt(t.reward)}만원</span></div>
+      <div class="team-progress"><span style="width:${width}%"></span></div>
+      <div class="team-stats">
+        <div class="stat"><span>추가 실적</span><b>${fmt(t.delta)}천원</b></div>
+        <div class="stat"><span>12%까지</span><b>${remain12?fmt(remain12)+'천원':'달성'}</b></div>
+        <div class="stat"><span>15%까지</span><b>${remain15?fmt(remain15)+'천원':'달성'}</b></div>
+        <div class="stat"><span>18%까지</span><b>${remain18?fmt(remain18)+'천원':'달성'}</b></div>
+      </div>
+    </div>
+  </article>`;
+}
+function applyRows(rows){
+  const headers=rows[0].map(v=>(v||'').trim());
+  const teamIndex=findColumn(headers,['팀명','팀','team']);
+  const targetIndex=findColumn(headers,['목표','target']);
+  const resultIndex=findColumn(headers,['실적','result']);
+  const timeIndex=findColumn(headers,['시간','업데이트','기준','time']);
+  state.history=rows.slice(1).map(r=>({
+    team:(r[teamIndex]||'').trim(),
+    target:parseNumber(r[targetIndex]),
+    result:parseNumber(r[resultIndex]),
+    timeRaw:(r[timeIndex>=0?timeIndex:3]||'').toString().replace(/\D/g,'')
+  })).filter(r=>r.team);
+}
+function applyMemberRows(rows){
+  const headers=rows[0].map(v=>(v||'').trim());
+  const teamIndex=findColumn(headers,['팀명','팀','team']);
+  const nameIndex=findColumn(headers,['이름','팀원','name','member']);
+  const branchIndex=findColumn(headers,['지점','소속','branch']);
+  const traitIndex=findColumn(headers,['특성','팀원특성','구분','trait','role']);
+  const map=new Map();
+  rows.slice(1).forEach(r=>{
+    const team=(r[teamIndex]||'').trim(),name=(r[nameIndex]||'').trim();
+    if(!team||!name) return;
+    const key=norm(team);
+    if(!map.has(key)) map.set(key,{team,members:[],leader:''});
+    const item=map.get(key);
+    const trait=traitIndex>=0?(r[traitIndex]||'').trim():'';
+    if(trait&&norm(trait).includes('팀장')) item.leader=name;
+    if(!item.members.some(m=>norm(memberName(m))===norm(name))) item.members.push({name,branch:branchIndex>=0?(r[branchIndex]||'').trim():''});
+  });
+  state.members=map;
+}
+async function load(){
+  $('basisText').textContent='데이터 불러오는 중';
+  const data=await fetch(CSV_URL+'&cacheBust='+Date.now()).then(r=>r.text());
+  applyRows(parseCSV(data));
+  try{
+    const members=await fetch(MEMBER_CSV_URL+'&cacheBust='+Date.now()).then(r=>r.text());
+    applyMemberRows(parseCSV(members));
+  }catch(e){ console.warn('member load failed',e); }
+  render();
+}
+$('q').addEventListener('input',e=>{state.query=e.target.value;render();});
+$('sort').addEventListener('change',e=>{state.sort=e.target.value;render();});
+$('refreshBtn').addEventListener('click',load);
+load().catch(err=>{console.error(err);$('basisText').textContent='데이터 연결 실패';});
+</script>
+</body>
+</html>
