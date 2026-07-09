@@ -33,6 +33,9 @@
 </style>
 <style id="friendday-polish">
 .friend-hero-main{min-height:520px;padding:26px 32px 32px;background:linear-gradient(180deg,#fff 0%,#fff 69%,#073568 69%,#052a52 100%);border-color:#dbe7fb}.poster-ribbon{height:42px;min-width:236px;margin-bottom:12px;font-size:20px;border-radius:9px}.poster-title{gap:13px}.poster-title span{font-size:64px;letter-spacing:-.01em}.poster-title strong{font-size:58px;letter-spacing:-.01em}.poster-script{margin:10px 0 22px;font-size:43px;text-decoration-thickness:4px;text-underline-offset:10px}.poster-cards{grid-template-columns:1.04fr .96fr;gap:16px;max-width:880px}.poster-card{min-height:226px;border-radius:22px;padding:24px 22px 20px}.poster-card-no{display:none}.poster-card h2{font-size:24px}.poster-card h3{margin:7px 0 16px;font-size:31px}.poster-card ul{padding:14px 16px;border-radius:17px}.poster-card li{margin:8px 0;font-size:15px}.poster-card li span{min-width:48px;font-size:13px}.reward-rows{gap:8px;padding:14px;border-radius:17px}.reward-rows span{padding:9px 12px}.reward-rows b{font-size:24px}.reward-rows em{font-size:17px;padding:6px 9px}.balloon{width:84px;height:94px;font-size:12px}.balloon-left{left:22px}.balloon-right{right:22px}.top10-board{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.top10-row{display:grid;grid-template-columns:92px minmax(0,1fr) 86px 190px;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:var(--shadow)}.top10-row.top-medal{border-color:#d9e7ff;background:linear-gradient(90deg,#f8fbff,#fff)}.top10-rank{height:40px;border-radius:14px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:950;white-space:nowrap}.top-medal .top10-rank{background:#1557d4}.top10-team{min-width:0}.top10-team b{display:block;font-size:15px;font-weight:950;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top10-team span{display:block;margin-top:3px;color:var(--sub);font-size:12px;font-weight:800}.top10-rate{text-align:right;color:#1557d4;font-size:22px;font-weight:950}.top10-meta{text-align:right;color:var(--sub);font-size:12px;font-weight:850;white-space:nowrap}.rank-podium .podium-card{display:none}@media (max-width:860px){.friend-hero-main{padding:19px 13px 22px}.poster-ribbon{min-width:200px;height:38px;font-size:17px}.poster-title span{font-size:47px}.poster-title strong{font-size:40px}.poster-script{font-size:31px;margin:8px 0 20px}.poster-cards{gap:16px}.poster-card{border-radius:20px;padding:22px 16px 17px}.poster-card h2{font-size:21px}.poster-card h3{font-size:27px}.top10-row{grid-template-columns:72px minmax(0,1fr) 68px;gap:9px;padding:11px}.top10-meta{grid-column:2/4;text-align:left}.top10-rank{height:38px;font-size:13px;border-radius:13px}.top10-rate{font-size:19px}.top10-team b{font-size:14px}.top10-team span{font-size:11px}}
+.top10-empty{background:#fff;border:1px dashed var(--line);border-radius:18px;padding:24px;text-align:center;color:var(--sub);font-size:14px;font-weight:850;box-shadow:var(--shadow)}.rank-num.pending{background:#eef2f7;color:#667085;font-size:14px}
+
+.team-card{grid-template-columns:112px minmax(0,1fr)}.rank-block{gap:8px;padding:16px 12px}.rank-num{width:82px;height:56px;border-radius:18px;line-height:1.08;text-align:center;word-break:keep-all}.rank-num.pending{font-size:15px;letter-spacing:0}.rank-label{font-size:12px;line-height:1.2;white-space:nowrap}.team-title{font-size:16px}.team-meta{font-size:12px}@media (max-width:860px){.team-card{grid-template-columns:88px minmax(0,1fr)}.rank-block{padding:13px 8px}.rank-num{width:68px;height:48px;border-radius:16px;font-size:16px}.rank-num.pending{font-size:13px}.rank-label{font-size:10.5px}.team-title{font-size:14.5px}}
 </style>
 </head>
 <body>
@@ -200,19 +203,20 @@ function render(){
   const sorted=[...state.teams].sort((a,b)=>b.eventRate-a.eventRate||b.delta-a.delta||a.team.localeCompare(b.team,'ko'));
   let prevRate=null,prevDelta=null,prevRank=0;
   let ranked=sorted.map((t,i)=>{
-    const sameAsPrev=i>0&&Math.abs(t.eventRate-prevRate)<0.0001&&t.delta===prevDelta;
-    const rank=sameAsPrev?prevRank:i+1;
+    const rankable=t.delta>0;
+    const sameAsPrev=rankable&&i>0&&Math.abs(t.eventRate-prevRate)<0.0001&&t.delta===prevDelta;
+    const rank=rankable?(sameAsPrev?prevRank:i+1):null;
     prevRate=t.eventRate; prevDelta=t.delta; prevRank=rank;
-    return {...t,rank};
+    return {...t,rank,rankable};
   });
   const rankCounts=ranked.reduce((map,t)=>map.set(t.rank,(map.get(t.rank)||0)+1),new Map());
-  ranked=ranked.map(t=>({...t,tied:(rankCounts.get(t.rank)||0)>1}));
+  ranked=ranked.map(t=>({...t,tied:t.rankable&&(rankCounts.get(t.rank)||0)>1}));
   const rankMap=new Map(ranked.map(t=>[norm(t.team),t.rank]));
   const q=norm(state.query);
   let list=ranked.filter(t=>!q||norm(t.team).includes(q)||norm(t.leader).includes(q));
-  if(state.sort==='rate') list.sort((a,b)=>a.rank-b.rank);
-  if(state.sort==='reward') list.sort((a,b)=>b.reward-a.reward||a.rank-b.rank);
-  if(state.sort==='delta') list.sort((a,b)=>b.delta-a.delta||a.rank-b.rank);
+  if(state.sort==='rate') list.sort((a,b)=>(a.rank??9999)-(b.rank??9999)||a.team.localeCompare(b.team,'ko'));
+  if(state.sort==='reward') list.sort((a,b)=>b.reward-a.reward||(a.rank??9999)-(b.rank??9999));
+  if(state.sort==='delta') list.sort((a,b)=>b.delta-a.delta||(a.rank??9999)-(b.rank??9999));
   if(state.sort==='team') list.sort((a,b)=>a.team.localeCompare(b.team,'ko'));
   list=list.map(t=>({...t,rank:rankMap.get(norm(t.team))||t.rank}));
   const totals=state.teams.reduce((acc,t)=>{acc.target+=t.target;acc.delta+=t.delta;acc.achieved+=t.eventRate>=12?1:0;acc.reward+=t.reward;return acc;},{target:0,delta:0,achieved:0,reward:0});
@@ -226,12 +230,13 @@ function render(){
   $('empty').style.display=list.length?'none':'block';
   const podium=$('rankPodium');
   if(podium){
-    podium.innerHTML=ranked.slice(0,10).map((t,i)=>`<article class="top10-row ${i<3?'top-medal':''}">
+    const topRows=ranked.filter(t=>t.rankable).slice(0,10);
+    podium.innerHTML=topRows.length?topRows.map((t,i)=>`<article class="top10-row ${i<3?'top-medal':''}">
       <div class="top10-rank">${t.tied?`공동 ${t.rank}등`:`${t.rank}등`}</div>
       <div class="top10-team"><b>${esc(t.team)}</b><span>${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</span></div>
       <div class="top10-rate">${t.eventRate.toFixed(1)}%</div>
       <div class="top10-meta">추가 ${fmt(t.delta)}천원 · 예상 ${fmt(t.reward)}만원</div>
-    </article>`).join('');
+    </article>`).join(''):`<article class="top10-empty">추가 실적 반영 후 순위가 표시됩니다.</article>`;
   }
   $('teamList').innerHTML=list.map(teamCard).join('');
 }
@@ -240,8 +245,9 @@ function teamCard(t){
   const remain12=Math.max(Math.ceil(t.target*.12-t.delta),0);
   const remain15=Math.max(Math.ceil(t.target*.15-t.delta),0);
   const remain18=Math.max(Math.ceil(t.target*.18-t.delta),0);
+  const rankText=t.rankable?(t.tied?`공동 ${t.rank}등`:`${t.rank}등`):'집계 전';
   return `<article class="team-card">
-    <div class="rank-block"><div class="rank-num">${t.tied?`공동 ${t.rank}등`:`${t.rank}등`}</div><div class="rank-label">현재 순위</div></div>
+    <div class="rank-block"><div class="rank-num ${t.rankable?'':'pending'}">${rankText}</div><div class="rank-label">${t.rankable?'현재 순위':'순위 대기'}</div></div>
     <div class="team-content">
       <div class="team-head">
         <div><div class="team-title">${esc(t.team)}</div><div class="team-meta">${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</div></div>
