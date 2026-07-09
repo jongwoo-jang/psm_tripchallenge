@@ -2138,6 +2138,7 @@ function setupFrienddayPopup(){
   document.addEventListener('keydown', e => {
     if(e.key === 'Escape' && popup.classList.contains('show')) close();
   });
+  if(new URLSearchParams(location.search).has('team')) return;
   if(localStorage.getItem(storageKey) !== todayKey){
     setTimeout(() => popup.classList.add('show'), 650);
   }
