@@ -1915,7 +1915,24 @@ function focusTeam(name){
     render();
     el = $(targetId);
   }
-  if(el){ el.scrollIntoView({ behavior:'smooth', block:'center' }); el.classList.add('highlight'); setTimeout(() => el.classList.remove('highlight'), 1800); }
+  if(el){
+    el.classList.add('open');
+    el.querySelector('.team-summary')?.setAttribute('aria-expanded', 'true');
+    const members = el.querySelector('.members');
+    const membersBtn = [...el.querySelectorAll('.team-actions .link-btn')].find(btn => btn.textContent.includes('팀원'));
+    if(members){
+      members.classList.add('open');
+      if(membersBtn) membersBtn.textContent = '접기';
+    }
+    el.scrollIntoView({ behavior:'smooth', block:'center' });
+    el.classList.add('highlight');
+    setTimeout(() => el.classList.remove('highlight'), 1800);
+  }
+}
+
+function focusTeamFromQuery(){
+  const p = new URLSearchParams(location.search).get('team');
+  if(p) focusTeam(encodeURIComponent(p));
 }
 
 async function shareTeam(name){
@@ -2076,8 +2093,10 @@ async function loadSheet(){
       if(!memberRes.ok) throw new Error('member network');
       applyMemberRows(parseCSV(await memberRes.text()));
       render();
+      focusTeamFromQuery();
     }catch(memberError){
       console.warn('Member CSV load failed:', memberError);
+      focusTeamFromQuery();
     }
   }catch(e){
     console.warn('CSV load failed:', e);
@@ -2089,6 +2108,7 @@ async function loadSheet(){
     $('syncState').textContent = '기본 데이터 표시';
     showNotice('시트 연결 지연. 기본 데이터를 표시합니다.', 'warn');
     render();
+    focusTeamFromQuery();
   }finally{
     state.loading = false;
     $('refreshBtn').disabled = false;
@@ -2145,7 +2165,7 @@ function setupFrienddayPopup(){
 }
 setTheme(localStorage.getItem('psm-theme'));
 setBasis(); setupMobileAppMode(); arrangeProductFlow(); render(); setupSectionSpy(); setupFrienddayPopup(); loadSheet();
-setTimeout(() => { const p = new URLSearchParams(location.search).get('team'); if(p) focusTeam(encodeURIComponent(p)); }, 700);
+setTimeout(focusTeamFromQuery, 700);
 </script>
 </body>
 </html>
