@@ -1927,12 +1927,18 @@ function focusTeam(name){
     el.scrollIntoView({ behavior:'smooth', block:'center' });
     el.classList.add('highlight');
     setTimeout(() => el.classList.remove('highlight'), 1800);
+    return true;
   }
+  return false;
 }
 
-function focusTeamFromQuery(){
+function focusTeamFromQuery(retry = 0){
   const p = new URLSearchParams(location.search).get('team');
-  if(p) focusTeam(encodeURIComponent(p));
+  if(!p) return;
+  const opened = focusTeam(encodeURIComponent(p));
+  if(!opened && retry < 20){
+    setTimeout(() => focusTeamFromQuery(retry + 1), 350);
+  }
 }
 
 async function shareTeam(name){
