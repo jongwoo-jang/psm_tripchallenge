@@ -23,7 +23,9 @@
 .team-body{padding:0 18px 16px}.team-score{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.team-score b{font-size:28px;line-height:1;font-weight:950}.team-score span{color:var(--sub);font-size:12px;font-weight:800}.team-progress{height:9px;border-radius:999px;background:#edf2f7;overflow:hidden;margin-top:12px}.team-progress span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green))}.team-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.stat{background:#f8fafc;border:1px solid #eef2f7;border-radius:14px;padding:10px}.stat span{display:block;color:var(--sub);font-size:11px;font-weight:760}.stat b{display:block;margin-top:4px;font-size:13px;font-weight:900;white-space:nowrap}.empty{display:none;text-align:center;color:var(--sub);font-weight:850;padding:42px 10px;background:var(--card);border:1px dashed var(--line);border-radius:20px}
 .bottom-nav{position:fixed;left:50%;right:auto;transform:translateX(-50%);bottom:12px;z-index:40;width:min(440px,calc(100% - 24px));border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.84);backdrop-filter:blur(22px) saturate(1.2);box-shadow:0 12px 30px rgba(20,31,47,.14);padding:8px}.nav-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.nav-inner button{height:42px;border:0;border-radius:15px;background:transparent;color:var(--sub);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:4px}.nav-inner button.active{background:#111827;color:#fff}.nav-inner svg{width:16px;height:16px;flex:none}
 @media (max-width:860px){.app{padding:14px 16px 24px}.hero{display:block}.summary{grid-template-columns:1fr 1fr;margin-top:12px}.metric.primary{grid-column:1/3}.rule-grid{grid-template-columns:1fr}.team-list{grid-template-columns:1fr}.search-row{grid-template-columns:1fr}.sort-select{width:100%}h1{font-size:31px}.hero-main{min-height:auto;padding:21px}.team-stats{grid-template-columns:repeat(2,1fr)}}
-</style>
+<style id="friendday-rank-layout">
+.hero{grid-template-columns:.9fr 1.1fr}.hero-main{min-height:214px}.summary{grid-template-columns:1fr 1fr 1fr}.metric.primary{grid-column:1/4}.metric.rank-focus{background:#111827;color:#fff;border-color:#111827}.metric.rank-focus .metric-label,.metric.rank-focus .metric-note{color:rgba(255,255,255,.72)}.rank-podium{display:grid;grid-template-columns:1.08fr .96fr .96fr;gap:10px;margin-top:12px}.podium-card{position:relative;min-height:132px;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:16px;overflow:hidden}.podium-card:before{content:"";position:absolute;right:-32px;top:-36px;width:104px;height:104px;border-radius:50%;background:rgba(45,108,223,.1)}.podium-rank{min-width:58px;height:48px;padding:0 10px;border-radius:17px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:950}.podium-card.top1{background:linear-gradient(135deg,#111827,#1f6ed4);color:#fff;border-color:transparent}.podium-card.top1:before{background:rgba(255,255,255,.16)}.podium-card.top1 .podium-rank{background:#fff;color:#111827}.podium-team{position:relative;margin-top:13px;font-size:16px;font-weight:950;line-height:1.28;word-break:keep-all}.podium-rate{position:relative;margin-top:8px;font-size:28px;line-height:1;font-weight:950}.podium-meta{position:relative;margin-top:7px;color:var(--sub);font-size:12px;font-weight:800}.podium-card.top1 .podium-meta{color:rgba(255,255,255,.76)}.team-list{grid-template-columns:1fr}.team-card{display:grid;grid-template-columns:94px minmax(0,1fr);align-items:stretch}.rank-block{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#f8fafc;border-right:1px solid var(--line);padding:14px 10px}.rank-num{width:68px;height:58px;border-radius:20px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:950}.rank-label{color:var(--sub);font-size:11px;font-weight:900}.team-content{min-width:0}.team-head{grid-template-columns:minmax(0,1fr) auto;padding-bottom:8px}.team-body{padding-bottom:18px}.team-score b{font-size:34px}.team-score span{font-size:13px}.team-stats{grid-template-columns:1.2fr 1fr 1fr 1fr}.tier-badge{height:30px;border-radius:12px}.section-title.rank-title{align-items:center}.section-title.rank-title h2{font-size:20px}@media (max-width:860px){.summary{grid-template-columns:1fr 1fr}.metric.primary{grid-column:1/3}.rank-podium{grid-template-columns:1fr}.team-card{grid-template-columns:76px minmax(0,1fr)}.rank-num{width:50px;height:50px;border-radius:17px;font-size:18px}.team-stats{grid-template-columns:repeat(2,1fr)}.team-score{align-items:flex-start;flex-direction:column}.team-score b{font-size:31px}}
+</style></style>
 </head>
 <body>
 <main class="app">
@@ -60,29 +62,22 @@
     </section>
   </section>
 
-  <section>
-    <div class="section-title"><h2>지급 구간</h2><span>팀원 수 기준 지급</span></div>
-    <div class="rule-grid">
-      <article class="rule-card"><b>12%</b><span>팀원당 5만원 지급</span></article>
-      <article class="rule-card"><b>15%</b><span>팀원당 7만원 지급</span></article>
-      <article class="rule-card"><b>18%</b><span>팀원당 10만원 지급</span></article>
-    </div>
-  </section>
+  <section id="rankBoard"><div class="section-title rank-title"><h2>친구데이 현재 순위</h2><span>진척률 기준 TOP3</span></div><div class="rank-podium" id="rankPodium"></div></section>
 
   <section class="toolbar">
     <div class="search-row">
       <label class="search" for="q"><input id="q" type="search" placeholder="팀명 또는 팀장 검색" autocomplete="off"></label>
       <select class="sort-select" id="sort" aria-label="정렬">
-        <option value="rate">진척률순</option>
-        <option value="reward">지급액순</option>
-        <option value="delta">추가실적순</option>
+        <option value="rate">순위순</option>
+        <option value="reward">예상 지급액순</option>
+        <option value="delta">추가 실적순</option>
         <option value="team">팀명순</option>
       </select>
     </div>
   </section>
 
   <section id="teams">
-    <div class="section-title"><h2>팀별 친구데이</h2><span id="listCount">0팀</span></div>
+    <div class="section-title rank-title"><h2>전체 순위</h2><span id="listCount">0팀</span></div>
     <div class="team-list" id="teamList"></div>
     <div class="empty" id="empty">표시할 팀이 없습니다.</div>
   </section>
@@ -90,10 +85,10 @@
 
 <nav class="bottom-nav" aria-label="하단 메뉴">
   <div class="nav-inner">
-    <button type="button" onclick="location.href='psm_dashboard_optimized.html'"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5M5 10v10h14V10M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>홈</button>
-    <button type="button" onclick="location.href='psm_dashboard_optimized.html#trend'"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M7 15l3-3 3 2 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>추이</button>
-    <button type="button" onclick="location.href='psm_dashboard_optimized.html#top'"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>랭킹</button>
-    <button type="button" onclick="location.href='psm_dashboard_optimized.html#teams'"><svg viewBox="0 0 24 24" fill="none"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 1 1-8 0m8 0h3a3 3 0 0 1 3 3v4h-5m-9-7H5a3 3 0 0 0-3 3v4h5m1-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>팀</button>
+    <button type="button" onclick="location.href='index.html'"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11.5 12 4l9 7.5M5 10v10h14V10M9 20v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>홈</button>
+    <button type="button" onclick="location.href='index.html#trend'"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M7 15l3-3 3 2 5-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>추이</button>
+    <button type="button" onclick="location.href='index.html#top'"><svg viewBox="0 0 24 24" fill="none"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 2h3v2a3 3 0 0 1-3 3M7 6H4v2a3 3 0 0 0 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>랭킹</button>
+    <button type="button" onclick="location.href='index.html#teams'"><svg viewBox="0 0 24 24" fill="none"><path d="M16 11a4 4 0 1 0-8 0m8 0a4 4 0 1 1-8 0m8 0h3a3 3 0 0 1 3 3v4h-5m-9-7H5a3 3 0 0 0-3 3v4h5m1-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>팀</button>
     <button class="active" type="button"><svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5 12 16l3.5-3.5M12 21s-7-4.2-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.8-7 10-7 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>친구데이</button>
   </div>
 </nav>
@@ -175,12 +170,24 @@ function buildTeams(){
 }
 function render(){
   buildTeams();
+  const sorted=[...state.teams].sort((a,b)=>b.eventRate-a.eventRate||b.delta-a.delta||a.team.localeCompare(b.team,'ko'));
+  let prevRate=null,prevDelta=null,prevRank=0;
+  let ranked=sorted.map((t,i)=>{
+    const sameAsPrev=i>0&&Math.abs(t.eventRate-prevRate)<0.0001&&t.delta===prevDelta;
+    const rank=sameAsPrev?prevRank:i+1;
+    prevRate=t.eventRate; prevDelta=t.delta; prevRank=rank;
+    return {...t,rank};
+  });
+  const rankCounts=ranked.reduce((map,t)=>map.set(t.rank,(map.get(t.rank)||0)+1),new Map());
+  ranked=ranked.map(t=>({...t,tied:(rankCounts.get(t.rank)||0)>1}));
+  const rankMap=new Map(ranked.map(t=>[norm(t.team),t.rank]));
   const q=norm(state.query);
-  let list=state.teams.filter(t=>!q||norm(t.team).includes(q)||norm(t.leader).includes(q));
-  if(state.sort==='rate') list.sort((a,b)=>b.eventRate-a.eventRate||b.delta-a.delta||a.team.localeCompare(b.team,'ko'));
-  if(state.sort==='reward') list.sort((a,b)=>b.reward-a.reward||b.eventRate-a.eventRate||a.team.localeCompare(b.team,'ko'));
-  if(state.sort==='delta') list.sort((a,b)=>b.delta-a.delta||b.eventRate-a.eventRate||a.team.localeCompare(b.team,'ko'));
+  let list=ranked.filter(t=>!q||norm(t.team).includes(q)||norm(t.leader).includes(q));
+  if(state.sort==='rate') list.sort((a,b)=>a.rank-b.rank);
+  if(state.sort==='reward') list.sort((a,b)=>b.reward-a.reward||a.rank-b.rank);
+  if(state.sort==='delta') list.sort((a,b)=>b.delta-a.delta||a.rank-b.rank);
   if(state.sort==='team') list.sort((a,b)=>a.team.localeCompare(b.team,'ko'));
+  list=list.map(t=>({...t,rank:rankMap.get(norm(t.team))||t.rank}));
   const totals=state.teams.reduce((acc,t)=>{acc.target+=t.target;acc.delta+=t.delta;acc.achieved+=t.eventRate>=12?1:0;acc.reward+=t.reward;return acc;},{target:0,delta:0,achieved:0,reward:0});
   const overall=totals.target?totals.delta/totals.target*100:0;
   $('overallRate').textContent=overall.toFixed(1);
@@ -190,6 +197,10 @@ function render(){
   $('totalReward').textContent=fmt(totals.reward);
   $('listCount').textContent=fmt(list.length)+'팀';
   $('empty').style.display=list.length?'none':'block';
+  const podium=$('rankPodium');
+  if(podium){
+    podium.innerHTML=ranked.slice(0,3).map((t,i)=>`<article class="podium-card ${i===0?'top1':''}"><div class="podium-rank">${t.tied?`공동 ${t.rank}등`:`${t.rank}등`}</div><div class="podium-team">${esc(t.team)}</div><div class="podium-rate">${t.eventRate.toFixed(1)}%</div><div class="podium-meta">추가 ${fmt(t.delta)}천원 · 예상 ${fmt(t.reward)}만원</div></article>`).join('');
+  }
   $('teamList').innerHTML=list.map(teamCard).join('');
 }
 function teamCard(t){
@@ -198,18 +209,21 @@ function teamCard(t){
   const remain15=Math.max(Math.ceil(t.target*.15-t.delta),0);
   const remain18=Math.max(Math.ceil(t.target*.18-t.delta),0);
   return `<article class="team-card">
-    <div class="team-head">
-      <div><div class="team-title">${esc(t.team)}</div><div class="team-meta">${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</div></div>
-      <span class="tier-badge ${t.tier.key}">${t.tier.label}</span>
-    </div>
-    <div class="team-body">
-      <div class="team-score"><b>${t.eventRate.toFixed(1)}%</b><span>예상 ${fmt(t.reward)}만원</span></div>
-      <div class="team-progress"><span style="width:${width}%"></span></div>
-      <div class="team-stats">
-        <div class="stat"><span>추가 실적</span><b>${fmt(t.delta)}천원</b></div>
-        <div class="stat"><span>12%까지</span><b>${remain12?fmt(remain12)+'천원':'달성'}</b></div>
-        <div class="stat"><span>15%까지</span><b>${remain15?fmt(remain15)+'천원':'달성'}</b></div>
-        <div class="stat"><span>18%까지</span><b>${remain18?fmt(remain18)+'천원':'달성'}</b></div>
+    <div class="rank-block"><div class="rank-num">${t.tied?`공동 ${t.rank}등`:`${t.rank}등`}</div><div class="rank-label">현재 순위</div></div>
+    <div class="team-content">
+      <div class="team-head">
+        <div><div class="team-title">${esc(t.team)}</div><div class="team-meta">${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</div></div>
+        <span class="tier-badge ${t.tier.key}">${t.tier.label}</span>
+      </div>
+      <div class="team-body">
+        <div class="team-score"><b>${t.eventRate.toFixed(1)}%</b><span>추가 ${fmt(t.delta)}천원 · 예상 ${fmt(t.reward)}만원</span></div>
+        <div class="team-progress"><span style="width:${width}%"></span></div>
+        <div class="team-stats">
+          <div class="stat"><span>추가 실적</span><b>${fmt(t.delta)}천원</b></div>
+          <div class="stat"><span>12%까지</span><b>${remain12?fmt(remain12)+'천원':'달성'}</b></div>
+          <div class="stat"><span>15%까지</span><b>${remain15?fmt(remain15)+'천원':'달성'}</b></div>
+          <div class="stat"><span>18%까지</span><b>${remain18?fmt(remain18)+'천원':'달성'}</b></div>
+        </div>
       </div>
     </div>
   </article>`;
