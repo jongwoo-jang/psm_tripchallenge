@@ -141,7 +141,7 @@ const esc=s=>(s||'').toString().replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;',
 const state={history:[],members:new Map(),teams:[],sort:'rate',query:''};
 const INDEX_TEAM_LEADERS={"왈(曰),왈(曰),왈(曰)":"방은경","의.일아(의정부+일산)걱정마♡":"최봉애","오(5)마이갓동-":"남궁희","떠나자ㆍ남동!!!":"김영미","오(5)지게 달리는 언니들~":"김수현","앗!싸리":"정경화","매출원정대":"김진선","놀러가려고 일한 조":"김미록","즐겁게 삽시다.":"김종미","도토리 오형제":"허혜경","원++식스":"유정화","우리가 간다 하와이!!":"한은희","광(미칠광)열 하게 놀아볼까":"김정화","마음은 하나~":"한예서","소통은 내돈내삼, 트립은 니돈내삼":"김은주","여행가자~!":"조현숙","시너지크루":"이정희","가즈아~ 제주로":"황세비","신촌 드림투어":"김혜원","출근금지 구역으로 출발":"이경희","일당백5공주":"조선영","나 오늘 밥 안해":"신유경","우리가유~":"전성미","4륜구동":"김희묘","모기보다 센 빨대":"이지영","대충~이겼슈~":"주인애","타코":"서명옥","광주교차":"송경하","美親여자들":"박정희","중부걸스 체결 어벤저스~":"현용은","우리의 7월은 제대로 대박7거야":"조유이","구상용의 아이들 외 1인":"기유리","욱이라면어디든":"김형욱","성경(성남경기)드림":"최명호","대권주자":"박서윤","나 오늘 집에 안갈래":"이혜영","행복찾기":"예윤정","독수리 오남매":"박성희","기유리 돌아와":"박지영"};
 const INDEX_LEADER_BY_KEY=new Map(Object.entries(INDEX_TEAM_LEADERS).map(([team,leader])=>[norm(team),leader]));
-const teamDetailUrl=team=>'index.html?team='+encodeURIComponent(team||'');
+const teamDetailUrl=team=>'index.html?team='+encodeURIComponent(team||'')+'&open=detail#teams';
 
 function parseCSV(text){
   const rows=[];let row=[],cur='',quote=false;
