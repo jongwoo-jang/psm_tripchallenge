@@ -23,9 +23,17 @@
 .team-body{padding:0 18px 16px}.team-score{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.team-score b{font-size:28px;line-height:1;font-weight:950}.team-score span{color:var(--sub);font-size:12px;font-weight:800}.team-progress{height:9px;border-radius:999px;background:#edf2f7;overflow:hidden;margin-top:12px}.team-progress span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green))}.team-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.stat{background:#f8fafc;border:1px solid #eef2f7;border-radius:14px;padding:10px}.stat span{display:block;color:var(--sub);font-size:11px;font-weight:760}.stat b{display:block;margin-top:4px;font-size:13px;font-weight:900;white-space:nowrap}.empty{display:none;text-align:center;color:var(--sub);font-weight:850;padding:42px 10px;background:var(--card);border:1px dashed var(--line);border-radius:20px}
 .bottom-nav{position:fixed;left:50%;right:auto;transform:translateX(-50%);bottom:12px;z-index:40;width:min(440px,calc(100% - 24px));border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.84);backdrop-filter:blur(22px) saturate(1.2);box-shadow:0 12px 30px rgba(20,31,47,.14);padding:8px}.nav-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.nav-inner button{height:42px;border:0;border-radius:15px;background:transparent;color:var(--sub);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:4px}.nav-inner button.active{background:#111827;color:#fff}.nav-inner svg{width:16px;height:16px;flex:none}
 @media (max-width:860px){.app{padding:14px 16px 24px}.hero{display:block}.summary{grid-template-columns:1fr 1fr;margin-top:12px}.metric.primary{grid-column:1/3}.rule-grid{grid-template-columns:1fr}.team-list{grid-template-columns:1fr}.search-row{grid-template-columns:1fr}.sort-select{width:100%}h1{font-size:31px}.hero-main{min-height:auto;padding:21px}.team-stats{grid-template-columns:repeat(2,1fr)}}
-<style id="friendday-rank-layout">
+/* friendday-rank-layout */
 .hero{grid-template-columns:.9fr 1.1fr}.hero-main{min-height:214px}.summary{grid-template-columns:1fr 1fr 1fr}.metric.primary{grid-column:1/4}.metric.rank-focus{background:#111827;color:#fff;border-color:#111827}.metric.rank-focus .metric-label,.metric.rank-focus .metric-note{color:rgba(255,255,255,.72)}.rank-podium{display:grid;grid-template-columns:1.08fr .96fr .96fr;gap:10px;margin-top:12px}.podium-card{position:relative;min-height:132px;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:16px;overflow:hidden}.podium-card:before{content:"";position:absolute;right:-32px;top:-36px;width:104px;height:104px;border-radius:50%;background:rgba(45,108,223,.1)}.podium-rank{min-width:58px;height:48px;padding:0 10px;border-radius:17px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:950}.podium-card.top1{background:linear-gradient(135deg,#111827,#1f6ed4);color:#fff;border-color:transparent}.podium-card.top1:before{background:rgba(255,255,255,.16)}.podium-card.top1 .podium-rank{background:#fff;color:#111827}.podium-team{position:relative;margin-top:13px;font-size:16px;font-weight:950;line-height:1.28;word-break:keep-all}.podium-rate{position:relative;margin-top:8px;font-size:28px;line-height:1;font-weight:950}.podium-meta{position:relative;margin-top:7px;color:var(--sub);font-size:12px;font-weight:800}.podium-card.top1 .podium-meta{color:rgba(255,255,255,.76)}.team-list{grid-template-columns:1fr}.team-card{display:grid;grid-template-columns:94px minmax(0,1fr);align-items:stretch}.rank-block{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#f8fafc;border-right:1px solid var(--line);padding:14px 10px}.rank-num{width:68px;height:58px;border-radius:20px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:950}.rank-label{color:var(--sub);font-size:11px;font-weight:900}.team-content{min-width:0}.team-head{grid-template-columns:minmax(0,1fr) auto;padding-bottom:8px}.team-body{padding-bottom:18px}.team-score b{font-size:34px}.team-score span{font-size:13px}.team-stats{grid-template-columns:1.2fr 1fr 1fr 1fr}.tier-badge{height:30px;border-radius:12px}.section-title.rank-title{align-items:center}.section-title.rank-title h2{font-size:20px}@media (max-width:860px){.summary{grid-template-columns:1fr 1fr}.metric.primary{grid-column:1/3}.rank-podium{grid-template-columns:1fr}.team-card{grid-template-columns:76px minmax(0,1fr)}.rank-num{width:50px;height:50px;border-radius:17px;font-size:18px}.team-stats{grid-template-columns:repeat(2,1fr)}.team-score{align-items:flex-start;flex-direction:column}.team-score b{font-size:31px}}
-</style></style>
+.friend-hero-main{min-height:560px;background:linear-gradient(180deg,#fff 0%,#fff 72%,#082f63 72%,#04264f 100%);color:var(--text);border:1px solid #d7e5ff;border-radius:28px;display:block;text-align:center;padding:24px 24px 30px;overflow:hidden}.friend-hero-main:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 13% 18%,rgba(255,44,109,.14) 0 34px,transparent 35px),radial-gradient(circle at 86% 18%,rgba(45,108,223,.16) 0 38px,transparent 39px),linear-gradient(180deg,rgba(255,255,255,.4),transparent 48%);pointer-events:none}.friend-hero-main:after{display:none}.poster-ribbon{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:260px;height:48px;margin:0 auto 14px;border-radius:10px;background:linear-gradient(180deg,#ff2b25,#d80f14);color:#fff;font-size:23px;font-weight:950;box-shadow:0 10px 18px rgba(216,15,20,.22);text-shadow:0 2px 0 rgba(0,0,0,.18)}.poster-ribbon:before,.poster-ribbon:after{content:"";position:absolute;top:8px;border-top:20px solid #c50b12;border-bottom:20px solid #c50b12}.poster-ribbon:before{right:100%;border-left:22px solid transparent}.poster-ribbon:after{left:100%;border-right:22px solid transparent}.poster-title{position:relative;display:flex;align-items:baseline;justify-content:center;gap:16px;line-height:.95}.poster-title span{font-size:72px;font-weight:950;color:#1557d4;letter-spacing:0}.poster-title strong{font-size:66px;font-weight:950;color:#050505}.poster-script{position:relative;margin:14px 0 20px;color:#e91e63;font-size:48px;font-weight:950;line-height:1;font-family:\"Segoe Print\",\"Comic Sans MS\",Pretendard,sans-serif;transform:rotate(-2deg);text-decoration:underline;text-decoration-thickness:5px;text-underline-offset:12px}.poster-cards{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:930px;margin:0 auto}.poster-card{position:relative;min-height:250px;border-radius:25px;padding:44px 24px 22px;text-align:left;color:#fff;box-shadow:0 16px 34px rgba(7,33,73,.2),inset 0 0 0 3px rgba(255,255,255,.7)}.poster-blue{background:linear-gradient(180deg,#075cd6,#003b97)}.poster-pink{background:linear-gradient(180deg,#f42183,#bf0955)}.poster-card-no{position:absolute;left:50%;top:-28px;transform:translateX(-50%);width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:inherit;border:4px solid rgba(255,255,255,.88);font-size:34px;font-weight:950;box-shadow:0 8px 18px rgba(0,0,0,.18)}.poster-card h2{margin:0;font-size:29px;font-weight:950;text-shadow:0 2px 0 rgba(0,0,0,.18)}.poster-card h3{margin:8px 0 20px;color:#ffeb1a;font-size:36px;line-height:1;font-weight:950;text-shadow:0 3px 0 rgba(0,0,0,.18)}.poster-card ul{list-style:none;margin:0;padding:16px 18px;background:#fff;border-radius:20px;color:#111827}.poster-card li{display:flex;align-items:center;gap:12px;margin:10px 0;font-size:17px;font-weight:850}.poster-card li span{min-width:52px;border-radius:999px;background:#0749a8;color:#fff;text-align:center;padding:5px 9px;font-size:14px}.poster-pink li span{background:#d81b60}.reward-rows{display:grid;gap:10px;background:#fff;border-radius:20px;padding:16px}.reward-rows span{display:flex;align-items:center;justify-content:space-between;border:1px solid #dfe7f5;border-radius:14px;background:#fbfdff;padding:11px 14px}.reward-rows b{color:#0f4ab8;font-size:27px;font-weight:950}.reward-rows em{font-style:normal;background:#0f4ab8;color:#ffeb1a;border-radius:9px;padding:7px 10px;font-size:20px;font-weight:950}.poster-pink .reward-rows b{color:#d81b60}.poster-pink .reward-rows em{background:#d81b60}.balloon{position:absolute;top:42px;width:98px;height:108px;border-radius:52% 52% 48% 48%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;line-height:1.25;font-weight:950;z-index:1;box-shadow:inset 10px 13px 18px rgba(255,255,255,.34),0 10px 18px rgba(0,0,0,.1)}.balloon:after{content:"";position:absolute;left:50%;top:100%;width:1px;height:82px;background:rgba(100,116,139,.28)}.balloon-left{left:26px;background:#f06292;transform:rotate(-9deg)}.balloon-right{right:26px;background:#3b63df;transform:rotate(9deg)}.confetti i{position:absolute;z-index:1;width:8px;height:18px;border-radius:2px;background:#ffcc00;transform:rotate(24deg)}.confetti i:nth-child(1){left:18%;top:26px;background:#00a86b}.confetti i:nth-child(2){left:27%;top:72px;background:#1557d4;transform:rotate(-28deg)}.confetti i:nth-child(3){left:11%;top:150px;background:#ff4b91}.confetti i:nth-child(4){right:18%;top:38px;background:#1557d4}.confetti i:nth-child(5){right:10%;top:148px;background:#37b24d}.confetti i:nth-child(6){right:28%;top:124px;background:#ff8a00}.confetti i:nth-child(7){left:42%;top:170px;background:#ffcc00}.confetti i:nth-child(8){right:40%;top:68px;background:#ff4b91}.hero-pills{display:none}@media (max-width:860px){.friend-hero-main{min-height:auto;padding:20px 14px 24px;background:linear-gradient(180deg,#fff 0%,#fff 78%,#082f63 78%,#04264f 100%)}.poster-ribbon{min-width:210px;height:42px;font-size:19px}.poster-title{display:block}.poster-title span{display:block;font-size:54px}.poster-title strong{display:block;font-size:45px;margin-top:4px}.poster-script{font-size:35px;margin:12px 0 22px}.poster-cards{grid-template-columns:1fr;gap:34px}.poster-card{min-height:0;padding:38px 18px 18px}.poster-card h2{font-size:24px}.poster-card h3{font-size:30px}.poster-card li{font-size:15px}.reward-rows b{font-size:23px}.reward-rows em{font-size:17px}.balloon{display:none}.confetti i:nth-child(n+5){display:none}}
+</style>
+<style id="friendday-poster-fix">
+.hero{display:block}.hero>.summary{margin-top:14px}.poster-cards{max-width:930px}.friend-hero-main{width:100%}
+@media (min-width:861px){.summary{grid-template-columns:2fr 1fr 1fr}.metric.primary{grid-column:auto}.poster-card{min-height:238px}}
+</style>
+<style id="friendday-polish">
+.friend-hero-main{min-height:520px;padding:26px 32px 32px;background:linear-gradient(180deg,#fff 0%,#fff 69%,#073568 69%,#052a52 100%);border-color:#dbe7fb}.poster-ribbon{height:42px;min-width:236px;margin-bottom:12px;font-size:20px;border-radius:9px}.poster-title{gap:13px}.poster-title span{font-size:64px;letter-spacing:-.01em}.poster-title strong{font-size:58px;letter-spacing:-.01em}.poster-script{margin:10px 0 22px;font-size:43px;text-decoration-thickness:4px;text-underline-offset:10px}.poster-cards{grid-template-columns:1.04fr .96fr;gap:16px;max-width:880px}.poster-card{min-height:226px;border-radius:22px;padding:24px 22px 20px}.poster-card-no{display:none}.poster-card h2{font-size:24px}.poster-card h3{margin:7px 0 16px;font-size:31px}.poster-card ul{padding:14px 16px;border-radius:17px}.poster-card li{margin:8px 0;font-size:15px}.poster-card li span{min-width:48px;font-size:13px}.reward-rows{gap:8px;padding:14px;border-radius:17px}.reward-rows span{padding:9px 12px}.reward-rows b{font-size:24px}.reward-rows em{font-size:17px;padding:6px 9px}.balloon{width:84px;height:94px;font-size:12px}.balloon-left{left:22px}.balloon-right{right:22px}.top10-board{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}.top10-row{display:grid;grid-template-columns:92px minmax(0,1fr) 86px 190px;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:var(--shadow)}.top10-row.top-medal{border-color:#d9e7ff;background:linear-gradient(90deg,#f8fbff,#fff)}.top10-rank{height:40px;border-radius:14px;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:950;white-space:nowrap}.top-medal .top10-rank{background:#1557d4}.top10-team{min-width:0}.top10-team b{display:block;font-size:15px;font-weight:950;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top10-team span{display:block;margin-top:3px;color:var(--sub);font-size:12px;font-weight:800}.top10-rate{text-align:right;color:#1557d4;font-size:22px;font-weight:950}.top10-meta{text-align:right;color:var(--sub);font-size:12px;font-weight:850;white-space:nowrap}.rank-podium .podium-card{display:none}@media (max-width:860px){.friend-hero-main{padding:19px 13px 22px}.poster-ribbon{min-width:200px;height:38px;font-size:17px}.poster-title span{font-size:47px}.poster-title strong{font-size:40px}.poster-script{font-size:31px;margin:8px 0 20px}.poster-cards{gap:16px}.poster-card{border-radius:20px;padding:22px 16px 17px}.poster-card h2{font-size:21px}.poster-card h3{font-size:27px}.top10-row{grid-template-columns:72px minmax(0,1fr) 68px;gap:9px;padding:11px}.top10-meta{grid-column:2/4;text-align:left}.top10-rank{height:38px;font-size:13px;border-radius:13px}.top10-rate{font-size:19px}.top10-team b{font-size:14px}.top10-team span{font-size:11px}}
+</style>
 </head>
 <body>
 <main class="app">
@@ -38,16 +46,35 @@
   </header>
 
   <section class="hero" id="home">
-    <article class="hero-main">
-      <div>
-        <div class="eyebrow">친구데이 이벤트</div>
-        <h1>친구데이<br>진척 현황</h1>
-        <p class="hero-copy">202607090900 실적을 기준으로 202607130900까지 추가 달성률을 집계합니다.</p>
+    <article class="hero-main friend-hero-main">
+      <div class="confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="balloon balloon-left">함께하면<br>더 즐거워요!</div>
+      <div class="balloon balloon-right">우리 함께<br>1등 가보자!</div>
+      <div class="poster-ribbon">7월 9일 - 7월 13일</div>
+      <div class="poster-title">
+        <span>PSM</span>
+        <strong>친구데이</strong>
       </div>
-      <div class="hero-pills">
-        <span class="pill">12% 팀원당 5만원</span>
-        <span class="pill">15% 팀원당 7만원</span>
-        <span class="pill">18% 팀원당 10만원</span>
+      <div class="poster-script">친구를 모아라!</div>
+      <div class="poster-cards">
+        <section class="poster-card poster-blue">
+          <h2>PSM 소통트립</h2>
+          <h3>친구를 모아라</h3>
+          <ul>
+            <li><span>대상</span> 소통트립 그룹</li>
+            <li><span>기간</span> 7.9 - 7.13</li>
+            <li><span>내용</span> 친구데이 달성률</li>
+          </ul>
+        </section>
+        <section class="poster-card poster-pink">
+          <h2>친구데이 시상</h2>
+          <h3>시너지는 UP!</h3>
+          <div class="reward-rows">
+            <span><b>12%</b><em>인당 +5만</em></span>
+            <span><b>15%</b><em>인당 +7만</em></span>
+            <span><b>18%</b><em>인당 +10만</em></span>
+          </div>
+        </section>
       </div>
     </article>
     <section class="summary">
@@ -62,7 +89,7 @@
     </section>
   </section>
 
-  <section id="rankBoard"><div class="section-title rank-title"><h2>친구데이 현재 순위</h2><span>진척률 기준 TOP3</span></div><div class="rank-podium" id="rankPodium"></div></section>
+  <section id="rankBoard"><div class="section-title rank-title"><h2>친구데이 현재 순위</h2><span>진척률 기준 TOP10</span></div><div class="rank-podium top10-board" id="rankPodium"></div></section>
 
   <section class="toolbar">
     <div class="search-row">
@@ -199,7 +226,12 @@ function render(){
   $('empty').style.display=list.length?'none':'block';
   const podium=$('rankPodium');
   if(podium){
-    podium.innerHTML=ranked.slice(0,3).map((t,i)=>`<article class="podium-card ${i===0?'top1':''}"><div class="podium-rank">${t.tied?`공동 ${t.rank}등`:`${t.rank}등`}</div><div class="podium-team">${esc(t.team)}</div><div class="podium-rate">${t.eventRate.toFixed(1)}%</div><div class="podium-meta">추가 ${fmt(t.delta)}천원 · 예상 ${fmt(t.reward)}만원</div></article>`).join('');
+    podium.innerHTML=ranked.slice(0,10).map((t,i)=>`<article class="top10-row ${i<3?'top-medal':''}">
+      <div class="top10-rank">${t.tied?`공동 ${t.rank}등`:`${t.rank}등`}</div>
+      <div class="top10-team"><b>${esc(t.team)}</b><span>${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</span></div>
+      <div class="top10-rate">${t.eventRate.toFixed(1)}%</div>
+      <div class="top10-meta">추가 ${fmt(t.delta)}천원 · 예상 ${fmt(t.reward)}만원</div>
+    </article>`).join('');
   }
   $('teamList').innerHTML=list.map(teamCard).join('');
 }
