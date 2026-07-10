@@ -1092,6 +1092,7 @@ h1,.mobile-app h1{color:#fff!important;font-weight:900!important;letter-spacing:
 button{touch-action:manipulation}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
 .event-pop{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(15,23,42,.42);backdrop-filter:blur(10px)}.event-pop.show{display:flex}.event-card{position:relative;width:min(420px,100%);overflow:hidden;border:1px solid rgba(219,231,251,.95);border-radius:28px;background:#fff;box-shadow:0 28px 70px rgba(15,23,42,.26);color:#111827}.event-card:before{content:"";position:absolute;inset:0 0 auto;height:8px;background:linear-gradient(90deg,#f43f5e,#facc15,#22c55e,#2563eb)}.event-body{position:relative;padding:24px 22px 20px;text-align:center}.event-ribbon{display:inline-flex;align-items:center;justify-content:center;height:32px;padding:0 14px;border-radius:999px;background:#ef2429;color:#fff;font-size:13px;font-weight:950;box-shadow:0 8px 18px rgba(239,36,41,.18)}.event-title{margin:13px 0 5px;font-size:32px;line-height:1.04;font-weight:950;letter-spacing:0}.event-title span{color:#1557d4}.event-script{margin:0;color:#e91e63;font-size:25px;font-weight:950;font-family:"Segoe Print","Comic Sans MS",Pretendard,sans-serif;transform:rotate(-1deg)}.event-copy{margin:13px auto 0;max-width:320px;color:#475467;font-size:14px;font-weight:750;line-height:1.5}.event-rewards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0 0}.event-rewards span{border:1px solid #dfe7f5;border-radius:15px;background:#f8fbff;padding:10px 6px;color:#0f172a;font-size:12px;font-weight:900}.event-rewards b{display:block;margin-bottom:3px;color:#1557d4;font-size:20px}.event-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.event-actions button,.event-actions a{height:44px;border-radius:15px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;font-weight:900}.event-primary{background:#111827!important;color:#fff!important;border-color:#111827!important}.event-secondary{background:#fff;color:#475467}.event-close{position:absolute;right:12px;top:12px;width:34px;height:34px;border:0;border-radius:50%;background:rgba(15,23,42,.08);color:#111827;font-size:20px;line-height:1}.event-check{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:7px;color:#667085;font-size:12px;font-weight:800}.event-check input{width:15px;height:15px;accent-color:#111827}@media (max-width:520px){.event-body{padding:23px 18px 18px}.event-title{font-size:29px}.event-script{font-size:22px}.event-actions{grid-template-columns:1fr}.event-rewards b{font-size:18px}}
 .event-card{width:min(460px,100%);border-radius:30px;background:linear-gradient(180deg,#fff 0%,#fff 74%,#e7f7ff 74%,#073568 100%)}.event-card:before{height:0}.event-body{padding:22px 20px 20px}.event-ribbon{height:38px;border-radius:10px;background:linear-gradient(180deg,#ff1919,#d70b13);font-size:17px;text-shadow:0 2px 0 rgba(0,0,0,.18)}.event-title{margin:12px 0 0;font-size:40px;text-shadow:0 3px 0 rgba(0,0,0,.08)}.event-title span{color:#1557d4}.event-script{margin:4px 0 14px;font-size:32px;color:#e91e63}.event-blue-board{border-radius:22px;background:linear-gradient(180deg,#075dcc,#003d99);padding:18px 16px 16px;color:#fff;box-shadow:inset 0 0 0 3px rgba(255,255,255,.7),inset 0 0 0 6px rgba(91,166,255,.48),0 14px 28px rgba(0,46,120,.22)}.event-blue-board strong{display:block;font-size:24px;font-weight:950;text-shadow:0 2px 0 rgba(0,0,0,.2)}.event-blue-board>b{display:block;margin:4px 0 12px;color:#ffed00;font-size:31px;line-height:1;font-weight:950;text-shadow:0 3px 0 rgba(0,0,0,.2)}.event-info{display:grid;gap:7px;border-radius:16px;background:#fff;color:#111827;padding:12px}.event-info p{display:flex;align-items:center;gap:9px;margin:0;font-size:14px;font-weight:900;text-align:left}.event-info span{min-width:46px;border-radius:999px;background:#064ba8;color:#fff;text-align:center;padding:5px 8px;font-size:12px}.event-rewards{margin-top:10px}.event-rewards span{background:#fff;border:2px solid #d9e4f4;border-radius:13px;padding:8px 5px}.event-rewards b{color:#123db7;font-size:21px}.event-actions{margin-top:14px}.event-primary{background:#064ba8!important;color:#fff!important;border-color:#064ba8!important}.event-close{background:rgba(17,24,39,.1)}@media (max-width:520px){.event-card{width:min(390px,100%)}.event-title{font-size:34px}.event-script{font-size:27px}.event-blue-board>b{font-size:27px}.event-actions{grid-template-columns:1fr 1fr}.event-rewards b{font-size:19px}}
+.event-close{z-index:3}
 @media (max-width:860px){
   .app,.mobile-app .app{padding-left:16px!important;padding-right:16px!important}
   .topbar,.mobile-app .topbar,.toolbar,.mobile-app .toolbar{margin-left:-16px!important;margin-right:-16px!important;padding-left:16px!important;padding-right:16px!important}
@@ -1210,7 +1211,7 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
 
 <div class="event-pop" id="frienddayPopup" role="dialog" aria-modal="true" aria-labelledby="frienddayPopupTitle">
   <article class="event-card">
-    <button class="event-close" id="frienddayClose" type="button" aria-label="친구데이 팝업 닫기">×</button>
+    <button class="event-close" id="frienddayClose" type="button" aria-label="친구데이 팝업 닫기" onclick="window.closeFrienddayPopup?.()">×</button>
     <div class="event-body">
       <div class="event-ribbon">7월 9일 - 7월 12일</div>
       <h2 class="event-title" id="frienddayPopupTitle"><span>PSM</span> 친구데이</h2>
@@ -1230,7 +1231,7 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
         <span><b>18%</b>인당 10만원</span>
       </div>
       <div class="event-actions">
-        <button class="event-secondary" id="frienddayLater" type="button">닫기</button>
+        <button class="event-secondary" id="frienddayLater" type="button" onclick="window.closeFrienddayPopup?.()">닫기</button>
         <a class="event-primary" href="friendday.html">순위 보러가기</a>
       </div>
       <label class="event-check"><input id="frienddayDontShow" type="checkbox">오늘 다시 보지 않기</label>
@@ -2156,6 +2157,7 @@ function setupFrienddayPopup(){
     if($('frienddayDontShow')?.checked) localStorage.setItem(storageKey, todayKey);
     popup.classList.remove('show');
   };
+  window.closeFrienddayPopup = close;
   $('frienddayClose')?.addEventListener('click', close);
   $('frienddayLater')?.addEventListener('click', close);
   popup.addEventListener('click', e => {
