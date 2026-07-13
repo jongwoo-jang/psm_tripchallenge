@@ -50,7 +50,7 @@
   <header class="topbar">
     <div class="brand">
       <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5 12 16l3.5-3.5M12 21s-7-4.2-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.8-7 10-7 10Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div><div class="brand-title">PSM 친구데이</div><div class="brand-sub" id="basisText">데이터 준비 중</div></div>
+      <div><div class="brand-title">PSM 친구데이 최종결과</div><div class="brand-sub" id="basisText">데이터 준비 중</div></div>
     </div>
     <button class="refresh-btn" id="refreshBtn" type="button">새로고침</button>
   </header>
@@ -60,10 +60,10 @@
       <div class="confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <div class="balloon balloon-left">함께하면<br>더 즐거워요!</div>
       <div class="balloon balloon-right">우리 함께<br>1등 가보자!</div>
-      <div class="poster-ribbon">7월 9일 - 7월 12일</div>
+      <div class="poster-ribbon">친구데이 종료 · 최종결과</div>
       <div class="poster-title">
         <span>PSM</span>
-        <strong>친구데이</strong>
+        <strong>최종결과</strong>
       </div>
       <div class="poster-script">친구들 모여라!</div>
       <section class="poster-board">
@@ -87,7 +87,7 @@
     </article>
     <section class="summary">
       <article class="metric primary">
-        <div class="metric-label">전체 친구데이 진척</div>
+        <div class="metric-label">최종 친구데이 진척</div>
         <div class="metric-value"><span id="overallRate">0.0</span><small>%</small></div>
         <div class="progress-line"><span id="overallBar"></span></div>
         <div class="metric-note" id="overallNote">추가 실적 0천원 / 목표 0천원</div>
@@ -97,7 +97,7 @@
     </section>
   </section>
 
-  <section id="rankBoard"><div class="section-title rank-title"><h2>친구데이 현재 순위</h2><span>진척률 기준 TOP10</span></div><div class="rank-podium top10-board" id="rankPodium"></div></section>
+  <section id="rankBoard"><div class="section-title rank-title"><h2>친구데이 최종 순위</h2><span>최종 진척률 기준 TOP10</span></div><div class="rank-podium top10-board" id="rankPodium"></div></section>
 
   <section class="toolbar">
     <div class="search-row">
@@ -164,7 +164,7 @@ function tierFor(rate){
   if(rate>=18) return {key:'tier18', label:'18% 달성', perMember:10};
   if(rate>=15) return {key:'tier15', label:'15% 달성', perMember:7};
   if(rate>=12) return {key:'tier12', label:'12% 달성', perMember:5};
-  return {key:'', label:'진행중', perMember:0};
+  return {key:'', label:'종료', perMember:0};
 }
 function snapshot(timeRaw){
   const byTeam=new Map();
@@ -257,7 +257,7 @@ function teamCard(t){
   const remain18=Math.max(Math.ceil(t.target*.18-t.delta),0);
   const rankText=t.rankable?(t.tied?`공동 ${t.rank}등`:`${t.rank}등`):'집계 전';
   return `<a class="team-card" href="${teamDetailUrl(t.team)}" aria-label="${esc(t.team)} 메인 팀 상세 보기">
-    <div class="rank-block"><div class="rank-num ${t.rankable?'':'pending'}">${rankText}</div><div class="rank-label">${t.rankable?'현재 순위':'순위 대기'}</div></div>
+    <div class="rank-block"><div class="rank-num ${t.rankable?'':'pending'}">${rankText}</div><div class="rank-label">${t.rankable?'최종 순위':'순위 없음'}</div></div>
     <div class="team-content">
       <div class="team-head">
         <div><div class="team-title">${esc(t.team)}</div><div class="team-meta">${t.leader?`팀장 ${esc(t.leader)} · `:''}팀원 ${fmt(t.memberCount)}명</div></div>
