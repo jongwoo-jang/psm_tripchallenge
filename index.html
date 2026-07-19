@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#10233f">
-<meta name="description" content="PSM소통트립 챌린지 실적과 당일 순위를 확인하세요. 9시, 13시, 15시, 17시 업데이트 됩니다.">
-<meta property="og:title" content="PSM 소통트립 챌린지">
-<meta property="og:description" content="PSM소통트립 챌린지 실적과 당일 순위를 확인하세요. 9시, 13시, 15시, 17시 업데이트 됩니다.">
+<meta name="description" content="PSM소통트립 챌린지 최종결과와 팀별 달성 현황을 확인하세요.">
+<meta property="og:title" content="PSM 소통트립 챌린지 최종결과">
+<meta property="og:description" content="PSM소통트립 챌린지 최종결과와 팀별 달성 현황을 확인하세요.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="preview.png">
 <meta property="og:image:type" content="image/png">
@@ -1127,11 +1127,11 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
   <section class="hero" id="home">
     <article class="hero-main">
       <div>
-        <div class="eyebrow">7월 챌린지 현황</div>
+        <div class="eyebrow">7월 챌린지 최종결과</div>
         <h1>PSM<br>소통트립 챌린지</h1>
         <section class="time-dashboard hero-time" aria-label="시점 선택">
           <div class="time-tabs" id="timeTabs">
-            <button class="time-tab active" data-time="latest" type="button">최신</button>
+            <button class="time-tab active" data-time="latest" type="button">최종</button>
           </div>
         </section>
       </div>
@@ -1173,7 +1173,7 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
   <div class="notice" id="notice" role="status"></div>
 
   <section id="top">
-    <div class="section-title"><h2>현재 TOP10</h2></div>
+    <div class="section-title"><h2>최종 TOP10</h2></div>
     <div class="leaderboard" id="topList"></div>
   </section>
 
@@ -1301,7 +1301,7 @@ function setTheme(mode){
 
 function setBasis(sourceText){
   const d = new Date().toLocaleDateString('ko-KR', { month:'2-digit', day:'2-digit' }).replace(/\.\s?/g,'.').replace(/\.$/,'');
-  $('basisText').textContent = sourceText || d + ' 업데이트 ' + UPDATE_SLOTS_TEXT + ' 기준';
+  $('basisText').textContent = sourceText || d + ' 최종결과 기준';
 }
 
 function totals(list = state.teams){
@@ -1591,7 +1591,7 @@ function renderTimeTabs(){
   }
   const times = availableTimes();
   if(state.selectedTime !== 'latest' && !times.includes(state.selectedTime)) state.selectedTime = 'latest';
-  const buttons = [{ label:'최신', value:'latest' }].concat(times.slice(-5).reverse().map(t => ({ label:shortSheetTime(t), value:t })));
+  const buttons = [{ label:'최종', value:'latest' }].concat(times.slice(-5).reverse().map(t => ({ label:shortSheetTime(t), value:t })));
   const signature = buttons.map(item => item.value).join('|') + '::' + state.selectedTime;
   if(tabs.dataset.signature === signature) return;
   tabs.dataset.signature = signature;
@@ -1677,7 +1677,7 @@ function render(){
   $('listCount').textContent = fmt(list.length) + '팀';
   updateActiveHint(list.length, state.teams.length);
   $('empty').style.display = list.length ? 'none' : 'block';
-  if(!list.length) $('empty').textContent = '현재 선택한 시점에는 해당 조건의 팀이 없습니다.';
+  if(!list.length) $('empty').textContent = '선택한 시점에는 해당 조건의 팀이 없습니다.';
   populateTrendTeamSelect();
   renderTrend();
   setupReveal();
@@ -1778,7 +1778,7 @@ function renderTrend(){
   const labelPrefix = selectedTeam ? selectedTeam + ' · ' : '';
   $('trendSummary').textContent = points.length > 1
     ? `${labelPrefix}최근 ${points.length}개 시점 · ${isTeamTrend ? percentPointText(delta) : (delta >= 0 ? '+' : '') + fmt(delta) + '천원'}`
-    : `${labelPrefix}최근 업데이트 기준`;
+    : `${labelPrefix}최종결과 기준`;
   const allBtn = $('trendAllBtn');
   if(allBtn) allBtn.classList.toggle('active', !selectedTeam);
   chart.dataset.scope = selectedTeam ? 'team' : 'all';
@@ -2124,7 +2124,7 @@ function renderMilestonePopup(){
             </button>`).join('')
           : '<div class="notice-empty notice-empty-small">아직 달성팀이 없습니다.</div>'}
       </section>`).join('')
-    : '<div class="notice-empty">현재 55% 이상 달성팀이 없습니다.</div>';
+    : '<div class="notice-empty">55% 이상 달성팀이 없습니다.</div>';
   if(!new URLSearchParams(location.search).has('team')) setTimeout(() => popup.classList.add('show'), 500);
 }
 
