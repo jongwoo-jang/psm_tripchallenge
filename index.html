@@ -1219,7 +1219,7 @@ button{touch-action:manipulation}button:focus-visible,input:focus-visible,select
     <div class="notice-body">
       <span class="notice-kicker">공지</span>
       <h2 class="notice-title" id="milestonePopupTitle">구간 달성팀 안내</h2>
-      <p class="notice-copy">55%, 60%, 65% 기준을 달성한 팀을 구간별 달성 순서로 안내드립니다.</p>
+      <p class="notice-copy">55%, 60%, 65% 기준에 해당하는 팀을 구간별 달성 순서로 안내드립니다.</p>
       <div class="notice-list" id="milestonePopupList"></div>
       <div class="notice-actions">
         <button class="notice-secondary" id="milestoneLater" type="button">닫기</button>
@@ -2085,7 +2085,7 @@ function showNotice(text, mode){
   n.style.display = 'block'; n.textContent = text;
 }
 
-function milestoneRows(threshold = 55){
+function milestoneRows(threshold = 55, maxExclusive = Infinity){
   const currentTime = state.latestTimeRaw || availableTimes().at(-1) || '';
   const times = availableTimes().filter(t => !currentTime || t <= currentTime).sort((a,b) => a.localeCompare(b));
   const firstAchievedTime = team => {
@@ -2097,15 +2097,16 @@ function milestoneRows(threshold = 55){
   };
   return snapshotTeams(currentTime)
     .map(t => ({ ...t, rateValue: rate(t), achievedTime: firstAchievedTime(t.team) }))
-    .filter(t => t.rateValue >= threshold)
+    .filter(t => t.rateValue >= threshold && t.rateValue < maxExclusive)
     .sort((a,b) => (a.achievedTime || '999999999999').localeCompare(b.achievedTime || '999999999999') || b.rateValue - a.rateValue || a.team.localeCompare(b.team, 'ko'));
 }
 
 function milestoneGroups(){
-  return [65, 60, 55].map(threshold => ({
-    threshold,
-    rows: milestoneRows(threshold)
-  }));
+  return [
+    { threshold:65, label:'65% 이상 달성', rows:milestoneRows(65) },
+    { threshold:60, label:'60% 달성', rows:milestoneRows(60, 65) },
+    { threshold:55, label:'55% 달성', rows:milestoneRows(55, 60) }
+  ];
 }
 
 function renderMilestonePopup(){
@@ -2116,7 +2117,7 @@ function renderMilestonePopup(){
   const total = groups.reduce((sum, group) => sum + group.rows.length, 0);
   list.innerHTML = total
     ? groups.map(group => `<section class="notice-section">
-        <div class="notice-section-title"><b>${group.threshold}% 달성</b><span>${group.rows.length}팀</span></div>
+        <div class="notice-section-title"><b>${group.label}</b><span>${group.rows.length}팀</span></div>
         ${group.rows.length
           ? group.rows.map(t => `<button class="notice-row notice-row-simple" type="button" onclick="focusTeam('${encodeURIComponent(t.team)}'); window.closeMilestonePopup?.();">
               <span class="notice-team"><b>${esc(t.team)}</b><span>${t.achievedTime ? shortSheetTime(t.achievedTime) + ' 달성' : '달성'}</span></span>
