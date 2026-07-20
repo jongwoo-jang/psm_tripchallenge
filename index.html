@@ -1228,7 +1228,7 @@ const BASE_TEAMS = [{"team":"나 오늘 밥 안해","leader":"신유경","member
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdfZpx6LSayA7SRgyWlR51RJfbOHaSJm_E514PwCKE2sQvKPzJDfS3tGDxZeRPtEYH2_1GvrvVfH5o/pub?gid=0&single=true&output=csv';
 const MEMBER_CSV_URL = 'https://docs.google.com/spreadsheets/d/1pwoa_QvPUiAzhcu0ZsYQfV3Zb7rxiLdbP4v7JZ6yVV4/gviz/tq?tqx=out:csv&gid=1874206095';
 const $ = id => document.getElementById(id);
-const state = { teams: structuredClone(BASE_TEAMS), history: [], filter: 'all', sort: 'rate', trendTeam: '', selectedTime: 'latest', latestTimeRaw: '', loading: false, trendExpanded: false };
+const state = { teams: structuredClone(BASE_TEAMS), history: [], filter: 'all', sort: 'rate', trendTeam: '', selectedTime: 'latest', latestTimeRaw: '', loading: false, sheetLoaded: false, trendExpanded: false };
 const fmt = n => Number(n || 0).toLocaleString('ko-KR');
 const norm = s => (s || '').toString().normalize('NFKC').replace(/\s/g, '').toLowerCase();
 const memberName = m => typeof m === 'string' ? m : (m?.name || '');
@@ -2065,17 +2065,37 @@ function milestoneRows(threshold = 55, maxExclusive = Infinity){
 }
 
 function milestoneGroups(){
-  return [
-    { threshold:65, label:'65% 이상 달성', rows:milestoneRows(65) },
-    { threshold:60, label:'60% 달성', rows:milestoneRows(60, 65) },
-    { threshold:55, label:'55% 달성', rows:milestoneRows(55, 60) }
+  const groups = [
+    { threshold:65, label:'65% 이상 달성', rows:[] },
+    { threshold:60, label:'60% 달성', rows:[] },
+    { threshold:55, label:'55% 달성', rows:[] }
   ];
+  const currentTime = state.latestTimeRaw || availableTimes().at(-1) || '';
+  snapshotTeams(currentTime)
+    .map(t => ({ ...t, rateValue: rate(t) }))
+    .filter(t => t.rateValue >= 55)
+    .sort((a,b) => b.rateValue - a.rateValue || a.team.localeCompare(b.team, 'ko'))
+    .forEach(t => {
+      if(t.rateValue >= 65) groups[0].rows.push(t);
+      else if(t.rateValue >= 60) groups[1].rows.push(t);
+      else groups[2].rows.push(t);
+    });
+  return groups;
 }
 
 function renderMilestonePopup(){
   const popup = $('milestonePopup');
   const list = $('milestonePopupList');
   if(!popup || !list) return;
+  if(state.loading && !state.sheetLoaded){
+    list.innerHTML = '<div class="notice-empty">최종 실적 데이터를 불러오는 중입니다.</div>';
+    return;
+  }
+  if(!state.sheetLoaded && !state.latestTimeRaw){
+    list.innerHTML = '<div class="notice-empty">최종 실적 데이터를 불러오지 못했습니다. 새로고침을 눌러 다시 확인해 주세요.</div>';
+    if(!new URLSearchParams(location.search).has('team')) setTimeout(() => popup.classList.add('show'), 500);
+    return;
+  }
   const groups = milestoneGroups();
   const total = groups.reduce((sum, group) => sum + group.rows.length, 0);
   list.innerHTML = total
@@ -2083,7 +2103,7 @@ function renderMilestonePopup(){
         <div class="notice-section-title"><b>${group.label}</b><span>${group.rows.length}팀</span></div>
         ${group.rows.length
           ? group.rows.map(t => `<button class="notice-row notice-row-simple" type="button" onclick="focusTeam('${encodeURIComponent(t.team)}'); window.closeMilestonePopup?.();">
-              <span class="notice-team"><b>${esc(t.team)}</b><span>최종결과 기준</span></span>
+              <span class="notice-team"><b>${esc(t.team)}</b></span>
               <span class="notice-rate">${t.rateValue.toFixed(1)}%</span>
             </button>`).join('')
           : '<div class="notice-empty notice-empty-small">아직 달성팀이 없습니다.</div>'}
@@ -2112,6 +2132,7 @@ async function loadSheet(){
     const res = await fetch(CSV_URL + '&cacheBust=' + Date.now());
     if(!res.ok) throw new Error('network');
     applyRows(parseCSV(await res.text()));
+    state.sheetLoaded = true;
     try{
       const memberRes = await fetch(MEMBER_CSV_URL + '&cacheBust=' + Date.now());
       if(!memberRes.ok) throw new Error('member network');
@@ -2130,6 +2151,7 @@ async function loadSheet(){
     state.history = [];
     state.latestTimeRaw = '';
     state.selectedTime = 'latest';
+    state.sheetLoaded = false;
     setBasis();
     $('syncState').textContent = '기본 데이터 표시';
     showNotice('시트 연결 지연. 기본 데이터를 표시합니다.', 'warn');
